@@ -1,0 +1,136 @@
+/* KycDetails.css */
+
+.kyc-details-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  /* background: #ffffff; */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  color: #ffffff;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.kyc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.kyc-user-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.kyc-status {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.status {
+  font-weight: bold;
+  text-transform: capitalize;
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+}
+
+.status.pending {
+  background-color: #fffbcc;
+  color: #f4b400;
+}
+
+.status.approved {
+  background-color: #d1ffd6;
+  color: #4caf50;
+}
+
+.status.rejected {
+  background-color: #ffebeb;
+  color: #f44336;
+}
+
+.kyc-content {
+  margin-top: 2rem;
+}
+
+.kyc-section {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  /* background: #585858; */
+  border-radius: 10px;
+  border: 1px solid white;
+  color: white;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.kyc-section p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.kyc-footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #777;
+}
+
+.kyc-footer p {
+  margin-bottom: 0.5rem;
+}
+.kyc-footer strong {
+  color: #333;
+}
+
+.approve-reject-buttons{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.approve-button,
+.reject-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.approve-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.reject-button {
+  background-color: #f44336;
+  color: white;
+}

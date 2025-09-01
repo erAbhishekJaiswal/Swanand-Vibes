@@ -1,0 +1,81 @@
+/* UploadForm.css */
+.product-form {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+    background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 
+              0 0 20px var(--glow-color);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.input-field {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.05);
+  color: #f1f5f9;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+.select-options{
+  background-color: #0b1927;
+  color: rgb(206, 206, 206);
+}
+
+.input-field:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+button[type="submit"] {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 350px;
+  margin: auto;
+}
+
+.preview-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.preview-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+}
+.preview-img:hover {
+  border-color: #007bff;
+}
