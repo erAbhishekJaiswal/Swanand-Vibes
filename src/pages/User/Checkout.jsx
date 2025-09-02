@@ -777,6 +777,7 @@ import React, { useEffect, useState } from "react";
 import "../../CssFiles/User/Checkout.css";
 import axios from "axios";
 import { getUserId } from "../../utills/authService";
+import {placeOrder} from '../../utills/apicall';
 
 const Checkout = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -792,16 +793,21 @@ const Checkout = () => {
     state: "",
     zipCode: "",
     country: "India",
+    itemsPrice: 0,
+    shippingPrice: 0,
+    taxPrice: 0,
+    totalPrice: 0,
+
 
     // Shipping Method
     shippingMethod: "standard",
 
     // Payment Information
-    cardNumber: "",
-    cardName: "",
-    expiryDate: "",
-    cvv: "",
-    saveCard: false,
+    // cardNumber: "",
+    // cardName: "",
+    // expiryDate: "",
+    // cvv: "",
+    // saveCard: false,
 
     // Billing Address
     // sameAsShipping: true,
@@ -902,11 +908,6 @@ const Checkout = () => {
     const newErrors = {};
 
     if (step === 1) {
-      // if (!formData.firstName) newErrors.firstName = "First name is required";
-      // if (!formData.lastName) newErrors.lastName = "Last name is required";
-      // if (!formData.email) newErrors.email = "Email is required";
-      // else if (!/\S+@\S+\.\S+/.test(formData.email))
-      //   newErrors.email = "Email is invalid";
       if (!formData.mobile) newErrors.mobile = "Mobile number is required";
       if (!formData.address) newErrors.address = "Address is required";
       if (!formData.city) newErrors.city = "City is required";
@@ -914,21 +915,21 @@ const Checkout = () => {
       if (!formData.zipCode) newErrors.zipCode = "Zip code is required";
     }
 
-    if (step === 3) {
-      if (!formData.cardNumber)
-        newErrors.cardNumber = "Card number is required";
-      else if (!/^\d{16}$/.test(formData.cardNumber.replace(/\s/g, "")))
-        newErrors.cardNumber = "Card number must be 16 digits";
-      if (!formData.cardName)
-        newErrors.cardName = "Cardholder name is required";
-      if (!formData.expiryDate)
-        newErrors.expiryDate = "Expiry date is required";
-      else if (!/^\d{2}\/\d{2}$/.test(formData.expiryDate))
-        newErrors.expiryDate = "Use format MM/YY";
-      if (!formData.cvv) newErrors.cvv = "CVV is required";
-      else if (!/^\d{3,4}$/.test(formData.cvv))
-        newErrors.cvv = "CVV must be 3-4 digits";
-    }
+    // if (step === 3) {
+    //   if (!formData.cardNumber)
+    //     newErrors.cardNumber = "Card number is required";
+    //   else if (!/^\d{16}$/.test(formData.cardNumber.replace(/\s/g, "")))
+    //     newErrors.cardNumber = "Card number must be 16 digits";
+    //   if (!formData.cardName)
+    //     newErrors.cardName = "Cardholder name is required";
+    //   if (!formData.expiryDate)
+    //     newErrors.expiryDate = "Expiry date is required";
+    //   else if (!/^\d{2}\/\d{2}$/.test(formData.expiryDate))
+    //     newErrors.expiryDate = "Use format MM/YY";
+    //   if (!formData.cvv) newErrors.cvv = "CVV is required";
+    //   else if (!/^\d{3,4}$/.test(formData.cvv))
+    //     newErrors.cvv = "CVV must be 3-4 digits";
+    // }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -983,15 +984,47 @@ const Checkout = () => {
     setCurrentStep((prev) => prev - 1);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateStep(3)) {
+    if (validateStep(2)) {
       // Process order submission
       console.log("Order submitted:", {
         ...formData,
         cartItems,
         shippingMethod: formData.shippingMethod,
+        itemsPrice: calculateSubtotal(),
+        shippingPrice: getShippingCost(),
+        taxPrice: calculateTax(),
+        totalPrice: calculateTotal(),
       });
+      const totalPrice = calculateTotal();
+      const shippingPrice = getShippingCost();
+      const taxPrice = calculateTax();
+
+      const orderResponse = await placeOrder(userId, {
+        ...formData,
+        cartItems,
+        shippingMethod: formData.shippingMethod,
+        itemsPrice: calculateSubtotal(),
+        shippingPrice: shippingPrice,
+        taxPrice: taxPrice,
+        totalPrice: totalPrice,
+      });
+
+      // axios.post(
+      //   `http://localhost:5000/api/order/${userId}`,
+      //   {
+      //     ...formData,
+      //     cartItems,
+      //     shippingMethod: formData.shippingMethod,
+      //     itemsPrice: calculateSubtotal(),
+      //     shippingPrice: shippingPrice,
+      //     taxPrice: taxPrice,
+      //     totalPrice: totalPrice,
+      //   }
+      // );
+
+      console.log("Order response:", orderResponse.data);
 
       alert("Order placed successfully!");
       // Here you would typically send the order to your backend
@@ -1017,12 +1050,12 @@ const Checkout = () => {
     return calculateSubtotal() + calculateTax() + getShippingCost();
   };
 
-  const formatCardNumber = (value) => {
-    return value
-      .replace(/\s/g, "")
-      .replace(/(\d{4})/g, "$1 ")
-      .trim();
-  };
+  // const formatCardNumber = (value) => {
+  //   return value
+  //     .replace(/\s/g, "")
+  //     .replace(/(\d{4})/g, "$1 ")
+  //     .trim();
+  // };
 
   // Handle address selection
   const handleAddressSelect = (address) => {
@@ -1407,7 +1440,7 @@ const Checkout = () => {
                   <button
                     type="button"
                     className="nav-btn next-btn"
-                    onClick={nextStep}
+                    onClick={handleSubmit}
                   >
                     Continue to Payment →
                   </button>
@@ -1415,7 +1448,7 @@ const Checkout = () => {
               </div>
             )}
 
-            {currentStep === 3 && (
+            {/* {currentStep === 3 && (
               <div className="form-step">
                 <h2>Payment Information</h2>
                 <form className="checkout-form">
@@ -1579,7 +1612,7 @@ const Checkout = () => {
                   </button>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className="order-summary">

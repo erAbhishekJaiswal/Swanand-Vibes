@@ -1,10 +1,29 @@
 // Orders.js
 import React, { useState } from 'react';
 import '../../CssFiles/User/Cart.css';
+import { useEffect } from 'react';
+import {getOrders} from '../../utills/apicall';
+import { getUserId } from '../../utills/authService';
 
 const Orders = () => {
   const [activeTab, setActiveTab] = useState('all');
-  
+  const userId = getUserId();
+
+useEffect(() => {
+    // Fetch orders from API or context
+    const fetchOrders = async () => {
+      try {
+        const response = await getOrders(userId);
+        const data = await response.json();
+        setOrders(data);
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
   const orders = [
     {
       id: 'ORD-12345',

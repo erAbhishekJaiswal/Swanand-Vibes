@@ -141,7 +141,10 @@ export const submitKyc = (payload) => {
 
 // Cart Api
 //
-export const addToCart = (userId, quantity, id) => {
+export const addToCart = (payload) => {
+  const { userId, quantity, id } = payload;
+  console.log(payload);
+
   return axios.post(`${API_URL}/user/cart/${id}`, { userId, quantity });
 };
 //
@@ -190,13 +193,15 @@ export const debitWallet = (userId, amount) => {
 
 
 // Orders Api
-// export const placeOrder = (orderData) => {
-//   return axios.post(`${API_URL}/users/orders`, orderData);
-// };
+export const placeOrder = (userId, orderData) => {
+  console.log(`Placing order for user ${userId}:`, orderData);
 
-// export const fetchOrders = (userId) => {
-//   return axios.get(`${API_URL}/users/orders/${userId}`);
-// };
+  return axios.post(`${API_URL}/order/${userId}`, orderData);
+};
+
+export const getOrders = (userId) => {
+  return axios.get(`${API_URL}/order/${userId}`);
+};
 
 
 
