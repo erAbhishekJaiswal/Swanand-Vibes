@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 // import Footer from './components/Footer';
 import Main from './pages/Main';
 import Sidebar from './components/Sidebar';
-import './app.css';
+import './App.css';
 function App() {
   return (
     <div className='app-container'>
