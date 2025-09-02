@@ -200,7 +200,7 @@ export const placeOrder = (userId, orderData) => {
 };
 
 export const getOrders = (userId) => {
-  return axios.get(`${API_URL}/order/${userId}`);
+  return axios.get(`${API_URL}/order/user/${userId}`);
 };
 
 
