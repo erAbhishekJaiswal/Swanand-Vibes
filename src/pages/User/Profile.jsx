@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "../../CssFiles/profile.css";
 import axios from "axios";
 import { getUserId,logoutUser } from "../../utills/authService";
+import { getUserProfile } from "../../utills/apicall";
 
 const Profile = ({ user, onUpdateProfile,}) => {
   const [refLink, setRefLink] = useState("");
@@ -21,9 +22,10 @@ const Profile = ({ user, onUpdateProfile,}) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const userData = await axios.get(
-        `http://localhost:5000/api/users/${id}/profile`
-      );
+      const userData = await getUserProfile(id);
+      // axios.get(
+      //   `http://localhost:5000/api/users/${id}/profile`
+      // );
       setFormData(userData.data);
       console.log(userData.data);
     };

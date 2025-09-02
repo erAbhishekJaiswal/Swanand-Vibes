@@ -63,6 +63,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router-dom'
 import '../../../CssFiles/Admin/product/list.css';
+import {getAllProducts, deleteProduct} from '../../../utills/apicall' 
 
 const List = () => {
     const navigate = useNavigate();
@@ -74,7 +75,8 @@ const List = () => {
         const fetchProducts = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('http://localhost:5000/api/products/');
+                const response = await getAllProducts();
+                // axios.get('http://localhost:5000/api/products/');
                 setProducts(response.data.data);
                 console.log(response.data);
             } catch (err) {
@@ -90,7 +92,8 @@ const List = () => {
     const handleDelete = async (productId) => {
         if (window.confirm('Are you sure you want to delete this product?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/products/${productId}`);
+                await deleteProduct(productId);
+                // axios.delete(`http://localhost:5000/api/products/${productId}`);
                 setProducts(products.filter(product => product._id !== productId));
             } catch (err) {
                 setError('Failed to delete product.');

@@ -61,6 +61,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../../CssFiles/Admin/user/UserList.css';
+import {getAllUsers,deleteUser} from '../../../utills/apicall';
 
 const UserList = () => {
     const navigate = useNavigate();
@@ -75,7 +76,8 @@ const UserList = () => {
         const fetchUsers = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('http://localhost:5000/api/users/');
+                const response = await getAllUsers();
+                // axios.get('http://localhost:5000/api/users/');
                 setUsers(response.data);
                 setFilteredUsers(response.data);
             } catch (error) {
@@ -105,7 +107,8 @@ const UserList = () => {
     const handleDeleteUser = async (userId, userName) => {
         if (window.confirm(`Are you sure you want to delete ${userName}?`)) {
             try {
-                await axios.delete(`http://localhost:5000/api/users/${userId}`);
+                await deleteUser(userId);
+                // axios.delete(`http://localhost:5000/api/users/${userId}`);
                 setUsers(users.filter(user => user.id !== userId));
                 alert('User deleted successfully!');
             } catch (error) {

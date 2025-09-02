@@ -28,6 +28,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import '../../../CssFiles/Admin/kyc/KycDetails.css';
+import { getKycById, approveKyc, rejectKyc } from '../../../utills/apicall';
 
 const KycDetails = () => {
   const [kycdata, setKycData] = useState(null);
@@ -38,7 +39,8 @@ const KycDetails = () => {
 
   useEffect( () => {
     const fetchData = async () => {
-      const res = await axios.get(`http://localhost:5000/api/user/kyc/${id}`)
+      const res = await getKycById(id);
+      // axios.get(`http://localhost:5000/api/user/kyc/${id}`)
       console.log(res.data);
       setKycData(res.data);
     }
@@ -48,7 +50,8 @@ const KycDetails = () => {
   const handleApprove = async () => {
     const confirmed = window.confirm("Are you sure you want to approve this KYC?");
     if (confirmed) {
-      const response = await axios.put(`http://localhost:5000/api/user/kyc/${id}/approve`);
+      const response = await approveKyc(id);
+      // axios.put(`http://localhost:5000/api/user/kyc/${id}/approve`);
       console.log(response.data);
       alert("KYC Approved Successfully");
       // Optionally, you can redirect or show a success message
@@ -60,7 +63,8 @@ const KycDetails = () => {
   const handleReject = async () => {
     const confirmed = window.confirm("Are you sure you want to reject this KYC?");
     if (confirmed) {
-      const response = await axios.put(`http://localhost:5000/api/user/kyc/${id}/reject`);
+      const response = await rejectKyc(id);
+      // axios.put(`http://localhost:5000/api/user/kyc/${id}/reject`);
       console.log(response.data);
       alert("KYC Rejected Successfully");
       // Optionally, you can redirect or show a success message

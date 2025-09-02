@@ -302,6 +302,8 @@ import React, { useEffect, useState } from 'react';
 import '../../../CssFiles/Admin/product/productcommon.css'
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
+import { addToCart } from '../../../store/cartSlice';
+import {getProductById} from '../../../utills/apicall';
 
 const Detail = () => {
   const { id } = useParams();
@@ -318,7 +320,8 @@ const Detail = () => {
 
   const fetchProduct = async (id) => {
     // Simulate an API call to fetch product details
-    const response = await axios.get(`http://localhost:5000/api/products/common/${id}`);
+    const response = await getProductById(id);
+    // axios.get(`http://localhost:5000/api/products/common/${id}`);
     setProductData(response.data.data);
     console.log(response.data.data);
   };

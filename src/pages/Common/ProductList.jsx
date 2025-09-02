@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../../store/cartSlice';
 import {getUserId} from '../../utills/authService';
+import { getCommonProducts, addToCart } from '../../utills/apicall';
 
 // import './FuturisticProducts.css';
 
@@ -22,7 +23,8 @@ const ProductList = () => {
   // Simulate data fetching
   useEffect(() => {
     const fetchProducts = async () => {
-        const res = await axios.get('https://swanand-vibes-backend.vercel.app/api/products/common');
+        const res = await getCommonProducts();
+        // axios.get('https://swanand-vibes-backend.vercel.app/api/products/common');
         console.log(res.data.data);
         setProducts(res.data.data);
         setFilteredProducts(res.data.data);
@@ -101,10 +103,11 @@ const ProductList = () => {
     
   // API Call to Add to Cart
   try {
-    const response = await axios.post(
-      `https://swanand-vibes-backend.vercel.app/api/user/cart/${id}`,
-      { userId, quantity }
-    );
+    const response = await addToCart({ userId, productId: id, quantity });
+    // axios.post(
+    //   `https://swanand-vibes-backend.vercel.app/api/user/cart/${id}`,
+    //   { userId, quantity }
+    // );
     console.log('Cart updated:', response.data);
     alert(`${product.name} added to cart!`);
   } catch (error) {

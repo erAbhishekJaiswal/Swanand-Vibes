@@ -5,6 +5,7 @@ import imgLogo from '../../assets/logo.jpg';
 import {Link, useNavigate,  Navigate } from "react-router-dom";
 import { isAuthenticated, getUserRole } from "../../utills/authService";
 import { useLocation } from "react-router-dom";
+import { registerUser } from '../../utills/apicall';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -39,16 +40,20 @@ const Register = () => {
     setLoading(true);
     console.log(formData);
 
-    const res = await fetch("http://localhost:5000/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    const data = await res.json();
+    const res = await registerUser(formData);
+    const data = res.data;
+    // console.log(data);
 
-    if (res.ok) {
+    // fetch("http://localhost:5000/api/auth/register", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(formData),
+    // });
+    // const data = await res.json();
+
+    if (res.status === 200) {
       // Handle successful registration
-      alert("Registration successful!");
+      // alert("Registration successful!");
       navigate("/login");
     } else {
       // Handle registration error

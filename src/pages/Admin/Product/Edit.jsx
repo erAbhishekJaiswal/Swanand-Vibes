@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import '../../../CssFiles/Admin/product/ProductForm.css';
+import {updateProduct,getProductById} from '../../../utills/apicall';
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -28,9 +29,10 @@ const EditProduct = () => {
     const fetchProduct = async () => {
       try {
         setFetching(true);
-        const response = await axios.get(
-          `http://localhost:5000/api/products/${id}`
-        );
+        const response = await getProductById(id);
+        // axios.get(
+        //   `http://localhost:5000/api/products/${id}`
+        // );
         const product = response.data.data;
         
         setFormData({
@@ -179,13 +181,18 @@ const EditProduct = () => {
       }
 
       // 3. Update product data
-      const updatedProduct = await axios.put(
-        `http://localhost:5000/api/products/${id}`,
-        {
-          ...formData,
-          images: uploadedImages,
-        }
-      );
+      const updatedProduct = await updateProduct(id, {
+        ...formData,
+        images: uploadedImages,
+      });
+
+      // axios.put(
+      //   `http://localhost:5000/api/products/${id}`,
+      //   {
+      //     ...formData,
+      //     images: uploadedImages,
+      //   }
+      // );
 
       console.log("Product updated:", updatedProduct.data);
       

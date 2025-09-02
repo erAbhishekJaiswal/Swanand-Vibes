@@ -226,6 +226,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import '../../../CssFiles/Admin/product/ProductForm.css';
+import {createProduct} from '../../../utills/apicall'
 
 const CreateProduct = () => {
   const [formData, setFormData] = useState({
@@ -351,14 +352,19 @@ const CreateProduct = () => {
       }
 
       // 3. Send product data with images to backend
-      const newProduct = await axios.post(
-        "http://localhost:5000/api/products/",
-        {
-          ...formData,
-          images: uploadedImages,
-          user: "689ff606db12335b27127163", // Example user ID
-        }
-      );
+      const newProduct = await createProduct({
+        ...formData,
+        images: uploadedImages,
+        user: "689ff606db12335b27127163", // Example user ID
+      });
+      // axios.post(
+      //   "http://localhost:5000/api/products/",
+      //   {
+      //     ...formData,
+      //     images: uploadedImages,
+      //     user: "689ff606db12335b27127163", // Example user ID
+      //   }
+      // );
 
       console.log("Product created:", newProduct.data);
       

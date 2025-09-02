@@ -4,6 +4,7 @@ import '../../CssFiles/User/Cart.css';
 import axios from 'axios';
 import { getUserId } from '../../utills/authService';
 import { useNavigate } from 'react-router-dom';
+import {getCart, removeFromCart, updateCartItem} from '../../utills/apicall';
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -13,7 +14,8 @@ const Cart = () => {
 
   useEffect(() => {
     const fetchCart = async () => {
-        const userCart = await axios.get(`http://localhost:5000/api/user/cart/${id}`);
+        const userCart = await getCart(id)
+        // axios.get(`http://localhost:5000/api/user/cart/${id}`);
         console.log(userCart.data.data);
         setCartItems(userCart.data.data.items);
     };
@@ -51,12 +53,13 @@ const Cart = () => {
     const removedItem = cartItems.find(item => item.product._id === productId);
     if (removedItem) {
       try {
-        await axios.delete(`http://localhost:5000/api/user/cart/${productId}`, {
-          data: {
-            item: removedItem,
-            userId: userId
-          }
-        });
+        // await axios.delete(`http://localhost:5000/api/user/cart/${productId}`, {
+        //   data: {
+        //     item: removedItem,
+        //     userId: userId
+        //   }
+        // });
+        await removeFromCart(userId, productId, removedItem);
       } catch (err) {
         console.error("Error removing item:", err);
       }

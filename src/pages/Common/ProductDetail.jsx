@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import '../../CssFiles/Admin/product/productcommon.css'
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
+import {getCommonProductById} from '../../utills/apicall';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -19,7 +20,8 @@ const ProductDetail = () => {
 
   const fetchProduct = async (id) => {
     // Simulate an API call to fetch product details
-    const response = await axios.get(`https://swanand-vibes-backend.vercel.app/api/products/common/${id}`);
+    const response = await getCommonProductById(id)
+    // axios.get(`https://swanand-vibes-backend.vercel.app/api/products/common/${id}`);
     setProductData(response.data.data);
     console.log(response.data.data);
   };

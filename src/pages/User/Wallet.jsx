@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../CssFiles/User/Wallet.css';
 import {getUserId} from '../../utills/authService';
+import { getWallet as fetchWallet } from '../../utills/apicall';
 
 const Wallet = () => {
   const [walletData, setWalletData] = useState(null);
@@ -16,7 +17,8 @@ const Wallet = () => {
       try {
         const userId = getUserId(); // Replace with actual user ID
         setLoading(true);
-        const response = await axios.get(`http://localhost:5000/api/user/wallet/${userId}`);
+        const response = await fetchWallet(userId);
+        // axios.get(`http://localhost:5000/api/user/wallet/${userId}`);
         setWalletData(response.data);
         console.log(response.data);
 

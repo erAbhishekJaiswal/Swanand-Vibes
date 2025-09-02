@@ -303,6 +303,7 @@ import { CheckCircle, XCircle, Clock, Upload, Trash2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { MdVerifiedUser } from "react-icons/md";
 import axios from "axios";
+import { submitKyc } from "../../utills/apicall";
 
 export default function AddKyc() {
   const [kycStatus, setKycStatus] = useState("Pending");
@@ -363,7 +364,7 @@ export default function AddKyc() {
     setLoading(true);
 
     try {
-      const sigRes = await axios.get("http://localhost:5000/api/products/signature");
+      const sigRes = await axios.get("https://swanand-vibes-backend.vercel.app/api/products/signature");
       const { timestamp, signature, cloudName, apiKey } = sigRes.data;
 
       console.log({timestamp,signature,cloudName,apiKey});
@@ -406,9 +407,10 @@ export default function AddKyc() {
       };
       console.log(payload);
 
-      const response = await axios.post("http://localhost:5000/api/user/kyc/submit", payload, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await submitKyc(payload);
+      // axios.post("http://localhost:5000/api/user/kyc/submit", payload, {
+      //   headers: { "Content-Type": "application/json" },
+      // });
 
       if (response.status === 200) {
         alert("KYC submitted successfully!");

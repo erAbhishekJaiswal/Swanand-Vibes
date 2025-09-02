@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import {getUserById} from '../../../utills/apicall';
 
 const UserDetails = () => {
   const { id } = useParams();
@@ -12,7 +13,8 @@ const UserDetails = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/users/${id}`);
+        const response = await getUserById(id);
+        // axios.get(`http://localhost:5000/api/users/${id}`);
         setUser(response.data);
         console.log(response.data);
 

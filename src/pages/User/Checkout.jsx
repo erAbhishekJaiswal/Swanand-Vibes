@@ -824,8 +824,8 @@ const Checkout = () => {
       try {
         setIsLoading(true);
         const [cartResponse, addressResponse] = await Promise.all([
-          axios.get(`http://localhost:5000/api/user/cart/${userId}`),
-          axios.get(`http://localhost:5000/api/users/${userId}`),
+          axios.get(`https://swanand-vibes-backend.vercel.app/api/user/cart/${userId}`),
+          axios.get(`https://swanand-vibes-backend.vercel.app/api/users/${userId}`),
         ]);
 
         setCartItems(cartResponse.data.data?.items || []);
@@ -960,7 +960,7 @@ const Checkout = () => {
 
       // save to DB
       const res = await axios.put(
-        `http://localhost:5000/api/users/${userId}`,
+        `https://swanand-vibes-backend.vercel.app/api/users/${userId}`,
         addressPayload
       );
 
@@ -968,7 +968,7 @@ const Checkout = () => {
         console.log("Address saved:", res.data);
         // Refresh saved addresses
         const addressResponse = await axios.get(
-          `http://localhost:5000/api/users/address/${userId}`
+          `https://swanand-vibes-backend.vercel.app/api/users/address/${userId}`
         );
         setSavedAddresses(addressResponse.data);
 

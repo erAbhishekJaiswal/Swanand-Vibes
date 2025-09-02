@@ -43,6 +43,7 @@ import { GoIssueClosed } from 'react-icons/go';
 import { MdOutlineCancel } from 'react-icons/md';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {getAllKycs} from '../../../utills/apicall';
 
 const KYCList = () => {
       const [kycList, setKycList] = useState([]);
@@ -51,7 +52,8 @@ const KYCList = () => {
 
   useEffect(() => {
     const fetchKycList = async () => {
-      const response = await axios.get("http://localhost:5000/api/user/kyc");
+      const response = await getAllKycs()
+      // axios.get("http://localhost:5000/api/user/kyc");
       setKycList(response.data);
       setLoading(false);
     };

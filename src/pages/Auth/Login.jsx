@@ -4,6 +4,7 @@ import "../../CssFiles/Auth/Auth.css";
 import imgLogo from "../../assets/logo.jpg"; // Ensure you have a logo image in the specified path
 import {Link, useNavigate,  Navigate } from "react-router-dom";
 import { isAuthenticated, getUserRole , loginUser} from "../../utills/authService";
+import { loginUser as authlogin } from '../../utills/apicall';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -27,14 +28,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    const data = await res.json();
+    const res = await authlogin(formData);
+    const data = res.data;
+    // fetch("http://localhost:5000/api/auth/login", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(formData),
+    // });
+    // const data = await res.json();
 
-    if (res.ok) {
+    if (res.status === 200) {
       loginUser(data);
 
       // Redirect based on role
