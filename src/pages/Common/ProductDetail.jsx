@@ -19,7 +19,7 @@ const ProductDetail = () => {
 
   const fetchProduct = async (id) => {
     // Simulate an API call to fetch product details
-    const response = await axios.get(`http://localhost:5000/api/products/common/${id}`);
+    const response = await axios.get(`https://swanand-vibes-backend.vercel.app/api/products/common/${id}`);
     setProductData(response.data.data);
     console.log(response.data.data);
   };

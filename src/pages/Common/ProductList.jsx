@@ -22,7 +22,7 @@ const ProductList = () => {
   // Simulate data fetching
   useEffect(() => {
     const fetchProducts = async () => {
-        const res = await axios.get('http://localhost:5000/api/products/common');
+        const res = await axios.get('https://swanand-vibes-backend.vercel.app/api/products/common');
         console.log(res.data.data);
         setProducts(res.data.data);
         setFilteredProducts(res.data.data);
@@ -102,7 +102,7 @@ const ProductList = () => {
   // API Call to Add to Cart
   try {
     const response = await axios.post(
-      `http://localhost:5000/api/user/cart/${id}`,
+      `https://swanand-vibes-backend.vercel.app/api/user/cart/${id}`,
       { userId, quantity }
     );
     console.log('Cart updated:', response.data);
