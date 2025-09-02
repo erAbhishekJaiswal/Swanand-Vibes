@@ -778,8 +778,10 @@ import "../../CssFiles/User/Checkout.css";
 import axios from "axios";
 import { getUserId } from "../../utills/authService";
 import {placeOrder} from '../../utills/apicall';
+import {useNavigate} from 'react-router-dom';
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     // Shipping Information
@@ -1025,8 +1027,9 @@ const Checkout = () => {
       // );
 
       console.log("Order response:", orderResponse.data);
-
       alert("Order placed successfully!");
+      navigate('/user/orders');
+
       // Here you would typically send the order to your backend
     }
   };
