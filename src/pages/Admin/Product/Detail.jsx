@@ -302,7 +302,7 @@ import React, { useEffect, useState } from 'react';
 import '../../../CssFiles/Admin/product/productcommon.css'
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
-import { addToCart } from '../../../store/cartSlice';
+// import { addToCart } from '../../../store/cartSlice';
 import {getProductById} from '../../../utills/apicall';
 
 const Detail = () => {
