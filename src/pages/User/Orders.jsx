@@ -14,7 +14,7 @@ useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await getOrders(userId);
-        const data = await response.json();
+        const data = response.data;
         setOrders(data);
       } catch (error) {
         console.error('Error fetching orders:', error);
