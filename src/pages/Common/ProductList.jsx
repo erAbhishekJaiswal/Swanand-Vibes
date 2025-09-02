@@ -103,7 +103,9 @@ const ProductList = () => {
     
   // API Call to Add to Cart
   try {
-    const response = await addToCart({ userId, productId: id, quantity });
+    console.log({ userId, id, quantity });
+
+    const response = await addToCart({ userId, id, quantity });
     // axios.post(
     //   `https://swanand-vibes-backend.vercel.app/api/user/cart/${id}`,
     //   { userId, quantity }
