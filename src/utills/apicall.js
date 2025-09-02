@@ -141,12 +141,12 @@ export const submitKyc = (payload) => {
 
 // Cart Api
 //
-export const addToCart = (userId, productId) => {
-  return axios.post(`${API_URL}/user/cart/${userId}`, { productId });
+export const addToCart = (userId, quantity, productId) => {
+  return axios.post(`${API_URL}/user/cart/${productId}`, { userId, quantity });
 };
 //
-export const getCart = (userId) => {
-  return axios.get(`${API_URL}/user/cart/${userId}`);
+export const getCart = (id) => {
+  return axios.get(`${API_URL}/user/cart/${id}`);
 };
 
 //
