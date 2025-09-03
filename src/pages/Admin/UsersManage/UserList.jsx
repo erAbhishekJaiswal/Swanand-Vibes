@@ -62,7 +62,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../../CssFiles/Admin/user/UserList.css';
 import {getAllUsers,deleteUser} from '../../../utills/apicall';
-import Spinner from '../../../Components/Spinner';
+import Spinner from '../../../components/Spinner';
 import { toast } from 'react-hot-toast';
 
 const UserList = () => {

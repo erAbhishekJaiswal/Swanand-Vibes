@@ -61,7 +61,7 @@ const KYCList = () => {
     fetchKycList();
   }, []);
 
-  if (loading) return <div><Spinner /></div>;
+  if (loading) return <div><Spinner size="lg" /></div>;
   return (
     // <div className="kyc-container">
     //   {/* Search bar */}

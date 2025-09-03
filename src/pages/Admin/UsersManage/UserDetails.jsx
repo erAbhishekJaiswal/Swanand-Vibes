@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import {getUserById} from '../../../utills/apicall';
-import Spinner from '../../../Components/Spinner';
+import Spinner from '../../../components/Spinner';
 import { toast } from 'react-hot-toast';
 
 const UserDetails = () => {

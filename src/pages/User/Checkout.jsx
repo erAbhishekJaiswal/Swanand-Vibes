@@ -780,7 +780,7 @@ import { getUserId } from "../../utills/authService";
 import {placeOrder} from '../../utills/apicall';
 import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-hot-toast';
-import Spinner from "../../Components/Spinner";
+import Spinner from "../../components/Spinner";
 const Checkout = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);

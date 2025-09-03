@@ -7,7 +7,7 @@ import { isAuthenticated, getUserRole } from "../../utills/authService";
 import { useLocation } from "react-router-dom";
 import { registerUser } from '../../utills/apicall';
 import {toast} from 'react-hot-toast';
-import Spinner from '../../Components/Spinner';
+import Spinner from "../../components/Spinner"
 
 const Register = () => {
   const navigate = useNavigate();

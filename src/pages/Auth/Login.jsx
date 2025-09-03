@@ -6,7 +6,7 @@ import {Link, useNavigate,  Navigate } from "react-router-dom";
 import { isAuthenticated, getUserRole , loginUser} from "../../utills/authService";
 import { loginUser as authlogin } from '../../utills/apicall';
 import { toast } from "react-hot-toast";
-import Spinner from "../../Components/Spinner";
+import Spinner from "../../components/Spinner";
 
 const Login = () => {
   const navigate = useNavigate();

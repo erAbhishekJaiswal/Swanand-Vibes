@@ -5,7 +5,7 @@ import '../../CssFiles/User/Wallet.css';
 import {getUserId} from '../../utills/authService';
 import { getWallet as fetchWallet } from '../../utills/apicall';
 import {toast} from 'react-hot-toast';
-import Spinner from '../../Components/Spinner';
+import Spinner from '../../components/Spinner';
 
 const Wallet = () => {
   const [walletData, setWalletData] = useState(null);

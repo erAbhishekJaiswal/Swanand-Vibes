@@ -304,7 +304,7 @@ import {useParams} from 'react-router-dom';
 import axios from 'axios';
 // import { addToCart } from '../../../store/cartSlice';
 import {getProductById} from '../../../utills/apicall';
-import Spinner from '../../../Components/Spinner';
+import Spinner from '../../../components/Spinner';
 
 const Detail = () => {
   const { id } = useParams();

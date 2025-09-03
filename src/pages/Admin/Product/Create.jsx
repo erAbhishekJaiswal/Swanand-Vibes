@@ -227,7 +227,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import '../../../CssFiles/Admin/product/ProductForm.css';
 import {createProduct} from '../../../utills/apicall'
-import Spinner from "../../../Components/Spinner";
+import Spinner from "../../../components/Spinner";
 import {toast} from 'react-hot-toast';
 
 const CreateProduct = () => {

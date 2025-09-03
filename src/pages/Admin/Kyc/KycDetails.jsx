@@ -153,7 +153,7 @@ import { useParams } from 'react-router-dom';
 import '../../../CssFiles/Admin/kyc/KycDetails.css';
 import { getKycById, approveKyc, rejectKyc } from '../../../utills/apicall';
 import {toast} from 'react-hot-toast';
-import Spinner from '../../../Components/Spinner';
+import Spinner from '../../../components/Spinner';
 
 const KycDetails = () => {
   const [kycdata, setKycData] = useState(null);
