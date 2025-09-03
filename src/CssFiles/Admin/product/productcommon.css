@@ -224,6 +224,13 @@
   transition: all 0.3s ease;
 }
 
+.filter-option{
+  background: #101b37de;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  /* color: var(--text-primary); */
+}
+
 .futuristic-select:focus {
   outline: none;
   border-color: var(--primary-accent);

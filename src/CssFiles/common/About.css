@@ -1,0 +1,322 @@
+/* About.css */
+/* Add these styles to your existing CSS file */
+
+/* .about-container {
+  padding-bottom: 4rem;
+} */
+
+/* About Hero */
+.about-hero {
+  text-align: center;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Mission Section */
+.mission-section {
+  padding: 4rem 0;
+}
+
+.mission-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.mission-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, var(--text-primary), var(--secondary-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mission-text p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.mission-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.mission-stat {
+  text-align: center;
+}
+
+.mission-stat h4 {
+  font-size: 2rem;
+  color: var(--primary-accent);
+  margin-bottom: 0.5rem;
+}
+
+.mission-stat p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.mission-visual {
+  position: relative;
+  height: 300px;
+}
+
+.floating-shapes {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--border-color);
+  animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+  width: 120px;
+  height: 120px;
+  top: 0;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  width: 80px;
+  height: 80px;
+  top: 40%;
+  right: 10%;
+  animation-delay: 2s;
+}
+
+.shape-3 {
+  width: 100px;
+  height: 100px;
+  bottom: 0;
+  left: 10%;
+  animation-delay: 4s;
+}
+
+/* MLM System Section */
+.mlm-system {
+  padding: 4rem 0;
+  background: var(--secondary-bg);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mlm-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.mlm-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.level-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.level {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 100px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.level:hover {
+  background: var(--primary-accent);
+  color: white;
+  transform: scale(1.05);
+}
+
+.connector {
+  width: 2px;
+  height: 20px;
+  background: var(--border-color);
+}
+
+.mlm-info h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.mlm-info p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.mlm-features {
+  list-style: none;
+}
+
+.mlm-features li {
+  padding: 0.5rem 0;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* Team Section */
+.team-section {
+  padding: 4rem 0;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.team-member {
+  text-align: center;
+}
+
+.member-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  border: 1px solid var(--border-color);
+  margin: 0 auto 1rem;
+  transition: all 0.3s ease;
+}
+
+.team-member:hover .member-image {
+  border-color: var(--primary-accent);
+  transform: scale(1.05);
+}
+
+.team-member h3 {
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.team-member p {
+  color: var(--text-secondary);
+}
+
+/* Values Section */
+.values-section {
+  padding: 4rem 0;
+  background: var(--secondary-bg);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.value-card {
+  text-align: center;
+  padding: 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary-accent);
+}
+
+.value-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.value-card h3 {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.value-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Responsive Design for About Page */
+@media (max-width: 1024px) {
+  .mission-content,
+  .mlm-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .mission-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .mission-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .level-chart {
+    transform: scale(0.8);
+  }
+  
+  .mlm-info h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mission-text h2 {
+    font-size: 2rem;
+  }
+  
+  .mission-visual {
+    height: 200px;
+  }
+  
+  .shape-1 {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .shape-2 {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .shape-3 {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .level {
+    padding: 0.6rem 1rem;
+    min-width: 80px;
+    font-size: 0.9rem;
+  }
+}

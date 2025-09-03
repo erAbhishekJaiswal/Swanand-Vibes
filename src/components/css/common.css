@@ -408,9 +408,9 @@ body {
 
 /* Footer Styles */
 .futuristic-footer {
-  background: var(--secondary-bg);
+  /* background: var(--secondary-bg); */
   padding: 3rem 2rem 1rem;
-  margin-top: 4rem;
+  /* margin-top: 4rem; */
 }
 
 .footer-content {
@@ -447,7 +447,7 @@ body {
 }
 
 .footer-section a {
-  display: block;
+  display: flex;
   color: var(--text-secondary);
   text-decoration: none;
   margin-bottom: 0.5rem;

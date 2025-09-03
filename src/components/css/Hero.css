@@ -1,0 +1,159 @@
+.hero-section {
+  position: relative;
+  padding: 80px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  overflow: hidden;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  z-index: 2;
+}
+
+.hero-text {
+  max-width: 600px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.brand-gradient {
+  background: linear-gradient(45deg, #ff8c00, #ff2e63);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #dcdcdc;
+}
+
+.hero-actions button {
+  margin-right: 15px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-primary {
+  background: #ff2e63;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #ff2e63;
+  color: #ff2e63;
+}
+
+.btn-primary:hover {
+  background: #ff4971;
+}
+
+.btn-secondary:hover {
+  background: #ff2e63;
+  color: #fff;
+}
+
+/* Slider */
+.slider {
+  position: relative;
+  width: 280px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide {
+  position: absolute;
+  width: 220px;
+  height: 160px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.6s ease;
+  backdrop-filter: blur(8px);
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  margin: 0 5px;
+  background: #aaa;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.active-dot {
+  background: #ff2e63;
+  transform: scale(1.2);
+}
+
+/* Background Effects */
+.hero-background .glowing-orbs .orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.5;
+}
+
+.orb-1 {
+  width: 250px;
+  height: 250px;
+  background: #ff2e63;
+  top: 10%;
+  left: -5%;
+}
+
+.orb-2 {
+  width: 200px;
+  height: 200px;
+  background: #08d9d6;
+  bottom: 15%;
+  right: -10%;
+}
+
+.orb-3 {
+  width: 150px;
+  height: 150px;
+  background: #f9ed69;
+  top: 50%;
+  right: 20%;
+}

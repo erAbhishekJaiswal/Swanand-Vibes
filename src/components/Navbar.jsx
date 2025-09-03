@@ -64,12 +64,12 @@ const Navbar = () => {
               {/* <Link to="/admin/dashboard" className="dashboard-btn futuristic-btn">
               <span className="btn-icon">📊</span>
             </Link> */}
-              <Link
+              {/* <Link
                 to="/notifications"
                 className="notification-btn futuristic-btn"
               >
                 <span className="btn-icon">🔔</span>
-              </Link>
+              </Link> */}
               <Link
                 to="/admin/profile"
                 className="dashboard-btn futuristic-btn"

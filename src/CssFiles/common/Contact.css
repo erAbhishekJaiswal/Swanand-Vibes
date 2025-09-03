@@ -1,0 +1,244 @@
+/* Contact.css */
+/* Add these styles to your existing CSS file */
+
+/* .contact-container {
+  padding-bottom: 4rem;
+} */
+
+/* Contact Hero */
+.contact-hero {
+  text-align: center;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Contact Content */
+.contact-content {
+  padding: 4rem 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.contact-info h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--text-primary), var(--secondary-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contact-info > p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-method {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.contact-method:hover {
+  border-color: var(--primary-accent);
+  transform: translateX(5px);
+}
+
+.method-icon {
+  font-size: 1.5rem;
+  min-width: 40px;
+}
+
+.method-info h3 {
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.method-info p {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0.25rem 0;
+}
+
+/* Contact Form */
+.contact-form-container {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.contact-form-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.8rem 1rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 3px var(--glow-color);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+/* FAQ Section */
+.faq-section {
+  padding: 4rem 0;
+  background: var(--secondary-bg);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.faq-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  border-color: var(--primary-accent);
+  transform: translateY(-2px);
+}
+
+.faq-item h3 {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+}
+
+.faq-item p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Contact CTA */
+.contact-cta {
+  text-align: center;
+  padding: 4rem 0;
+  /* background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent)); */
+  color: white;
+}
+
+.contact-cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.contact-cta p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+/* Responsive Design for Contact Page */
+@media (max-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-method {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .method-icon {
+    align-self: center;
+  }
+  
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form-container {
+    padding: 1.5rem;
+  }
+  
+  .contact-info h2 {
+    font-size: 1.8rem;
+  }
+  
+  .contact-form-container h2 {
+    font-size: 1.5rem;
+  }
+  
+  .contact-cta h2 {
+    font-size: 2rem;
+  }
+  
+  .contact-cta p {
+    font-size: 1rem;
+  }
+}

@@ -88,9 +88,25 @@ const Profile = ({ user, onUpdateProfile,}) => {
     }
   }, [formData]);
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(refLink);
-    alert("Referral link copied!");
+  // const copyToClipboard = () => {
+  //   navigator.clipboard.writeText(refLink);
+  //   alert("Referral link copied!");
+  // };
+
+
+   const handleShare = (link) => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Awesome Page",
+          text: "Check out this page!",
+          url: link,
+        })
+        .then(() => console.log("Shared successfully"))
+        .catch((error) => console.error("Error sharing:", error));
+    } else {
+      alert("Sharing not supported in your browser. Copy link instead.");
+    }
   };
 
     const handleLogout = async () => {
@@ -130,7 +146,7 @@ const Profile = ({ user, onUpdateProfile,}) => {
         <div className="profile-card">
           <div className="profile-avatar-section">
             <div className="avatar-upload">
-              <div className="avatar-preview">
+              {/* <div className="avatar-preview">
                 <div
                   className="avatar-image"
                   style={{
@@ -150,16 +166,16 @@ const Profile = ({ user, onUpdateProfile,}) => {
                     />
                   </label>
                 )}
-              </div>
+              </div> */}
             </div>
             <div className="avatar-info">
-              <h2>{formData.name}</h2>
-              <p>{formData.email}</p>
-              <p>company id: {formData.companyid}</p>
+              <h2>Name: {formData.name}</h2>
+              <p>Email: {formData.email}</p>
+              <p>Company ID: {formData.companyid}</p>
 
-              <div className="member-status">
+              {/* <div className="member-status">
                 <span className="status-badge">Premium Member</span>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -235,8 +251,9 @@ const Profile = ({ user, onUpdateProfile,}) => {
             <div className="referral-section">
               <h3 className="">Your Referral Link</h3>
               <input type="text" value={refLink} readOnly className="futuristic-input" />
-              <button onClick={copyToClipboard} className="futuristic-btn">
-                Copy Link
+              {/* <ShareButton link={refLink} /> */}
+              <button onClick={() => handleShare(refLink)} className="futuristic-btn">
+                Share Link
               </button>
             </div>
 

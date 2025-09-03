@@ -219,12 +219,12 @@ const ProductList = () => {
             <div className="search-box">
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder="🔍Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="futuristic-input"
               />
-              <span className="search-icon">🔍</span>
+              {/* <span className="search-icon">🔍</span> */}
             </div>
 
             <div className="sort-filter">
@@ -233,11 +233,11 @@ const ProductList = () => {
                 onChange={(e) => setSortOption(e.target.value)}
                 className="futuristic-select"
               >
-                <option value="featured">Featured</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
-                <option value="name">Name</option>
+                <option className="filter-option" value="featured">Featured</option>
+                <option className="filter-option" value="price-low">Price: Low to High</option>
+                <option className="filter-option" value="price-high">Price: High to Low</option>
+                <option className="filter-option" value="rating">Highest Rated</option>
+                <option className="filter-option" value="name">Name</option>
               </select>
             </div>
           </div>
