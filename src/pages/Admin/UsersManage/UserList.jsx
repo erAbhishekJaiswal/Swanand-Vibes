@@ -62,6 +62,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../../CssFiles/Admin/user/UserList.css';
 import {getAllUsers,deleteUser} from '../../../utills/apicall';
+import Spinner from '../../../Components/Spinner';
+import { toast } from 'react-hot-toast';
 
 const UserList = () => {
     const navigate = useNavigate();
@@ -141,14 +143,7 @@ const UserList = () => {
     };
 
     if (loading) {
-        return (
-            <div className="user-list-container">
-                <div className="loading-spinner">
-                    <div className="spinner"></div>
-                    <p>Loading users...</p>
-                </div>
-            </div>
-        );
+        return <Spinner size="lg" />;
     }
 
     if (error) {

@@ -4,10 +4,14 @@ import "../../CssFiles/profile.css";
 import axios from "axios";
 import { getUserId,logoutUser } from "../../utills/authService";
 import { getUserProfile } from "../../utills/apicall";
+import {toast} from 'react-hot-toast';
+import Spinner from "../../components/Spinner";
+import { useNavigate } from "react-router-dom";
 
 const Profile = ({ user, onUpdateProfile,}) => {
   const [refLink, setRefLink] = useState("");
-
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: user?.name || "Loading...",
@@ -22,12 +26,14 @@ const Profile = ({ user, onUpdateProfile,}) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const userData = await getUserProfile(id);
       // axios.get(
       //   `http://localhost:5000/api/users/${id}/profile`
       // );
       setFormData(userData.data);
       console.log(userData.data);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -43,6 +49,7 @@ const Profile = ({ user, onUpdateProfile,}) => {
     e.preventDefault();
     onUpdateProfile(formData);
     setIsEditing(false);
+    toast.success("Profile updated successfully");
   };
 
   const handleCancel = () => {
@@ -57,6 +64,7 @@ const Profile = ({ user, onUpdateProfile,}) => {
       avatar: user?.avatar || null,
     });
     setIsEditing(false);
+    toast.error("Edit cancelled");
   };
 
   const handleAvatarChange = (e) => {
@@ -89,6 +97,27 @@ const Profile = ({ user, onUpdateProfile,}) => {
       await logoutUser();
       window.location.href = "/login"; // Redirect to login page after logout
     };
+
+    // const handleKycEnable = async () => {
+    //   setLoading(true);
+    //   const response = await axios.post(
+    //     `http://localhost:5000/api/users/${id}/kyc/enable`
+    //   );
+    //   setLoading(false);
+    //   if (response.status === 200) {
+    //     toast.success("KYC verification enabled");
+    //   } else {
+    //     toast.error("Failed to enable KYC verification");
+    //   }
+    // };
+
+    const handleKycEnable = async () => {
+      navigate("/user/kyc");
+    };
+
+  if (loading) {
+    return <Spinner size="lg" />;
+  }
 
   return (
     <div className="profile-container futuristic-profile">
@@ -260,14 +289,14 @@ const Profile = ({ user, onUpdateProfile,}) => {
               </div>
               <button className="security-action futuristic-btn">Change</button>
             </div>
-            {/* <div className="security-item">
+            <div className="security-item">
               <span className="security-icon">📱</span>
               <div className="security-info">
-                <h4>Two-Factor Authentication</h4>
-                <p>Disabled</p>
+                <h4>KYC Verification</h4>
+                <p>Status: {"Pending"}</p>
               </div>
-              <button className="security-action futuristic-btn">Enable</button>
-            </div> */}
+              <button onClick={handleKycEnable} className="security-action futuristic-btn">Kyc Now</button>
+            </div>
 
           </div>
 

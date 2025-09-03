@@ -4,6 +4,8 @@ import '../../CssFiles/Admin/product/productcommon.css'
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
 import {getCommonProductById} from '../../utills/apicall';
+import Spinner from '../../components/Spinner';
+import {toast} from 'react-hot-toast';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -13,17 +15,20 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
   const [productData, setProductData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchProduct(id);
   }, [id]);
 
   const fetchProduct = async (id) => {
+    setLoading(true);
     // Simulate an API call to fetch product details
     const response = await getCommonProductById(id)
     // axios.get(`https://swanand-vibes-backend.vercel.app/api/products/common/${id}`);
     setProductData(response.data.data);
     console.log(response.data.data);
+    setLoading(false);
   };
 
   const productImages = productData?.images.map((image) => image.url) || [];
@@ -132,6 +137,7 @@ const relatedProducts = [
       quantity
     };
     addToCart(productToAdd);
+    toast.success(`${product.name} added to cart!`);
   };
 
   const increaseQuantity = () => {
@@ -148,6 +154,8 @@ const relatedProducts = [
     // Handle back navigation
     window.history.back();
   };
+
+  if (loading) return <Spinner size="lg" />;
 
   return (
     <div className="product-detail-container">

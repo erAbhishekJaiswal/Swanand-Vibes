@@ -6,6 +6,8 @@ import {Link, useNavigate,  Navigate } from "react-router-dom";
 import { isAuthenticated, getUserRole } from "../../utills/authService";
 import { useLocation } from "react-router-dom";
 import { registerUser } from '../../utills/apicall';
+import {toast} from 'react-hot-toast';
+import Spinner from '../../Components/Spinner';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -53,17 +55,17 @@ const Register = () => {
 
     if (res.status === 200) {
       // Handle successful registration
-      // alert("Registration successful!");
+      toast.success("Registration successful!");
       navigate("/login");
     } else {
       // Handle registration error
-      alert(data.message);
+      toast.error(data.message);
     }
     setLoading(false);
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Spinner size="lg" />;
   }
 
   return (

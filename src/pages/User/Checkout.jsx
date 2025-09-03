@@ -779,7 +779,8 @@ import axios from "axios";
 import { getUserId } from "../../utills/authService";
 import {placeOrder} from '../../utills/apicall';
 import {useNavigate} from 'react-router-dom';
-
+import {toast} from 'react-hot-toast';
+import Spinner from "../../Components/Spinner";
 const Checkout = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
@@ -945,6 +946,7 @@ const Checkout = () => {
 
   const handleAddressNext = async () => {
     try {
+      setIsLoading(true);
       // only pick address-related fields to send
       const addressPayload = {
         userId,
@@ -961,6 +963,7 @@ const Checkout = () => {
       };
       console.log(addressPayload);
 
+      
       // save to DB
       const res = await axios.put(
         `https://swanand-vibes-backend.vercel.app/api/users/${userId}`,
@@ -975,6 +978,7 @@ const Checkout = () => {
         );
         setSavedAddresses(addressResponse.data);
 
+        setIsLoading(false);
         nextStep();
       }
     } catch (error) {
@@ -987,6 +991,7 @@ const Checkout = () => {
   };
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     if (validateStep(2)) {
       // Process order submission
@@ -1027,7 +1032,9 @@ const Checkout = () => {
       // );
 
       console.log("Order response:", orderResponse.data);
-      alert("Order placed successfully!");
+      setIsLoading(false);
+      toast.success("Order placed successfully!");
+      // alert("Order placed successfully!");
       navigate('/user/orders');
 
       // Here you would typically send the order to your backend
@@ -1080,7 +1087,7 @@ const Checkout = () => {
   };
 
   if (isLoading) {
-    return <div className="checkout-container">Loading...</div>;
+    return <Spinner size="lg" />; // Show loading spinner while fetching data
   }
 
   return (

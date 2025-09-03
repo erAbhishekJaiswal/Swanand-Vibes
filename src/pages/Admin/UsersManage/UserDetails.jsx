@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import {getUserById} from '../../../utills/apicall';
+import Spinner from '../../../Components/Spinner';
+import { toast } from 'react-hot-toast';
 
 const UserDetails = () => {
   const { id } = useParams();
@@ -12,6 +14,7 @@ const UserDetails = () => {
 
   useEffect(() => {
     const fetchUserDetails = async () => {
+      setLoading(true);
       try {
         const response = await getUserById(id);
         // axios.get(`http://localhost:5000/api/users/${id}`);
@@ -20,7 +23,7 @@ const UserDetails = () => {
 
       } catch (error) {
         console.error('Error fetching user details:', error);
-        setError('Failed to load user details. Please try again later.');
+        toast.error('Failed to load user details. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -29,12 +32,12 @@ const UserDetails = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Spinner size="lg" />;
   }
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  // if (error) {
+  //   return <div>{error}</div>;
+  // }
 
   return (
     <div>

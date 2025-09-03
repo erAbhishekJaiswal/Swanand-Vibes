@@ -15,7 +15,8 @@ const Pages = () => {
   return (
     <div className="pages-container" style={{ width: '80%' }}>
         <Routes>
-          <Route path="/" element={<h1>Main Content</h1>} />
+          <Route path="/" element={<h1>Users Content</h1>} />
+          <Route path="/dashboard" element={<Profile />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/users" element={<UserList />} />
           <Route path="/detail/:id" element={<UserDetails />} />

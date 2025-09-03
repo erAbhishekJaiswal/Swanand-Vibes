@@ -64,6 +64,8 @@ import { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router-dom'
 import '../../../CssFiles/Admin/product/list.css';
 import {getAllProducts, deleteProduct} from '../../../utills/apicall' 
+import Spinner from '../../../components/Spinner';
+import { toast } from 'react-hot-toast';
 
 const List = () => {
     const navigate = useNavigate();
@@ -95,8 +97,9 @@ const List = () => {
                 await deleteProduct(productId);
                 // axios.delete(`http://localhost:5000/api/products/${productId}`);
                 setProducts(products.filter(product => product._id !== productId));
+                toast.success('Product deleted successfully.');
             } catch (err) {
-                setError('Failed to delete product.');
+                toast.error('Failed to delete product.');
                 console.error('Error deleting product:', err);
             }
         }
@@ -118,14 +121,7 @@ const List = () => {
     };
 
     if (loading) {
-        return (
-            <div className="product-list-container">
-                <div className="loading-spinner">
-                    <div className="spinner"></div>
-                    <p>Loading products...</p>
-                </div>
-            </div>
-        );
+        return <Spinner size='lg' />;
     }
 
     if (error) {

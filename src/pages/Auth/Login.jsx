@@ -5,6 +5,8 @@ import imgLogo from "../../assets/logo.jpg"; // Ensure you have a logo image in 
 import {Link, useNavigate,  Navigate } from "react-router-dom";
 import { isAuthenticated, getUserRole , loginUser} from "../../utills/authService";
 import { loginUser as authlogin } from '../../utills/apicall';
+import { toast } from "react-hot-toast";
+import Spinner from "../../Components/Spinner";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
 
   if (isAuthenticated()) {
@@ -27,7 +30,9 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
+    setLoading(true);
     const res = await authlogin(formData);
     const data = res.data;
     // fetch("http://localhost:5000/api/auth/login", {
@@ -42,14 +47,20 @@ const Login = () => {
 
       // Redirect based on role
       if (data.user.role === "admin") {
+        toast.success("Admin Login successful");
         navigate("/admin/dashboard");
       } else {
+        toast.success("User Login successful");
         navigate("/user/dashboard");
       }
     } else {
-      alert(data.message);
+      toast.error(data.message);
     }
   };
+
+  if (loading) {
+    return <Spinner size="lg" />;
+  }
 
   return (
     <div className="auth-container futuristic-auth">

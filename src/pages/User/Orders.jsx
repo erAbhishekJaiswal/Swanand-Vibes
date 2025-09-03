@@ -352,6 +352,7 @@ import React, { useState, useEffect } from 'react';
 import '../../CssFiles/User/Cart.css';
 import { getOrders } from '../../utills/apicall';
 import { getUserId } from '../../utills/authService';
+import Spinner from '../../components/Spinner';
 
 const Orders = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -413,15 +414,16 @@ const Orders = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="orders-container">
-        <div className="orders-header">
-          <h1>My Orders</h1>
-          <p>Track and manage your orders</p>
-        </div>
-        <div className="loading">Loading orders...</div>
-      </div>
-    );
+    return <Spinner size='lg' />
+    // (
+    //   <div className="orders-container">
+    //     <div className="orders-header">
+    //       <h1>My Orders</h1>
+    //       <p>Track and manage your orders</p>
+    //     </div>
+    //     <div className="loading">Loading orders...</div>
+    //   </div>
+    // );
   }
 
   return (

@@ -1,0 +1,962 @@
+/* Spinner.css */
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #818cf8;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+  --light-color: #f8fafc;
+  --dark-color: #1e293b;
+  --spinner-size-xs: 16px;
+  --spinner-size-sm: 24px;
+  --spinner-size-md: 40px;
+  --spinner-size-lg: 60px;
+  --spinner-size-xl: 80px;
+}
+
+/* Base spinner styles */
+.spinner {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+.spinner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-text {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--dark-color);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Size variants */
+.spinner-xs .spinner-text {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.spinner-sm .spinner-text {
+  font-size: 0.8rem;
+  margin-top: 0.6rem;
+}
+
+.spinner-lg .spinner-text {
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.spinner-xl .spinner-text {
+  font-size: 1.125rem;
+  margin-top: 1.25rem;
+}
+
+/* Color variants */
+.spinner-primary .spinner-text {
+  color: var(--primary-color);
+}
+
+.spinner-secondary .spinner-text {
+  color: var(--secondary-color);
+}
+
+.spinner-success .spinner-text {
+  color: var(--success-color);
+}
+
+.spinner-warning .spinner-text {
+  color: var(--warning-color);
+}
+
+.spinner-error .spinner-text {
+  color: var(--error-color);
+}
+
+.spinner-light .spinner-text {
+  color: var(--light-color);
+}
+
+.spinner-dark .spinner-text {
+  color: var(--dark-color);
+}
+
+/* Ring Spinner */
+.ring {
+  display: inline-block;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 3px solid;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-xs .ring {
+  width: var(--spinner-size-xs);
+  height: var(--spinner-size-xs);
+  border-width: 2px;
+}
+
+.spinner-sm .ring {
+  width: var(--spinner-size-sm);
+  height: var(--spinner-size-sm);
+  border-width: 2px;
+}
+
+.spinner-md .ring {
+  width: var(--spinner-size-md);
+  height: var(--spinner-size-md);
+  border-width: 3px;
+}
+
+.spinner-lg .ring {
+  width: var(--spinner-size-lg);
+  height: var(--spinner-size-lg);
+  border-width: 4px;
+}
+
+.spinner-xl .ring {
+  width: var(--spinner-size-xl);
+  height: var(--spinner-size-xl);
+  border-width: 5px;
+}
+
+.spinner-primary .ring {
+  border-top-color: var(--primary-color);
+}
+
+.spinner-secondary .ring {
+  border-top-color: var(--secondary-color);
+}
+
+.spinner-success .ring {
+  border-top-color: var(--success-color);
+}
+
+.spinner-warning .ring {
+  border-top-color: var(--warning-color);
+}
+
+.spinner-error .ring {
+  border-top-color: var(--error-color);
+}
+
+.spinner-light .ring {
+  border-top-color: var(--light-color);
+}
+
+.spinner-dark .ring {
+  border-top-color: var(--dark-color);
+}
+
+/* Dual Ring Spinner */
+.dual-ring {
+  display: inline-block;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+.spinner-xs .dual-ring {
+  width: var(--spinner-size-xs);
+  height: var(--spinner-size-xs);
+  border: 2px solid transparent;
+}
+
+.spinner-sm .dual-ring {
+  width: var(--spinner-size-sm);
+  height: var(--spinner-size-sm);
+  border: 2px solid transparent;
+}
+
+.spinner-md .dual-ring {
+  width: var(--spinner-size-md);
+  height: var(--spinner-size-md);
+  border: 3px solid transparent;
+}
+
+.spinner-lg .dual-ring {
+  width: var(--spinner-size-lg);
+  height: var(--spinner-size-lg);
+  border: 4px solid transparent;
+}
+
+.spinner-xl .dual-ring {
+  width: var(--spinner-size-xl);
+  height: var(--spinner-size-xl);
+  border: 5px solid transparent;
+}
+
+.spinner-primary .dual-ring {
+  border-top-color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+.spinner-secondary .dual-ring {
+  border-top-color: var(--secondary-color);
+  border-bottom-color: var(--secondary-color);
+}
+
+.spinner-success .dual-ring {
+  border-top-color: var(--success-color);
+  border-bottom-color: var(--success-color);
+}
+
+.spinner-warning .dual-ring {
+  border-top-color: var(--warning-color);
+  border-bottom-color: var(--warning-color);
+}
+
+.spinner-error .dual-ring {
+  border-top-color: var(--error-color);
+  border-bottom-color: var(--error-color);
+}
+
+.spinner-light .dual-ring {
+  border-top-color: var(--light-color);
+  border-bottom-color: var(--light-color);
+}
+
+.spinner-dark .dual-ring {
+  border-top-color: var(--dark-color);
+  border-bottom-color: var(--dark-color);
+}
+
+/* Ellipsis Spinner */
+.ellipsis {
+  display: inline-block;
+  position: relative;
+}
+
+.ellipsis div {
+  position: absolute;
+  border-radius: 50%;
+  animation: ellipsis 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.ellipsis div:nth-child(1) {
+  animation-delay: -0.24s;
+}
+
+.ellipsis div:nth-child(2) {
+  animation-delay: -0.12s;
+}
+
+.ellipsis div:nth-child(3) {
+  animation-delay: 0;
+}
+
+.spinner-xs .ellipsis {
+  width: var(--spinner-size-xs);
+  height: var(--spinner-size-xs);
+}
+
+.spinner-xs .ellipsis div {
+  width: 4px;
+  height: 4px;
+}
+
+.spinner-sm .ellipsis {
+  width: var(--spinner-size-sm);
+  height: var(--spinner-size-sm);
+}
+
+.spinner-sm .ellipsis div {
+  width: 5px;
+  height: 5px;
+}
+
+.spinner-md .ellipsis {
+  width: var(--spinner-size-md);
+  height: var(--spinner-size-md);
+}
+
+.spinner-md .ellipsis div {
+  width: 8px;
+  height: 8px;
+}
+
+.spinner-lg .ellipsis {
+  width: var(--spinner-size-lg);
+  height: var(--spinner-size-lg);
+}
+
+.spinner-lg .ellipsis div {
+  width: 10px;
+  height: 10px;
+}
+
+.spinner-xl .ellipsis {
+  width: var(--spinner-size-xl);
+  height: var(--spinner-size-xl);
+}
+
+.spinner-xl .ellipsis div {
+  width: 12px;
+  height: 12px;
+}
+
+.spinner-primary .ellipsis div {
+  background: var(--primary-color);
+}
+
+.spinner-secondary .ellipsis div {
+  background: var(--secondary-color);
+}
+
+.spinner-success .ellipsis div {
+  background: var(--success-color);
+}
+
+.spinner-warning .ellipsis div {
+  background: var(--warning-color);
+}
+
+.spinner-error .ellipsis div {
+  background: var(--error-color);
+}
+
+.spinner-light .ellipsis div {
+  background: var(--light-color);
+}
+
+.spinner-dark .ellipsis div {
+  background: var(--dark-color);
+}
+
+/* Ripple Spinner */
+.ripple {
+  display: inline-block;
+  position: relative;
+}
+
+.ripple div {
+  position: absolute;
+  border: 2px solid;
+  border-radius: 50%;
+  animation: ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+
+.spinner-xs .ripple {
+  width: var(--spinner-size-xs);
+  height: var(--spinner-size-xs);
+}
+
+.spinner-sm .ripple {
+  width: var(--spinner-size-sm);
+  height: var(--spinner-size-sm);
+}
+
+.spinner-md .ripple {
+  width: var(--spinner-size-md);
+  height: var(--spinner-size-md);
+}
+
+.spinner-lg .ripple {
+  width: var(--spinner-size-lg);
+  height: var(--spinner-size-lg);
+}
+
+.spinner-xl .ripple {
+  width: var(--spinner-size-xl);
+  height: var(--spinner-size-xl);
+}
+
+.spinner-primary .ripple div {
+  border-color: var(--primary-color);
+}
+
+.spinner-secondary .ripple div {
+  border-color: var(--secondary-color);
+}
+
+.spinner-success .ripple div {
+  border-color: var(--success-color);
+}
+
+.spinner-warning .ripple div {
+  border-color: var(--warning-color);
+}
+
+.spinner-error .ripple div {
+  border-color: var(--error-color);
+}
+
+.spinner-light .ripple div {
+  border-color: var(--light-color);
+}
+
+.spinner-dark .ripple div {
+  border-color: var(--dark-color);
+}
+
+/* Hourglass Spinner */
+.hourglass {
+  display: inline-block;
+  position: relative;
+  animation: rotate 1.5s linear infinite;
+}
+
+.hourglass:before {
+  content: "";
+  display: block;
+  border-style: solid;
+  border-width: 0 10px 20px 10px;
+  border-color: transparent transparent;
+  animation: hourglass 1.5s linear infinite;
+}
+
+.spinner-xs .hourglass:before {
+  border-width: 0 6px 12px 6px;
+}
+
+.spinner-sm .hourglass:before {
+  border-width: 0 8px 16px 8px;
+}
+
+.spinner-md .hourglass:before {
+  border-width: 0 10px 20px 10px;
+}
+
+.spinner-lg .hourglass:before {
+  border-width: 0 12px 24px 12px;
+}
+
+.spinner-xl .hourglass:before {
+  border-width: 0 14px 28px 14px;
+}
+
+.spinner-primary .hourglass:before {
+  border-color: transparent transparent var(--primary-color) transparent;
+}
+
+.spinner-secondary .hourglass:before {
+  border-color: transparent transparent var(--secondary-color) transparent;
+}
+
+.spinner-success .hourglass:before {
+  border-color: transparent transparent var(--success-color) transparent;
+}
+
+.spinner-warning .hourglass:before {
+  border-color: transparent transparent var(--warning-color) transparent;
+}
+
+.spinner-error .hourglass:before {
+  border-color: transparent transparent var(--error-color) transparent;
+}
+
+.spinner-light .hourglass:before {
+  border-color: transparent transparent var(--light-color) transparent;
+}
+
+.spinner-dark .hourglass:before {
+  border-color: transparent transparent var(--dark-color) transparent;
+}
+
+/* Dots Spinner */
+.dots {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dots div {
+  border-radius: 50%;
+  animation: dots-bounce 1.4s ease-in-out infinite both;
+}
+
+.dots div:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.dots div:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.spinner-xs .dots {
+  width: var(--spinner-size-xs);
+  height: var(--spinner-size-xs);
+}
+
+.spinner-xs .dots div {
+  width: 4px;
+  height: 4px;
+}
+
+.spinner-sm .dots {
+  width: var(--spinner-size-sm);
+  height: var(--spinner-size-sm);
+}
+
+.spinner-sm .dots div {
+  width: 5px;
+  height: 5px;
+}
+
+.spinner-md .dots {
+  width: var(--spinner-size-md);
+  height: var(--spinner-size-md);
+}
+
+.spinner-md .dots div {
+  width: 8px;
+  height: 8px;
+}
+
+.spinner-lg .dots {
+  width: var(--spinner-size-lg);
+  height: var(--spinner-size-lg);
+}
+
+.spinner-lg .dots div {
+  width: 10px;
+  height: 10px;
+}
+
+.spinner-xl .dots {
+  width: var(--spinner-size-xl);
+  height: var(--spinner-size-xl);
+}
+
+.spinner-xl .dots div {
+  width: 12px;
+  height: 12px;
+}
+
+.spinner-primary .dots div {
+  background-color: var(--primary-color);
+}
+
+.spinner-secondary .dots div {
+  background-color: var(--secondary-color);
+}
+
+.spinner-success .dots div {
+  background-color: var(--success-color);
+}
+
+.spinner-warning .dots div {
+  background-color: var(--warning-color);
+}
+
+.spinner-error .dots div {
+  background-color: var(--error-color);
+}
+
+.spinner-light .dots div {
+  background-color: var(--light-color);
+}
+
+.spinner-dark .dots div {
+  background-color: var(--dark-color);
+}
+
+/* Cube Grid Spinner */
+.cube-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.cube {
+  animation: cube-grid 1.3s infinite ease-in-out;
+}
+
+.cube:nth-child(1) { animation-delay: 0.2s; }
+.cube:nth-child(2) { animation-delay: 0.3s; }
+.cube:nth-child(3) { animation-delay: 0.4s; }
+.cube:nth-child(4) { animation-delay: 0.1s; }
+.cube:nth-child(5) { animation-delay: 0.2s; }
+.cube:nth-child(6) { animation-delay: 0.3s; }
+.cube:nth-child(7) { animation-delay: 0.0s; }
+.cube:nth-child(8) { animation-delay: 0.1s; }
+.cube:nth-child(9) { animation-delay: 0.2s; }
+
+.spinner-xs .cube-grid {
+  width: var(--spinner-size-xs);
+  height: var(--spinner-size-xs);
+}
+
+.spinner-xs .cube {
+  width: 4px;
+  height: 4px;
+}
+
+.spinner-sm .cube-grid {
+  width: var(--spinner-size-sm);
+  height: var(--spinner-size-sm);
+}
+
+.spinner-sm .cube {
+  width: 5px;
+  height: 5px;
+}
+
+.spinner-md .cube-grid {
+  width: var(--spinner-size-md);
+  height: var(--spinner-size-md);
+}
+
+.spinner-md .cube {
+  width: 8px;
+  height: 8px;
+}
+
+.spinner-lg .cube-grid {
+  width: var(--spinner-size-lg);
+  height: var(--spinner-size-lg);
+}
+
+.spinner-lg .cube {
+  width: 10px;
+  height: 10px;
+}
+
+.spinner-xl .cube-grid {
+  width: var(--spinner-size-xl);
+  height: var(--spinner-size-xl);
+}
+
+.spinner-xl .cube {
+  width: 12px;
+  height: 12px;
+}
+
+.spinner-primary .cube {
+  background-color: var(--primary-color);
+}
+
+.spinner-secondary .cube {
+  background-color: var(--secondary-color);
+}
+
+.spinner-success .cube {
+  background-color: var(--success-color);
+}
+
+.spinner-warning .cube {
+  background-color: var(--warning-color);
+}
+
+.spinner-error .cube {
+  background-color: var(--error-color);
+}
+
+.spinner-light .cube {
+  background-color: var(--light-color);
+}
+
+.spinner-dark .cube {
+  background-color: var(--dark-color);
+}
+
+/* Pulse Spinner */
+.pulse {
+  display: inline-block;
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite both;
+}
+
+.spinner-xs .pulse {
+  width: var(--spinner-size-xs);
+  height: var(--spinner-size-xs);
+}
+
+.spinner-sm .pulse {
+  width: var(--spinner-size-sm);
+  height: var(--spinner-size-sm);
+}
+
+.spinner-md .pulse {
+  width: var(--spinner-size-md);
+  height: var(--spinner-size-md);
+}
+
+.spinner-lg .pulse {
+  width: var(--spinner-size-lg);
+  height: var(--spinner-size-lg);
+}
+
+.spinner-xl .pulse {
+  width: var(--spinner-size-xl);
+  height: var(--spinner-size-xl);
+}
+
+.spinner-primary .pulse {
+  background-color: var(--primary-color);
+}
+
+.spinner-secondary .pulse {
+  background-color: var(--secondary-color);
+}
+
+.spinner-success .pulse {
+  background-color: var(--success-color);
+}
+
+.spinner-warning .pulse {
+  background-color: var(--warning-color);
+}
+
+.spinner-error .pulse {
+  background-color: var(--error-color);
+}
+
+.spinner-light .pulse {
+  background-color: var(--light-color);
+}
+
+.spinner-dark .pulse {
+  background-color: var(--dark-color);
+}
+
+/* Progress Spinner */
+.progress-spinner {
+  display: inline-block;
+  position: relative;
+}
+
+.progress-circle {
+  transform: rotate(-90deg);
+}
+
+.progress-circle-inner {
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+  animation: progress 1.5s ease-in-out infinite both;
+  transform-origin: center;
+}
+
+.spinner-xs .progress-spinner {
+  width: var(--spinner-size-xs);
+  height: var(--spinner-size-xs);
+}
+
+.spinner-sm .progress-spinner {
+  width: var(--spinner-size-sm);
+  height: var(--spinner-size-sm);
+}
+
+.spinner-md .progress-spinner {
+  width: var(--spinner-size-md);
+  height: var(--spinner-size-md);
+}
+
+.spinner-lg .progress-spinner {
+  width: var(--spinner-size-lg);
+  height: var(--spinner-size-lg);
+}
+
+.spinner-xl .progress-spinner {
+  width: var(--spinner-size-xl);
+  height: var(--spinner-size-xl);
+}
+
+.spinner-primary .progress-circle-inner {
+  stroke: var(--primary-color);
+}
+
+.spinner-secondary .progress-circle-inner {
+  stroke: var(--secondary-color);
+}
+
+.spinner-success .progress-circle-inner {
+  stroke: var(--success-color);
+}
+
+.spinner-warning .progress-circle-inner {
+  stroke: var(--warning-color);
+}
+
+.spinner-error .progress-circle-inner {
+  stroke: var(--error-color);
+}
+
+.spinner-light .progress-circle-inner {
+  stroke: var(--light-color);
+}
+
+.spinner-dark .progress-circle-inner {
+  stroke: var(--dark-color);
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes ellipsis {
+  0% {
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+  }
+  100% {
+    top: 50%;
+    left: 100%;
+    transform: translate(-100%, -50%);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes hourglass {
+  0% {
+    border-color: transparent transparent;
+  }
+  50% {
+    border-color: transparent transparent;
+  }
+  100% {
+    border-color: transparent transparent;
+  }
+}
+
+@keyframes dots-bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+@keyframes cube-grid {
+  0%, 70%, 100% {
+    transform: scale3d(1, 1, 1);
+  }
+  35% {
+    transform: scale3d(0, 0, 1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes progress {
+  0% {
+    stroke-dashoffset: 283;
+    transform: rotate(0deg);
+  }
+  50% {
+    stroke-dashoffset: 70;
+    transform: rotate(180deg);
+  }
+  100% {
+    stroke-dashoffset: 283;
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  :root {
+    --spinner-size-xs: 14px;
+    --spinner-size-sm: 20px;
+    --spinner-size-md: 32px;
+    --spinner-size-lg: 48px;
+    --spinner-size-xl: 64px;
+  }
+  
+  .spinner-text {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --spinner-size-xs: 12px;
+    --spinner-size-sm: 18px;
+    --spinner-size-md: 28px;
+    --spinner-size-lg: 40px;
+    --spinner-size-xl: 56px;
+  }
+  
+  .spinner-text {
+    font-size: 0.75rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .spinner:not([class*="spinner-light"]):not([class*="spinner-dark"]) .spinner-text {
+    color: var(--light-color);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .ring,
+  .dual-ring,
+  .ellipsis div,
+  .ripple div,
+  .hourglass,
+  .dots div,
+  .cube,
+  .pulse,
+  .progress-circle-inner {
+    animation-duration: 2s;
+    animation-timing-function: linear;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .spinner-primary .ring,
+  .spinner-primary .dual-ring,
+  .spinner-primary .ellipsis div,
+  .spinner-primary .ripple div,
+  .spinner-primary .hourglass:before,
+  .spinner-primary .dots div,
+  .spinner-primary .cube,
+  .spinner-primary .pulse,
+  .spinner-primary .progress-circle-inner {
+    filter: brightness(1.5);
+  }
+}

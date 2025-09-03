@@ -13,11 +13,13 @@ import UserDashboard from "./User/UserDashboard";
 import NotAuthorized from "./NotAuthorized";
 import ProductList from "./Common/ProductList";
 import ProductDetail from "./Common/ProductDetail";
+import { Toaster } from 'react-hot-toast';
 
 const Main = () => {
   return (
     <main className="main-content">
       {/* <BrowserRouter> */}
+      <Toaster position="top-center" reverseOrder={false} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin/*" element={

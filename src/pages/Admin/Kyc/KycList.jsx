@@ -44,6 +44,7 @@ import { MdOutlineCancel } from 'react-icons/md';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {getAllKycs} from '../../../utills/apicall';
+import Spinner from '../../../components/Spinner';
 
 const KYCList = () => {
       const [kycList, setKycList] = useState([]);
@@ -60,7 +61,7 @@ const KYCList = () => {
     fetchKycList();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><Spinner /></div>;
   return (
     // <div className="kyc-container">
     //   {/* Search bar */}

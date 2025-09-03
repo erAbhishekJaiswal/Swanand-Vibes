@@ -4,6 +4,8 @@ import axios from 'axios';
 import '../../CssFiles/User/Wallet.css';
 import {getUserId} from '../../utills/authService';
 import { getWallet as fetchWallet } from '../../utills/apicall';
+import {toast} from 'react-hot-toast';
+import Spinner from '../../Components/Spinner';
 
 const Wallet = () => {
   const [walletData, setWalletData] = useState(null);
@@ -23,9 +25,9 @@ const Wallet = () => {
         console.log(response.data);
 
       } catch (err) {
-        console.error('Error fetching wallet data:', err);
-        setError('Failed to load wallet data. Please try again later.');
-        
+        toast.error('Error fetching wallet data:', err);
+        toast.error('Failed to load wallet data. Please try again later.');
+
         // Mock data for demonstration
         // setWalletData({
         //   balance: 1250.75,
@@ -150,18 +152,19 @@ const Wallet = () => {
 
   const handleWithdraw = () => {
     // Implement withdrawal functionality
-    alert('Withdrawal functionality would be implemented here');
+    toast('Withdrawal functionality would be implemented here');
   };
 
   if (loading) {
-    return (
-      <div className="wallet-container">
-        <div className="loading-spinner">
-          <div className="spinner"></div>
-          <p>Loading wallet data...</p>
-        </div>
-      </div>
-    );
+    return <Spinner size="lg" />;
+    // return (
+    //   <div className="wallet-container">
+    //     <div className="loading-spinner">
+    //       <div className="spinner"></div>
+    //       <p>Loading wallet data...</p>
+    //     </div>
+    //   </div>
+    // );
   }
 
   if (error && !walletData) {

@@ -227,6 +227,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import '../../../CssFiles/Admin/product/ProductForm.css';
 import {createProduct} from '../../../utills/apicall'
+import Spinner from "../../../Components/Spinner";
+import {toast} from 'react-hot-toast';
 
 const CreateProduct = () => {
   const [formData, setFormData] = useState({
@@ -369,7 +371,7 @@ const CreateProduct = () => {
       console.log("Product created:", newProduct.data);
       
       // Show success message
-      alert("Product uploaded successfully!");
+      toast.success("Product uploaded successfully!");
 
       // Reset form
       setFormData({
@@ -385,7 +387,7 @@ const CreateProduct = () => {
       setErrors({});
     } catch (err) {
       console.error("Error uploading product:", err);
-      alert("Failed to upload product. Please try again.");
+      toast.error("Failed to upload product. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -398,7 +400,7 @@ const CreateProduct = () => {
         <p>Add a new product to your inventory</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="product-form">
+      {loading ? <Spinner /> : <form onSubmit={handleSubmit} className="product-form">
         <div className="form-grid">
           <div className="form-group">
             <label htmlFor="name" className="form-label">
@@ -594,7 +596,7 @@ const CreateProduct = () => {
             )}
           </button>
         </div>
-      </form>
+      </form>}
     </div>
   );
 };

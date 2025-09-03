@@ -5,19 +5,24 @@ import axios from 'axios';
 import { getUserId } from '../../utills/authService';
 import { useNavigate } from 'react-router-dom';
 import {getCart, removeFromCart, updateCartItem} from '../../utills/apicall';
+import { toast } from 'react-hot-toast';
+import Spinner from '../../components/Spinner';
 
 const Cart = () => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([
   ]);
+  const [loading, setLoading] = useState(false);
   const id = getUserId();
 
   useEffect(() => {
     const fetchCart = async () => {
-        const userCart = await getCart(id)
-        // axios.get(`http://localhost:5000/api/user/cart/${id}`);
-        console.log(userCart.data.data);
-        setCartItems(userCart.data.data.items);
+      setLoading(true);
+      const userCart = await getCart(id);
+      // axios.get(`http://localhost:5000/api/user/cart/${id}`);
+      console.log(userCart.data.data);
+      setCartItems(userCart.data.data.items);
+      setLoading(false);
     };
     fetchCart();
   }, []);
@@ -60,8 +65,9 @@ const Cart = () => {
         //   }
         // });
         await removeFromCart(userId, productId, removedItem);
+        toast.success("Item removed from cart");
       } catch (err) {
-        console.error("Error removing item:", err);
+        toast.error("Error removing item:", err);
       }
     }
   };
@@ -93,6 +99,10 @@ const Cart = () => {
         </div>
       </div>
     );
+  }
+
+  if (loading) {
+    return <Spinner size="lg" />;
   }
 
   return (

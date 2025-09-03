@@ -4,6 +4,8 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import '../../../CssFiles/Admin/product/ProductForm.css';
 import {updateProduct,getProductById} from '../../../utills/apicall';
+import Spinner from "../../../components/Spinner";
+import {toast} from 'react-hot-toast';
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -28,6 +30,7 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
+        setLoading(true);
         setFetching(true);
         const response = await getProductById(id);
         // axios.get(
@@ -48,9 +51,10 @@ const EditProduct = () => {
         setPreviewImages(product.images?.map(img => img.url) || []);
       } catch (err) {
         console.error("Error fetching product:", err);
-        alert("Failed to load product data.");
+        toast.error("Failed to load product data.");
       } finally {
         setFetching(false);
+        setLoading(false);
       }
     };
 
@@ -197,8 +201,8 @@ const EditProduct = () => {
       console.log("Product updated:", updatedProduct.data);
       
       // Show success message
-      alert("Product updated successfully!");
-      
+      toast.success("Product updated successfully!");
+
       // Call the onSave callback if provided
     //   if (onSave) {
     //     onSave(updatedProduct.data);
@@ -207,21 +211,18 @@ const EditProduct = () => {
         navigate(`/admin/product/${id}`);
     } catch (err) {
       console.error("Error updating product:", err);
-      alert("Failed to update product. Please try again.");
+      toast.error("Failed to update product. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   if (fetching) {
-    return (
-      <div className="product-form-container">
-        <div className="loading-spinner">
-          <div className="spinner"></div>
-          <p>Loading product data...</p>
-        </div>
-      </div>
-    );
+    return <Spinner size="lg" />;
+  }
+
+  if (loading) {
+    return <Spinner size="lg" />;
   }
 
   return (

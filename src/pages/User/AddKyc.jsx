@@ -304,6 +304,8 @@ import { motion } from "framer-motion";
 import { MdVerifiedUser } from "react-icons/md";
 import axios from "axios";
 import { submitKyc } from "../../utills/apicall";
+import { toast } from "react-hot-toast";
+import Spinner from "../../components/Spinner";
 
 export default function AddKyc() {
   const [kycStatus, setKycStatus] = useState("Pending");
@@ -413,9 +415,9 @@ export default function AddKyc() {
       // });
 
       if (response.status === 200) {
-        alert("KYC submitted successfully!");
+        toast.success("KYC submitted successfully!");
       } else {
-        alert("Failed to submit KYC.");
+        toast.error("Failed to submit KYC.");
       }
 
       setKycStatus("Pending");
@@ -431,8 +433,8 @@ export default function AddKyc() {
       setPreviewImages({ aadhaar: null, pan: null, bank: null });
 
     } catch (err) {
-      console.error("Error uploading KYC:", err);
-      alert("Failed to upload KYC.");
+      toast.error("Error uploading KYC:", err);
+      toast.error("Failed to upload KYC.");
     } finally {
       setLoading(false);
     }
@@ -448,6 +450,10 @@ export default function AddKyc() {
         return <div className="status pending"><Clock size={22} /> Pending</div>;
     }
   };
+
+  if (loading) {
+    return <Spinner size="lg" />;
+  }
 
   return (
     <main className="kyc-container">

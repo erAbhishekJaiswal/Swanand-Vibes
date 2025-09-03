@@ -304,6 +304,7 @@ import {useParams} from 'react-router-dom';
 import axios from 'axios';
 // import { addToCart } from '../../../store/cartSlice';
 import {getProductById} from '../../../utills/apicall';
+import Spinner from '../../../Components/Spinner';
 
 const Detail = () => {
   const { id } = useParams();
@@ -313,17 +314,23 @@ const Detail = () => {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
   const [productData, setProductData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchProduct(id);
   }, [id]);
 
   const fetchProduct = async (id) => {
-    // Simulate an API call to fetch product details
-    const response = await getProductById(id);
-    // axios.get(`http://localhost:5000/api/products/common/${id}`);
-    setProductData(response.data.data);
-    console.log(response.data.data);
+    setLoading(true);
+    try {
+      const response = await getProductById(id);
+      setProductData(response.data.data);
+      console.log(response.data.data);
+    } catch (error) {
+      console.error("Error fetching product:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const productImages = productData?.images.map((image) => image.url) || [];
@@ -387,6 +394,9 @@ const relatedProducts = [
     // Handle back navigation
     window.history.back();
   };
+  if (loading) {
+    return <Spinner size="lg" />;
+  }
 
   return (
     <div className="product-detail-container">
