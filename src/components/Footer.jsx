@@ -48,11 +48,11 @@ const Footer = () => {
         <div className="footer-divider"></div>
         <div className="bottom-content">
           <p>© 2025 Swanand Vibes. All rights reserved.</p>
-          <div className="footer-links">
+          {/* <div className="footer-links">
             <Link to="/terms" className="footer-link">Terms of Service</Link>
             <Link to="/policy" className="footer-link">Privacy Policy</Link>
             <Link to="/cookies" className="footer-link">Cookie Policy</Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>
