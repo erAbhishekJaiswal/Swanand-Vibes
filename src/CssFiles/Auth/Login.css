@@ -34,3 +34,43 @@
 .auth-button:hover{
     background-color: #555;
 }
+
+
+
+/* ✅ Responsive styles */
+@media (max-width: 768px) {
+    .auth-title {
+        font-size: 1.5rem;
+    }
+
+    .auth-form {
+        padding: 1.5rem;
+    }
+
+    .auth-input {
+        font-size: 0.95rem;
+    }
+
+    .auth-button {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-title {
+        font-size: 1.3rem;
+    }
+
+    .auth-form {
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    .auth-input {
+        padding: 0.6rem;
+    }
+
+    .auth-button {
+        padding: 0.6rem;
+    }
+}

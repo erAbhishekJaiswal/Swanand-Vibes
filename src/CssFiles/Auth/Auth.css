@@ -319,3 +319,103 @@
   color: var(--secondary-accent);
 }
 
+
+
+
+/* ===================== Responsive Design ===================== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .auth-card {
+    max-width: 400px;
+    padding: 2rem;
+  }
+
+  .auth-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .futuristic-input {
+    font-size: 0.95rem;
+    padding: 0.7rem 1rem 0.7rem 2.2rem;
+  }
+
+  .auth-btn {
+    font-size: 0.95rem;
+    padding: 0.9rem;
+  }
+}
+
+/* Mobile (landscape & portrait) */
+@media (max-width: 768px) {
+  .auth-container {
+    padding: 1rem;
+  }
+
+  .auth-card {
+    max-width: 100%;
+    padding: 1.8rem;
+    border-radius: 12px;
+  }
+
+  .auth-logo .logo-text {
+    font-size: 1.5rem;
+  }
+
+  .auth-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .futuristic-input {
+    font-size: 0.9rem;
+    padding: 0.7rem 1rem 0.7rem 2.2rem;
+  }
+
+  .auth-btn {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.2rem;
+    border-radius: 10px;
+  }
+
+  .auth-logo {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .auth-logo .logo-text {
+    font-size: 1.3rem;
+  }
+
+  .auth-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .futuristic-input {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem 0.6rem 2rem;
+  }
+
+  .auth-btn {
+    font-size: 0.85rem;
+    padding: 0.7rem;
+  }
+
+  .social-auth {
+    flex-direction: column;
+  }
+
+  .social-btn {
+    width: 100%;
+  }
+}

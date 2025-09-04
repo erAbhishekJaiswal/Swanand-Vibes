@@ -4,10 +4,13 @@ import './css/common.css';
 import { Link, useLocation } from 'react-router-dom';
 import { getUserRole , isAuthenticated} from "../utills/authService";
 import { GiWallet } from "react-icons/gi";
+import { useDispatch } from "react-redux";
+import {toggleSidebar} from '../store/sidebar';
 
-const Sidebar = () => {
+const Sidebar = ({ isCollapsed, toggle }) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const menuItems = [
     { icon: '👤', text: 'Users', path: '/admin/users', active: true },
@@ -28,14 +31,20 @@ const Sidebar = () => {
     { icon: '⚙️', text: 'Settings', path: '/user/settings' }
   ];
 
+  // const handleExpand = () => {
+  //   dispatch(toggleSidebar());
+  //   setIsExpanded(!isExpanded);
+  // };  
+
   return (
-    <aside className={`sidebar futuristic-sidebar ${isExpanded ? 'expanded' : 'collapsed'}`}>
+    <aside className={`sidebar futuristic-sidebar ${isCollapsed ? 'expanded' : 'collapsed'}`}>
       <div className="sidebar-header">
         <button 
           className="sidebar-toggle futuristic-btn"
-          onClick={() => setIsExpanded(!isExpanded)}
+          // onClick={() => handleExpand()}
+          onClick={toggle}
         >
-          <span className={`toggle-icon ${isExpanded ? 'expanded' : ''}`}></span>
+          <span className={`toggle-icon ${isCollapsed ? 'expanded' : ''}`}></span>
         </button>
       </div>
       
@@ -50,7 +59,7 @@ const Sidebar = () => {
           >
             <Link to={item.path} className="nav-link">
               <span className="item-icon">{item.icon}</span>
-              {isExpanded && <span className="item-text">{item.text}</span>}
+              {isCollapsed && <span className="item-text">{item.text}</span>}
             </Link>
           </div>
         ))}
@@ -69,7 +78,7 @@ const Sidebar = () => {
               >
                 <Link to={item.path} className="nav-link">
                   <span className="item-icon">{item.icon}</span>
-                  {isExpanded && <span className="item-text">{item.text}</span>}
+                  {isCollapsed && <span className="item-text">{item.text}</span>}
                 </Link>
               </div>
             ))}
@@ -80,7 +89,7 @@ const Sidebar = () => {
       <div className="sidebar-footer">
         <div className="user-profile">
           <div className="avatar"></div>
-          {isExpanded && (
+          {isCollapsed && (
             <div className="user-info">
               <div className="user-name">Alex Morgan</div>
               <div className="user-role">Administrator</div>

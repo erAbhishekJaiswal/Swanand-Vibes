@@ -6,12 +6,14 @@ import Checkout from "../../pages/User/Checkout";
 import Wallet from "../../pages/User/Wallet";
 import AddKyc from "./AddKyc";
 import OrderDetail from "./OrderDetail";
+// import Dashboard from "./Dashboard";
+
 
 const Pages = () => {
   return (
-    <div className="pages-container">
+    <div  >
         <Routes>
-          <Route path="/" element={<h1>User Dashboard</h1>} />
+          <Route path="/dashboard" element={<h1>Dashboard</h1>} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Orders />} />

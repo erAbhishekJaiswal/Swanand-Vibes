@@ -293,13 +293,13 @@ body {
 .futuristic-sidebar.expanded {
   width: 275px;
   height: 90vh;
-  /* position: fixed; */
+  position: fixed;
 }
 
 .futuristic-sidebar.collapsed {
   width: 70px;
   height: 90vh;
-  /* position: fixed; */
+  position: fixed;
 }
 
 .sidebar-header {
