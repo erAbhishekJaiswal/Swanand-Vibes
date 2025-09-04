@@ -5,7 +5,7 @@ import imgLogo from '../../assets/logo.jpg';
 import {Link, useNavigate,  Navigate } from "react-router-dom";
 import { isAuthenticated, getUserRole } from "../../utills/authService";
 import { useLocation } from "react-router-dom";
-import { registerUser } from '../../utills/apicall';
+import { registerUser,verifyUser } from '../../utills/apicall';
 import {toast} from 'react-hot-toast';
 import Spinner from "../../components/Spinner"
 
@@ -42,7 +42,8 @@ const Register = () => {
     setLoading(true);
     console.log(formData);
 
-    const res = await registerUser(formData);
+    // const res = await registerUser(formData);
+    const res = await verifyUser(formData);
     const data = res.data;
     // console.log(data);
 
@@ -54,9 +55,11 @@ const Register = () => {
     // const data = await res.json();
 
     if (res.status === 200) {
+      console.log(data);
+      
       // Handle successful registration
       toast.success("Registration successful!");
-      navigate("/login");
+      navigate("/email-verify", { state: formData });
     } else {
       // Handle registration error
       toast.error(data.message);

@@ -12,7 +12,7 @@ export const ShareButton = (link ) => {
         .then(() => toast.success("Shared successfully"))
         .catch((error) => toast.error("Error sharing:", error));
     } else {
-      alert("Sharing not supported in your browser. Copy link instead.");
+      toast.error("Sharing not supported in your browser. Copy link instead.");
     }
 //   };
 

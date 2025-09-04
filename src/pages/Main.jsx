@@ -14,6 +14,7 @@ import NotAuthorized from "./NotAuthorized";
 import ProductList from "./Common/ProductList";
 import ProductDetail from "./Common/ProductDetail";
 import { Toaster } from 'react-hot-toast';
+import OtpVerification from "../components/OtpVerification";
 
 const Main = () => {
   return (
@@ -34,6 +35,7 @@ const Main = () => {
           } />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/email-verify" element={<OtpVerification />} />
           <Route path="/register/:referralCode" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/about" element={<About />} />

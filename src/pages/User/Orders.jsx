@@ -353,8 +353,10 @@ import '../../CssFiles/User/Cart.css';
 import { getOrders } from '../../utills/apicall';
 import { getUserId } from '../../utills/authService';
 import Spinner from '../../components/Spinner';
+import { useNavigate } from 'react-router-dom';
 
 const Orders = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('all');
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -411,6 +413,11 @@ const Orders = () => {
       month: 'short',
       day: 'numeric'
     });
+  };
+
+  const handleViewDetails = (id) => {
+    // Navigate to the order details page
+    navigate(`/user/orders/${id}`);
   };
 
   if (isLoading) {
@@ -563,7 +570,7 @@ const Orders = () => {
                     {order.deliveryStatus === 'pending' && (
                       <button className="action-btn">Cancel Order</button>
                     )}
-                    <button className="action-btn primary">View Details</button>
+                    <button onClick={() => handleViewDetails(order._id)} className="action-btn primary">View Details</button>
                   </div>
                 </div>
 

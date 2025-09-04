@@ -6,9 +6,17 @@ const API_URL = "https://swanand-vibes-backend.vercel.app/api";
 // User Auth Api
 //
 export const registerUser = (formData) => {
-  return axios.post(`${API_URL}/auth/register`, formData);
+ const {name , email, password, otp} = formData
+
+ 
+  
+  return axios.post(`http://localhost:5000/api/auth/register`, formData);
 };
 
+export const verifyUser = (formData) => {
+  
+  return axios.post(`http://localhost:5000/api/auth/request-otp`, { name, email, password });
+}
 //
 export const loginUser = (loginData) => {
   return axios.post(`${API_URL}/auth/login`, loginData);
