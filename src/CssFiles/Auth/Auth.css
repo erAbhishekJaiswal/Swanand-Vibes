@@ -96,7 +96,7 @@
 }
 
 .form-group label {
-  display: block;
+  /* display: block; */
   margin-bottom: 0.5rem;
   color: var(--text-primary);
   font-weight: 500;
@@ -197,7 +197,7 @@
 }
 
 .checkbox-container input:checked ~ .checkmark:after {
-  display: block;
+  /* display: block; */
   left: 6px;
   top: 2px;
   width: 4px;

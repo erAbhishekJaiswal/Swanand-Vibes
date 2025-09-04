@@ -10,12 +10,12 @@ export const registerUser = (formData) => {
 
  
   
-  return axios.post(`http://localhost:5000/api/auth/register`, formData);
+  return axios.post(`${API_URL}/auth/register`, formData);
 };
 
 export const verifyUser = (formData) => {
   
-  return axios.post(`http://localhost:5000/api/auth/request-otp`, { name, email, password });
+  return axios.post(`${API_URL}/auth/request-otp`, { name, email, password });
 }
 //
 export const loginUser = (loginData) => {

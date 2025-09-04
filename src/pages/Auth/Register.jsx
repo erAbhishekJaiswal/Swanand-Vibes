@@ -97,8 +97,9 @@ const Register = () => {
                 onChange={handleChange}
                 required
                 className="futuristic-input"
+                placeholder='👤 Full Name'
               />
-              <span className="input-icon">👤</span>
+              {/* <span className="input-icon">👤</span> */}
             </div>
           </div>
 
@@ -113,8 +114,9 @@ const Register = () => {
                 onChange={handleChange}
                 required
                 className="futuristic-input"
+                placeholder='📧 Email Address'
               />
-              <span className="input-icon">📧</span>
+              {/* <span className="input-icon">📧</span> */}
             </div>
           </div>
 
@@ -129,8 +131,9 @@ const Register = () => {
                 onChange={handleChange}
                 required
                 className="futuristic-input"
+                placeholder='🔒 Password'
               />
-              <span className="input-icon">🔒</span>
+              {/* <span className="input-icon">🔒</span> */}
             </div>
           </div>
 
@@ -145,8 +148,9 @@ const Register = () => {
                 onChange={handleChange}
                 required
                 className="futuristic-input"
+                placeholder='🔒 Confirm Password'
               />
-              <span className="input-icon">🔒</span>
+              {/* <span className="input-icon">🔒</span> */}
             </div>
           </div>
 
@@ -161,14 +165,14 @@ const Register = () => {
           onChange={handleChange}
           className="w-full p-2 border rounded mb-3"
         />
-              <span className="input-icon">🔒</span>
+              {/* <span className="input-icon">🔒</span> */}
             </div>
           </div>
 
 
 
           <div className="form-group checkbox-group">
-            <label className="checkbox-container">
+            <label className="checkbox-container" style={{ fontSize: "13px" }}>
               <input
                 type="checkbox"
                 name="agreeTerms"
@@ -177,7 +181,7 @@ const Register = () => {
                 required
               />
               <span className="checkmark"></span>
-              I agree to the <a href="#terms">Terms of Service</a> and <a href="#privacy">Privacy Policy</a>
+              {"  "}I agree to the <Link to="/terms">Terms of Service</Link> and <Link to="/privacy">Privacy Policy</Link>
             </label>
           </div>
 

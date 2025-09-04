@@ -71,7 +71,7 @@ const Login = () => {
             <img src={imgLogo} alt="Logo" className="logo-image" />
             <span className="logo-text">Swanand vibes</span>
           </div>
-          <h2>Welcome Back</h2>
+          <h3>Welcome Back</h3>
           <p>Sign in to access your account</p>
         </div>
 
@@ -87,8 +87,9 @@ const Login = () => {
                 onChange={handleChange}
                 required
                 className="futuristic-input"
+                placeholder="📧 Enter your email address"
               />
-              <span className="input-icon">📧</span>
+              {/* <span className="input-icon">📧</span> */}
             </div>
           </div>
 
@@ -108,8 +109,9 @@ const Login = () => {
                 onChange={handleChange}
                 required
                 className="futuristic-input"
+                placeholder="🔒 Enter your password"
               />
-              <span className="input-icon">🔒</span>
+              {/* <span className="input-icon">🔒</span> */}
             </div>
           </div>
 

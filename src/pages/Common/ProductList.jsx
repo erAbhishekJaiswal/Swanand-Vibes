@@ -120,7 +120,7 @@ const ProductList = () => {
       toast.success(`${product.name} added to cart!`);
     } catch (error) {
       console.error("Error adding product to cart:", error);
-      toast.error("Error adding product to cart");
+      toast.error("Error please login then adding product to cart");
     }
   };
 
