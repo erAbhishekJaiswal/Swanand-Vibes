@@ -264,11 +264,11 @@ const ProductList = () => {
                   </div>
                   <div
                     className="product-info"
-                    onClick={() => handleOpenProductDetail(product?.id)}
+                    
                   >
-                    <h3 className="product-name">{product.name}</h3>
-                    <p className="product-description">{product.description}</p>
-                    <div className="product-meta">
+                    <h3 className="product-name" onClick={() => handleOpenProductDetail(product?.id)}>{product.name}</h3>
+                    <p className="product-description" onClick={() => handleOpenProductDetail(product?.id)}>{product.description}</p>
+                    <div className="product-meta" onClick={() => handleOpenProductDetail(product?.id)}>
                       <div className="product-rating">
                         <span className="rating-stars">
                           {"★".repeat(Math.floor(product.rating))}
@@ -280,12 +280,19 @@ const ProductList = () => {
                         ₹{product.price.toFixed(2)}
                       </div>
                     </div>
-                    <div className="product-tags">
+                    <div onClick={() => handleOpenProductDetail(product?.id)} className="product-tags">
                       {/* {product?.tags?.map(tag => (
                         <span key={tag} className="product-tag">{tag}</span>
                       ))} */}
                       <span className="product-tag">{product.brand}</span>
                     </div>
+                    
+                     <button
+                      className="addtocart-btn"
+                      onClick={(e) => handleQuickAdd(product)}
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 </div>
               ))
