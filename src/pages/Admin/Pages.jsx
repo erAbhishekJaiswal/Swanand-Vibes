@@ -13,7 +13,7 @@ import EditProduct from "./Product/Edit";
 import AddKyc from "../../pages/User/AddKyc";
 const Pages = () => {
   return (
-    <div className="pages-container" style={{ width: '80%' }}>
+    <div>
         <Routes>
           <Route path="/" element={<h1>Users Content</h1>} />
           <Route path="/dashboard" element={<Profile />} />

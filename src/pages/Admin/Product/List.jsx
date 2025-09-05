@@ -150,7 +150,7 @@ const List = () => {
 
             <div className="products-grid">
                 {products?.map(product => (
-                    <div key={product._id} className="product-card">
+                    <div key={product._id} className="product-cards">
                         <div className="product-image">
                             <img 
                                 src={product.images[0]?.url || 'https://via.placeholder.com/300x200/1e293b/ffffff?text=No+Image'} 
@@ -161,7 +161,7 @@ const List = () => {
                             </div>
                         </div>
                         
-                        <div className="product-info">
+                        <div className="product-list-info">
                             <h3 className="product-name">{product.name}</h3>
                             <p className="product-description">{product.description?.substring(0, 60)}...</p>
                             
@@ -177,12 +177,12 @@ const List = () => {
                             </div>
                             
                             <div className="product-actions">
-                                <button onClick={() => handleEdit(product._id)} className="action-btn edit-btn">
+                                <button onClick={() => handleEdit(product._id)} className="product-action-btn edit-btn">
                                     <span className="btn-icon">✏️</span>
                                     Edit
                                 </button>
                                 <button 
-                                    className="action-btn delete-btn"
+                                    className="product-action-btn delete-btn"
                                     onClick={() => handleDelete(product._id)}
                                 >
                                     <span className="btn-icon">🗑️</span>

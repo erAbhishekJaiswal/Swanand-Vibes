@@ -116,3 +116,115 @@
 .details-button:active {
   transform: scale(0.95);
 }
+
+
+
+/* -------------------------- */
+/* 📱 Tablets and Down (<= 1024px) */
+@media (max-width: 1024px) {
+  .kyc-container {
+    padding: 1.5rem;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .search-input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .table-caption {
+    font-size: 1.2rem;
+  }
+
+  .kyc-table th,
+  .kyc-table td {
+    padding: 0.75rem;
+    font-size: 13px;
+  }
+
+  .details-button {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+
+/* -------------------------- */
+/* 📱 Small Devices (<= 768px) */
+@media (max-width: 768px) {
+  .kyc-container {
+    padding: 1rem;
+  }
+
+  .table-caption {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .kyc-table th,
+  .kyc-table td {
+    font-size: 12px;
+    padding: 0.6rem;
+  }
+
+  .status-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  .details-button {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+
+  .table-subcaption {
+    font-size: 0.75rem;
+  }
+}
+
+
+/* -------------------------- */
+/* 📱 Phones (<= 480px) */
+@media (max-width: 480px) {
+  .kyc-container {
+    padding: 0.75rem;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .search-input {
+    font-size: 13px;
+    padding: 0.6rem 0.9rem;
+  }
+
+  .table-caption {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .kyc-table th,
+  .kyc-table td {
+    font-size: 11px;
+    padding: 0.5rem;
+  }
+
+  .status-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .details-button {
+    font-size: 10px;
+    padding: 5px 8px;
+    white-space: nowrap;
+  }
+}

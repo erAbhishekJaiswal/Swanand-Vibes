@@ -79,7 +79,6 @@ const UserList = () => {
             try {
                 setLoading(true);
                 const response = await getAllUsers();
-                // axios.get('http://localhost:5000/api/users/');
                 setUsers(response.data);
                 setFilteredUsers(response.data);
             } catch (error) {
@@ -162,12 +161,9 @@ const UserList = () => {
         <div className="user-list-container">
             <div className="user-list-header">
                 <div className="header-content">
-                    <h1>User Management</h1>
+                    <h2>User Management</h2>
                     <p>Manage your system users and permissions</p>
                 </div>
-                {/* <button className="add-user-btn">
-                    <span className="btn-icon">+</span> Add New User
-                </button> */}
             </div>
 
             <div className="user-controls">
@@ -177,7 +173,7 @@ const UserList = () => {
                         placeholder="🔍Search users..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="search-input"
+                        className="userserch-list search-input"
                     />
                     {/* <span className="search-icon">🔍</span> */}
                 </div>

@@ -442,7 +442,7 @@ const relatedProducts = [
             <p>{productData?.description}</p>
           </div>
 
-          <div className="purchase-section">
+          {/* <div className="purchase-section">
             <div className="quantity-selector">
               <button onClick={decreaseQuantity} className="quantity-btn">-</button>
               <span className="quantity-value">{quantity}</span>
@@ -450,9 +450,8 @@ const relatedProducts = [
             </div>
             <button onClick={handleAddToCart} className="add-to-cart-btn futuristic-btn primary">
               Add to Cart • ₹ {(productData?.price* quantity).toFixed(2)}
-              {/* Add to Cart • ₹{(variants[selectedVariant]?.price * quantity).toFixed(2)} */}
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
 
