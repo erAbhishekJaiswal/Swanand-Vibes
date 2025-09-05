@@ -8,9 +8,8 @@ import { useDispatch } from "react-redux";
 import {toggleSidebar} from '../store/sidebar';
 
 const Sidebar = ({ isCollapsed, toggle }) => {
-  const [isExpanded, setIsExpanded] = useState(true);
+  // const [isExpanded, setIsExpanded] = useState(true);
   const location = useLocation();
-  const dispatch = useDispatch();
 
   const menuItems = [
     { icon: '👤', text: 'Users', path: '/admin/users', active: true },
@@ -86,7 +85,7 @@ const Sidebar = ({ isCollapsed, toggle }) => {
         )
       }
       
-      <div className="sidebar-footer">
+      {/* <div className="sidebar-footer">
         <div className="user-profile">
           <div className="avatar"></div>
           {isCollapsed && (
@@ -96,7 +95,7 @@ const Sidebar = ({ isCollapsed, toggle }) => {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
     </aside>
   );
 };

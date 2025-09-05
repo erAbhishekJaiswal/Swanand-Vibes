@@ -121,7 +121,7 @@ const Cart = () => {
               </div>
               
               <div className="item-details">
-                <p>id: {item?.product?._id}</p>
+                {/* <p>id: {item?.product?._id}</p> */}
                 <h3 className="item-name">{item?.name}</h3>
                 <p className="item-price">₹{item?.price.toFixed(2)}</p>
                 <p className="item-stock">{item?.product?.stock} in stock</p>
@@ -209,7 +209,7 @@ const Cart = () => {
             </div>
           </div>
 
-          <div className="promo-card">
+          {/* <div className="promo-card">
             <h4>Apply Promo Code</h4>
             <div className="promo-input-group">
               <input 
@@ -219,7 +219,8 @@ const Cart = () => {
               />
               <button className="apply-btn">Apply</button>
             </div>
-          </div>
+          </div> */}
+          
         </div>
       </div>
 

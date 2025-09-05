@@ -489,7 +489,7 @@
 .summary-card h3 {
   margin-bottom: 1.5rem;
   color: var(--text-primary);
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 /* Order Items */
@@ -635,6 +635,10 @@
   
   .form-row {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .form-group{
+    margin-bottom: 0;
   }
   
   .checkout-navigation {
@@ -660,6 +664,10 @@
   .step {
     padding: 0.5rem;
   }
+
+  .checkout-label{
+    display: none;
+  }
   
   .step-number {
     width: 32px;
@@ -668,7 +676,7 @@
   }
   
   .checkout-form-container {
-    padding: 1.5rem;
+    padding: 0rem;
   }
   
   .shipping-method {
@@ -680,4 +688,52 @@
   .method-info {
     text-align: center;
   }
+  button,
+input[type="radio"],
+input[type="checkbox"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+}
+
+@media (max-width: 360px) {
+  .checkout-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .step-title {
+    font-size: 0.9rem;
+  }
+
+  .step-desc {
+    font-size: 0.75rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .summary-card,
+  .support-card {
+    padding: 1rem;
+  }
+
+  .order-item .item-image {
+    width: 40px;
+    height: 40px;
+  }
+
+  .payment-icon {
+    font-size: 1.2rem;
+  }
+  button,
+input[type="radio"],
+input[type="checkbox"] {
+  min-height: 40px;
+  min-width: 40px;
+}
+
 }

@@ -63,7 +63,7 @@
   display: grid;
   grid-template-columns: 100px 1fr auto auto;
   gap: 1.5rem;
-  padding: 1.5rem;
+  /* padding: 1.5rem; */
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 16px;
@@ -196,7 +196,7 @@
 .promo-card h4 {
   margin-bottom: 1.5rem;
   color: var(--text-primary);
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .summary-row {
@@ -209,7 +209,7 @@
 .summary-row.total {
   font-weight: 700;
   color: var(--text-primary);
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .free-shipping {
@@ -265,7 +265,7 @@
 }
 
 .payment-icon {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 /* Promo Code */
@@ -604,9 +604,13 @@
   }
 
   .cart-item {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 1rem;
+    display: flex;
+        flex-direction: column;
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
   }
 
   .item-image img {

@@ -1272,11 +1272,12 @@ const Checkout = () => {
 
                   <div className="form-row">
                     <div className="form-group">
-                      <label htmlFor="email">Email Address *</label>
+                      <label className="checkout-label" htmlFor="email">Email Address *</label>
                       <input
                         type="email"
                         id="email"
                         name="email"
+                        placeholder="Enter Your email..."
                         value={formData.email || savedAddresses.email}
                         onChange={handleInputChange}
                         className={errors.email ? "error" : ""}
@@ -1287,11 +1288,12 @@ const Checkout = () => {
                       )}
                     </div>
                     <div className="form-group">
-                      <label htmlFor="mobile">Mobile Number *</label>
+                      <label className="checkout-label" htmlFor="mobile">Mobile Number *</label>
                       <input
                         type="tel"
                         id="mobile"
                         name="mobile"
+                        placeholder="Enter Mobile Number ..."
                         value={formData.mobile}
                         onChange={handleInputChange}
                         className={errors.mobile ? "error" : ""}
@@ -1303,11 +1305,12 @@ const Checkout = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="address">Street Address *</label>
+                    <label className="checkout-label" htmlFor="address">Street Address *</label>
                     <input
                       type="text"
                       id="address"
                       name="address"
+                      placeholder="Enter Address..."
                       value={formData.address}
                       onChange={handleInputChange}
                       className={errors.address ? "error" : ""}
@@ -1318,13 +1321,14 @@ const Checkout = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="apartment">
+                    <label className="checkout-label" htmlFor="apartment">
                       Apartment, Suite, etc. (optional)
                     </label>
                     <input
                       type="text"
                       id="apartment"
                       name="apartment"
+                      placeholder="Enter Apartment..."
                       value={formData.apartment}
                       onChange={handleInputChange}
                     />
@@ -1332,11 +1336,12 @@ const Checkout = () => {
 
                   <div className="form-row">
                     <div className="form-group">
-                      <label htmlFor="city">City *</label>
+                      <label className="checkout-label" htmlFor="city">City *</label>
                       <input
                         type="text"
                         id="city"
                         name="city"
+                        placeholder="Enter City..."
                         value={formData.city}
                         onChange={handleInputChange}
                         className={errors.city ? "error" : ""}
@@ -1346,11 +1351,12 @@ const Checkout = () => {
                       )}
                     </div>
                     <div className="form-group">
-                      <label htmlFor="state">State *</label>
+                      <label className="checkout-label" htmlFor="state">State *</label>
                       <input
                         type="text"
                         id="state"
                         name="state"
+                        placeholder="Enter State..."
                         value={formData.state}
                         onChange={handleInputChange}
                         className={errors.state ? "error" : ""}
@@ -1360,11 +1366,12 @@ const Checkout = () => {
                       )}
                     </div>
                     <div className="form-group">
-                      <label htmlFor="zipCode">ZIP Code *</label>
+                      <label className="checkout-label" htmlFor="zipCode">ZIP Code *</label>
                       <input
                         type="text"
                         id="zipCode"
                         name="zipCode"
+                        placeholder="Enter Pincode..."
                         value={formData.zipCode}
                         onChange={handleInputChange}
                         className={errors.zipCode ? "error" : ""}
@@ -1376,7 +1383,7 @@ const Checkout = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="country">Country</label>
+                    <label className="checkout-label" htmlFor="country">Country</label>
                     <select
                       id="country"
                       name="country"

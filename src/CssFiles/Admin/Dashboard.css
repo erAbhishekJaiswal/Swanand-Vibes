@@ -49,8 +49,8 @@
   }
 
   .pages-container.shrunk {
-    width: calc(100% - 60px);
-    margin-left: 0;
+    width: calc(100% - 12px);
+    /* margin-left: 0; */
   }
 }
 
@@ -61,8 +61,8 @@
 }
 
 .pages-container.shrunk {
-  width: calc(100% - 240px); /* Adjust when sidebar expanded */
-  margin-left: 60px;
+  /* width: calc(100% - 240px); Adjust when sidebar expanded */
+  margin-left: 33px;
 }
 
 .pages-container.expanded {
