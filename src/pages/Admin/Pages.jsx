@@ -11,6 +11,8 @@ import ProductList from "./Product/List";
 import Detail from "./Product/Detail";
 import EditProduct from "./Product/Edit";
 import AddKyc from "../../pages/User/AddKyc";
+import ContactList from "./Contact/ContactList";
+import WithdrawList from "../Admin/Wallet/WithdrawalRequests";
 const Pages = () => {
   return (
     <div>
@@ -25,6 +27,8 @@ const Pages = () => {
           <Route path="/kyc/add" element={<AddKyc />} />
           <Route path="/kyc/:id" element={<KycDetails />} />
           <Route path="/kyc/edit/:id" element={<KycEdit />} />
+          <Route path="/withdraw" element={<WithdrawList />} />
+          <Route path="/contactlist" element={<ContactList />} />
           <Route path="/products" element={<ProductList />} />
           <Route path="/product/:id" element={<Detail />} />
           <Route path="/product/add" element={<CreateProduct />} />

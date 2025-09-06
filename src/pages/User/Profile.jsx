@@ -298,14 +298,14 @@ const Profile = ({ user, onUpdateProfile,}) => {
         <div className="profile-sidebar">
           <div className="sidebar-card">
             <h3>Account Security</h3>
-            <div className="security-item">
+            {/* <div className="security-item">
               <span className="security-icon">🔒</span>
               <div className="security-info">
                 <h4>Password</h4>
                 <p>Last changed 2 weeks ago</p>
               </div>
               <button className="security-action futuristic-btn">Change</button>
-            </div>
+            </div> */}
             <div className="security-item">
               <span className="security-icon">📱</span>
               <div className="security-info">

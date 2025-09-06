@@ -16,10 +16,10 @@ const Sidebar = ({ isCollapsed, toggle }) => {
     { icon: '📦', text: 'Products', path: '/admin/products' },
     { icon: '🪪', text: 'KYC', path: '/admin/kyc' },
     { icon: '💰', text: 'Withdraw', path: '/admin/withdraw' },
-    { icon: '🤖', text: 'Referrals', path: '/admin/referrals' },
+    // { icon: '🤖', text: 'Referrals', path: '/admin/referrals' },
     // { icon: '📊', text: 'Reports', path: '/admin/reports' },
     // { icon: '🌡️', text: 'Monitoring', path: '/admin/monitoring' },
-    { icon: '🛠️', text: 'Settings', path: '/admin/settings' }
+    // { icon: '🛠️', text: 'Settings', path: '/admin/settings' }
   ];
 
   const UserMenuItems = [
@@ -27,7 +27,7 @@ const Sidebar = ({ isCollapsed, toggle }) => {
     { icon: '📦', text: 'Orders', path: '/user/orders' },
     { icon: '🛒', text: 'Cart', path: '/user/cart' },
     { icon: <GiWallet />, text: 'Wallet', path: '/user/wallet' },
-    { icon: '⚙️', text: 'Settings', path: '/user/settings' }
+    // { icon: '⚙️', text: 'Settings', path: '/user/settings' }
   ];
 
   // const handleExpand = () => {

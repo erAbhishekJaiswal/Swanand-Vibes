@@ -6,6 +6,7 @@ import Checkout from "../../pages/User/Checkout";
 import Wallet from "../../pages/User/Wallet";
 import AddKyc from "./AddKyc";
 import OrderDetail from "./OrderDetail";
+import Withdraw from "./Withdraw";
 // import Dashboard from "./Dashboard";
 
 
@@ -17,6 +18,7 @@ const Pages = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="/withdraw" element={<Withdraw />} />
           <Route path="/orders/:id" element={<OrderDetail />} />
           <Route path="/settings" element={<h1>User Settings</h1>} />
           <Route path="/kyc" element={<AddKyc />} />
