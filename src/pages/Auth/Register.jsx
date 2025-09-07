@@ -41,8 +41,8 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     console.log(formData);
-
-    // const res = await registerUser(formData);
+    try {
+        // const res = await registerUser(formData);
     const res = await verifyUser(formData);
     const data = res.data;
     // console.log(data);
@@ -60,11 +60,18 @@ const Register = () => {
       // Handle successful registration
       toast.success("Registration successful!");
       navigate("/email-verify", { state: formData });
+      setLoading(false);
     } else {
       // Handle registration error
       toast.error(data.message);
+      setLoading(false);
     }
     setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.error('Error registering user:', error);
+      toast.error('Registration failed. Please try again.');
+    }
   };
 
   if (loading) {
