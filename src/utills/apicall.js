@@ -14,7 +14,8 @@ export const registerUser = (formData) => {
 };
 
 export const verifyUser = (formData) => {
-  
+  // console.log(formData);
+  const {name , email, password} = formData;
   return axios.post(`${API_URL}/auth/request-otp`, { name, email, password });
 }
 //
