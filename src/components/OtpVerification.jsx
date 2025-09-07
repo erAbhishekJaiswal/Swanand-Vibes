@@ -81,8 +81,8 @@ const OtpVerification = () => {
       // onVerify(otpValue);
       // console.log({...state, otpValue});
       // const formdata = {...state, otpValue};
-      registerUser({...state, otpValue});
-      if(registerUser({...state, otpValue}).status === 200){
+      const res = registerUser({...state, otpValue});
+      if(res.status === 201){
         toast.success('OTP verified successfully');
         navigate('/login');
       }else {

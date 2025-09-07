@@ -69,8 +69,8 @@ const Register = () => {
     setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.error('Error registering user:', error);
-      toast.error('Registration failed. Please try again.');
+      console.error('Error registering user:', error.response.data.msg);
+      toast.error(error.response.data.msg,'Registration failed. Please try again.');
     }
   };
 
