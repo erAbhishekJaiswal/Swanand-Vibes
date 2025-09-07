@@ -7,9 +7,6 @@ const API_URL = "https://swanand-vibes-backend.vercel.app/api";
 //
 export const registerUser = (formData) => {
  const {name , email, password, otp} = formData
-
- 
-  
   return axios.post(`${API_URL}/auth/register`, formData);
 };
 
@@ -84,9 +81,12 @@ export const getUserById = (id) => {
   return axios.get(`${API_URL}/users/${id}`);
 };
 
-export const updateUser = (id, userData) => {
-  return axios.put(`${API_URL}/users/${id}`, userData);
-};
+export const updateUserProfile = async (id, formData) => {
+  return axios.put(`${API_URL}/users/${id}/profile`, formData);
+}; 
+// export const updateUser = (id, userData) => {
+//   return axios.put(`${API_URL}/users/${id}`, userData);
+// };
 //
 export const deleteUser = (id) => {
   return axios.delete(`${API_URL}/users/${id}`);

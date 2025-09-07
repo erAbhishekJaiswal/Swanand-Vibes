@@ -110,7 +110,7 @@ const UserList = () => {
             try {
                 await deleteUser(userId);
                 // axios.delete(`http://localhost:5000/api/users/${userId}`);
-                setUsers(users.filter(user => user.id !== userId));
+                setUsers(users.filter(user => user._id !== userId));
                 alert('User deleted successfully!');
             } catch (error) {
                 console.error('Error deleting user:', error);
@@ -220,8 +220,8 @@ const UserList = () => {
                                 <td>{new Date(user.createdAt || Date.now()).toLocaleDateString()}</td>
                                 <td className="action-buttons">
                                     <button onClick={() => handleViewUser(user._id)} title="View"><span>👁️</span></button>
-                                    <button title="Edit"><span>✏️</span></button>
-                                    <button onClick={() => handleDeleteUser(user.id, user.name)} title="Delete"><span>🗑️</span></button>
+                                    {/* <button title="Edit"><span>✏️</span></button> */}
+                                    <button onClick={() => handleDeleteUser(user._id, user.name)} title="Delete"><span>🗑️</span></button>
                                 </td>
                             </tr>
                         ))}

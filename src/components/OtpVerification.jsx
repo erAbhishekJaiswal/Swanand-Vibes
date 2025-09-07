@@ -76,12 +76,14 @@ const OtpVerification = () => {
     }
   };
 
-  const handleSubmit = (otpValue) => {
+  const handleSubmit = async (otpValue) => {
     if (otpValue.length === 6) {
       // onVerify(otpValue);
       // console.log({...state, otpValue});
       // const formdata = {...state, otpValue};
-      const res = registerUser({...state, otpValue});
+      const res = await registerUser({...state, otpValue});
+      console.log(res);
+      
       if(res.status === 201){
         toast.success('OTP verified successfully');
         navigate('/login');
