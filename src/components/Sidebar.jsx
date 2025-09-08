@@ -6,6 +6,7 @@ import { getUserRole , isAuthenticated} from "../utills/authService";
 import { GiWallet } from "react-icons/gi";
 import { useDispatch } from "react-redux";
 import {toggleSidebar} from '../store/sidebar';
+import { MdContactPage } from "react-icons/md";
 
 const Sidebar = ({ isCollapsed, toggle }) => {
   // const [isExpanded, setIsExpanded] = useState(true);
@@ -16,6 +17,7 @@ const Sidebar = ({ isCollapsed, toggle }) => {
     { icon: '📦', text: 'Products', path: '/admin/products' },
     { icon: '🪪', text: 'KYC', path: '/admin/kyc' },
     { icon: '💰', text: 'Withdraw', path: '/admin/withdraw' },
+    { icon: <MdContactPage />, text: 'Contact List', path: '/admin/contactlist' },
     // { icon: '🤖', text: 'Referrals', path: '/admin/referrals' },
     // { icon: '📊', text: 'Reports', path: '/admin/reports' },
     // { icon: '🌡️', text: 'Monitoring', path: '/admin/monitoring' },

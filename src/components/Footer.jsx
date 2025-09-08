@@ -2,6 +2,10 @@
 import React from 'react';
 import './css/common.css';
 import {Link} from 'react-router-dom';
+import { SlSocialInstagram } from "react-icons/sl";
+import { SlSocialYoutube } from "react-icons/sl";
+import { TiSocialFacebook } from "react-icons/ti";
+import { FaSquareXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -11,19 +15,19 @@ const Footer = () => {
           <h4>Swanand Vibes</h4>
           <p>Redefining the future of digital experiences</p>
           <div className="social-links">
-            <Link to="/" className="social-link">𝕏</Link>
-            <Link to="/" className="social-link">📷</Link>
-            <Link to="/" className="social-link">📱</Link>
-            <Link to="/" className="social-link">💼</Link>
+            <Link to="https://x.com/" className="social-link"><FaSquareXTwitter /></Link>
+            <Link to="https://www.instagram.com/" className="social-link"><SlSocialInstagram /></Link>
+            <Link to="https://www.facebook.com/" className="social-link"><TiSocialFacebook /></Link>
+            <Link to="https://www.youtube.com/" className="social-link"><SlSocialYoutube /></Link>
           </div>
         </div>
         
         <div className="footer-section">
           <h5>Products</h5>
-          <Link to="/" className="footer-link">Swanand Vibes Agarbati</Link>
-          <Link to="/" className="footer-link">Swanand Vibes Spiritual</Link>
-          <Link to="/" className="footer-link">Swanand Vibes Incense</Link>
-          <Link to="/" className="footer-link">Swanand Vibes </Link>
+          <Link to="/products" className="footer-link">Swanand Vibes Agarbati</Link>
+          <Link to="/products" className="footer-link">Swanand Vibes Spiritual</Link>
+          <Link to="/products" className="footer-link">Swanand Vibes Incense</Link>
+          <Link to="/products" className="footer-link">Swanand Vibes </Link>
         </div>
         
         {/* <div className="footer-section">

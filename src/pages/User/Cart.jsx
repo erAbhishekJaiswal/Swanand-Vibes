@@ -86,6 +86,12 @@ const Cart = () => {
     return calculateSubtotal() + calculateTax();
   };
 
+
+
+  if (loading) {
+    return <Spinner size="lg" />;
+  }
+
   if (cartItems.length === 0) {
     return (
       <div className="cart-container">
@@ -100,11 +106,6 @@ const Cart = () => {
       </div>
     );
   }
-
-  if (loading) {
-    return <Spinner size="lg" />;
-  }
-
   return (
     <div className="cart-container">
       <div className="cart-header">

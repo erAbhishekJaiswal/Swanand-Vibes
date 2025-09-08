@@ -65,7 +65,7 @@ const Home = () => {
               </div>
               <h3>Premium Wellness Kit</h3>
               <p className="product-price">₹129.99</p>
-              <button className="btn-outline">View Product</button>
+              <button onClick={() => navigate('/products')} className="btn-outline">View More Products</button>
             </div>
             <div className="product-card">
               <div className="product-image">
@@ -73,7 +73,7 @@ const Home = () => {
               </div>
               <h3>Tech Gadgets Bundle</h3>
               <p className="product-price">₹249.99</p>
-              <button className="btn-outline">View Product</button>
+              <button onClick={()=>navigate('/products')} className="btn-outline">View More Product</button>
             </div>
             <div className="product-card">
               <div className="product-image">
@@ -81,7 +81,7 @@ const Home = () => {
               </div>
               <h3>Lord Ganesha Silver Pendant</h3>
               <p className="product-price">₹179.99</p>
-              <button className="btn-outline">View Product</button>
+              <button onClick={() => navigate('/products')} className="btn-outline">View More Product</button>
             </div>
           </div>
         </div>

@@ -17,6 +17,9 @@ const ContactList = () => {
 
   // Sample data - replace with API call
   useEffect(() => {
+    setIsLoading(true);
+    
+    // Simulate API call
     const mockContacts = [
       {
         id: 1,

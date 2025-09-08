@@ -68,6 +68,10 @@ const About = () => {
               </div>
             </div>
             <div className="mission-visual">
+
+              <div className="mission-image-container">
+                <img src="https://cdn.pixabay.com/photo/2018/10/10/10/53/business-3736926_1280.jpg" alt="mission" className="mission-image" style={{ width: '100%', height: 'auto' }} />
+              </div>
               {/* <div className="floating-shapes">
                 <div className="shape shape-1"></div>
                 <div className="shape shape-2"></div>
@@ -135,22 +139,30 @@ const About = () => {
           <h2 className="section-title">Leadership Team</h2>
           <div className="team-grid">
             <div className="team-member">
-              <div className="member-image"></div>
+              <div className="member-image">
+                <img src="https://cdn.pixabay.com/photo/2023/09/24/21/09/ai-generated-8273849_960_720.jpg" alt="team member" className='member-image' />
+              </div>
               <h3>Alex Johnson</h3>
               <p>Founder & CEO</p>
             </div>
             <div className="team-member">
-              <div className="member-image"></div>
+              <div className="member-image">
+                <img src="https://cdn.pixabay.com/photo/2024/08/31/21/30/ai-generated-9012418_1280.png" alt="team member" className='member-image' />
+              </div>
               <h3>Sarah Chen</h3>
               <p>MLM System Architect</p>
             </div>
             <div className="team-member">
-              <div className="member-image"></div>
+              <div className="member-image">
+                <img src="https://cdn.pixabay.com/photo/2023/08/24/21/48/ai-generated-8211716_1280.jpg" alt="team member" className='member-image' />
+              </div>
               <h3>Marcus Rivera</h3>
               <p>E-Commerce Director</p>
             </div>
             <div className="team-member">
-              <div className="member-image"></div>
+              <div className="member-image">
+                <img src="https://cdn.pixabay.com/photo/2023/12/04/06/14/ai-generated-8428762_1280.jpg" alt="team member" className='member-image' />
+              </div>
               <h3>Lisa Zhang</h3>
               <p>Technology Lead</p>
             </div>
