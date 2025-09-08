@@ -688,12 +688,12 @@
   .method-info {
     text-align: center;
   }
-  button,
+  /* button,
 input[type="radio"],
 input[type="checkbox"] {
   min-height: 44px;
   min-width: 44px;
-}
+} */
 
 }
 

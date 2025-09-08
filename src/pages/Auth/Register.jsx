@@ -179,7 +179,7 @@ const Register = () => {
 
 
           <div className="form-group checkbox-group">
-            <label className="checkbox-container" style={{ fontSize: "13px" }}>
+            <label className="register-checkbox-container" style={{ fontSize: "13px" }}>
               <input
                 type="checkbox"
                 name="agreeTerms"

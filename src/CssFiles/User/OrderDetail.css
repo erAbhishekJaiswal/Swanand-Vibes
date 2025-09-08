@@ -376,14 +376,15 @@
   padding: 10px 16px;
   border: 1px solid #ddd;
   border-radius: 6px;
-  background: white;
+  /* background: white; */
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .action-btn:hover {
-  background-color: #f8f9fa;
+  background-color: #b35225;
+  color: white;
 }
 
 .action-btn.cancel-btn {

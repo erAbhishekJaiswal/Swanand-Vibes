@@ -164,9 +164,9 @@
 }
 
 .form-group label {
-  display: block;
+  /* display: block; */
   margin-bottom: 8px;
-  color: #374151;
+  color: #e5e5e5;
   font-weight: 500;
 }
 

@@ -58,159 +58,314 @@
 
 
 // List.js (Updated)
-import React from 'react';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import {useNavigate} from 'react-router-dom'
+// import React from 'react';
+// import axios from 'axios';
+// import { useState, useEffect } from 'react';
+// import {useNavigate} from 'react-router-dom'
+// import '../../../CssFiles/Admin/product/list.css';
+// import {getAllProducts, deleteProduct} from '../../../utills/apicall' 
+// import Spinner from '../../../components/Spinner';
+// import { toast } from 'react-hot-toast';
+
+// const List = () => {
+//     const navigate = useNavigate();
+//     const [products, setProducts] = useState([]);
+//     const [loading, setLoading] = useState(true);
+//     const [error, setError] = useState(null);
+
+//     useEffect(() => {
+//         const fetchProducts = async () => {
+//             try {
+//                 setLoading(true);
+//                 const response = await getAllProducts();
+//                 // axios.get('http://localhost:5000/api/products/');
+//                 setProducts(response.data.data);
+//                 console.log(response.data);
+//             } catch (err) {
+//                 setError('Failed to fetch products. Please try again later.');
+//                 console.error('Error fetching products:', err);
+//             } finally {
+//                 setLoading(false);
+//             }
+//         };
+//         fetchProducts();
+//     }, []);
+
+//     const handleDelete = async (productId) => {
+//         if (window.confirm('Are you sure you want to delete this product?')) {
+//             try {
+//                 await deleteProduct(productId);
+//                 // axios.delete(`http://localhost:5000/api/products/${productId}`);
+//                 setProducts(products.filter(product => product._id !== productId));
+//                 toast.success('Product deleted successfully.');
+//             } catch (err) {
+//                 toast.error('Failed to delete product.');
+//                 console.error('Error deleting product:', err);
+//             }
+//         }
+//     };
+
+//     const handleEdit = (id) => {
+//         // Navigate to the edit page or open a modal for editing
+//         navigate(`/admin/product/edit/${id}`);
+//     };
+
+//     const handleAdd = () => {
+//         // Navigate to the add product page or open a modal for adding
+//         navigate('/admin/product/add');
+//     };
+
+//     const handleView = (id) => {
+//         // Navigate to the product detail page
+//         navigate(`/admin/product/${id}`);
+//     };
+
+//     if (loading) {
+//         return <Spinner size='lg' />;
+//     }
+
+//     if (error) {
+//         return (
+//             <div className="product-list-container">
+//                 <div className="error-message">
+//                     <span className="error-icon">⚠️</span>
+//                     <h3>{error}</h3>
+//                     <button onClick={() => window.location.reload()} className="retry-btn">
+//                         Try Again
+//                     </button>
+//                 </div>
+//             </div>
+//         );
+//     }
+
+//     return (
+//         <div className="product-list-container">
+//             <div className="product-list-header">
+//                 <h1>Product Inventory</h1>
+//                 <p>Manage your product catalog with ease</p>
+//                 <button className="add-product-btn" onClick={handleAdd}>
+//                     + Add New Product
+//                 </button>
+//             </div>
+
+//             <div className="products-grid">
+//                 {products?.map(product => (
+//                     <div key={product._id} className="product-cards">
+//                         <div className="product-image">
+//                             <img 
+//                                 src={product.images[0]?.url || 'https://via.placeholder.com/300x200/1e293b/ffffff?text=No+Image'} 
+//                                 alt={product.name} 
+//                             />
+//                             <div className="product-overlay">
+//                                 <button onClick={() => handleView(product._id)} className="action-btn view-btn">View</button>
+//                             </div>
+//                         </div>
+                        
+//                         <div className="product-list-info">
+//                             <h3 className="product-name">{product.name}</h3>
+//                             <p className="product-description">{product.description?.substring(0, 60)}...</p>
+                            
+//                             <div className="product-details">
+//                                 <div className="product-price">₹{product.price}</div>
+//                                 <span className="product-category">{product.category}</span>
+//                             </div>
+                            
+//                             <div className="product-stock">
+//                                 <span className={`stock-status ${product.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
+//                                     {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+//                                 </span>
+//                             </div>
+                            
+//                             <div className="product-actions">
+//                                 <button onClick={() => handleEdit(product._id)} className="product-action-btn edit-btn">
+//                                     <span className="btn-icon">✏️</span>
+//                                     Edit
+//                                 </button>
+//                                 <button 
+//                                     className="product-action-btn delete-btn"
+//                                     onClick={() => handleDelete(product._id)}
+//                                 >
+//                                     <span className="btn-icon">🗑️</span>
+//                                     Delete
+//                                 </button>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 ))}
+//             </div>
+
+//             {products.length === 0 && (
+//                 <div className="empty-state">
+//                     <div className="empty-icon">📦</div>
+//                     <h3>No products found</h3>
+//                     <p>Get started by adding your first product</p>
+//                     <button className="add-product-btn primary">
+//                         + Add New Product
+//                     </button>
+//                 </div>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default List;
+
+
+
+
+
+
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../../CssFiles/Admin/product/list.css';
-import {getAllProducts, deleteProduct} from '../../../utills/apicall' 
+import { getAllProducts, deleteProduct } from '../../../utills/apicall';
 import Spinner from '../../../components/Spinner';
 import { toast } from 'react-hot-toast';
+import {FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 
 const List = () => {
-    const navigate = useNavigate();
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10); // You can make this dynamic if needed
+  const [totalPages, setTotalPages] = useState(1);
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                setLoading(true);
-                const response = await getAllProducts();
-                // axios.get('http://localhost:5000/api/products/');
-                setProducts(response.data.data);
-                console.log(response.data);
-            } catch (err) {
-                setError('Failed to fetch products. Please try again later.');
-                console.error('Error fetching products:', err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchProducts();
-    }, []);
-
-    const handleDelete = async (productId) => {
-        if (window.confirm('Are you sure you want to delete this product?')) {
-            try {
-                await deleteProduct(productId);
-                // axios.delete(`http://localhost:5000/api/products/${productId}`);
-                setProducts(products.filter(product => product._id !== productId));
-                toast.success('Product deleted successfully.');
-            } catch (err) {
-                toast.error('Failed to delete product.');
-                console.error('Error deleting product:', err);
-            }
-        }
-    };
-
-    const handleEdit = (id) => {
-        // Navigate to the edit page or open a modal for editing
-        navigate(`/admin/product/edit/${id}`);
-    };
-
-    const handleAdd = () => {
-        // Navigate to the add product page or open a modal for adding
-        navigate('/admin/product/add');
-    };
-
-    const handleView = (id) => {
-        // Navigate to the product detail page
-        navigate(`/admin/product/${id}`);
-    };
-
-    if (loading) {
-        return <Spinner size='lg' />;
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const response = await getAllProducts(page, limit, 'i', 'j'); // Pass pagination params
+      setProducts(response.data.data);
+      setTotalPages(response.data.totalPages);
+    } catch (err) {
+      setError('Failed to fetch products. Please try again later.');
+      console.error('Error fetching products:', err);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    if (error) {
-        return (
-            <div className="product-list-container">
-                <div className="error-message">
-                    <span className="error-icon">⚠️</span>
-                    <h3>{error}</h3>
-                    <button onClick={() => window.location.reload()} className="retry-btn">
-                        Try Again
-                    </button>
-                </div>
-            </div>
-        );
+  useEffect(() => {
+    fetchProducts();
+  }, [page]);
+
+  const handleDelete = async (productId) => {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      try {
+        await deleteProduct(productId);
+        toast.success('Product deleted successfully.');
+        fetchProducts(); // Refresh after deletion
+      } catch (err) {
+        toast.error('Failed to delete product.');
+        console.error('Error deleting product:', err);
+      }
     }
+  };
 
+  const handleEdit = (id) => navigate(`/admin/product/edit/${id}`);
+  const handleAdd = () => navigate('/admin/product/add');
+  const handleView = (id) => navigate(`/admin/product/${id}`);
+
+  const handlePrevPage = () => setPage((prev) => Math.max(prev - 1, 1));
+  const handleNextPage = () => setPage((prev) => Math.min(prev + 1, totalPages));
+
+  if (loading) return <Spinner size="lg" />;
+  if (error) {
     return (
-        <div className="product-list-container">
-            <div className="product-list-header">
-                <h1>Product Inventory</h1>
-                <p>Manage your product catalog with ease</p>
-                <button className="add-product-btn" onClick={handleAdd}>
-                    + Add New Product
-                </button>
-            </div>
-
-            <div className="products-grid">
-                {products?.map(product => (
-                    <div key={product._id} className="product-cards">
-                        <div className="product-image">
-                            <img 
-                                src={product.images[0]?.url || 'https://via.placeholder.com/300x200/1e293b/ffffff?text=No+Image'} 
-                                alt={product.name} 
-                            />
-                            <div className="product-overlay">
-                                <button onClick={() => handleView(product._id)} className="action-btn view-btn">View</button>
-                            </div>
-                        </div>
-                        
-                        <div className="product-list-info">
-                            <h3 className="product-name">{product.name}</h3>
-                            <p className="product-description">{product.description?.substring(0, 60)}...</p>
-                            
-                            <div className="product-details">
-                                <div className="product-price">₹{product.price}</div>
-                                <span className="product-category">{product.category}</span>
-                            </div>
-                            
-                            <div className="product-stock">
-                                <span className={`stock-status ${product.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
-                                    {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
-                                </span>
-                            </div>
-                            
-                            <div className="product-actions">
-                                <button onClick={() => handleEdit(product._id)} className="product-action-btn edit-btn">
-                                    <span className="btn-icon">✏️</span>
-                                    Edit
-                                </button>
-                                <button 
-                                    className="product-action-btn delete-btn"
-                                    onClick={() => handleDelete(product._id)}
-                                >
-                                    <span className="btn-icon">🗑️</span>
-                                    Delete
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            {products.length === 0 && (
-                <div className="empty-state">
-                    <div className="empty-icon">📦</div>
-                    <h3>No products found</h3>
-                    <p>Get started by adding your first product</p>
-                    <button className="add-product-btn primary">
-                        + Add New Product
-                    </button>
-                </div>
-            )}
+      <div className="product-list-container">
+        <div className="error-message">
+          <span className="error-icon">⚠️</span>
+          <h3>{error}</h3>
+          <button onClick={() => window.location.reload()} className="retry-btn">
+            Try Again
+          </button>
         </div>
+      </div>
     );
+  }
+
+  return (
+    <div className="product-list-container">
+      <div className="product-list-header">
+        <h1>Product Inventory</h1>
+        <p>Manage your product catalog with ease</p>
+        <button className="add-product-btn" onClick={handleAdd}>
+          + Add New Product
+        </button>
+      </div>
+
+      <div className="products-grid">
+        {products.map((product) => (
+          <div key={product._id} className="product-cards">
+            <div className="product-image">
+              <img
+                src={product.images[0]?.url || 'https://via.placeholder.com/300x200/1e293b/ffffff?text=No+Image'}
+                alt={product.name}
+              />
+              <div className="product-overlay">
+                <button onClick={() => handleView(product._id)} className="action-btn view-btn">
+                  View
+                </button>
+              </div>
+            </div>
+
+            <div className="product-list-info">
+              <h3 className="product-name">{product.name}</h3>
+              <p className="product-description">{product.description?.substring(0, 60)}...</p>
+
+              <div className="product-details">
+                <div className="product-price">₹{product.price}</div>
+                <span className="product-category">{product.category}</span>
+              </div>
+
+              <div className="product-stock">
+                <span className={`stock-status ${product.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
+                  {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+                </span>
+              </div>
+
+              <div className="product-actions">
+                <button onClick={() => handleEdit(product._id)} className="product-action-btn edit-btn">
+                  <span className="btn-icon">✏️</span> Edit
+                </button>
+                <button onClick={() => handleDelete(product._id)} className="product-action-btn delete-btn">
+                  <span className="btn-icon">🗑️</span> Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {products.length === 0 && (
+        <div className="empty-state">
+          <div className="empty-icon">📦</div>
+          <h3>No products found</h3>
+          <p>Get started by adding your first product</p>
+          <button className="add-product-btn primary" onClick={handleAdd}>
+            + Add New Product
+          </button>
+        </div>
+      )}
+
+      {/* Pagination Controls */}
+      <div className="product-pagination-controls">
+        <button className='product-pagination-btn' onClick={handlePrevPage} disabled={page === 1}>
+          <FiArrowLeft />
+        </button>
+        <span>
+         {" "} Page {page} of {totalPages} {" "}
+        </span>
+        <button className='product-pagination-btn' onClick={handleNextPage} disabled={page === totalPages}>
+          <FiArrowRight />
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default List;
-
-
 
 
 

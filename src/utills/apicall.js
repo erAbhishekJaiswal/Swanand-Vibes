@@ -2,19 +2,18 @@ import axios from "axios";
 
 const API_URL = "https://swanand-vibes-backend.vercel.app/api";
 
-
 // User Auth Api
 //
 export const registerUser = (formData) => {
- const {name , email, password, otp} = formData
+  const { name, email, password, otp } = formData;
   return axios.post(`${API_URL}/auth/register`, formData);
 };
 
 export const verifyUser = (formData) => {
   // console.log(formData);
-  const {name , email, password} = formData;
+  const { name, email, password } = formData;
   return axios.post(`${API_URL}/auth/request-otp`, { name, email, password });
-}
+};
 //
 export const loginUser = (loginData) => {
   return axios.post(`${API_URL}/auth/login`, loginData);
@@ -28,26 +27,90 @@ export const logoutUser = () => {
 //   return axios.put(`${API_URL}/users/password`, passwordData);
 // };
 
-
-
 // Products Api
 
 //
-export const getCommonProducts = () => {
-  return axios.get(`${API_URL}/products/common`);
+// export const getCommonProducts = () => {
+//   return axios.get(`http://localhost:5000/api/products/common`);
+// };
+
+export const getCommonProducts = ({
+  page,
+  limit,
+  search,
+  category,
+  minPrice,
+  maxPrice,
+  brands,
+  minRating,
+  sort,
+}) => {
+  return axios.get(`${API_URL}/products/common`, {
+    params: {
+      page,
+      limit,
+      search,
+      category,
+      minPrice,
+      maxPrice,
+      brands,
+      minRating,
+      sort,
+    },
+  });
 };
+
+// Enhanced version with better error handling
+export const getFilters = async () => {
+  try {
+    const response = await axios.get(
+      `${API_URL}/products/filters`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        timeout: 10000, // 10 second timeout
+      }
+    );
+
+    if (response.data.success) {
+      return response;
+    } else {
+      throw new Error(response.data.message || "Failed to fetch filters");
+    }
+  } catch (error) {
+    console.error("Error fetching filters:", error);
+
+    // Return a fallback response if the API fails
+    return {
+      data: {
+        success: false,
+        data: {
+          categories: [],
+          brands: [],
+          priceRange: [0, 1000],
+        },
+      },
+    };
+  }
+};
+
 //
 export const getCommonProductById = (id) => {
   return axios.get(`${API_URL}/products/common/${id}`);
 };
 
-      // admin api
-      //
-export const getAllProducts = () => {
-  return axios.get(`${API_URL}/products`);
+// admin api
+//
+export const getAllProducts = (page, limit, search, category) => {
+  console.log(page, limit, search, category);
+
+  return axios.get(
+    `${API_URL}/products?page=${page}&limit=${limit}&search=${search}&category=${category}`
+  );
 };
 
-// 
+//
 export const getProductById = (id) => {
   return axios.get(`${API_URL}/products/${id}`);
 };
@@ -62,14 +125,10 @@ export const updateProduct = (id, productData) => {
   return axios.put(`${API_URL}/products/${id}`, productData);
 };
 
-// 
+//
 export const deleteProduct = (id) => {
   return axios.delete(`${API_URL}/products/${id}`);
 };
-
-
-
-
 
 //  Users Api
 //
@@ -83,7 +142,7 @@ export const getUserById = (id) => {
 
 export const updateUserProfile = async (id, formData) => {
   return axios.put(`${API_URL}/users/${id}/profile`, formData);
-}; 
+};
 // export const updateUser = (id, userData) => {
 //   return axios.put(`${API_URL}/users/${id}`, userData);
 // };
@@ -102,21 +161,20 @@ export const getUserAddress = (userId) => {
   return axios.get(`${API_URL}/users/address/${userId}`);
 };
 
-
 // Kyc
-// 
+//
 export const getAllKycs = () => {
   return axios.get(`${API_URL}/user/kyc`);
 };
-// 
+//
 export const approveKyc = (id) => {
   return axios.put(`${API_URL}/user/kyc/${id}/approve`);
 };
-// 
+//
 export const rejectKyc = (id) => {
   return axios.put(`${API_URL}/user/kyc/${id}/reject`);
 };
-// 
+//
 export const getKycById = (id) => {
   return axios.get(`${API_URL}/user/kyc/${id}`);
 };
@@ -145,15 +203,11 @@ export const submitKyc = (payload) => {
 //   return axios.delete(`${API_URL}/users/kyc/${kycId}`);
 // };
 
-
-
-
 // Cart Api
 //
 export const addToCart = (payload) => {
   const { userId, quantity, id } = payload;
   console.log(payload);
-
   return axios.post(`${API_URL}/user/cart/${id}`, { userId, quantity });
 };
 //
@@ -166,8 +220,8 @@ export const removeFromCart = (userId, productId, removedItem) => {
   return axios.delete(`${API_URL}/user/cart/${productId}`, {
     data: {
       item: removedItem,
-      userId: userId
-    }
+      userId: userId,
+    },
   });
 };
 
@@ -178,10 +232,6 @@ export const clearCart = (userId) => {
 export const updateCartItem = (userId, productId, quantity) => {
   return axios.put(`${API_URL}/user/cart/${userId}/${productId}`, { quantity });
 };
-
-
-
-
 
 // Wallet Api
 
@@ -195,11 +245,10 @@ export const getWallet = (userId) => {
 };
 
 export const debitWallet = (userId, amount) => {
-  return axios.delete(`${API_URL}/user/wallet/${userId}/withdraw`, { data: { amount } });
+  return axios.delete(`${API_URL}/user/wallet/${userId}/withdraw`, {
+    data: { amount },
+  });
 };
-
-
-
 
 // Orders Api
 export const placeOrder = (userId, orderData) => {
@@ -216,16 +265,26 @@ export const getOrders = (userId) => {
 
 
 
+// contact api 
+export const contactslist = () =>{
+    return axios.get(`${API_URL}/contact`);
+}
+
+export const contactdelete = (id) => {
+  return axios.delete(`${API_URL}/order/contact/${id}`);
+}
+
+export const contactupdate = (id, newStatus) => {
+  return axios.put(`${API_URL}/contact/${id}`, { status: newStatus });
+}
 
 
 
 
 
-
-
-
-{/***************************** Admin Api ***************************/}
-
+{
+  /***************************** Admin Api ***************************/
+}
 
 // // Users
 // export const fetchAllUsers = () => {
@@ -236,12 +295,10 @@ export const getOrders = (userId) => {
 // //   return axios.delete(`${API_URL}/admin/users/${userId}`);
 // // };
 
-
 // // Products
 // export const fetchAllProducts = () => {
 //   return axios.get(`${API_URL}/admin/products`);
 // };
-
 
 // // Cart
 // export const fetchAllCarts = () => {
@@ -251,8 +308,6 @@ export const getOrders = (userId) => {
 // export const deleteCart = (cartId) => {
 //   return axios.delete(`${API_URL}/admin/carts/${cartId}`);
 // };
-
-
 
 // // Kyc
 // export const fetchAllKycRequests = () => {
@@ -280,7 +335,6 @@ export const getOrders = (userId) => {
 //   return axios.post(`${API_URL}/admin/cloudinary/upload`, formData);
 // };
 
-
 // // Orders
 // export const fetchAllOrders = () => {
 //   return axios.get(`${API_URL}/admin/orders`);
@@ -289,5 +343,3 @@ export const getOrders = (userId) => {
 // export const updateOrderStatus = (orderId, status) => {
 //   return axios.put(`${API_URL}/admin/orders/${orderId}`, { status });
 // };
-
-

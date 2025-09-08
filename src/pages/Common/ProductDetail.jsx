@@ -3,13 +3,16 @@ import React, { useEffect, useState } from 'react';
 import '../../CssFiles/Admin/product/productcommon.css'
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
-import {getCommonProductById} from '../../utills/apicall';
+import {getCommonProductById , addToCart} from '../../utills/apicall';
 import Spinner from '../../components/Spinner';
 import {toast} from 'react-hot-toast';
+import { getUserId } from '../../utills/authService';
 
 const ProductDetail = () => {
   const { id } = useParams();
-
+  console.log(id);
+  const userid = getUserId();
+  
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -84,13 +87,13 @@ const ProductDetail = () => {
 //   ];
 
 // Mock product data
-const product = {
-  id: 1,
-  name: "Futuristic SmartPhone X12",
-  description: "A next-gen smartphone with AI-powered features, sleek design, and unmatched performance.",
-  price: 999.99,
-  rating: 4.5,
-};
+// const product = {
+//   id: 1,
+//   name: "Futuristic SmartPhone X12",
+//   description: "A next-gen smartphone with AI-powered features, sleek design, and unmatched performance.",
+//   price: 999.99,
+//   rating: 4.5,
+// };
 
 // Mock product images
 // const productImages = [
@@ -129,15 +132,23 @@ const relatedProducts = [
   },
 ];
 
-
   const handleAddToCart = () => {
     const productToAdd = {
-      ...product,
-      variant: variants[selectedVariant],
-      quantity
+      // ...product,
+      // variant: variants[selectedVariant],
+      quantity,
+      id,
+      userId: userid
     };
-    addToCart(productToAdd);
-    toast.success(`${product.name} added to cart!`);
+    try {
+      console.log(productToAdd);
+       addToCart(productToAdd);
+    toast.success(`${productData.name} added to cart!`);
+    } catch (error) {
+      toast.error(error.message);
+      console.log(error);
+    }
+   
   };
 
   const increaseQuantity = () => {
@@ -166,16 +177,16 @@ const relatedProducts = [
       <div className="product-detail">
         <div className="product-gallery">
           <div className="main-image">
-            <img src={productImages[selectedImage]} alt={product.name} />
+            <img src={productImages[selectedImage]} alt={productData?.name} />
           </div>
           <div className="image-thumbnails">
-            {productImages.map((img, index) => (
+            {productImages?.map((img, index) => (
               <div 
                 key={index} 
                 className={`thumbnail ${selectedImage === index ? 'active' : ''}`}
                 onClick={() => setSelectedImage(index)}
               >
-                <img src={img} alt={`${product.name} view ${index + 1}`} />
+                <img src={img} alt={`${productData.name} view ${index + 1}`} />
               </div>
             ))}
           </div>

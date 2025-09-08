@@ -360,6 +360,25 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.product-pagination-controls{
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.product-pagination-btn{
+  padding: 0.6rem 1.2rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.product-pagination-btn:hover{
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary-accent);
+}
 /* Responsive Design */
 @media (max-width: 1024px) {
   .products-grid {

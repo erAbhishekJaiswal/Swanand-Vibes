@@ -4,6 +4,9 @@ import { FiSearch, FiFilter, FiMessageSquare, FiMail, FiClock, FiCheck, FiAlertC
 import '../../../CssFiles/Admin/contact/ContactList.css';
 import { GrView } from "react-icons/gr";
 import { MdDeleteOutline } from "react-icons/md";
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { contactslist, contactdelete, contactupdate } from '../../../utills/apicall';
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([]);
@@ -15,137 +18,31 @@ const ContactList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
 
-  // Sample data - replace with API call
+  // Fetch contacts from API
+
   useEffect(() => {
-    setIsLoading(true);
-    
-    // Simulate API call
-    const mockContacts = [
-      {
-        id: 1,
-        name: 'Sarah Johnson',
-        email: 'sarah.johnson@example.com',
-        subject: 'Product Inquiry',
-        message: 'I would like to know more about your premium subscription features and pricing.',
-        date: '2023-11-15T14:30:00',
-        status: 'new',
-        priority: 'high',
-        phone: '+1 (555) 123-4567',
-        category: 'Sales'
-      },
-      {
-        id: 2,
-        name: 'Michael Chen',
-        email: 'michael.chen@example.com',
-        subject: 'Technical Support',
-        message: 'I\'m having issues with the mobile app crashing when I try to upload photos.',
-        date: '2023-11-14T10:15:00',
-        status: 'in-progress',
-        priority: 'high',
-        phone: '+1 (555) 987-6543',
-        category: 'Technical'
-      },
-      {
-        id: 3,
-        name: 'Emma Rodriguez',
-        email: 'emma.rodriguez@example.com',
-        subject: 'Billing Question',
-        message: 'I was charged twice this month. Can you please check and refund the duplicate charge?',
-        date: '2023-11-13T16:45:00',
-        status: 'resolved',
+
+  // fetch('http://localhost:5000/api/contact/') // Replace with your actual endpoint
+  contactslist()
+    .then(res => res.json())
+    .then(data => {
+      const formatted = data.map(contact => ({
+        id: contact._id,
+        name: contact.name,
+        email: contact.email,
+        phone: contact.phone,
+        subject: contact.subject,
+        message: contact.message,
+        status: contact.status,
+        date: contact.createdAt,
         priority: 'medium',
-        phone: '+1 (555) 456-7890',
-        category: 'Billing'
-      },
-      {
-        id: 4,
-        name: 'David Kim',
-        email: 'david.kim@example.com',
-        subject: 'Partnership Opportunity',
-        message: 'I represent TechSolutions Inc. and would like to discuss potential partnership opportunities.',
-        date: '2023-11-12T09:20:00',
-        status: 'new',
-        priority: 'medium',
-        phone: '+1 (555) 234-5678',
-        category: 'Business'
-      },
-      {
-        id: 5,
-        name: 'Lisa Thompson',
-        email: 'lisa.thompson@example.com',
-        subject: 'Feature Request',
-        message: 'It would be great if you could add dark mode to the web application.',
-        date: '2023-11-11T13:10:00',
-        status: 'resolved',
-        priority: 'low',
-        phone: '+1 (555) 876-5432',
-        category: 'Feedback'
-      },
-      {
-        id: 6,
-        name: 'James Wilson',
-        email: 'james.wilson@example.com',
-        subject: 'Account Deletion',
-        message: 'I would like to delete my account and all associated data from your system.',
-        date: '2023-11-10T11:30:00',
-        status: 'new',
-        priority: 'medium',
-        phone: '+1 (555) 345-6789',
-        category: 'Account'
-      },
-      {
-        id: 7,
-        name: 'Olivia Martinez',
-        email: 'olivia.martinez@example.com',
-        subject: 'Login Issues',
-        message: 'I cannot log in to my account. It says my password is incorrect, but I\'m sure it\'s correct.',
-        date: '2023-11-09T15:40:00',
-        status: 'in-progress',
-        priority: 'high',
-        phone: '+1 (555) 765-4321',
-        category: 'Technical'
-      },
-      {
-        id: 8,
-        name: 'Robert Taylor',
-        email: 'robert.taylor@example.com',
-        subject: 'Refund Request',
-        message: 'I canceled my subscription within the trial period but was still charged.',
-        date: '2023-11-08T12:25:00',
-        status: 'new',
-        priority: 'high',
-        phone: '+1 (555) 543-2109',
-        category: 'Billing'
-      },
-      {
-        id: 9,
-        name: 'Sophia Anderson',
-        email: 'sophia.anderson@example.com',
-        subject: 'Product Feedback',
-        message: 'I love your service! The new update has made it even better. Thank you!',
-        date: '2023-11-07T14:15:00',
-        status: 'resolved',
-        priority: 'low',
-        phone: '+1 (555) 321-0987',
-        category: 'Feedback'
-      },
-      {
-        id: 10,
-        name: 'William Brown',
-        email: 'william.brown@example.com',
-        subject: 'Data Export',
-        message: 'How can I export all my data from the platform?',
-        date: '2023-11-06T10:50:00',
-        status: 'in-progress',
-        priority: 'medium',
-        phone: '+1 (555) 654-7890',
-        category: 'Account'
-      }
-    ];
-    
-    setContacts(mockContacts);
-    setFilteredContacts(mockContacts);
-  }, []);
+        category: 'General'
+      }));
+      setContacts(formatted);
+      setFilteredContacts(formatted);
+    });
+}, []);
+
 
   // Filter contacts based on search and filters
   useEffect(() => {
@@ -189,11 +86,22 @@ const ContactList = () => {
     setContacts(contacts.map(contact => 
       contact.id === id ? { ...contact, status: newStatus } : contact
     ));
+
+    // This would be your actual API call
+    // axios.put(`http://localhost:5000/api/contact/${id}`, { status: newStatus });
+    contactupdate(id, newStatus);
+    toast.success('Contact status updated');
+
   };
 
   // Handle delete contact
   const deleteContact = (id) => {
     setContacts(contacts.filter(contact => contact.id !== id));
+
+    // This would be your actual API call
+    // axios.delete(`http://localhost:5000/api/contact/${id}`);
+    contactdelete(id);
+    toast.success('Contact deleted successfully');
   };
 
   // Format date
@@ -213,14 +121,14 @@ const ContactList = () => {
   };
 
   // Get priority badge class
-  const getPriorityBadgeClass = (priority) => {
-    switch (priority) {
-      case 'high': return 'priority-badge high';
-      case 'medium': return 'priority-badge medium';
-      case 'low': return 'priority-badge low';
-      default: return 'priority-badge';
-    }
-  };
+  // const getPriorityBadgeClass = (priority) => {
+  //   switch (priority) {
+  //     case 'high': return 'priority-badge high';
+  //     case 'medium': return 'priority-badge medium';
+  //     case 'low': return 'priority-badge low';
+  //     default: return 'priority-badge';
+  //   }
+  // };
 
   return (
     <div className="admin-contact-container">
@@ -247,14 +155,14 @@ const ContactList = () => {
               value={statusFilter} 
               onChange={(e) => setStatusFilter(e.target.value)}
             >
-              <option value="all">All Status</option>
-              <option value="new">New</option>
-              <option value="in-progress">In Progress</option>
-              <option value="resolved">Resolved</option>
+              <option className='contact-fiter-group' value="all">All Status</option>
+              <option className='contact-fiter-group' value="new">New</option>
+              <option className='contact-fiter-group' value="in-progress">In Progress</option>
+              <option className='contact-fiter-group' value="resolved">Resolved</option>
             </select>
           </div>
 
-          <div className="filter-group">
+          {/* <div className="filter-group">
             <select 
               value={priorityFilter} 
               onChange={(e) => setPriorityFilter(e.target.value)}
@@ -264,7 +172,7 @@ const ContactList = () => {
               <option value="medium">Medium</option>
               <option value="low">Low</option>
             </select>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -316,8 +224,8 @@ const ContactList = () => {
             <tr>
               <th>User</th>
               <th>Subject</th>
-              <th>Category</th>
-              <th>Priority</th>
+              {/* <th>Category</th> */}
+              {/* <th>Priority</th> */}
               <th>Status</th>
               <th>Date</th>
               <th>Actions</th>
@@ -343,14 +251,14 @@ const ContactList = () => {
                       {contact.subject}
                     </div>
                   </td>
-                  <td>
+                  {/* <td>
                     <span className="category-badge">{contact.category}</span>
-                  </td>
-                  <td>
+                  </td> */}
+                  {/* <td>
                     <span className={getPriorityBadgeClass(contact.priority)}>
                       {contact.priority}
                     </span>
-                  </td>
+                  </td> */}
                   <td>
                     <span className={getStatusBadgeClass(contact.status)}>
                       {contact.status}
@@ -468,9 +376,9 @@ const ContactList = () => {
                 <div className="detail-row">
                   <div className="detail-label">Priority:</div>
                   <div className="detail-value">
-                    <span className={getPriorityBadgeClass(selectedContact.priority)}>
+                    {/* <span className={getPriorityBadgeClass(selectedContact.priority)}>
                       {selectedContact.priority}
-                    </span>
+                    </span> */}
                   </div>
                 </div>
                 <div className="detail-row">
