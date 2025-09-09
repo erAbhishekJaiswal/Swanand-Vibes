@@ -354,6 +354,7 @@ import { getOrders } from '../../utills/apicall';
 import { getUserId } from '../../utills/authService';
 import Spinner from '../../components/Spinner';
 import { useNavigate } from 'react-router-dom';
+import {toast} from 'react-hot-toast'
 
 const Orders = () => {
   const navigate = useNavigate();
@@ -419,6 +420,12 @@ const Orders = () => {
     // Navigate to the order details page
     navigate(`/user/orders/${id}`);
   };
+
+  const handleCancelOrder = (id) => {
+    // Handle order cancellation
+    console.log(`Cancel order with ID: ${id}`);
+    toast.success('Order cancelled successfully');
+  }
 
   if (isLoading) {
     return <Spinner size='lg' />
@@ -568,7 +575,7 @@ const Orders = () => {
                       </>
                     )}
                     {order.deliveryStatus === 'pending' && (
-                      <button className="order-action-btn">Cancel Order</button>
+                      <button onClick={() => handleCancelOrder(order._id)} className="order-action-btn">Cancel Order</button>
                     )}
                     <button onClick={() => handleViewDetails(order._id)} className="order-action-btn primary">View Details</button>
                   </div>

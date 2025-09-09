@@ -254,9 +254,9 @@ export const debitWallet = (userId, amount) => {
 
 // Orders Api
 export const placeOrder = (userId, orderData) => {
-  console.log(`Placing order for user ${userId}:`, orderData);
+  // console.log(`Placing order for user ${userId}:`, orderData);
 
-  return axios.post(`http://localhost:5000/api/order/${userId}`, orderData);
+  return axios.post(`${API_URL}/order/${userId}`, orderData);
 };
 
 export const getOrders = (userId) => {

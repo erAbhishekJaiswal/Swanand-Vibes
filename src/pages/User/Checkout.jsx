@@ -2010,7 +2010,7 @@ const Checkout = () => {
 
       // 1. Create Razorpay Order on backend
       const { data: order } = await axios.post(
-        "http://localhost:5000/api/pay/create-order",
+        "https://swanand-vibes-backend.vercel.app/api/pay/create-order",
         { amount: totalPrice }
       );
 
@@ -2026,7 +2026,7 @@ const Checkout = () => {
           try {
             // 3. Verify payment with backend
             await axios.post(
-              "http://localhost:5000/api/pay/verify",
+              "https://swanand-vibes-backend.vercel.app/api/pay/verify",
               {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,

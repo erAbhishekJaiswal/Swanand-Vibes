@@ -888,13 +888,13 @@ const OrderList = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('darkMode') === 'true' || 
-             window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-    return false;
-  });
+//   const [darkMode, setDarkMode] = useState(() => {
+//     if (typeof window !== 'undefined') {
+//       return localStorage.getItem('darkMode') === 'true' || 
+//              window.matchMedia('(prefers-color-scheme: dark)').matches;
+//     }
+//     return false;
+//   });
 
   // Fetch orders from API
   const fetchOrders = async (page = 1, limit = 10, search = "", status = "all", start = "", end = "") => {
@@ -911,7 +911,7 @@ const OrderList = () => {
         ...(end && { endDate: end })
       });
 
-      const response = await fetch(`http://localhost:5000/api/order?${params}`);
+      const response = await fetch(`https://swanand-vibes-backend.vercel.app/api/order?${params}`);
       const data = await response.json();
       console.log(data);
       

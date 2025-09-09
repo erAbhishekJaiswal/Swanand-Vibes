@@ -5,6 +5,7 @@ import axios from 'axios';
 import { getUserId } from '../../utills/authService';
 import '../../CssFiles/User/OrderDetail.css';
 import { toast } from 'react-hot-toast';
+import Spinner from '../../components/Spinner';
 
 const OrderDetail = () => {
   const { id } = useParams();
@@ -83,12 +84,13 @@ const OrderDetail = () => {
 
   if (isLoading) {
     return (
-      <div className="order-detail-container">
-        <div className="loading-spinner">
-          <div className="spinner"></div>
-          <p>Loading order details...</p>
-        </div>
-      </div>
+      <Spinner size='lg' />
+      // <div className="order-detail-container">
+      //   <div className="loading-spinner">
+      //     <div className="spinner"></div>
+      //     <p>Loading order details...</p>
+      //   </div>
+      // </div>
     );
   }
 
@@ -260,24 +262,24 @@ const OrderDetail = () => {
           <h2>Order Actions</h2>
           <div className="action-buttons">
             {!order.isDelivered && order.deliveryStatus !== 'cancelled' && (
-              <button className="action-btn cancel-btn">
+              <button className="order-action-btn cancel-btn">
                 Cancel Order
               </button>
             )}
             {order.isDelivered && (
               <>
-                <button className="action-btn return-btn">
+                <button className="order-action-btn return-btn">
                   Return Items
                 </button>
-                <button className="action-btn review-btn">
+                <button className="order-action-btn review-btn">
                   Write a Review
                 </button>
               </>
             )}
-            <button className="action-btn help-btn">
+            <button className="order-action-btn help-btn">
               Get Help
             </button>
-            <button className="action-btn invoice-btn">
+            <button className="order-action-btn invoice-btn">
               Download Invoice
             </button>
           </div>
