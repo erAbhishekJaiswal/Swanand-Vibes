@@ -235,9 +235,10 @@ const List = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await getAllProducts(page, limit, 'i', 'j'); // Pass pagination params
+      const response = await getAllProducts(page, limit, ' ', ' '); // Pass pagination params
       setProducts(response.data.data);
       setTotalPages(response.data.totalPages);
+      console.log(response.data);
     } catch (err) {
       setError('Failed to fetch products. Please try again later.');
       console.error('Error fetching products:', err);
@@ -327,10 +328,12 @@ const List = () => {
 
               <div className="product-actions">
                 <button onClick={() => handleEdit(product._id)} className="product-action-btn edit-btn">
-                  <span className="btn-icon">✏️</span> Edit
+                  {/* <span className="btn-icon"></span>  */}
+                  Edit
                 </button>
                 <button onClick={() => handleDelete(product._id)} className="product-action-btn delete-btn">
-                  <span className="btn-icon">🗑️</span> Delete
+                  {/* <span className="btn-icon"></span>  */}
+                  Delete
                 </button>
               </div>
             </div>
