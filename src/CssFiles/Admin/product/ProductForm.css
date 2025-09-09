@@ -185,7 +185,7 @@
 }
 
 .preview-title::before {
-  content: "🖼️";
+  /* content: "🖼️"; */
   margin-right: 0.5rem;
 }
 

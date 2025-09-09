@@ -557,20 +557,20 @@ const Orders = () => {
                   <div className="order-actions">
                     {order.isDelivered && (
                       <>
-                        <button className="action-btn">Buy Again</button>
-                        <button className="action-btn">Return Item</button>
-                        <button className="action-btn">Write Review</button>
+                        <button className="order-action-btn">Buy Again</button>
+                        <button className="order-action-btn">Return Item</button>
+                        <button className="order-action-btn">Write Review</button>
                       </>
                     )}
                     {order.deliveryStatus === 'shipped' && (
                       <>
-                        <button className="action-btn">Track Package</button>
+                        <button className="order-action-btn">Track Package</button>
                       </>
                     )}
                     {order.deliveryStatus === 'pending' && (
-                      <button className="action-btn">Cancel Order</button>
+                      <button className="order-action-btn">Cancel Order</button>
                     )}
-                    <button onClick={() => handleViewDetails(order._id)} className="action-btn primary">View Details</button>
+                    <button onClick={() => handleViewDetails(order._id)} className="order-action-btn primary">View Details</button>
                   </div>
                 </div>
 

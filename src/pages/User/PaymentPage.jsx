@@ -17,7 +17,7 @@ const PaymentPage = () => {
         currency: order.currency,
         name: "My Shop",
         description: "Test Transaction",
-        order_id: order.id,
+        order_id: "razorpay_ABC123",//order.id,
         handler: async function (response) {
           // Step 3: Verify payment on backend
           const verify = await axios.post("http://localhost:5000/api/pay/verify", response);

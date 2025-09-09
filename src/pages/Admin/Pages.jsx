@@ -13,6 +13,7 @@ import EditProduct from "./Product/Edit";
 import AddKyc from "../../pages/User/AddKyc";
 import ContactList from "./Contact/ContactList";
 import WithdrawList from "../Admin/Wallet/WithdrawalRequests";
+import OrderList from "./Order/OrderList";
 const Pages = () => {
   return (
     <div>
@@ -33,6 +34,7 @@ const Pages = () => {
           <Route path="/product/:id" element={<Detail />} />
           <Route path="/product/add" element={<CreateProduct />} />
           <Route path="/product/edit/:id" element={<EditProduct />} />
+          <Route path="/orderlist" element={<OrderList/>}/>
         </Routes>
     </div>
   );

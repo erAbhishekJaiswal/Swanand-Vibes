@@ -161,7 +161,7 @@ const EditProduct = () => {
       if (newImages.length > 0) {
         // 1. Get Cloudinary signature from backend
         const sigRes = await axios.get(
-          "http://localhost:5000/api/products/signature"
+          "https://swanand-vibes-backend.vercel.app/api/products/signature"
         );
         const { timestamp, signature, cloudName, apiKey } = sigRes.data;
 
