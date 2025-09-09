@@ -7,6 +7,7 @@ import Wallet from "../../pages/User/Wallet";
 import AddKyc from "./AddKyc";
 import OrderDetail from "./OrderDetail";
 import Withdraw from "./Withdraw";
+import PaymentPage from "./PaymentPage";
 // import Dashboard from "./Dashboard";
 
 
@@ -24,6 +25,7 @@ const Pages = () => {
           <Route path="/kyc" element={<AddKyc />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/wallet" element={<Wallet />} />
+          <Route path="/payment" element={<PaymentPage />} />
         </Routes>
     </div>
   );

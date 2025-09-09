@@ -186,7 +186,9 @@ export const getKycByUserId = (userId) => {
 // for users
 //
 export const submitKyc = (payload) => {
-  return axios.post(`${API_URL}/user/kyc`, payload, {
+  // console.log(payload);
+  
+  return axios.post(`${API_URL}/user/kyc/submit`, payload, {
     headers: { "Content-Type": "application/json" },
   });
 };

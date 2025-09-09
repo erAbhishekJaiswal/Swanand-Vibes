@@ -306,8 +306,10 @@ import axios from "axios";
 import { submitKyc } from "../../utills/apicall";
 import { toast } from "react-hot-toast";
 import Spinner from "../../components/Spinner";
+import { useNavigate } from "react-router-dom";
 
 export default function AddKyc() {
+  const navigate = useNavigate();
   const [kycStatus, setKycStatus] = useState("Pending");
 
   const [form, setForm] = useState({
@@ -410,12 +412,13 @@ export default function AddKyc() {
       console.log(payload);
 
       const response = await submitKyc(payload);
-      // axios.post("http://localhost:5000/api/user/kyc/submit", payload, {
-      //   headers: { "Content-Type": "application/json" },
-      // });
+    //  const response = await axios.post("http://localhost:5000/api/user/kyc/submit", payload, {
+    //     headers: { "Content-Type": "application/json" },
+    //   });
 
       if (response.status === 200) {
         toast.success("KYC submitted successfully!");
+        navigate("/user/profile");
       } else {
         toast.error("Failed to submit KYC.");
       }
