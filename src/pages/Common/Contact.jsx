@@ -19,6 +19,7 @@ import "../../CssFiles/common/Contact.css";
 import { toast } from "react-hot-toast";
 import Spinner from "../../components/Spinner";
 import { isAuthenticated } from "../../utills/authService";
+import {contactcreate} from '../../utills/apicall'
 import axios from "axios";
 
 const Contact = () => {
@@ -46,7 +47,8 @@ const Contact = () => {
     setLoading(true);
     // Handle form submission
     console.log(formData);
-    const res = await axios.post("http://localhost:5000/api/contact/", formData )
+    // const res = await axios.post("/api/contact/", formData )
+    const res = await contactcreate(formData);
     console.log(res);
     toast.success("Thank you for your message! We will get back to you soon.");
     setFormData({

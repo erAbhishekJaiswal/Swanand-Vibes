@@ -278,6 +278,9 @@ export const contactupdate = (id, newStatus) => {
   return axios.put(`${API_URL}/contact/${id}`, { status: newStatus });
 }
 
+export const contactcreate = (contactData) => {
+  return axios.post(`${API_URL}/contact`, contactData);
+}
 
 
 
