@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { FiSearch, FiFilter, FiDollarSign, FiUser, FiClock, FiCheck, FiX, FiAlertCircle, FiEye, FiChevronDown, FiChevronUp, FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import '../../../CssFiles/Admin/Withdrawal/WithdrawalRequests.css';
 import axios from 'axios';
+import Spinner from "../../../components/Spinner";
 
 const WithdrawalRequests = () => {
   const [requests, setRequests] = useState([]);
@@ -323,12 +324,13 @@ const WithdrawalRequests = () => {
 
   if (isLoading) {
     return (
-      <div className="withdrawal-requests-container">
-        <div className="loading-spinner">
-          <div className="spinner"></div>
-          <p>Loading withdrawal requests...</p>
-        </div>
-      </div>
+      // <div className="withdrawal-requests-container">
+      //   <div className="loading-spinner">
+      //     <div className="spinner"></div>
+      //     <p>Loading withdrawal requests...</p>
+      //   </div>
+      // </div>
+      <Spinner size="lg"/>
     );
   }
 

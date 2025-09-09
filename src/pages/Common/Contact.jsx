@@ -130,7 +130,9 @@ const Contact = () => {
             <div className="contact-form-container">
               <h2>Send us a Message</h2>
               {loading ? (
-                <Spinner />
+                <div className="loader">
+                <Spinner size="lg"/>
+                </div>
               ) : (
                 <form className="contact-form" onSubmit={handleSubmit}>
                   <div className="form-row">

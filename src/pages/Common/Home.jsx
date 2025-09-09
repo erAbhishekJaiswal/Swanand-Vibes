@@ -21,32 +21,32 @@ const Home = () => {
           <h2 className="section-title">Why Choose Swanand Vibes?</h2>
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">🚀</div>
+              {/* <div className="feature-icon">🚀</div> */}
               <h3>Advanced E-Commerce</h3>
               <p>Shop from our curated collection of premium products with seamless checkout and fast delivery.</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🌐</div>
+              {/* <div className="feature-icon">🌐</div> */}
               <h3>12-Level MLM System</h3>
               <p>Build your network across 12 levels and earn commissions from each level's performance.</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">💎</div>
+              {/* <div className="feature-icon">💎</div> */}
               <h3>Premium Rewards</h3>
               <p>Earn not just commissions but also exclusive rewards, trips, and luxury items.</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🔒</div>
+              {/* <div className="feature-icon">🔒</div> */}
               <h3>Secure Platform</h3>
               <p>Advanced security measures to protect your data and transactions.</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">📊</div>
+              {/* <div className="feature-icon">📊</div> */}
               <h3>Analytics Dashboard</h3>
               <p>Track your team performance, earnings, and growth with detailed analytics.</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">⚡</div>
+              {/* <div className="feature-icon">⚡</div> */}
               <h3>Fast Payouts</h3>
               <p>Get your commissions and rewards quickly with our efficient payout system.</p>
             </div>

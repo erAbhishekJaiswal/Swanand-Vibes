@@ -328,7 +328,7 @@ const Navbar = () => {
                 onClick={handleNavLinkClick}
                 className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
               >
-                <span className="link-icon">🏠</span>
+                {/* <span className="link-icon">🏠</span> */}
                 <span className="link-text">Home</span>
               </Link>
             </div>
