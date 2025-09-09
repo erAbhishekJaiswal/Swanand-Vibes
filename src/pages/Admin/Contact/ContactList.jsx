@@ -23,9 +23,13 @@ const ContactList = () => {
   useEffect(() => {
 
   // fetch('http://localhost:5000/api/contact/') // Replace with your actual endpoint
-  contactslist()
-    .then(res => res.json())
-    .then(data => {
+  const fatchContacts = async () => {
+      const res = await contactslist()
+    // .then(res => res.json())
+    // .then(data => {
+      // console.log(data);
+      const data = res.data
+      
       const formatted = data.map(contact => ({
         id: contact._id,
         name: contact.name,
@@ -40,7 +44,11 @@ const ContactList = () => {
       }));
       setContacts(formatted);
       setFilteredContacts(formatted);
-    });
+    // });
+  }
+
+  fatchContacts();
+
 }, []);
 
 
