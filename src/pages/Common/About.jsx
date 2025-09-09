@@ -89,29 +89,89 @@ const About = () => {
           <div className="mlm-content">
             <div className="mlm-visual">
               <div className="level-chart">
-                <div className="level level-1">Level 1</div>
+                <div className="level level-1">
+                  <div className='inner-level'>
+                    <h3 className='inner-level-title'>Level 1</h3>
+                    <p className='inner-level-para'>Direct Referrals or New Register</p>
+                  </div>
+                </div>
                 <div className="connector"></div>
-                <div className="level level-2">Level 2</div>
+                <div className="level level-2">
+                  <div className='inner-level'>
+                    <h3 className='inner-level-title'>Level 2</h3>
+                    <p className='inner-level-para'>Indirect Referrals</p>
+                  </div>
+                </div>
                 <div className="connector"></div>
-                <div className="level level-3">Level 3</div>
+                <div className="level level-3">
+                  <div className='inner-level'>
+                    <h3 className='inner-level-title'>Level 3</h3>
+                    <p className='inner-level-para'>Indirect Referrals</p>
+                  </div>
+                </div>
                 <div className="connector"></div>
-                <div className="level level-4">Level 4</div>
+                <div className="level level-4">
+                  <div className='inner-level'>
+                    <h3 className='inner-level-title'>Level 4</h3>
+                    <p className='inner-level-para'>Indirect Referrals</p>
+                  </div>
+                </div>
                 <div className="connector"></div>
-                <div className="level level-5">Level 5</div>
+                <div className="level level-5">
+                  <div className='inner-level'>
+                    <h3 className='inner-level-title'>Level 5</h3>
+                    <p className='inner-level-para'>Indirect Referrals</p>
+                  </div>
+                </div>
                 <div className="connector"></div>
-                <div className="level level-6">Level 6</div>
+                <div className="level level-6">
+                  <div className='inner-level'>
+                    <h3 className='inner-level-title'>Level 6</h3>
+                    <p className='inner-level-para'>Indirect Referrals</p>
+                  </div>
+                </div>
                 <div className="connector"></div>
-                <div className="level level-7">Level 7</div>
+                <div className="level level-7">
+                  <div className='inner-level'>
+                    <h3 className='inner-level-title'>Level 7</h3>
+                    <p className='inner-level-para'>Indirect Referrals</p>
+                  </div>
+                </div>
                 <div className="connector"></div>
-                <div className="level level-8">Level 8</div>
+                <div className="level level-8">
+                  <div className='inner-level'>
+                    <h3 className='inner-level-title'>Level 8</h3>
+                    <p className='inner-level-para'>Indirect Referrals</p>
+                  </div>
+                </div>
                 <div className="connector"></div>
-                <div className="level level-9">Level 9</div>
+                <div className="level level-9">
+                  <div className='inner-level'>
+                    <h3 className='inner-level-title'>Level 9</h3>
+                    <p className='inner-level-para'>Indirect Referrals</p>
+                  </div>
+                </div>
                 <div className="connector"></div>
-                <div className="level level-10">Level 10</div>
+                <div className="level level-10">
+                  <div className='inner-level'>
+                    <h3 className='inner-level-title'>Level 10</h3>
+                    <p className='inner-level-para'>Indirect Referrals</p>
+                  </div>
+                </div>
                 <div className="connector"></div>
-                <div className="level level-11">Level 11</div>
+                <div className="level level-11">
+                  <div className='inner-level'>
+                    <h3 className='inner-level-title'>Level 11</h3>
+                    <p className='inner-level-para'>Indirect Referrals</p>
+                  </div>
+                </div>
                 <div className="connector"></div>
-                <div className="level level-12">Level 12</div>
+                <div className="level level-12">
+                  <div className='inner-level'>
+                    <h3 className='inner-level-title'>Level 12</h3>
+                    <p className='inner-level-para'>Indirect Referrals</p>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="mlm-info">
@@ -176,22 +236,22 @@ const About = () => {
           <h2 className="section-title">Our Core Values</h2>
           <div className="values-grid">
             <div className="value-card">
-              <div className="value-icon">🤝</div>
+              {/* <div className="value-icon">🤝</div> */}
               <h3>Integrity</h3>
               <p>We operate with transparency and honesty in all our dealings.</p>
             </div>
             <div className="value-card">
-              <div className="value-icon">🌱</div>
+              {/* <div className="value-icon">🌱</div> */}
               <h3>Growth</h3>
               <p>We're committed to the personal and financial growth of our members.</p>
             </div>
             <div className="value-card">
-              <div className="value-icon">💡</div>
+              {/* <div className="value-icon">💡</div> */}
               <h3>Innovation</h3>
               <p>Continuously improving our platform and MLM system.</p>
             </div>
             <div className="value-card">
-              <div className="value-icon">👥</div>
+              {/* <div className="value-icon">👥</div> */}
               <h3>Community</h3>
               <p>Building a supportive network that helps everyone succeed.</p>
             </div>

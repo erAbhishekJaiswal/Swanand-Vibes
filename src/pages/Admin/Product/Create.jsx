@@ -329,7 +329,7 @@ const CreateProduct = () => {
     try {
       // 1. Get Cloudinary signature from backend
       const sigRes = await axios.get(
-        "http://localhost:5000/api/products/signature"
+        "https://swanand-vibes-backend.vercel.app/api/products/signature"
       );
       const { timestamp, signature, cloudName, apiKey } = sigRes.data;
 
@@ -590,7 +590,7 @@ const CreateProduct = () => {
               </>
             ) : (
               <>
-                <span className="submit-icon">🚀</span>
+                {/* <span className="submit-icon">🚀</span> */}
                 Create Product
               </>
             )}
