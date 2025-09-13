@@ -431,6 +431,8 @@ const Profile = ({ user, onUpdateProfile }) => {
       setIsLoading(true);
       try {
         const userData = await getUserProfile(id);
+        console.log("userData", userData);
+        
         setFormData({
           name: userData.data.name || "Loading...",
           email: userData.data.email || "Loading...",
@@ -554,6 +556,12 @@ const Profile = ({ user, onUpdateProfile }) => {
   const handleKycEnable = async () => {
     navigate("/user/kyc");
   };
+
+ const handlePasswordChange = async () => {
+   const resetToken = localStorage.getItem("refreshToken");
+   const email = formData?.email;
+   navigate('/user/profile/reset-password', {state: {resetToken, email}})
+ }
 
   if (isLoading) {
     return <Spinner size="lg" />;
@@ -722,6 +730,15 @@ const Profile = ({ user, onUpdateProfile }) => {
         <div className="profile-sidebar">
           <div className="sidebar-card">
             <h3>Account Security</h3>
+            <div className="security-item">
+              <span className="security-icon">🔒</span>
+              <div className="security-info">
+                <h4>Password</h4>
+                <p>Last changed 2 weeks ago</p>
+              </div>
+              <button onClick={handlePasswordChange} className="security-action futuristic-btn">Change</button>
+            </div>
+            
             <div className="security-item">
               <span className="security-icon">📱</span>
               <div className="security-info">

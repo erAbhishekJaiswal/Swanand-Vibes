@@ -16,6 +16,57 @@ const WithdrawalRequests = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const today = new Date().toISOString().split("T")[0];
+  const [startDate, setStartDate] = useState("2025-09-01");
+  const [endDate, setEndDate] = useState(today);
+  const [showModal, setShowModal] = useState(false);
+  
+
+  const handleWithdrawalReport = async () => {
+  try {
+    if (!startDate || !endDate) {
+      alert("Please select both start and end dates.");
+      return;
+    }
+
+    const res = await axios.get(
+      `http://localhost:5000/api/user/wallet/withdrawal-report?start=${encodeURIComponent(
+        startDate
+      )}&end=${encodeURIComponent(endDate)}`,
+      { responseType: "blob" }
+    );
+
+    const url = window.URL.createObjectURL(new Blob([res.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "withdrawal-report.xlsx");
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } catch (err) {
+    console.error("Error downloading report:", err);
+  }
+};
+
+
+  // const handleWithdrawalReport = async () => {
+  //   try {
+  //     const res = await axios.get(
+  //       `http://localhost:5000/api/user/wallet/withdrawal-report?start=${startDate}&end=${endDate}`,
+  //       { responseType: "blob" }
+  //     );
+
+  //     const url = window.URL.createObjectURL(new Blob([res.data]));
+  //     const link = document.createElement("a");
+  //     link.href = url;
+  //     link.setAttribute("download", "withdrawal-report.xlsx");
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     link.remove();
+  //   } catch (err) {
+  //     console.error("Error downloading report:", err);
+  //   }
+  // };
 
   // Sample data based on API response
   useEffect(() => {
@@ -337,9 +388,88 @@ const WithdrawalRequests = () => {
   return (
     <div className="withdrawal-requests-container">
       <div className="requests-header">
-        <h1>Withdrawal Requests</h1>
-        <p>Manage user withdrawal requests and transactions</p>
+        <div className='requests-header-text'>
+          <h1>Withdrawal Requests</h1>
+          <p>Manage user withdrawal requests and transactions</p>
+        </div>
+        <div className='outter-main-download-btn'>
+          <button className="main-download-btn" onClick={() => setShowModal(true)}>
+        Download Report
+      </button>
       </div>
+       
+      </div>
+
+      
+
+
+            {/* Popup Modal */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2 className="withdrawal-report-title">Withdrawal Report</h2>
+            <div className="withdrawal-report-filters">
+              <div className="withdrawal-report-filter-group">
+                <label>Start Date</label>
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </div>
+              <div className="withdrawal-report-filter-group">
+                <label>End Date</label>
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="modal-actions">
+              <button
+                className="withdrawal-report-download-btn"
+                onClick={handleWithdrawalReport}
+              >
+                Download
+              </button>
+              <button
+                className="withdrawal-report-cancel-btn"
+                onClick={() => setShowModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+       {/* <div className="withdrawal-report-container">
+      <h2 className="withdrawal-report-title">Withdrawal Report</h2>
+      <div className="withdrawal-report-filters">
+        <div className="withdrawal-report-filter-group">
+          <label>Start Date</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </div>
+        <div className="withdrawal-report-filter-group">
+          <label>End Date</label>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
+        <button className="withdrawal-report-download-btn" onClick={handleWithdrawalReport}>
+          Download Report
+        </button>
+      </div>
+       </div> */}
 
       <div className="requests-controls">
         <div className="search-box">

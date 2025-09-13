@@ -1,0 +1,23 @@
+.translate-container{
+    display: flex;
+    align-items: center;
+}
+.trans-salect{
+    width: 40px;
+}
+.t-select{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 1rem;
+}
+.t-select-option{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: rgb(24, 21, 21);
+    color: #fff;
+    font-size: 1rem;
+}

@@ -57,192 +57,467 @@
 
 
 
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import { useNavigate } from 'react-router-dom';
+// import '../../../CssFiles/Admin/user/UserList.css';
+// import {getAllUsers,deleteUser} from '../../../utills/apicall';
+// import Spinner from '../../../components/Spinner';
+// import { toast } from 'react-hot-toast';
+
+// const UserList = () => {
+//     const navigate = useNavigate();
+//     const [users, setUsers] = useState([]);
+//     const [filteredUsers, setFilteredUsers] = useState([]);
+//     const [loading, setLoading] = useState(true);
+//     const [error, setError] = useState(null);
+//     const [searchTerm, setSearchTerm] = useState('');
+//     const [roleFilter, setRoleFilter] = useState('all');
+
+//     useEffect(() => {
+//         const fetchUsers = async () => {
+//             try {
+//                 setLoading(true);
+//                 const response = await getAllUsers();
+//                 setUsers(response.data);
+//                 setFilteredUsers(response.data);
+//             } catch (error) {
+//                 console.error('Error fetching users:', error);
+//                 setError('Failed to load users. Please try again later.');
+//             } finally {
+//                 setLoading(false);
+//             }
+//         };
+//         fetchUsers();
+//     }, []);
+
+//     useEffect(() => {
+//         let results = users;
+//         if (searchTerm) {
+//             results = results.filter(user =>
+//                 user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+//                 user.email.toLowerCase().includes(searchTerm.toLowerCase())
+//             );
+//         }
+//         if (roleFilter !== 'all') {
+//             results = results.filter(user => user.role === roleFilter);
+//         }
+//         setFilteredUsers(results);
+//     }, [users, searchTerm, roleFilter]);
+
+//     const handleDeleteUser = async (userId, userName) => {
+//         if (window.confirm(`Are you sure you want to delete ${userName}?`)) {
+//             try {
+//                 await deleteUser(userId);
+//                 // axios.delete(`http://localhost:5000/api/users/${userId}`);
+//                 setUsers(users.filter(user => user._id !== userId));
+//                 alert('User deleted successfully!');
+//             } catch (error) {
+//                 console.error('Error deleting user:', error);
+//                 alert('Failed to delete user. Please try again.');
+//             }
+//         }
+//     };
+
+//     const getRoleBadgeClass = (role) => {
+//         switch (role) {
+//             case 'admin': return 'badge admin';
+//             case 'moderator': return 'badge moderator';
+//             case 'user': return 'badge user';
+//             default: return 'badge';
+//         }
+//     };
+
+//     const getRoleDisplayName = (role) => {
+//         switch (role) {
+//             case 'admin': return 'Administrator';
+//             case 'moderator': return 'Moderator';
+//             case 'user': return 'User';
+//             default: return role;
+//         }
+//     };
+
+//     const handleViewUser = (id) => {
+//         navigate(`/admin/detail/${id}`);
+//     };
+
+//     if (loading) {
+//         return <Spinner size="lg" />;
+//     }
+
+//     if (error) {
+//         return (
+//             <div className="user-list-container">
+//                 <div className="error-message">
+//                     <span className="error-icon">⚠️</span>
+//                     <h3>{error}</h3>
+//                     <button onClick={() => window.location.reload()} className="retry-btn">Try Again</button>
+//                 </div>
+//             </div>
+//         );
+//     }
+
+//     return (
+//         <div className="user-list-container">
+//             <div className="user-list-header">
+//                 <div className="header-content">
+//                     <h2>User Management</h2>
+//                     <p>Manage your system users and permissions</p>
+//                 </div>
+//             </div>
+
+//             <div className="user-controls">
+//                 <div className="search-box">
+//                     <input
+//                         type="text"
+//                         placeholder="🔍Search users..."
+//                         value={searchTerm}
+//                         onChange={(e) => setSearchTerm(e.target.value)}
+//                         className="userserch-list search-input"
+//                     />
+//                     {/* <span className="search-icon">🔍</span> */}
+//                 </div>
+//                 <div className="filter-controls">
+//                     <label htmlFor="role-filter">Filter by Role:</label>
+//                     <select
+//                         id="role-filter"
+//                         value={roleFilter}
+//                         onChange={(e) => setRoleFilter(e.target.value)}
+//                         className="role-filter"
+//                     >
+//                         <option value="all">All Roles</option>
+//                         <option value="admin">Administrators</option>
+//                         <option value="user">Users</option>
+//                     </select>
+//                 </div>
+//             </div>
+
+//             <div className="user-table-wrapper">
+//                 <table className="user-table">
+//                     <thead>
+//                         <tr>
+//                             <th>#</th>
+//                             <th>Name</th>
+//                             <th>Email</th>
+//                             <th>Role</th>
+//                             {/* <th>Orders</th>
+//                             <th>Spent</th>
+//                             <th>Rating</th> */}
+//                             <th>Joined</th>
+//                             <th>Actions</th>
+//                         </tr>
+//                     </thead>
+//                     <tbody>
+//                         {filteredUsers.map((user, index) => (
+//                             <tr key={user._id}>
+//                                 <td>{index + 1}</td>
+//                                 <td>{user.name}</td>
+//                                 <td>{user.email}</td>
+//                                 <td><span className={getRoleBadgeClass(user.role)}>{getRoleDisplayName(user.role)}</span></td>
+//                                 {/* <td>12</td>
+//                                 <td>$1,240</td>
+//                                 <td>4.8</td> */}
+//                                 <td>{new Date(user.createdAt || Date.now()).toLocaleDateString()}</td>
+//                                 <td className="action-buttons">
+//                                     <button onClick={() => handleViewUser(user._id)} title="View"><span>👁️</span></button>
+//                                     {/* <button title="Edit"><span>✏️</span></button> */}
+//                                     <button onClick={() => handleDeleteUser(user._id, user.name)} title="Delete"><span>🗑️</span></button>
+//                                 </td>
+//                             </tr>
+//                         ))}
+//                     </tbody>
+//                 </table>
+//             </div>
+
+//             {filteredUsers.length === 0 && (
+//                 <div className="empty-state">
+//                     <h3>No users found</h3>
+//                     <p>{searchTerm || roleFilter !== 'all' ? 'Try adjusting your search or filter criteria.' : 'No users available in the system.'}</p>
+//                     {(searchTerm || roleFilter !== 'all') && (
+//                         <button className="clear-filters-btn" onClick={() => {
+//                             setSearchTerm('');
+//                             setRoleFilter('all');
+//                         }}>Clear Filters</button>
+//                     )}
+//                 </div>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default UserList;
+
+
+
+
+
+
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../../CssFiles/Admin/user/UserList.css';
-import {getAllUsers,deleteUser} from '../../../utills/apicall';
+import { getAllUsers, deleteUser } from '../../../utills/apicall';
 import Spinner from '../../../components/Spinner';
 import { toast } from 'react-hot-toast';
 
 const UserList = () => {
-    const navigate = useNavigate();
-    const [users, setUsers] = useState([]);
-    const [filteredUsers, setFilteredUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [roleFilter, setRoleFilter] = useState('all');
+  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                setLoading(true);
-                const response = await getAllUsers();
-                setUsers(response.data);
-                setFilteredUsers(response.data);
-            } catch (error) {
-                console.error('Error fetching users:', error);
-                setError('Failed to load users. Please try again later.');
-            } finally {
-                setLoading(false);
-            }
-        };
+  // Filters
+  const [searchTerm, setSearchTerm] = useState('');
+  const [roleFilter, setRoleFilter] = useState('all');
+
+  // Pagination
+  const [page, setPage] = useState(1);
+  const [limit] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchUsers = async () => {
+    try {
+      setLoading(true);
+
+      const params = {
+        page,
+        limit,
+        search: searchTerm !== '' ? searchTerm : '',
+        role: roleFilter !== 'all' ? roleFilter : ''};
+
+      const response = await getAllUsers(params);
+      console.log(response.data.data);
+      const result = response.data
+      if (result.success) {
+        setUsers(response.data.data);
+        setTotalPages(response.data.totalPages);
+      } else {
+        setError('Failed to load users.');
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      setError('Failed to load users. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, [page, searchTerm, roleFilter]);
+
+  const handleDeleteUser = async (userId, userName) => {
+    if (window.confirm(`Are you sure you want to delete ${userName}?`)) {
+      try {
+        await deleteUser(userId);
+        toast.success('User deleted successfully!');
         fetchUsers();
-    }, []);
-
-    useEffect(() => {
-        let results = users;
-        if (searchTerm) {
-            results = results.filter(user =>
-                user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                user.email.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-        }
-        if (roleFilter !== 'all') {
-            results = results.filter(user => user.role === roleFilter);
-        }
-        setFilteredUsers(results);
-    }, [users, searchTerm, roleFilter]);
-
-    const handleDeleteUser = async (userId, userName) => {
-        if (window.confirm(`Are you sure you want to delete ${userName}?`)) {
-            try {
-                await deleteUser(userId);
-                // axios.delete(`http://localhost:5000/api/users/${userId}`);
-                setUsers(users.filter(user => user._id !== userId));
-                alert('User deleted successfully!');
-            } catch (error) {
-                console.error('Error deleting user:', error);
-                alert('Failed to delete user. Please try again.');
-            }
-        }
-    };
-
-    const getRoleBadgeClass = (role) => {
-        switch (role) {
-            case 'admin': return 'badge admin';
-            case 'moderator': return 'badge moderator';
-            case 'user': return 'badge user';
-            default: return 'badge';
-        }
-    };
-
-    const getRoleDisplayName = (role) => {
-        switch (role) {
-            case 'admin': return 'Administrator';
-            case 'moderator': return 'Moderator';
-            case 'user': return 'User';
-            default: return role;
-        }
-    };
-
-    const handleViewUser = (id) => {
-        navigate(`/admin/detail/${id}`);
-    };
-
-    if (loading) {
-        return <Spinner size="lg" />;
+      } catch (error) {
+        console.error('Error deleting user:', error);
+        toast.error('Failed to delete user. Please try again.');
+      }
     }
+  };
 
-    if (error) {
-        return (
-            <div className="user-list-container">
-                <div className="error-message">
-                    <span className="error-icon">⚠️</span>
-                    <h3>{error}</h3>
-                    <button onClick={() => window.location.reload()} className="retry-btn">Try Again</button>
-                </div>
-            </div>
-        );
+  const getRoleBadgeClass = (role) => {
+    switch (role) {
+      case 'admin':
+        return 'badge admin';
+      case 'moderator':
+        return 'badge moderator';
+      case 'user':
+        return 'badge user';
+      default:
+        return 'badge';
     }
+  };
 
+  const getRoleDisplayName = (role) => {
+    switch (role) {
+      case 'admin':
+        return 'Administrator';
+      case 'moderator':
+        return 'Moderator';
+      case 'user':
+        return 'User';
+      default:
+        return role;
+    }
+  };
+
+  const handleViewUser = (id) => {
+    navigate(`/admin/detail/${id}`);
+  };
+
+  if (loading) {
+    return <Spinner size="lg" />;
+  }
+
+  if (error) {
     return (
-        <div className="user-list-container">
-            <div className="user-list-header">
-                <div className="header-content">
-                    <h2>User Management</h2>
-                    <p>Manage your system users and permissions</p>
-                </div>
-            </div>
-
-            <div className="user-controls">
-                <div className="search-box">
-                    <input
-                        type="text"
-                        placeholder="🔍Search users..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="userserch-list search-input"
-                    />
-                    {/* <span className="search-icon">🔍</span> */}
-                </div>
-                <div className="filter-controls">
-                    <label htmlFor="role-filter">Filter by Role:</label>
-                    <select
-                        id="role-filter"
-                        value={roleFilter}
-                        onChange={(e) => setRoleFilter(e.target.value)}
-                        className="role-filter"
-                    >
-                        <option value="all">All Roles</option>
-                        <option value="admin">Administrators</option>
-                        <option value="user">Users</option>
-                    </select>
-                </div>
-            </div>
-
-            <div className="user-table-wrapper">
-                <table className="user-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Orders</th>
-                            <th>Spent</th>
-                            <th>Rating</th>
-                            <th>Joined</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredUsers.map((user, index) => (
-                            <tr key={user._id}>
-                                <td>{index + 1}</td>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
-                                <td><span className={getRoleBadgeClass(user.role)}>{getRoleDisplayName(user.role)}</span></td>
-                                <td>12</td>
-                                <td>$1,240</td>
-                                <td>4.8</td>
-                                <td>{new Date(user.createdAt || Date.now()).toLocaleDateString()}</td>
-                                <td className="action-buttons">
-                                    <button onClick={() => handleViewUser(user._id)} title="View"><span>👁️</span></button>
-                                    {/* <button title="Edit"><span>✏️</span></button> */}
-                                    <button onClick={() => handleDeleteUser(user._id, user.name)} title="Delete"><span>🗑️</span></button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
-            {filteredUsers.length === 0 && (
-                <div className="empty-state">
-                    <h3>No users found</h3>
-                    <p>{searchTerm || roleFilter !== 'all' ? 'Try adjusting your search or filter criteria.' : 'No users available in the system.'}</p>
-                    {(searchTerm || roleFilter !== 'all') && (
-                        <button className="clear-filters-btn" onClick={() => {
-                            setSearchTerm('');
-                            setRoleFilter('all');
-                        }}>Clear Filters</button>
-                    )}
-                </div>
-            )}
+      <div className="user-list-container">
+        <div className="error-message">
+          <span className="error-icon">⚠️</span>
+          <h3>{error}</h3>
+          <button
+            onClick={() => {
+              setError(null);
+              fetchUsers();
+            }}
+            className="retry-btn"
+          >
+            Try Again
+          </button>
         </div>
+      </div>
     );
+  }
+
+  return (
+    <div className="user-list-container">
+      <div className="user-list-header">
+        <div className="header-content">
+          <h2>User Management</h2>
+          <p>Manage your system users and permissions</p>
+        </div>
+      </div>
+
+      <div className="user-controls">
+        <div className="search-box">
+          <input
+            type="text"
+            placeholder="🔍 Search users..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setPage(1); // reset to page 1 on new search
+            }}
+            className="userserch-list search-input"
+          />
+        </div>
+        <div className="filter-controls">
+          <label htmlFor="role-filter">Filter by Role:</label>
+          <select
+            id="role-filter"
+            value={roleFilter}
+            onChange={(e) => {
+              setRoleFilter(e.target.value);
+              setPage(1); // reset to page 1 on new filter
+            }}
+            className="role-filter"
+          >
+            <option value="all">All Roles</option>
+            <option value="admin">Administrators</option>
+            <option value="user">Users</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="requests-table-container">
+        <table className="requests-table">
+          <thead>
+            <tr>
+              <th>
+                <div className="table-header">#</div></th>
+              <th>
+                <div className="table-header">Name
+                </div>
+                </th>
+              <th>
+                <div className="table-header">
+                    Email
+                </div></th>
+              <th>
+                <div className="table-header">
+                    Role
+                </div></th>
+              <th>
+               <div className="table-header">Joined</div> 
+                </th>
+              <th>
+                <div className="table-header">Actions
+                </div>
+                </th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr key={user._id}>
+                <td>{(page - 1) * limit + index + 1}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>
+                  <span className={getRoleBadgeClass(user.role)}>
+                    {getRoleDisplayName(user.role)}
+                  </span>
+                </td>
+                <td>
+                  {new Date(user.createdAt || Date.now()).toLocaleDateString()}
+                </td>
+                <td className="action-buttons">
+                  <button
+                    onClick={() => handleViewUser(user._id)}
+                    title="View"
+                  >
+                    👁️
+                  </button>
+                  <button
+                    onClick={() => handleDeleteUser(user._id, user.name)}
+                    title="Delete"
+                  >
+                    🗑️
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button
+            disabled={page === 1}
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            ⬅ Prev
+          </button>
+          <span>
+            Page {page} of {totalPages}
+          </span>
+          <button
+            disabled={page === totalPages}
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            Next ➡
+          </button>
+        </div>
+      )}
+
+      {users.length === 0 && (
+        <div className="empty-state">
+          <h3>No users found</h3>
+          <p>
+            {searchTerm || roleFilter !== 'all'
+              ? 'Try adjusting your search or filter criteria.'
+              : 'No users available in the system.'}
+          </p>
+          {(searchTerm || roleFilter !== 'all') && (
+            <button
+              className="clear-filters-btn"
+              onClick={() => {
+                setSearchTerm('');
+                setRoleFilter('all');
+                setPage(1);
+              }}
+            >
+              Clear Filters
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default UserList;

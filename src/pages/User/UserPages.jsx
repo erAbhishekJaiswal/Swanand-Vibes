@@ -8,14 +8,16 @@ import AddKyc from "./AddKyc";
 import OrderDetail from "./OrderDetail";
 import Withdraw from "./Withdraw";
 import PaymentPage from "./PaymentPage";
-// import Dashboard from "./Dashboard";
-
+import Dashboard from "./Dashboard";
+import ResetProfilePassword from "../Common/ResetProfilePassword";
+import NetworkView from "./NetworkView";
 
 const Pages = () => {
   return (
     <div  >
         <Routes>
-          <Route path="/dashboard" element={<Profile />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Orders />} />
@@ -26,6 +28,8 @@ const Pages = () => {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/profile/reset-password" element={<ResetProfilePassword />} />
+          <Route path="/network" element={<NetworkView />} />
         </Routes>
     </div>
   );

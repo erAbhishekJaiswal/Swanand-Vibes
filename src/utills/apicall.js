@@ -1,18 +1,19 @@
 import axios from "axios";
 
-const API_URL = "https://swanand-vibes-backend.vercel.app/api";
+const API_URL =  "http://localhost:5000/api";
+// "https://swanand-vibes-backend.vercel.app/api";
 
 // User Auth Api
 //
 export const registerUser = (formData) => {
   const { name, email, password, otp } = formData;
-  return axios.post(`${API_URL}/auth/register`, formData);
+  return axios.post(`http://localhost:5000/api/auth/register`, formData);
 };
 
 export const verifyUser = (formData) => {
   // console.log(formData);
   const { name, email, password } = formData;
-  return axios.post(`${API_URL}/auth/request-otp`, { name, email, password });
+  return axios.post(`http://localhost:5000/api/auth/request-otp`, { name, email, password });
 };
 //
 export const loginUser = (loginData) => {
@@ -130,10 +131,25 @@ export const deleteProduct = (id) => {
   return axios.delete(`${API_URL}/products/${id}`);
 };
 
+// 
+export const generateStockReport = () => {
+  return axios.get(`${API_URL}/products/stock`, {
+      responseType: 'blob', // 👈 Important for binary data like .xlsx
+    });
+};
+
 //  Users Api
 //
-export const getAllUsers = () => {
-  return axios.get(`${API_URL}/users`);
+// export const getAllUsers = () => {
+//   return axios.get(`${API_URL}/users`);
+// };
+
+export const getAllUsers = (params ) => {
+  console.log(params);
+  
+  return axios.get(
+    `http://localhost:5000/api/users`,{ params }
+  );
 };
 //
 export const getUserById = (id) => {

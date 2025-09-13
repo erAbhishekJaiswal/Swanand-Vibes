@@ -81,6 +81,24 @@ body {
   box-shadow: 0 0 20px var(--glow-color);
   transform: translateY(-2px);
 }
+.add-product-stock-btn-container{
+  display: flex;
+  justify-content: space-between;
+}
+.download-product-btn{
+  padding: 0.8rem 1.5rem;
+  background: rgb(37 255 0 / 43%);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.download-product-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary-accent);
+}
 
 /* Products Grid */
 .products-grid {

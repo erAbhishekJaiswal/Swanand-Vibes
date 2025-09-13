@@ -14,12 +14,18 @@ import AddKyc from "../../pages/User/AddKyc";
 import ContactList from "./Contact/ContactList";
 import WithdrawList from "../Admin/Wallet/WithdrawalRequests";
 import OrderList from "./Order/OrderList";
+import AddCategory from "./Product/AddCategory";
+import AdminDashboard from "./AdminDashboard";
+import UploadImage from "./Gallery/UploadImage";
+import GiftUpload from "./Gift/GiftUpload";
+import GalleryList from "./Gallery/GalleryList";
+import GiftList from "./Gift/GiftList";
 const Pages = () => {
   return (
     <div>
         <Routes>
-          <Route path="/" element={<h1>Users Content</h1>} />
-          <Route path="/dashboard" element={<Profile />} />
+          <Route path="/" element={<AdminDashboard />} />
+          <Route path="/dashboard" element={<AdminDashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/users" element={<UserList />} />
           <Route path="/detail/:id" element={<UserDetails />} />
@@ -33,8 +39,13 @@ const Pages = () => {
           <Route path="/products" element={<ProductList />} />
           <Route path="/product/:id" element={<Detail />} />
           <Route path="/product/add" element={<CreateProduct />} />
+          <Route path="/category/add" element={<AddCategory />} />
           <Route path="/product/edit/:id" element={<EditProduct />} />
           <Route path="/orderlist" element={<OrderList/>}/>
+          <Route path="/uploadimage" element={<UploadImage/>}/>
+          <Route path="/gallery" element={<GalleryList />} />
+          <Route path="/giftupload" element={<GiftUpload/>}/>
+          <Route path="/giftlist" element={<GiftList/>}/>
         </Routes>
     </div>
   );

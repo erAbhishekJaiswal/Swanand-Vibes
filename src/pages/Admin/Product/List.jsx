@@ -218,10 +218,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../../CssFiles/Admin/product/list.css';
-import { getAllProducts, deleteProduct } from '../../../utills/apicall';
+import { getAllProducts, deleteProduct, generateStockReport } from '../../../utills/apicall';
 import Spinner from '../../../components/Spinner';
 import { toast } from 'react-hot-toast';
 import {FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import axios from 'axios';
+import { LuDownload } from "react-icons/lu";
 
 const List = () => {
   const navigate = useNavigate();
@@ -271,6 +273,51 @@ const List = () => {
   const handlePrevPage = () => setPage((prev) => Math.max(prev - 1, 1));
   const handleNextPage = () => setPage((prev) => Math.min(prev + 1, totalPages));
 
+  // const handlegenerateStockReport = () => {
+  //   try {
+  //     const res = generateStockReport();
+  //     // download the file
+  //        const url = window.URL.createObjectURL(new Blob([res.data]));
+  //   const link = document.createElement('a');
+  //   link.href = url;
+  //   link.setAttribute('download', 'stock_report.xlsx');
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   link.remove();
+
+  //     // console.log(res.data);
+  //     toast.success('Stock report generated successfully.');
+  //   } catch (error) {
+  //     console.error('Error generating stock report:', error);
+  //     toast.error('Failed to generate stock report.');
+  //   }
+  // };
+
+  const handlegenerateStockReport = async () => {
+  try {
+    const res = await axios.get('http://localhost:5000/api/products/stock', {
+      responseType: 'blob', // 👈 required!
+    });
+
+    const blob = new Blob([res.data], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    });
+
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'stock_report.xlsx');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    toast.success('Stock report generated successfully.');
+  } catch (error) {
+    console.error('Error generating stock report:', error);
+    toast.error('Failed to generate stock report.');
+  }
+};
+
   if (loading) return <Spinner size="lg" />;
   if (error) {
     return (
@@ -291,9 +338,15 @@ const List = () => {
       <div className="product-list-header">
         <h1>Product Inventory</h1>
         <p>Manage your product catalog with ease</p>
-        <button className="add-product-btn" onClick={handleAdd}>
+        <div className="add-product-stock-btn-container">
+           <button className="add-product-btn" onClick={handleAdd}>
           + Add New Product
         </button>
+        <button className="download-product-btn" onClick={handlegenerateStockReport}>
+          Stock Report <LuDownload />
+        </button>
+        </div>
+       
       </div>
 
       <div className="products-grid">

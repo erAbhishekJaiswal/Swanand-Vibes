@@ -15,6 +15,9 @@ import ProductList from "./Common/ProductList";
 import ProductDetail from "./Common/ProductDetail";
 import { Toaster } from 'react-hot-toast';
 import OtpVerification from "../components/OtpVerification";
+import ForgetPassword from "../components/ForgetPassword";
+import ResetPassword from "../components/ResetPassword";
+import OtpForgetVerification from "../components/OtpForgetPassword";
 
 const Main = () => {
   return (
@@ -37,6 +40,11 @@ const Main = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/email-verify" element={<OtpVerification />} />
           <Route path="/register/:referralCode" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgetPassword />} />
+          <Route path="/otp-forget-verification" element={<OtpForgetVerification />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+
+
           <Route path="/profile" element={<Profile />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />

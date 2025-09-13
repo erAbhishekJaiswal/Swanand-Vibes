@@ -17,7 +17,7 @@
   flex-shrink: 0;
   position: sticky;
   /* top: 0; */
-  overflow-y: auto; /* scroll if sidebar too long */
+  /* overflow-y: auto; scroll if sidebar too long */
 }
 
 /* User pages take rest of the space */

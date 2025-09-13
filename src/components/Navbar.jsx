@@ -232,6 +232,7 @@ import {
   logoutUser,
 } from "../utills/authService";
 import { useSelector } from "react-redux";
+import LanguageSelector from '../components/LanguageSelector';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -378,6 +379,10 @@ const Navbar = () => {
                     Register
                   </Link>
                 </div>
+                <div className="nav-item">
+                  {/* Language Selector */}
+                  <LanguageSelector />              
+                </div>
               </>
             )}
 
@@ -393,6 +398,10 @@ const Navbar = () => {
                   <button onClick={handleLogout} className="logout-btn futuristic-btn">
                     Logout
                   </button>
+                </div>
+                <div className="nav-item">
+                  {/* Language Selector */}
+                  <LanguageSelector />              
                 </div>
               </>
             )}
@@ -417,6 +426,10 @@ const Navbar = () => {
                     Logout
                   </button>
                 </div>
+                <div className="nav-item">
+                  {/* Language Selector */}
+                  <LanguageSelector />              
+                </div>
               </>
             )}
           </div>
@@ -433,6 +446,10 @@ const Navbar = () => {
                 <Link to="/register" className="register-btn futuristic-btn">
                   Register
                 </Link>
+                <div className="nav-item">
+                  {/* Language Selector */}
+                  <LanguageSelector />              
+                </div>
               </>
             )}
 
@@ -444,6 +461,10 @@ const Navbar = () => {
                 <button onClick={handleLogout} className="logout-btn futuristic-btn">
                   Logout
                 </button>
+                <div className="nav-item">
+                  {/* Language Selector */}
+                  <LanguageSelector />              
+                </div>
               </>
             )}
 
@@ -459,6 +480,10 @@ const Navbar = () => {
                 <button onClick={handleLogout} className="logout-btn futuristic-btn">
                   Logout
                 </button>
+                <div className="nav-item">
+                  {/* Language Selector */}
+                  <LanguageSelector />              
+                </div>
               </>
             )}
           </div>

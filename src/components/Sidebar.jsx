@@ -7,28 +7,33 @@ import { GiWallet } from "react-icons/gi";
 import { useDispatch } from "react-redux";
 import {toggleSidebar} from '../store/sidebar';
 import { MdContactPage } from "react-icons/md";
+import { PiNetworkDuotone } from "react-icons/pi";
 
 const Sidebar = ({ isCollapsed, toggle }) => {
   // const [isExpanded, setIsExpanded] = useState(true);
   const location = useLocation();
 
   const menuItems = [
+    { icon: '📊', text: 'DashBoard', path: '/admin/' },
     { icon: '👤', text: 'Users', path: '/admin/users', active: true },
     { icon: '📦', text: 'Products', path: '/admin/products' },
     { icon: '🪪', text: 'KYC', path: '/admin/kyc' },
     { icon: '💰', text: 'Withdraw', path: '/admin/withdraw' },
     { icon: <MdContactPage />, text: 'Contact List', path: '/admin/contactlist' },
-    // { icon: '🤖', text: 'Referrals', path: '/admin/referrals' },
-    // { icon: '📊', text: 'Reports', path: '/admin/reports' },
+    { icon: '🖼️', text: 'Gallery', path: '/admin/gallery' },
+    { icon: '🎁', text: 'add gift', path: '/admin/giftlist' },
+    
     // { icon: '🌡️', text: 'Monitoring', path: '/admin/monitoring' },
     // { icon: '🛠️', text: 'Settings', path: '/admin/settings' }
   ];
 
   const UserMenuItems = [
+     { icon: '📊', text: 'DashBoard', path: '/user/dashboard' },
     { icon: '👤', text: 'Profile', path: '/user/profile' },
     { icon: '📦', text: 'Orders', path: '/user/orders' },
     { icon: '🛒', text: 'Cart', path: '/user/cart' },
     { icon: <GiWallet />, text: 'Wallet', path: '/user/wallet' },
+    { icon: <PiNetworkDuotone />, text: 'Network', path: '/user/network' },
     // { icon: '⚙️', text: 'Settings', path: '/user/settings' }
   ];
 
