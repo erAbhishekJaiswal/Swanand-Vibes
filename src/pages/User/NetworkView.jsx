@@ -101,6 +101,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../CssFiles/User/Network.css";
 import { getUserId } from "../../utills/authService";
+import Spinner from "../../components/Spinner";
 
 const NetworkView = () => {
   const [downline, setDownline] = useState([]);
@@ -120,8 +121,8 @@ const NetworkView = () => {
         setError(null);
         
         const [resDownline, resUpline] = await Promise.all([
-          axios.get(`http://localhost:5000/api/users/downline/${userId}`),
-          axios.get(`http://localhost:5000/api/users/upline/${userId}`)
+          axios.get(`https://swanand-vibes-backend.vercel.app/users/downline/${userId}`),
+          axios.get(`https://swanand-vibes-backend.vercel.app/api/users/upline/${userId}`)
         ]);
         
         setDownline(resDownline.data.downline || []);
@@ -365,12 +366,7 @@ const NetworkView = () => {
 
   if (loading) {
     return (
-      <div className="network-network-container">
-        <div className="network-loading-container">
-          <div className="network-loading-spinner"></div>
-          <p>Loading your network...</p>
-        </div>
-      </div>
+     <Spinner size="lg" />
     );
   }
 
@@ -458,6 +454,120 @@ const NetworkView = () => {
         {viewMode === "tree" && renderTreeView()}
 
         {viewMode === "cards" && renderCardView()}
+        
+      <div className="busimessplan">
+        <div className="level-plans">
+           <section className="mlm-system">
+         <div className="container">
+           <h2 className="section-title">The 12-Level MLM Advantage</h2>
+           <div className="mlm-content">
+             <div className="mlm-visual">
+               <div className="level-chart">
+                 <div className="level level-1">
+                   <div className='inner-level'>
+                     <h3 className='inner-level-title'>Level 1</h3>
+                     <p className='inner-level-para'>Direct Referrals or New Register</p>
+                   </div>
+                 </div>
+                 <div className="connector"></div>
+                 <div className="level level-2">
+                   <div className='inner-level'>
+                     <h3 className='inner-level-title'>Level 2</h3>
+                     <p className='inner-level-para'>Indirect Referrals</p>
+                   </div>
+                 </div>
+                 <div className="connector"></div>
+                 <div className="level level-3">
+                   <div className='inner-level'>
+                     <h3 className='inner-level-title'>Level 3</h3>
+                     <p className='inner-level-para'>Indirect Referrals</p>
+                   </div>
+                 </div>
+                 <div className="connector"></div>
+                 <div className="level level-4">
+                   <div className='inner-level'>
+                     <h3 className='inner-level-title'>Level 4</h3>
+                     <p className='inner-level-para'>Indirect Referrals</p>
+                   </div>
+                 </div>
+                 <div className="connector"></div>
+                 <div className="level level-5">
+                   <div className='inner-level'>
+                     <h3 className='inner-level-title'>Level 5</h3>
+                     <p className='inner-level-para'>Indirect Referrals</p>
+                   </div>
+                 </div>
+                 <div className="connector"></div>
+                 <div className="level level-6">
+                   <div className='inner-level'>
+                     <h3 className='inner-level-title'>Level 6</h3>
+                     <p className='inner-level-para'>Indirect Referrals</p>
+                   </div>
+                 </div>
+                 <div className="connector"></div>
+                 <div className="level level-7">
+                   <div className='inner-level'>
+                     <h3 className='inner-level-title'>Level 7</h3>
+                     <p className='inner-level-para'>Indirect Referrals</p>
+                   </div>
+                 </div>
+                 <div className="connector"></div>
+                 <div className="level level-8">
+                   <div className='inner-level'>
+                     <h3 className='inner-level-title'>Level 8</h3>
+                     <p className='inner-level-para'>Indirect Referrals</p>
+                   </div>
+                 </div>
+                 <div className="connector"></div>
+                 <div className="level level-9">
+                   <div className='inner-level'>
+                     <h3 className='inner-level-title'>Level 9</h3>
+                     <p className='inner-level-para'>Indirect Referrals</p>
+                   </div>
+                 </div>
+                 <div className="connector"></div>
+                 <div className="level level-10">
+                   <div className='inner-level'>
+                     <h3 className='inner-level-title'>Level 10</h3>
+                     <p className='inner-level-para'>Indirect Referrals</p>
+                   </div>
+                 </div>
+                 <div className="connector"></div>
+                 <div className="level level-11">
+                   <div className='inner-level'>
+                     <h3 className='inner-level-title'>Level 11</h3>
+                     <p className='inner-level-para'>Indirect Referrals</p>
+                   </div>
+                 </div>
+                 <div className="connector"></div>
+                 <div className="level level-12">
+                   <div className='inner-level'>
+                     <h3 className='inner-level-title'>Level 12</h3>
+                     <p className='inner-level-para'>Indirect Referrals</p>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <div className="mlm-info">
+               <h3>Earn Across All Levels</h3>
+               <p>
+                 Our unique 12-level system allows you to earn commissions not just from your direct 
+                 referrals, but from the entire network across all 12 levels. This creates exponential 
+                 earning potential as your network grows.
+               </p>
+               <ul className="mlm-features">
+                 <li>✅ Commission on personal sales</li>
+                 <li>✅ Team override commissions</li>
+                 <li>✅ Leadership bonuses</li>
+                 <li>✅ Performance incentives</li>
+                 <li>✅ Rank advancement rewards</li>
+               </ul>
+             </div>
+           </div>
+         </div>
+       </section>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ const OrderDetail = () => {
     const fetchOrderDetail = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(`http://localhost:5000/api/order/${id}`
+        const response = await axios.get(`https://swanand-vibes-backend.vercel.app/api/order/${id}`
         //     , {
         //   params: { userId }
         // }

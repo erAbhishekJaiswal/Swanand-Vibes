@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../../CssFiles/Admin/AdminDashboard.css";
+import {getUserId} from '../../utills/authService'
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
+
+  const id = getUserId();
+  const navigate = useNavigate();
 
   const [stats, setStats] = useState({
     users: 0,
@@ -12,11 +17,31 @@ const AdminDashboard = () => {
   useEffect(() => {
     // Fetch stats from API (mock data for now)
     setStats({
-      users: 1245,
-      orders: 89,
-      products: 56,
-      inquiries: 12,
+      users: 0,
+      orders: 0,
+      products: 0,
+      inquiries: 0,
     });
+    const fetchStats = async () => {
+      try {
+        const response = await fetch(`https://swanand-vibes-backend.vercel.app/api/users/dashboard/${id}`);
+        const data = await response.json();
+        console.log(data);
+        
+        setStats({
+      users: data.userCount,
+      orders: data.orderCount,
+      products: data.productCount,
+      inquiries: data.contactCount,
+      kycs: data.kycPendingCount,
+      deposits: data.depositCount,
+      withdrawals: data.withdrawalCount
+    });
+      } catch (error) {
+        console.error("Error fetching stats:", error);
+      }
+    };
+    fetchStats();
   }, []);
 
   return (
@@ -26,7 +51,7 @@ const AdminDashboard = () => {
           <div className="dashboard-content">
             <h2>Dashboard Overview</h2>
             <div className="stats-grid">
-              <div className="stat-card">
+              <div className="stat-card" onClick={() => navigate("/admin/users")}>
                 <div className="stat-icon users">
                   <i className="fas fa-users"></i>
                 </div>
@@ -35,7 +60,7 @@ const AdminDashboard = () => {
                   <p>Total Users</p>
                 </div>
               </div>
-              <div className="stat-card">
+              <div className="stat-card" onClick={() => navigate("/admin/orderlist")}>
                 <div className="stat-icon orders">
                   <i className="fas fa-shopping-cart"></i>
                 </div>
@@ -44,7 +69,7 @@ const AdminDashboard = () => {
                   <p>Orders</p>
                 </div>
               </div>
-              <div className="stat-card">
+              <div className="stat-card" onClick={() => navigate("/admin/products")}>
                 <div className="stat-icon products">
                   <i className="fas fa-box"></i>
                 </div>
@@ -53,13 +78,31 @@ const AdminDashboard = () => {
                   <p>Products</p>
                 </div>
               </div>
-              <div className="stat-card">
+              <div className="stat-card" onClick={() => navigate("/admin/contactlist")}>
                 <div className="stat-icon inquiries">
                   <i className="fas fa-envelope"></i>
                 </div>
                 <div className="stat-info">
                   <h3>{stats.inquiries}</h3>
                   <p>Inquiries</p>
+                </div>
+              </div>
+              <div className="stat-card" onClick={() => navigate("/admin/kyc")}>
+                <div className="stat-icon kycs">
+                  <i className="fas fa-envelope"></i>
+                </div>
+                <div className="stat-info">
+                  <h3>{stats.kycs}</h3>
+                  <p>KYC Pending</p>
+                </div>
+              </div>
+              <div className="stat-card" onClick={() => navigate("/admin/withdraw")}>
+                <div className="stat-icon deposits">
+                  <i className="fas fa-envelope"></i>
+                </div>
+                <div className="stat-info">
+                  <h3>{stats.deposits}</h3>
+                  <p>Deposits</p>
                 </div>
               </div>
             </div>

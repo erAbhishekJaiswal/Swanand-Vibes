@@ -307,6 +307,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import "../../../CssFiles/Admin/Gallery/Gallery.css";
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../../../components/Spinner';
 
 const GalleryList = () => {
   const navigate = useNavigate();
@@ -330,7 +331,7 @@ const GalleryList = () => {
   const fetchImages = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/gallery/');
+      const response = await axios.get('https://swanand-vibes-backend.vercel.app/api/gallery/');
       setImages(response.data);
       
       const uniqueCategories = [...new Set(response.data.map(img => img.category))];
@@ -363,7 +364,7 @@ const GalleryList = () => {
     if (!window.confirm('Are you sure you want to delete this image?')) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/gallery/${id}`);
+      await axios.delete(`https://swanand-vibes-backend.vercel.app/gallery/${id}`);
       toast.success('Image deleted successfully');
       fetchImages();
     } catch (error) {
@@ -404,7 +405,7 @@ const GalleryList = () => {
       }
 
       // 🔹 Update DB
-      await axios.put(`http://localhost:5000/api/gallery/${editingImage._id}`, {
+      await axios.put(`https://swanand-vibes-backend.vercel.app/api/gallery/${editingImage._id}`, {
         title: editingImage.title,
         category: editingImage.category,
         imageUrl
@@ -439,10 +440,11 @@ const GalleryList = () => {
 
   if (loading) {
     return (
-      <div className="gallery-loading">
-        <div className="spinner"></div>
-        <p>Loading images...</p>
-      </div>
+      <Spinner size='lg'/>
+      // <div className="gallery-loading">
+      //   <div className="spinner"></div>
+      //   <p>Loading images...</p>
+      // </div>
     );
   }
 

@@ -11,6 +11,7 @@ import PaymentPage from "./PaymentPage";
 import Dashboard from "./Dashboard";
 import ResetProfilePassword from "../Common/ResetProfilePassword";
 import NetworkView from "./NetworkView";
+import Gallery from "./Gallery";
 
 const Pages = () => {
   return (
@@ -30,6 +31,7 @@ const Pages = () => {
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/profile/reset-password" element={<ResetProfilePassword />} />
           <Route path="/network" element={<NetworkView />} />
+          <Route path="/gallery" element={<Gallery />} />
         </Routes>
     </div>
   );

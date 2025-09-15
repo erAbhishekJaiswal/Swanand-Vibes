@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import "../../../CssFiles/Admin/Gift/GiftList.css";
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../../../components/Spinner';
 
 const GiftList = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const GiftList = () => {
   const fetchGifts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/gift/');
+      const response = await axios.get('https://swanand-vibes-backend.vercel.app/api/gift/');
       setGifts(response.data);
       
       const uniqueLevels = [...new Set(response.data.map(gift => gift.achievementLevel))];
@@ -62,7 +63,7 @@ const GiftList = () => {
     if (!window.confirm('Are you sure you want to delete this gift?')) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/gift/${id}`);
+      await axios.delete(`https://swanand-vibes-backend.vercel.app/api/gift/${id}`);
       toast.success('Gift deleted successfully');
       fetchGifts();
     } catch (error) {
@@ -106,7 +107,7 @@ const GiftList = () => {
       }
 
       // Update gift in database
-      await axios.put(`http://localhost:5000/api/gift/${editingGift._id}`, {
+      await axios.put(`https://swanand-vibes-backend.vercel.app/api/gift/${editingGift._id}`, {
         title: editingGift.title,
         description: editingGift.description,
         achievementLevel: editingGift.achievementLevel,
@@ -157,10 +158,11 @@ const GiftList = () => {
 
   if (loading) {
     return (
-      <div className="gift-loading">
-        <div className="gift-spinner"></div>
-        <p>Loading gifts...</p>
-      </div>
+      <Spinner size='lg'/>
+      // <div className="gift-loading">
+      //   <div className="gift-spinner"></div>
+      //   <p>Loading gifts...</p>
+      // </div>
     );
   }
 

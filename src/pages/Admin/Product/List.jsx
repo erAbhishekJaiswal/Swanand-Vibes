@@ -295,7 +295,7 @@ const List = () => {
 
   const handlegenerateStockReport = async () => {
   try {
-    const res = await axios.get('http://localhost:5000/api/products/stock', {
+    const res = await axios.get('https://swanand-vibes-backend.vercel.app/api/products/stock', {
       responseType: 'blob', // 👈 required!
     });
 

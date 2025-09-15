@@ -672,7 +672,7 @@ body {
 }
 
 .sidebar-nav .nav-link {
-  padding: 0.7rem;
+  padding: 0.5rem;
   color: var(--text-secondary);
   text-decoration: none;
   display: flex;

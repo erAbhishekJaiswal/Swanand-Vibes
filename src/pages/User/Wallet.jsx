@@ -6,6 +6,7 @@ import {getUserId} from '../../utills/authService';
 import { getWallet as fetchWallet } from '../../utills/apicall';
 import {toast} from 'react-hot-toast';
 import Spinner from '../../components/Spinner';
+import { useNavigate } from 'react-router-dom';
 
 const Wallet = () => {
   const [walletData, setWalletData] = useState(null);
@@ -13,7 +14,7 @@ const Wallet = () => {
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('all');
   const [selectedLevel, setSelectedLevel] = useState('all');
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchWalletData = async () => {
       try {
@@ -151,8 +152,7 @@ const Wallet = () => {
   };
 
   const handleWithdraw = () => {
-    // Implement withdrawal functionality
-    toast('Withdrawal functionality would be implemented here');
+    navigate('/user/withdraw');
   };
 
   if (loading) {

@@ -596,17 +596,49 @@
 
 import React, { useState, useEffect } from "react";
 import "../../CssFiles/User/UserDashboard.css";
+import axios from "axios";
+import { getUserId } from "../../utills/authService";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const id = getUserId();
+  const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState("dashboard");
-  
+
   const [userData, setUserData] = useState({
     name: "Raj Sharma",
-    level: "Silver",
-    points: 1250,
+    cart: "Silver",
     walletBalance: 5250,
     kycStatus: "Pending",
+    orders: 0,
+    totalOrderAmount: 0,
+    gifts: [],
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log(id);
+
+        const fatchdashboard = await axios.get(
+          `https://swanand-vibes-backend.vercel.app/api/users/dashboard/user/${id}`
+        );
+        console.log(fatchdashboard.data);
+        setUserData({
+          name: fatchdashboard.data.user.name,
+          cart: fatchdashboard.data.cartCount,
+          orders: fatchdashboard.data.orderCount,
+          totalOrderAmount: fatchdashboard.data.totalOrderAmount,
+          walletBalance: fatchdashboard.data.walletBalance,
+          kycStatus: fatchdashboard.data.kycStatus,
+          gifts: fatchdashboard.data.gifts,
+        });
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const [orders, setOrders] = useState([
     {
@@ -625,6 +657,11 @@ const Dashboard = () => {
     },
   ]);
 
+  const handleOnclickOrders = () => {
+    navigate("/user/orders")
+  };
+  
+
   return (
     <div className="user-dashboard">
       <div className="user-container">
@@ -637,17 +674,28 @@ const Dashboard = () => {
                   <i className="fas fa-trophy"></i>
                 </div>
                 <div className="stat-info">
-                  <h3>{userData.level}</h3>
-                  <p>Current Level</p>
+                  <h3>{userData.cart}</h3>
+                  <p>Product Cart</p>
                 </div>
               </div>
+
+              <div className="stat-card">
+                <div className="stat-icon order">
+                  <i className="fas fa-trophy"></i>
+                </div>
+                <div className="stat-info">
+                  <h3>{userData.orders}</h3>
+                  <p>Total Orders</p>
+                </div>
+              </div>
+
               <div className="stat-card">
                 <div className="stat-icon points">
                   <i className="fas fa-star"></i>
                 </div>
                 <div className="stat-info">
-                  <h3>{userData.points}</h3>
-                  <p>Reward Points</p>
+                  <h3>{userData.totalOrderAmount}</h3>
+                  <p>Total Order Amount</p>
                 </div>
               </div>
               <div className="stat-card">
@@ -676,7 +724,7 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="dashboard-sections">
+            {/* <div className="dashboard-sections">
               <div className="recent-orders">
                 <h3>Recent Orders</h3>
                 {orders.slice(0, 2).map((order) => (
@@ -721,6 +769,98 @@ const Dashboard = () => {
                   You need {5000 - userData.points} more points to reach Gold
                   level
                 </p>
+              </div>
+
+                <div className="gift-offer-info">
+                <h3>Gifts or Offers</h3>
+                <div className="gift-offer-level-progress">
+                  {
+                    userData?.gifts?.map((gift) => (
+                      <div className="gift-table-row">
+                        <div className="gift-icon">
+                          <img src={gift.imageUrl} alt={gift.name} />
+                        </div>
+                        <div className="gift-info">
+                          <h4>{gift.title}</h4>
+                          <p>{gift.description}</p>
+                        </div>
+                      </div>
+                    ))
+                  }
+                </div>
+              </div>
+            </div> */}
+
+            <div className="dashboard-sections">
+              {/* Recent Orders */}
+              <div className="dashboard-card recent-orders">
+                <h3 className="section-title">Recent Orders</h3>
+                {orders.slice(0, 2).map((order) => (
+                  <div key={order.id} className="order-item">
+                    <div className="order-info">
+                      <h4>Order #{order.id}</h4>
+                      <p>
+                        ₹{order.amount} • {order.items} item(s)
+                      </p>
+                    </div>
+                    <div
+                      className={`order-status ${order.status.toLowerCase()}`}
+                    >
+                      {order.status}
+                    </div>
+                  </div>
+                ))}
+                <button
+                  className="view-all-btn"
+                  onClick={handleOnclickOrders}
+                >
+                  View All Orders
+                </button>
+              </div>
+
+              {/* Network Info */}
+              {/* <div className="dashboard-card network-info">
+    <h3 className="section-title">Your Network Level</h3>
+    <div className="level-progress">
+      <div className="progress-bar">
+        <div
+          className="progress-fill"
+          style={{ width: `${(userData.points / 1000) * 10}%` }}
+        ></div>
+      </div>
+      <div className="level-details">
+        <span>Bronze</span>
+        <span className="current-level">Silver (Current)</span>
+        <span>Gold</span>
+      </div>
+    </div>
+    <p className="progress-note">
+      You need {5000 - userData.points} more points to reach Gold level
+    </p>
+  </div> */}
+
+              {/* Gifts / Offers */}
+              <div className="dashboard-card gift-offer-info">
+                <h3 className="section-title">Gifts or Offers</h3>
+                <div className="gift-list">
+                  {userData?.gifts?.map((gift, index) => (
+                    <div key={index} className="gift-item">
+                      <div className="gift-icon">
+                        <img src={gift.imageUrl} alt={gift.name} />
+                      </div>
+                      <div className="gift-info">
+                        <h4>{gift.title}</h4>
+                        <p>{gift.description}</p>
+                      </div>
+                      <div className="gift-status">
+                        <p>Status: {gift.status}</p>
+                      </div>
+                      <div className="gift-validity">
+                        <p>Validity: {new Date(gift.validity).toISOString().slice(0, 10)}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

@@ -327,12 +327,12 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="values-section">
+      {/* <section className="values-section">
         <div className="container">
           <h2 className="section-title">{t('leadership_team')}</h2>
-          {/* your existing team grid */}
+        
         </div>
-      </section>
+      </section> */}
 
       {/* Values Section */}
       <section className="team-section">

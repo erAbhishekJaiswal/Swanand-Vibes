@@ -18,7 +18,7 @@ const ForgetPassword = () => {
     // Simulate API call
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/password/request-otp",
+        "https://swanand-vibes-backend.vercel.app/api/auth/password/request-otp",
         { email }
       );
       console.log(response.data);

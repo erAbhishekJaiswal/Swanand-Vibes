@@ -76,7 +76,7 @@ const UploadImage = () => {
       });
       
       // 🔹 Save to database
-      await axios.post("http://localhost:5000/api/gallery", {
+      await axios.post("https://swanand-vibes-backend.vercel.app/api/gallery", {
         title: formData.title,
         category: formData.category,
         imageUrl: secure_url,

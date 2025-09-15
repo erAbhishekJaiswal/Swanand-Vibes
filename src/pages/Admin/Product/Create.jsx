@@ -646,7 +646,7 @@ const CreateProduct = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/category");
+      const response = await axios.get("https://swanand-vibes-backend.vercel.app/api/category");
       setCategoryOptions(response.data.categories);
       console.log(response.data.categories);
       
@@ -918,7 +918,7 @@ const CreateProduct = () => {
     try {
       // 1. Get Cloudinary signature from backend
       const sigRes = await axios.get(
-        "http://localhost:5000/api/products/signature"
+        "https://swanand-vibes-backend.vercel.app/api/products/signature"
       );
       const signatureData = sigRes.data;
 

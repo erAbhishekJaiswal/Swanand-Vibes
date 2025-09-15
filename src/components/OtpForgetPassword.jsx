@@ -4,6 +4,7 @@ import './css/OtpVerification.css';
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import Spinner from './Spinner';
 
 const OtpForgetVerification = () => {
     const onResend = () => {};
@@ -79,7 +80,7 @@ const OtpForgetVerification = () => {
     const uemail = typeof state.email === 'string' ? state.email : state.email?.email;
     // console.log(useremail);
     
-    const res = await axios.post('http://localhost:5000/api/auth/password/verify-otp', { email: uemail, otp: otpValue});
+    const res = await axios.post('https://swanand-vibes-backend.vercel.app/api/auth/password/verify-otp', { email: uemail, otp: otpValue});
       console.log(res.data);
       const {resetToken, useremail} = res.data;
       if(res.status === 200){
@@ -165,8 +166,7 @@ const maskEmail = (email) => {
           >
             {isLoading ? (
               <>
-                <span className="spinner"></span>
-                Verifying...
+                <Spinner size='xl' />
               </>
             ) : (
               'Verify'

@@ -17,6 +17,7 @@ const Sidebar = ({ isCollapsed, toggle }) => {
     { icon: '📊', text: 'DashBoard', path: '/admin/' },
     { icon: '👤', text: 'Users', path: '/admin/users', active: true },
     { icon: '📦', text: 'Products', path: '/admin/products' },
+    { icon: '🛍️', text: 'Orders', path: '/admin/orderlist' },
     { icon: '🪪', text: 'KYC', path: '/admin/kyc' },
     { icon: '💰', text: 'Withdraw', path: '/admin/withdraw' },
     { icon: <MdContactPage />, text: 'Contact List', path: '/admin/contactlist' },
@@ -34,6 +35,8 @@ const Sidebar = ({ isCollapsed, toggle }) => {
     { icon: '🛒', text: 'Cart', path: '/user/cart' },
     { icon: <GiWallet />, text: 'Wallet', path: '/user/wallet' },
     { icon: <PiNetworkDuotone />, text: 'Network', path: '/user/network' },
+    { icon: '🖼️', text: 'Gallery', path: '/user/gallery' },
+    // { icon: '🎁', text: 'add gift', path: '/user/giftlist' },
     // { icon: '⚙️', text: 'Settings', path: '/user/settings' }
   ];
 

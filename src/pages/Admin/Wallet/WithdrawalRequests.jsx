@@ -30,7 +30,7 @@ const WithdrawalRequests = () => {
     }
 
     const res = await axios.get(
-      `http://localhost:5000/api/user/wallet/withdrawal-report?start=${encodeURIComponent(
+      `https://swanand-vibes-backend.vercel.app/api/user/wallet/withdrawal-report?start=${encodeURIComponent(
         startDate
       )}&end=${encodeURIComponent(endDate)}`,
       { responseType: "blob" }
@@ -76,7 +76,7 @@ const WithdrawalRequests = () => {
         setIsLoading(true);
         
         // This would be your actual API call
-        const response = await axios.get('http://localhost:5000/api/user/wallet/requests');
+        const response = await axios.get('https://swanand-vibes-backend.vercel.app/api/user/wallet/requests');
         const data = response.data;
         console.log(data);
                 // Mock data based on the API response structure

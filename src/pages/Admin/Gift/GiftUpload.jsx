@@ -77,7 +77,7 @@ const GiftUpload = () => {
       
 
       // 🔹 Save gift/offer to DB
-      await axios.post("http://localhost:5000/api/gift/", {
+      await axios.post("https://swanand-vibes-backend.vercel.app/api/gift/", {
         ...formData,
         imageUrl: secure_url,
       });

@@ -40,7 +40,7 @@ const ResetProfilePassword = () => {
     // Simulate API call
     try {
         const response = await axios.post(
-          "http://localhost:5000/api/auth/password/reset-password",
+          "https://swanand-vibes-backend.vercel.app/api/auth/password/reset-password",
           { email: state.useremail || state.email , resetToken : state.resetToken, newPassword: formData.password, }
         )
         console.log(response.data);

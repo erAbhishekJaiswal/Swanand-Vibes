@@ -33,7 +33,7 @@ const Withdraw = () => {
         }
 
         // Fetch KYC status
-        const kycResponse = await fetch(`/api/kyc/${userId}`);
+        const kycResponse = await fetch(`https://swanand-vibes-backend.vercel.app/api/kyc/${userId}`);
         if (kycResponse.ok) {
           const kycData = await kycResponse.json();
           setKycStatus(kycData.status || 'not-submitted');

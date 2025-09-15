@@ -44,6 +44,7 @@
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
 }
 
 .stat-icon {
@@ -73,6 +74,15 @@
 .stat-icon.inquiries {
   background-color: #f39c12;
 }
+.stat-icon.kycs {
+  background-color: #9b59b6;
+}
+.stat-icon.deposits {
+  background-color: #0ff1dc;
+}
+/* .stat-icon.withdrawals {
+  background-color: #e67e22;
+} */
 
 .stat-info h3 {
   margin: 0;

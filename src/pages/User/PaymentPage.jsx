@@ -6,7 +6,7 @@ const PaymentPage = () => {
   const handlePayment = async () => {
     try {
       // Step 1: Get order from backend
-      const { data: order } = await axios.post("http://localhost:5000/api/pay/create-order", {
+      const { data: order } = await axios.post("https://swanand-vibes-backend.vercel.app/api/pay/create-order", {
         amount: 500, // ₹500
       });
 
@@ -20,7 +20,7 @@ const PaymentPage = () => {
         order_id: "razorpay_ABC123",//order.id,
         handler: async function (response) {
           // Step 3: Verify payment on backend
-          const verify = await axios.post("http://localhost:5000/api/pay/verify", response);
+          const verify = await axios.post("https://swanand-vibes-backend.vercel.app/api/pay/verify", response);
           if (verify.data.success) {
             alert("Payment Successful ✅");
           } else {
