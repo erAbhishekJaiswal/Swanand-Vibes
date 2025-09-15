@@ -1,19 +1,19 @@
 import axios from "axios";
 
-const API_URL =  "http://localhost:5000/api";
+const API_URL =  "https://swanand-vibes-backend.vercel.app/api";
 // "https://swanand-vibes-backend.vercel.app/api";
 
 // User Auth Api
 //
 export const registerUser = (formData) => {
   const { name, email, password, otp } = formData;
-  return axios.post(`http://localhost:5000/api/auth/register`, formData);
+  return axios.post(`${API_URL}/auth/register`, formData);
 };
 
 export const verifyUser = (formData) => {
   // console.log(formData);
   const { name, email, password } = formData;
-  return axios.post(`http://localhost:5000/api/auth/request-otp`, { name, email, password });
+  return axios.post(`${API_URL}/auth/request-otp`, { name, email, password });
 };
 //
 export const loginUser = (loginData) => {
@@ -148,7 +148,7 @@ export const getAllUsers = (params ) => {
   console.log(params);
   
   return axios.get(
-    `http://localhost:5000/api/users`,{ params }
+    `${API_URL}/users`,{ params }
   );
 };
 //
