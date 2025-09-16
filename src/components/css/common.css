@@ -310,9 +310,9 @@ body {
 
 /* buttons & links */
 .futuristic-btn {
-  background: var(--glass-bg);
+  background: #dfdfdf;
   border: 1px solid var(--border-color);
-  color: var(--text-primary);
+  color: #212121;
   padding: 8px 12px;
   border-radius: 8px;
   cursor: pointer;
@@ -375,7 +375,7 @@ body {
 .logo-text {
   font-weight: 700;
   font-size: 1.25rem;
-  color: var(--text-primary);
+  color: #a90000;
 }
 
 /* desktop menu */
@@ -403,7 +403,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--text-secondary);
+  color: #1f1f1f;
   text-decoration: none;
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
@@ -412,13 +412,13 @@ body {
 
 .nav-link:hover,
 .nav-link:focus {
-  color: var(--text-primary);
-  background: var(--glass-bg);
+  color: #4050f5;
+  background: #67676752;
 }
 
 .nav-link.active {
-  color: var(--text-primary);
-  background: var(--glass-bg);
+  color: #4050f5;
+  background: #67676752;
   font-weight: 700;
 }
 
@@ -519,7 +519,7 @@ body {
     visibility: hidden;
     flex-direction: column;
     gap: 1.25rem;
-    background: rgba(15,23,42,0.96);
+    background: rgb(229 229 229 / 90%);
     padding: 1.5rem 1rem;
     height: calc(100vh - 64px);
     overflow-y: auto;
@@ -673,7 +673,7 @@ body {
 
 .sidebar-nav .nav-link {
   padding: 0.5rem;
-  color: var(--text-secondary);
+  color: #1f1f1f;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -757,17 +757,18 @@ body {
 .footer-section h4,
 .footer-section h5 {
   margin-bottom: 1rem;
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
     var(--text-primary),
     var(--text-secondary)
   );
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: transparent; */
 }
 
 .footer-section h4 {
   font-size: 1.5rem;
+  color: #a90000;
 }
 
 .footer-section h5 {
@@ -775,13 +776,13 @@ body {
 }
 
 .footer-section p {
-  color: var(--text-secondary);
+  color: #212121;
   margin-bottom: 1.5rem;
 }
 
 .footer-section a {
   display: flex;
-  color: var(--text-secondary);
+  color: #212121;
   text-decoration: none;
   margin-bottom: 0.5rem;
   transition: color 0.3s ease;
@@ -840,7 +841,7 @@ body {
 }
 
 .bottom-content p {
-  color: var(--text-secondary);
+  color: #333333;
   font-size: 0.9rem;
 }
 

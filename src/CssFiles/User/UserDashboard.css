@@ -103,7 +103,7 @@
 .stat-card {
   display: flex;
   align-items: center;
-  /* background-color: #c0c0c0; */
+  background-color: #ffffff;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -145,12 +145,12 @@
 .stat-info h3 {
   margin: 0;
   font-size: 1.5rem;
-  color: #eeeeee;
+  color: #313131;
 }
 
 .stat-info p {
   margin: 5px 0 0;
-  color: #e9e9e9;
+  color: #3a3a3a;
 }
 
 .pending, .under-review {
@@ -423,7 +423,7 @@
 .gift-info p {
   margin: 4px 0 0;
   font-size: 0.85rem;
-  color: #eeeeee;
+  color: #363636;
 }
 
 

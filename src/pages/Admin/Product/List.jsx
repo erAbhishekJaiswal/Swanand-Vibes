@@ -406,14 +406,14 @@ const List = () => {
       )}
 
       {/* Pagination Controls */}
-      <div className="product-pagination-controls">
-        <button className='product-pagination-btn' onClick={handlePrevPage} disabled={page === 1}>
+      <div className="pagination">
+        <button className='user-pagination-btn' onClick={handlePrevPage} disabled={page === 1}>
           <FiArrowLeft />
         </button>
-        <span>
+        <span className="user-pagination-text">
          {" "} Page {page} of {totalPages} {" "}
         </span>
-        <button className='product-pagination-btn' onClick={handleNextPage} disabled={page === totalPages}>
+        <button className='user-pagination-btn' onClick={handleNextPage} disabled={page === totalPages}>
           <FiArrowRight />
         </button>
       </div>

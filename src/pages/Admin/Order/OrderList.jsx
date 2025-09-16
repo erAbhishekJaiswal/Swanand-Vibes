@@ -1192,14 +1192,14 @@ const OrderList = () => {
         <table className="orders-table">
           <thead>
             <tr>
-              <th onClick={() => handleSort('_id')}>
+              {/* <th onClick={() => handleSort('_id')}>
                 <div className="table-header">
                   Order ID
                   {sortField === '_id' && (
                     sortDirection === 'asc' ? <FiChevronUp /> : <FiChevronDown />
                   )}
                 </div>
-              </th>
+              </th> */}
               <th onClick={() => handleSort('user')}>
                 <div className="table-header">
                   Customer
@@ -1247,11 +1247,11 @@ const OrderList = () => {
             {filteredOrders.length > 0 ? (
               filteredOrders.map(order => (
                 <tr key={order._id}>
-                  <td>
+                  {/* <td>
                     <div className="order-id">
                       {order._id}
                     </div>
-                  </td>
+                  </td> */}
                   <td>
                     <div className="customer-cell">
                       <div className="customer-name">{order.user?.name || 'N/A'}</div>

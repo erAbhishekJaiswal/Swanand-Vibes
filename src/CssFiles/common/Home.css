@@ -1,15 +1,15 @@
-/* Home.css */
+/* Home.css - Light Mode */
 :root {
-  --primary-bg: #0f172a;
-  --secondary-bg: rgba(30, 41, 59, 0.7);
-  --card-bg: rgba(30, 41, 59, 0.5);
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --primary-accent: #3b82f6;
-  --secondary-accent: #818cf8;
-  --text-primary: #f1f5f9;
-  --text-secondary: #cbd5e1;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --glow-color: rgba(59, 130, 246, 0.4);
+  --primary-bg: #f8fafc;
+  --secondary-bg: rgba(226, 232, 240, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --glass-bg: rgba(241, 245, 249, 0.7);
+  --primary-accent: #2563eb;
+  --secondary-accent: #4f46e5;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --border-color: rgba(148, 163, 184, 0.3);
+  --glow-color: rgba(37, 99, 235, 0.2);
 }
 
 * {
@@ -20,7 +20,7 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--primary-bg);
+  background-color: #ececec;
   color: var(--text-primary);
   line-height: 1.6;
 }
@@ -53,7 +53,8 @@ body {
 .hero-title {
   font-size: 3.5rem;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--text-primary), var(--secondary-accent));
+  /* background: linear-gradient(135deg, var(--text-primary), var(--secondary-accent)); */
+  background: linear-gradient(135deg, #ff0000, #2035ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -105,13 +106,13 @@ body {
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(226, 232, 240, 0.5);
   border-color: var(--primary-accent);
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--text-primary);
+  color: #232323;
   border: 1px solid var(--border-color);
 }
 
@@ -122,13 +123,13 @@ body {
 
 .btn-outline-light {
   background: transparent;
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #313131;
+  border: 1px solid var(--border-color);
 }
 
 .btn-outline-light:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: white;
+  background: rgba(255, 255, 255, 0.7);
+  border-color: var(--text-primary);
 }
 
 /* Floating Cards */
@@ -144,7 +145,7 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
@@ -175,6 +176,7 @@ body {
 .card-icon {
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: var(--primary-accent);
 }
 
 .card h4 {
@@ -207,7 +209,7 @@ body {
   position: absolute;
   border-radius: 50%;
   filter: blur(60px);
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .orb-1 {
@@ -231,15 +233,15 @@ body {
 .orb-3 {
   width: 150px;
   height: 150px;
-  background: #8b5cf6;
+  background: #6366f1;
   top: 50%;
   left: 50%;
   animation: pulse 10s ease-in-out infinite 4s;
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.2); opacity: 0.7; }
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.2); opacity: 0.4; }
 }
 
 /* Sections */
@@ -251,9 +253,9 @@ section {
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 3rem;
-  background: linear-gradient(135deg, var(--text-primary), var(--secondary-accent));
+  /* background: linear-gradient(135deg, var(--text-primary), var(--secondary-accent)); */
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* -webkit-text-fill-color: transparent; */
 }
 
 /* Features Section */
@@ -264,7 +266,7 @@ section {
 }
 
 .feature-card {
-  background: var(--card-bg);
+  background: transparent;
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 2rem;
@@ -274,22 +276,23 @@ section {
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   border-color: var(--primary-accent);
 }
 
 .feature-icon {
   font-size: 3rem;
   margin-bottom: 1rem;
+  color: var(--primary-accent);
 }
 
 .feature-card h3 {
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: #232323;
 }
 
 .feature-card p {
-  color: var(--text-secondary);
+  color: #494949;
   line-height: 1.6;
 }
 
@@ -301,7 +304,7 @@ section {
 }
 
 .product-card {
-  background: var(--card-bg);
+  background: transparent;
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 1.5rem;
@@ -311,7 +314,7 @@ section {
 
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   border-color: var(--primary-accent);
 }
 
@@ -321,11 +324,12 @@ section {
   background: var(--glass-bg);
   border-radius: 12px;
   margin-bottom: 1rem;
+  border: 1px solid var(--border-color);
 }
 
 .product-card h3 {
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: #232323;
 }
 
 .product-price {
@@ -336,11 +340,11 @@ section {
 }
 
 /* Stats Section */
-.stats-section {
+/* .stats-section {
   background: var(--secondary-bg);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
-}
+} */
 
 .stats-grid {
   display: grid;
@@ -356,16 +360,16 @@ section {
 }
 
 .stat-item p {
-  color: var(--text-secondary);
+  color: #494949;
   font-size: 1.1rem;
 }
 
 /* CTA Section */
 .cta-section {
   text-align: center;
-  /* background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent)); */
-  color: white;
+  color: var(--text-primary);
   padding: 5rem 0;
+  background: var(--secondary-bg);
 }
 
 .cta-section h2 {
@@ -376,7 +380,7 @@ section {
 .cta-section p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-  opacity: 0.9;
+  color: var(--text-secondary);
 }
 
 .cta-buttons {

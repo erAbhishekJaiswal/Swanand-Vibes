@@ -258,7 +258,7 @@ const OrderDetail = () => {
         </div>
 
         {/* Order Actions */}
-        <div className="order-actions-card">
+        {/* <div className="order-actions-card">
           <h2>Order Actions</h2>
           <div className="action-buttons">
             {!order.isDelivered && order.deliveryStatus !== 'cancelled' && (
@@ -283,7 +283,7 @@ const OrderDetail = () => {
               Download Invoice
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

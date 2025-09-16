@@ -318,7 +318,9 @@ const WithdrawalRequests = () => {
   const updateStatus = async (requestId, newStatus) => {
     try {
       // This would be your actual API call
-      // await axios.patch(`/api/withdrawal-requests/${requestId}`, { status: newStatus });
+      console.log({walletId: requests._id ,txnId: requestId, status: newStatus });
+      
+      // await axios.patch(`/api/withdrawal-requests/${requestId}`, {walletId: requests._id ,txnId: requestId, status: newStatus });
       
       // Update local state
       setRequests(requests.map(request => 
@@ -646,25 +648,25 @@ const WithdrawalRequests = () => {
                         >
                           <FiEye />
                         </button>
-                        {transaction.status === 'pending' && (
+                        {transaction.status === "withdrawal-requested" && (
                           <>
                             <button 
                               className="action-btn approve"
-                              onClick={() => updateStatus(request._id, 'approved')}
+                              onClick={() => updateStatus(request._id, 'withdrawal-approved')}
                               title="Approve"
                             >
                               <FiCheck />
                             </button>
                             <button 
                               className="action-btn reject"
-                              onClick={() => updateStatus(request._id, 'rejected')}
+                              onClick={() => updateStatus(request._id, 'withdrawal-rejected')}
                               title="Reject"
                             >
                               <FiX />
                             </button>
                           </>
                         )}
-                        {transaction.status === 'approved' && (
+                        {transaction.status === 'withdrawal-approved' && (
                           <button 
                             className="action-btn complete"
                             onClick={() => updateStatus(request._id, 'completed')}

@@ -133,7 +133,7 @@
   border: none;
   background: none;
   font-size: 14px;
-  color: var(--text-primary);
+  color: #212121;
   cursor: pointer;
   outline: none;
 }
@@ -180,7 +180,7 @@
   border-radius: 8px;
   font-size: 14px;
   background: transparent;
-  color: var(--text-primary);
+  color: #212121;
   box-shadow: var(--card-shadow);
 }
 .apply-date-btn{
@@ -189,7 +189,7 @@
   border-radius: 8px;
   font-size: 14px;
   background: transparent;
-  color: var(--text-primary);
+  color: #212121;
   box-shadow: var(--card-shadow);
   cursor: pointer;
 }
@@ -204,7 +204,7 @@
   border-radius: 8px;
   font-size: 14px;
   background: transparent;
-  color: var(--text-primary);
+  color: #212121;
   box-shadow: var(--card-shadow);
   cursor: pointer;
 }
@@ -243,9 +243,9 @@
   color: white;
 }
 
-.stat-icon.total {
+/* .stat-icon.total {
   background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
-}
+} */
 
 .stat-icon.pending {
   background: linear-gradient(135deg, var(--warning-color), #d97706);
@@ -312,7 +312,7 @@
 .orders-table td {
   padding: 15px;
   border-bottom: 1px solid var(--border-color);
-  color: var(--text-primary);
+  color: #212121;
 }
 
 .order-id {
@@ -330,10 +330,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #212121;
 }
 
 .customer-email {
-  color: var(--text-secondary);
+  color: #212121;
   font-size: 13px;
   white-space: nowrap;
   overflow: hidden;
@@ -348,6 +349,7 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  color: #212121;
 }
 
 .paid-badge {
@@ -534,7 +536,7 @@
 
 .modal-header h2 {
   margin: 0;
-  color: var(--text-primary);
+  color: #212121;
   font-size: 22px;
 }
 
@@ -568,7 +570,7 @@
 
 .order-detail-section h3 {
   margin: 0 0 15px 0;
-  color: var(--text-primary);
+  color: #212121;
   font-size: 18px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--border-color);
@@ -587,12 +589,12 @@
 }
 
 .order-detail-label {
-  color: var(--text-secondary);
+  color: #212121;
   font-weight: 500;
 }
 
 .detail-value {
-  /* color: var(--text-primary); */
+  color: #535353;
   text-align: right;
 }
 

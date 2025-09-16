@@ -7,7 +7,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: 'Arial', sans-serif;
-  color: #ffffff;
+  color: #212121;
 }
 
 .page-title {
@@ -67,6 +67,7 @@
   border: 1px solid white;
   color: white;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  background: white;
 }
 
 .section-title {
@@ -78,6 +79,7 @@
 .kyc-section p {
   font-size: 1rem;
   margin-bottom: 0.5rem;
+  color: #212121;
 }
 
 .image-container {

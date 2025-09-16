@@ -244,12 +244,12 @@
 
 .requests-header h1 {
   font-size: 28px;
-  color: #c0c0c0;
+  color: #444444;
   margin: 0 0 8px 0;
 }
 
 .requests-header p {
-  color: #c1c2c4;
+  color: #656565;
   margin: 0;
   font-size: 16px;
 }
@@ -376,7 +376,7 @@
 }
 
 .requests-table-container {
-  /* background: white; */
+  background: white;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
@@ -415,6 +415,7 @@
 .requests-table td {
   padding: 15px;
   border-bottom: 1px solid #f1f5f9;
+  color: #212121;
 }
 
 .user-cell {
@@ -442,7 +443,7 @@
 
 .user-name {
   font-weight: 600;
-  color: #cacaca;
+  color: #303030;
   margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
@@ -450,7 +451,7 @@
 }
 
 .user-email {
-  color: #cacaca;
+  color: #222222;
   font-size: 13px;
   white-space: nowrap;
   overflow: hidden;
@@ -459,7 +460,7 @@
 
 .amount-cell, .balance-cell {
   font-weight: 600;
-  color: #cacaca;
+  color: #2c2c2c;
 }
 
 .status-badge {
@@ -684,7 +685,7 @@
 
 .detail-section h3 {
   margin: 0 0 15px 0;
-  color: #dfdfdf;
+  color: #303030;
   font-size: 18px;
   padding-bottom: 10px;
   border-bottom: 1px solid #f1f5f9;
@@ -698,7 +699,7 @@
 .detail-label {
   width: 140px;
   flex-shrink: 0;
-  color: #dfdfdf;
+  color: #313131;
   font-weight: 500;
 }
 

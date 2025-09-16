@@ -25,6 +25,7 @@
   border: 1px solid;
     border-radius: 10px;
     margin-bottom: 15px;
+  color: #212121;
 }
 .add-gallery-section{
   display: flex;
@@ -117,7 +118,7 @@
 }
 
 .gallery-item {
-  background: #39393961;
+  background: #ffffff61;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -201,13 +202,13 @@
   margin: 0 0 8px 0;
   font-size: 16px;
   font-weight: 600;
-  color: #e0e0e0;
+  color: #303030;
 }
 
 .gallery-image-category {
   display: inline-block;
   background: #667eea;
-  color: white;
+  color: rgb(31, 31, 31);
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 12px;
@@ -236,7 +237,7 @@
 }
 
 .gallery-modal-content {
-  background: rgb(66, 66, 66);
+  background: rgb(255, 255, 255);
   border-radius: 12px;
   max-width: 500px;
   width: 100%;
@@ -255,7 +256,7 @@
 
 .gallery-modal-header h2 {
   margin: 0;
-  color: #dfdfdf;
+  color: #303030;
 }
 
 .gallery-modal-close {
@@ -263,7 +264,7 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #c0c0c0;
+  color: #2e2e2e;
   padding: 0;
   width: 30px;
   height: 30px;
@@ -288,7 +289,7 @@
   display: block;
   margin-bottom: 6px;
   font-weight: 500;
-  color: #e0e0e0;
+  color: #313131;
 }
 
 .gallery-form-group input,

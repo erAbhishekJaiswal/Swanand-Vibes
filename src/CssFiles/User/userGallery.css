@@ -17,7 +17,7 @@
 
 .header-content h1 {
   font-size: 28px;
-  color: #eeeeee;
+  color: #333333;
   margin: 0 0 8px 0;
   display: flex;
   align-items: center;
@@ -25,7 +25,7 @@
 }
 
 .header-content p {
-  color: #e7e7e7;
+  color: #2e2e2e;
   margin: 0;
   font-size: 16px;
 }
@@ -87,9 +87,10 @@
 .search-box input {
   width: 100%;
   padding: 12px 15px 12px 40px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #383838;
   border-radius: 8px;
   font-size: 14px;
+  color: #2e2e2e;
   /* background: #f8fafc; */
 }
 
@@ -98,7 +99,7 @@
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #e2e2e2;
+  color: #333333;
 }
 
 .category-filter, .date-filter {
@@ -109,6 +110,7 @@
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
+  color: #1e293b;
 }
 
 .filter-icon {
@@ -413,8 +415,8 @@
   background: white;
   border-radius: 12px;
   max-width: 900px;
-  max-height: 90vh;
-  overflow: hidden;
+  max-height: 80vh;
+  /* overflow: hidden; */
   position: relative;
   display: flex;
   flex-direction: column;

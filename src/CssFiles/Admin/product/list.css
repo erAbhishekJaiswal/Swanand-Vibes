@@ -39,7 +39,7 @@ body {
   text-align: center;
   margin-bottom: 2.5rem;
   padding: 1.5rem;
-  background: var(--card-bg);
+  background: transparent;
   border-radius: 16px;
   border: 1px solid var(--border-color);
 }
@@ -47,13 +47,14 @@ body {
 .product-list-header h1 {
   font-size: 2.2rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, var(--text-primary), var(--secondary-accent));
+  /* background: linear-gradient(135deg, var(--text-primary), var(--secondary-accent)); */
+  background: linear-gradient(135deg, #6b6969, #2438ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .product-list-header p {
-  color: var(--text-secondary);
+  color: #0f172a;
   margin-bottom: 1.5rem;
 }
 
@@ -62,7 +63,7 @@ body {
   background: var(--glass-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: var(--text-primary);
+  color: #212121;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -90,7 +91,7 @@ body {
   background: rgb(37 255 0 / 43%);
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: var(--text-primary);
+  color: #212121;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -110,7 +111,7 @@ body {
 
 /* Product Card */
 .product-cards {
-  background: var(--card-bg);
+  background: transparent;
   border: 1px solid var(--border-color);
   border-radius: 16px;
   overflow: hidden;
@@ -184,7 +185,7 @@ body {
 .product-name {
   font-size: 1.2rem;
   /* margin-bottom: 0.5rem; */
-  color: var(--text-primary);
+  color: #212121;
   font-weight: 600;
 }
 
@@ -214,7 +215,7 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 12px;
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: #212121;
 }
 
 .product-stock {
@@ -262,7 +263,7 @@ body {
 
 .edit-btn {
   background: var(--glass-bg);
-  color: var(--text-primary);
+  color: #212121;
   border: 1px solid var(--border-color);
 }
 

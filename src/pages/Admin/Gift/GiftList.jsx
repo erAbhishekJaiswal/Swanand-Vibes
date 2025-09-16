@@ -211,7 +211,7 @@ const GiftList = () => {
       ) : (
         <div className="gift-grid">
           {filteredGifts.map(gift => (
-            <div key={gift._id} className="gift-item">
+            <div key={gift._id} className="gift-items">
               <div className="gift-image-container">
                 <img src={gift.imageUrl} alt={gift.title} loading="lazy" />
                 {isExpired(gift.validity) && (

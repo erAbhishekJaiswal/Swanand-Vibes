@@ -12,12 +12,12 @@
 
 .contact-header h1 {
   font-size: 28px;
-  color: #f3f3f3;
+  color: #303030;
   margin: 0 0 8px 0;
 }
 
 .contact-header p {
-  color: #e0e0e0;
+  color: #313131;
   margin: 0;
   font-size: 16px;
 }
@@ -171,6 +171,7 @@
 .contacts-table td {
   padding: 15px;
   border-bottom: 1px solid #f1f5f9;
+  color: #212121;
 }
 
 .user-info {
@@ -215,7 +216,7 @@
 
 .subject-cell {
   font-weight: 500;
-  color: #b4b4b4;
+  color: #313131;
   max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
@@ -440,7 +441,7 @@
 
 .contact-detail-section h3 {
   margin: 0 0 15px 0;
-  color: #f3f3f3;
+  color: #2c2c2c;
   font-size: 18px;
   padding-bottom: 10px;
   border-bottom: 1px solid #f1f5f9;
@@ -482,11 +483,12 @@
 }
 
 .message-content {
-  background: #575757;
+  background: #ffffff;
   border-radius: 8px;
   padding: 15px;
   line-height: 1.6;
-  color: #f5f5f5;
+  color: #1f1f1f;
+  border: 1px solid #1b77d3;
 }
 
 .modal-actions {

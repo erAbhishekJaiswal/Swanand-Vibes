@@ -66,6 +66,7 @@
   padding: 1rem;
   text-align: center;
   border-bottom: 1px solid #eee;
+  color: #212121;
 }
 
 .kyc-row:hover {
@@ -145,6 +146,7 @@
   .kyc-table td {
     padding: 0.75rem;
     font-size: 13px;
+    color: #212121;
   }
 
   .details-button {

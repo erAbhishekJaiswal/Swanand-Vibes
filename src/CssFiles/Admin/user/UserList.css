@@ -558,6 +558,12 @@
     margin-bottom: 1.5rem;
 }
 
+.user-list-title{
+  color: #212121;
+}
+.user-list-subtitle{
+  color: #212121;
+}
 .user-list-header h1 {
     margin: 0;
 }
@@ -589,8 +595,8 @@
     border-radius: 4px;
     border: 1px solid #ccc;
     cursor: pointer;
-    background-color: #0d0d2f;
-    color: #e2e2e2;
+    /* background-color: #0d0d2f; */
+    color: #272727;
     font-weight: bold;
 }
 
@@ -688,6 +694,25 @@
     margin: 0;
 }
 
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.user-pagination-text{
+    margin-right: 0.5rem;
+    color: #212121;
+}
+
+.user-pagination-btn{
+    background-color: #00575f;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
 /* -------------------------- */
 /* ✅ Responsive Media Queries */
 /* -------------------------- */

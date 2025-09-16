@@ -376,8 +376,8 @@ const UserList = () => {
     <div className="user-list-container">
       <div className="user-list-header">
         <div className="header-content">
-          <h2>User Management</h2>
-          <p>Manage your system users and permissions</p>
+          <h2 className='user-list-title'>User Management</h2>
+          <p className='user-list-subtitle'>Manage your system users and permissions</p>
         </div>
       </div>
 
@@ -479,15 +479,17 @@ const UserList = () => {
           <button
             disabled={page === 1}
             onClick={() => setPage((prev) => prev - 1)}
+            className="user-pagination-btn"
           >
             ⬅ Prev
           </button>
-          <span>
+          <span  className="user-pagination-text">
             Page {page} of {totalPages}
           </span>
           <button
             disabled={page === totalPages}
             onClick={() => setPage((prev) => prev + 1)}
+             className="user-pagination-btn"
           >
             Next ➡
           </button>

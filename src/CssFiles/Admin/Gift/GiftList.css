@@ -15,7 +15,7 @@
 }
 
 .gift-header-main h1 {
-  color: #ececec;
+  color: #252525;
   margin: 0;
   font-size: 28px;
 }
@@ -116,15 +116,15 @@
   gap: 25px;
 }
 
-.gift-item {
-  background: rgb(37 37 37 / 52%);
+.gift-items {
+  background: rgb(245, 245, 245);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.gift-item:hover {
+.gift-items:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
@@ -142,7 +142,7 @@
   transition: transform 0.3s ease;
 }
 
-.gift-item:hover .gift-image-container img {
+.gift-items:hover .gift-image-container img {
   transform: scale(1.05);
 }
 
@@ -173,7 +173,7 @@
   transition: opacity 0.3s ease;
 }
 
-.gift-item:hover .gift-image-overlay {
+.gift-items:hover .gift-image-overlay {
   opacity: 1;
 }
 
@@ -213,11 +213,11 @@
   margin: 0 0 10px 0;
   font-size: 18px;
   font-weight: 600;
-  color: #e6e6e6;
+  color: #2c2c2c;
 }
 
 .gift-description {
-  color: #e4e4e4;
+  color: #202020;
   margin: 0 0 15px 0;
   line-height: 1.5;
   font-size: 14px;
@@ -237,7 +237,7 @@
   border-radius: 20px;
   font-size: 12px;
   font-weight: 500;
-  color: white;
+  color: rgb(43, 43, 43);
 }
 
 .gift-level-bronze {
@@ -271,13 +271,14 @@
 
 .validity-label {
   font-size: 11px;
-  color: #666;
+  color: #313131;
   margin-bottom: 2px;
 }
 
 .validity-date {
   font-size: 12px;
   font-weight: 500;
+  color: #212121;
 }
 
 .validity-date.expired {
@@ -285,7 +286,7 @@
 }
 
 .gift-date {
-  color: #999;
+  color: #363636;
   font-size: 12px;
   border-top: 1px solid #eee;
   padding-top: 10px;
@@ -307,7 +308,7 @@
 }
 
 .gift-modal-content {
-  background: rgb(66, 66, 66);
+  background: rgb(255, 255, 255);
   border-radius: 12px;
   max-width: 500px;
   width: 100%;
@@ -327,7 +328,7 @@
 
 .gift-modal-header h2 {
   margin: 0;
-  color: #ebebeb;
+  color: #222222;
 }
 
 .gift-modal-close {
@@ -335,7 +336,7 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #e9e9e9;
+  color: #313131;
   padding: 0;
   width: 30px;
   height: 30px;
@@ -345,7 +346,7 @@
 }
 
 .gift-modal-close:hover {
-  color: #ebebeb;
+  color: #c7c7c7;
 }
 
 .gift-edit-form {
@@ -360,7 +361,7 @@
   display: block;
   margin-bottom: 6px;
   font-weight: 500;
-  color: #ececec;
+  color: #303030;
 }
 
 .gift-form-group input,
@@ -372,7 +373,7 @@
   border-radius: 6px;
   font-size: 14px;
   background: transparent;
-  color: #ebebeb;
+  color: #303030;
 }
 
 .gift-form-group textarea {

@@ -7,7 +7,7 @@
   --primary-accent: #3b82f6;
   --secondary-accent: #818cf8;
   --text-primary: #f1f5f9;
-  --text-secondary: #cbd5e1;
+  --text-secondary: #3b3b3b;
   --border-color: rgba(255, 255, 255, 0.1);
   --glow-color: rgba(59, 130, 246, 0.4);
   --success-color: #10b981;
@@ -177,7 +177,7 @@
   background: var(--glass-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: var(--text-primary);
+  color: #212121;
   font-size: 1rem;
   transition: all 0.3s ease;
 }
@@ -409,7 +409,7 @@
 }
 
 .method-info p {
-  color: var(--text-secondary);
+  color: #3b3b3b;
   font-size: 0.9rem;
 }
 
@@ -521,7 +521,7 @@
 .order-item .item-details h4 {
   font-size: 0.9rem;
   margin-bottom: 0.25rem;
-  color: var(--text-primary);
+  color: #212121;
 }
 
 .order-item .item-details p {
@@ -531,7 +531,7 @@
 
 .order-item .item-price {
   font-weight: 600;
-  color: var(--text-primary);
+  color: #212121;
 }
 
 /* Summary Rows */

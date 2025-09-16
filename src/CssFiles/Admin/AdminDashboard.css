@@ -87,17 +87,18 @@
 .stat-info h3 {
   margin: 0;
   font-size: 1.8rem;
-  color: #2c3e50;
+  color: #313131;
 }
 
 .stat-info p {
   margin: 5px 0 0;
-  color: #7f8c8d;
+  color: #3a3a3a;
 }
 
 /* Recent Activities */
 .recent-activities {
-  /* background-color: #fff; */
+  background-color: #fff;
+  color: #333333;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -132,12 +133,12 @@
 
 .activity-details p {
   margin: 0;
-  color: #dbdbdb;
+  color: #1a1a1a;
 }
 
 .activity-time {
   font-size: 0.85rem;
-  color: #95a5a6;
+  color: #4d4d4d;
 }
 
 /* Tables */
