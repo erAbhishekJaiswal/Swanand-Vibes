@@ -30,13 +30,14 @@
 .checkout-header h1 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, var(--text-primary), var(--secondary-accent));
+  /* background: linear-gradient(135deg, var(--text-primary), var(--secondary-accent)); */
+  background: linear-gradient(135deg, #ff0000, #6f6f6f);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .checkout-header p {
-  color: var(--text-secondary);
+  color: #212121;
   font-size: 1.1rem;
 }
 
@@ -51,7 +52,7 @@
   justify-content: center;
   gap: 1rem;
   padding: 1.5rem;
-  background: var(--card-bg);
+  background: transparent;
   border: 1px solid var(--border-color);
   border-radius: 16px;
 }
@@ -95,12 +96,12 @@
 
 .step-title {
   font-weight: 600;
-  color: var(--text-primary);
+  color: #212121;
 }
 
 .step-desc {
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: #3b3b3b;
 }
 
 .step-connector {
@@ -134,15 +135,16 @@
 }
 
 .checkout-form-container {
-  background: var(--card-bg);
+  background: transparent;
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 2rem;
+  width: 90%;
 }
 
 .form-step h2 {
   margin-bottom: 1.5rem;
-  color: var(--text-primary);
+  color: #212121;
   font-size: 1.5rem;
 }
 
@@ -315,7 +317,7 @@
 .address-details p {
   margin: 4px 0;
   font-size: 14px;
-  color: #e4e4e4;
+  color: #303030;
   line-height: 1.5;
 }
 
@@ -360,6 +362,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  color: #212121;
 }
 
 .shipping-method:hover {
@@ -405,7 +408,7 @@
 
 .method-info h4 {
   margin-bottom: 0.25rem;
-  color: var(--text-primary);
+  color: #212121;
 }
 
 .method-info p {
@@ -415,7 +418,7 @@
 
 .method-price {
   font-weight: 600;
-  color: var(--text-primary);
+  color: #212121;
 }
 
 /* Billing Address */
@@ -449,8 +452,8 @@
 }
 
 .prev-btn {
-  background: var(--glass-bg);
-  color: var(--text-primary);
+  background: white;
+  color: #212121;
   border: 1px solid var(--border-color);
 }
 
@@ -480,15 +483,16 @@
 
 .summary-card,
 .support-card {
-  background: var(--card-bg);
+  background: transparent;
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 1.5rem;
+  width: 90%;
 }
 
 .summary-card h3 {
   margin-bottom: 1.5rem;
-  color: var(--text-primary);
+  color: #212121;
   font-size: 1rem;
 }
 
@@ -539,12 +543,12 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.8rem;
-  color: var(--text-secondary);
+  color: #212121;
 }
 
 .summary-row.total {
   font-weight: 700;
-  color: var(--text-primary);
+  color: #212121;
   font-size: 1.1rem;
 }
 
@@ -560,7 +564,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  color: var(--text-secondary);
+  color: #212121;
   font-size: 0.9rem;
   margin: 1rem 0;
   padding: 0.8rem;
@@ -571,7 +575,7 @@
 /* Payment Methods */
 .payment-methods {
   text-align: center;
-  color: var(--text-secondary);
+  color: #212121;
   font-size: 0.9rem;
 }
 
@@ -676,7 +680,7 @@
   }
   
   .checkout-form-container {
-    padding: 0rem;
+    padding: 1rem;
   }
   
   .shipping-method {

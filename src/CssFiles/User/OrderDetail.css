@@ -479,7 +479,7 @@
   padding: 24px;
   font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
   color: #f1f1f1;
-  background: #0f172a; /* dark slate background */
+  background: transparent; /* dark slate background */
   min-height: 100vh;
 }
 
@@ -507,7 +507,7 @@
 .order-detail-header h1 {
   font-size: 28px;
   font-weight: 600;
-  color: #ffffff;
+  color: #202020;
   margin-bottom: 6px;
 }
 
@@ -551,7 +551,7 @@
 .order-status-card, .order-items-card, 
 .order-summary-card, .shipping-address-card,
 .order-actions-card {
-  background: #1e293b;
+  background: transparent;
   border-radius: 14px;
   padding: 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
@@ -577,7 +577,7 @@
 .status-header h2 {
   font-size: 20px;
   font-weight: 500;
-  color: #e2e8f0;
+  color: #1d1d1d;
 }
 
 .status-badge {
@@ -599,6 +599,9 @@
   justify-content: space-between;
   margin: 28px 0;
   position: relative;
+}
+.order-dates{
+  color: #212121;
 }
 
 .progress-step {
@@ -642,12 +645,12 @@
 .step-label {
   font-size: 14px;
   margin-top: 6px;
-  color: #94a3b8;
+  color: #333333;
 }
 
 .progress-step.active .step-label,
 .progress-step.completed .step-label {
-  color: #f1f5f9;
+  color: #252525;
   font-weight: 500;
 }
 
@@ -664,7 +667,7 @@
 .order-actions-card h2 {
   font-size: 19px;
   font-weight: 600;
-  color: #e2e8f0;
+  color: #1b1b1b;
   margin-bottom: 18px;
 }
 
@@ -688,11 +691,11 @@
 .item-details h4 {
   font-size: 16px;
   font-weight: 500;
-  color: #f1f5f9;
+  color: #222222;
 }
 
 .item-price, .item-quantity { font-size: 14px; color: #94a3b8; }
-.item-total { font-size: 18px; font-weight: 600; color: #e2e8f0; }
+.item-total { font-size: 18px; font-weight: 600; color: #212121; }
 
 /* Summary */
 .summary-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
@@ -702,11 +705,15 @@
 .payment-info h3, .shipping-info h3 {
   font-size: 17px;
   margin-bottom: 10px;
-  color: #e2e8f0;
+  color: #292929;
 }
 
 .payment-status.paid { color: #22c55e; }
 .payment-status.pending { color: #facc15; }
+
+.payment-detail{
+  color: #212121;
+}
 
 /* Actions */
 .action-buttons {
@@ -745,11 +752,20 @@
 .invoice-btn:hover { background: #4b5563; }
 
 /* Responsive */
-@media (max-width: 900px) { .order-detail-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .order-detail-grid { grid-template-columns: 1fr; } 
+.order-item-detail{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+}
 @media (max-width: 600px) { 
   .order-detail-container { padding: 16px; }
-  .progress-tracker { flex-direction: column; gap: 20px; align-items: flex-start; }
+  .progress-tracker { flex-direction: column; gap: 20px; align-items: center; }
   .step-connector { display: none; }
   .action-buttons { flex-direction: column; }
   .order-action-btn { width: 100%; }
+  .order-dates{
+    color: #212121;
+  }
 }

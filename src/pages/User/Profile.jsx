@@ -422,6 +422,7 @@ const Profile = ({ user, onUpdateProfile }) => {
     address: "",
     companyid: "",
     avatar: null,
+    kycstatus: "",
   });
 
   const id = getUserId();
@@ -430,17 +431,19 @@ const Profile = ({ user, onUpdateProfile }) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const userData = await getUserProfile(id);
-        console.log("userData", userData);
+        // const userData = await getUserProfile(id);
+        const userData = await axios.get(`http://localhost:5000/api/users/${id}/profile`);
+        console.log("userData", userData.data);
         
         setFormData({
-          name: userData.data.name || "Loading...",
-          email: userData.data.email || "Loading...",
-          mobile: userData.data.mobile || "",
-          address: userData.data.address || "",
-          companyid: userData.data.companyid || "",
-          avatar: userData.data.avatar || null,
-          referralCode: userData.data.referralCode || ""
+          name: userData.data.user.name || "Loading...",
+          email: userData.data.user.email || "Loading...",
+          mobile: userData.data.user.mobile || "",
+          address: userData.data.user.address || "",
+          companyid: userData.data.user.companyid || "",
+          avatar: userData.data.user.avatar || null,
+          referralCode: userData.data.user.referralCode || "",
+          kycstatus: userData.data.kyc || "",
         });
         setIsLoading(false);
       } catch (error) {
@@ -745,12 +748,17 @@ const Profile = ({ user, onUpdateProfile }) => {
                 <h4>KYC Verification</h4>
                 <p>Complete identity verification</p>
               </div>
-              <button 
+             { formData?.kycstatus === 'notSubmitted' ? 
+             <><button 
                 onClick={handleKycEnable} 
                 className="security-action futuristic-btn"
               >
                 Verify Now
-              </button>
+              </button></> :<>
+              <p className="profile-kyc-status">
+              {formData.kycstatus.toUpperCase()}</p>
+              </>
+              }
             </div>
           </div>
         </div>

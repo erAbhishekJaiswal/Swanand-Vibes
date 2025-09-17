@@ -147,7 +147,7 @@ const Gallery = () => {
 
       {/* Filters Section */}
       <div className="gallery-filters">
-        <div className="filter-group">
+        <div className="gallery-filter-group">
           <div className="search-box">
             <FiSearch className="search-icon" />
             <input

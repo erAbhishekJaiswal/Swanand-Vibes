@@ -352,7 +352,7 @@ const Wallet = () => {
         </div>
 
         <div className="wallet-stats">
-          <div className="stat-card">
+          <div className="wallet-stat-card">
             <h3>Performance Overview</h3>
             <div className="stats-grid">
               <div className="stat-item">

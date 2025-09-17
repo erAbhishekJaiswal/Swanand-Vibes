@@ -35,31 +35,44 @@ export const logoutUser = () => {
 //   return axios.get(`http://localhost:5000/api/products/common`);
 // };
 
-export const getCommonProducts = ({
-  page,
-  limit,
-  search,
-  category,
-  minPrice,
-  maxPrice,
-  brands,
-  minRating,
-  sort,
-}) => {
-  return axios.get(`${API_URL}/products/common`, {
-    params: {
-      page,
-      limit,
-      search,
-      category,
-      minPrice,
-      maxPrice,
-      brands,
-      minRating,
-      sort,
-    },
+
+// In your utills/apicall.js file
+export const getCommonProducts = (params = {}) => {
+  // Clean up params - remove empty values
+  const cleanParams = {};
+  Object.keys(params).forEach(key => {
+    if (params[key] !== "" && params[key] !== null && params[key] !== undefined) {
+      cleanParams[key] = params[key];
+    }
   });
-};
+
+  return axios.get(`${API_URL}/products/common`, {
+    params: cleanParams,
+    paramsSerializer: {
+      indexes: null // Don't use array format for params
+    }
+  });
+}; 
+
+// export const getCommonProducts = (params) => {
+//   console.log(
+//    params
+//   );
+  
+//   return axios.get(`${API_URL}/products/common`, {
+//     params: {
+//       page:params.page,
+//       limit:params.limit,
+//       search: params.search,
+//       category: params.category,
+//       minPrice: params.minPrice,
+//       maxPrice: params.maxPrice,
+//       brands: params.brands,
+//       minRating: params.minRating,
+//       sort: params.sort,
+//     },
+//   });
+// };
 
 // Enhanced version with better error handling
 export const getFilters = async () => {
@@ -98,6 +111,7 @@ export const getFilters = async () => {
 
 //
 export const getCommonProductById = (id) => {
+
   return axios.get(`${API_URL}/products/common/${id}`);
 };
 

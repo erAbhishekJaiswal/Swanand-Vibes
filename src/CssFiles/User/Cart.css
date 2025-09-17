@@ -34,14 +34,15 @@
 .orders-header h1 {
   font-size: 2.2rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, var(--text-primary), var(--secondary-accent));
+  /* background: linear-gradient(135deg, #616060 var(--secondary-accent)); */
+  background: linear-gradient(135deg, #ff0000, #6f6f6f);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .cart-header p,
 .orders-header p {
-  color: var(--text-secondary);
+  color: #535353;
 }
 
 /* Cart Content */
@@ -64,7 +65,7 @@
   grid-template-columns: 100px 1fr auto auto;
   gap: 1.5rem;
   /* padding: 1.5rem; */
-  background: var(--card-bg);
+  background: transparent;
   border: 1px solid var(--border-color);
   border-radius: 16px;
   align-items: center;
@@ -86,7 +87,7 @@
 .item-details h3 {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: #212121;
 }
 
 .item-price {
@@ -112,7 +113,7 @@
   border: 1px solid var(--border-color);
   border-radius: 6px;
   background: var(--glass-bg);
-  color: var(--text-secondary);
+  color: #212121;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 0.8rem;
@@ -142,7 +143,7 @@
   height: 32px;
   border: 1px solid var(--border-color);
   background: var(--glass-bg);
-  color: var(--text-primary);
+  color: #212121;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -174,7 +175,7 @@
 .total-price {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #212121;
 }
 
 /* Cart Summary */
@@ -351,7 +352,7 @@
   gap: 0.5rem;
   margin-bottom: 2rem;
   padding: 0.5rem;
-  background: var(--card-bg);
+  background: transparent;
   border: 1px solid var(--border-color);
   border-radius: 12px;
 }
@@ -361,7 +362,7 @@
   background: transparent;
   border: none;
   border-radius: 8px;
-  color: var(--text-secondary);
+  color: #212121;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 500;
@@ -374,7 +375,7 @@
 
 .tab-btn:hover:not(.active) {
   background: var(--glass-bg);
-  color: var(--text-primary);
+  color: #3b82f6;
 }
 
 /* Order Cards */
@@ -385,7 +386,7 @@
 }
 
 .order-card {
-  background: var(--card-bg);
+  background: transparent;
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 1.5rem;
@@ -456,12 +457,12 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem 0;
-  border-bottom: 1px solid var(--border-color);
+  /* border-bottom: 1px solid var(--border-color); */
 }
 
-.order-item:last-child {
+/* .order-item:last-child {
   border-bottom: none;
-}
+} */
 
 .order-item .item-image {
   width: 60px;
@@ -482,7 +483,7 @@
 
 .item-info h4 {
   margin-bottom: 0.25rem;
-  color: var(--text-primary);
+  color: #303030;
 }
 
 .item-quantity {

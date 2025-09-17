@@ -472,12 +472,12 @@ const Orders = () => {
         >
           Delivered
         </button>
-        <button 
+        {/* <button 
           className={`tab-btn ${activeTab === 'cancelled' ? 'active' : ''}`}
           onClick={() => setActiveTab('cancelled')}
         >
           Cancelled
-        </button>
+        </button> */}
       </div>
 
       <div className="orders-content">
@@ -562,7 +562,7 @@ const Orders = () => {
                   </div>
 
                   <div className="order-actions">
-                    {order.isDelivered && (
+                    {/* {order.isDelivered && (
                       <>
                         <button className="order-action-btn">Buy Again</button>
                         <button className="order-action-btn">Return Item</button>
@@ -576,7 +576,7 @@ const Orders = () => {
                     )}
                     {order.deliveryStatus === 'pending' && (
                       <button onClick={() => handleCancelOrder(order._id)} className="order-action-btn">Cancel Order</button>
-                    )}
+                    )} */}
                     <button onClick={() => handleViewDetails(order._id)} className="order-action-btn primary">View Details</button>
                   </div>
                 </div>

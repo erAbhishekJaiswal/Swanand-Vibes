@@ -18,6 +18,8 @@ import OtpVerification from "../components/OtpVerification";
 import ForgetPassword from "../components/ForgetPassword";
 import ResetPassword from "../components/ResetPassword";
 import OtpForgetVerification from "../components/OtpForgetPassword";
+import TermsAndConditions from "./Common/TermsAndConditions";
+import PrivacyPolicy from "./Common/PrivacyPolicy";
 
 const Main = () => {
   return (
@@ -50,6 +52,8 @@ const Main = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/products" element={<ProductList />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
            {/* Not Authorized Page */}
         <Route path="/not-authorized" element={<NotAuthorized />} />
         </Routes>

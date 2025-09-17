@@ -154,9 +154,9 @@ const OrderDetail = () => {
                   {step.status === 'cancelled' && '✕'}
                 </div>
                 <span className="step-label">{step.name}</span>
-                {index < progressSteps.length - 1 && (
+                {/* {index < progressSteps.length - 1 && (
                   <div className="step-connector"></div>
-                )}
+                )} */}
               </div>
             ))}
           </div>
