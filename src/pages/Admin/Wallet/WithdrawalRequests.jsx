@@ -70,179 +70,217 @@ const WithdrawalRequests = () => {
 
   // Sample data based on API response
   useEffect(() => {
+    // const fetchData = async () => {
+    //   try {
+    //     // Simulate API call
+    //     setIsLoading(true);
+        
+    //     // This would be your actual API call
+    //     const response = await axios.get('https://swanand-vibes-backend.vercel.app/api/user/wallet/requests');
+    //     const data = response.data;
+    //     console.log(data);
+    //             // Mock data based on the API response structure
+    //     // const mockData = [
+    //     //   {
+    //     //     _id: "68b5650b7505b81ebfa4a48f",
+    //     //     user: {
+    //     //       _id: "68b5650b7505b81ebfa4a48e",
+    //     //       name: "Sarah Johnson",
+    //     //       email: "sarah.johnson@example.com",
+    //     //       avatar: "SJ"
+    //     //     },
+    //     //     balance: 298,
+    //     //     transactions: [
+    //     //       {
+    //     //         type: "debit",
+    //     //         amount: 150,
+    //     //         status: "pending",
+    //     //         _id: "68bbeea90c470a23bbac9075",
+    //     //         date: "2025-09-06T08:19:53.278Z"
+    //     //       }
+    //     //     ]
+    //     //   },
+    //     //   {
+    //     //     _id: "68b5650b7505b81ebfa4a490",
+    //     //     user: {
+    //     //       _id: "68b5650b7505b81ebfa4a48d",
+    //     //       name: "Michael Chen",
+    //     //       email: "michael.chen@example.com",
+    //     //       avatar: "MC"
+    //     //     },
+    //     //     balance: 542,
+    //     //     transactions: [
+    //     //       {
+    //     //         type: "debit",
+    //     //         amount: 200,
+    //     //         status: "approved",
+    //     //         _id: "68bbeea90c470a23bbac9076",
+    //     //         date: "2025-09-05T14:30:22.123Z"
+    //     //       }
+    //     //     ]
+    //     //   },
+    //     //   {
+    //     //     _id: "68b5650b7505b81ebfa4a491",
+    //     //     user: {
+    //     //       _id: "68b5650b7505b81ebfa4a48c",
+    //     //       name: "Emma Rodriguez",
+    //     //       email: "emma.rodriguez@example.com",
+    //     //       avatar: "ER"
+    //     //     },
+    //     //     balance: 125,
+    //     //     transactions: [
+    //     //       {
+    //     //         type: "debit",
+    //     //         amount: 100,
+    //     //         status: "rejected",
+    //     //         _id: "68bbeea90c470a23bbac9077",
+    //     //         date: "2025-09-04T11:45:10.456Z"
+    //     //       }
+    //     //     ]
+    //     //   },
+    //     //   {
+    //     //     _id: "68b5650b7505b81ebfa4a492",
+    //     //     user: {
+    //     //       _id: "68b5650b7505b81ebfa4a48b",
+    //     //       name: "David Kim",
+    //     //       email: "david.kim@example.com",
+    //     //       avatar: "DK"
+    //     //     },
+    //     //     balance: 876,
+    //     //     transactions: [
+    //     //       {
+    //     //         type: "debit",
+    //     //         amount: 500,
+    //     //         status: "pending",
+    //     //         _id: "68bbeea90c470a23bbac9078",
+    //     //         date: "2025-09-06T09:12:34.789Z"
+    //     //       }
+    //     //     ]
+    //     //   },
+    //     //   {
+    //     //     _id: "68b5650b7505b81ebfa4a493",
+    //     //     user: {
+    //     //       _id: "68b5650b7505b81ebfa4a48a",
+    //     //       name: "Lisa Thompson",
+    //     //       email: "lisa.thompson@example.com",
+    //     //       avatar: "LT"
+    //     //     },
+    //     //     balance: 321,
+    //     //     transactions: [
+    //     //       {
+    //     //         type: "debit",
+    //     //         amount: 300,
+    //     //         status: "processing",
+    //     //         _id: "68bbeea90c470a23bbac9079",
+    //     //         date: "2025-09-05T16:20:15.321Z"
+    //     //       }
+    //     //     ]
+    //     //   },
+    //     //   {
+    //     //     _id: "68b5650b7505b81ebfa4a494",
+    //     //     user: {
+    //     //       _id: "68b5650b7505b81ebfa4a489",
+    //     //       name: "James Wilson",
+    //     //       email: "james.wilson@example.com",
+    //     //       avatar: "JW"
+    //     //     },
+    //     //     balance: 654,
+    //     //     transactions: [
+    //     //       {
+    //     //         type: "debit",
+    //     //         amount: 250,
+    //     //         status: "pending",
+    //     //         _id: "68bbeea90c470a23bbac9080",
+    //     //         date: "2025-09-06T10:05:43.654Z"
+    //     //       }
+    //     //     ]
+    //     //   },
+    //     //   {
+    //     //     _id: "68b5650b7505b81ebfa4a495",
+    //     //     user: {
+    //     //       _id: "68b5650b7505b81ebfa4a488",
+    //     //       name: "Olivia Martinez",
+    //     //       email: "olivia.martinez@example.com",
+    //     //       avatar: "OM"
+    //     //     },
+    //     //     balance: 432,
+    //     //     transactions: [
+    //     //       {
+    //     //         type: "debit",
+    //     //         amount: 150,
+    //     //         status: "approved",
+    //     //         _id: "68bbeea90c470a23bbac9081",
+    //     //         date: "2025-09-03T13:40:29.987Z"
+    //     //       }
+    //     //     ]
+    //     //   },
+    //     //   {
+    //     //     _id: "68b5650b7505b81ebfa4a496",
+    //     //     user: {
+    //     //       _id: "68b5650b7505b81ebfa4a487",
+    //     //       name: "Robert Taylor",
+    //     //       email: "robert.taylor@example.com",
+    //     //       avatar: "RT"
+    //     //     },
+    //     //     balance: 789,
+    //     //     transactions: [
+    //     //       {
+    //     //         type: "debit",
+    //     //         amount: 400,
+    //     //         status: "rejected",
+    //     //         _id: "68bbeea90c470a23bbac9082",
+    //     //         date: "2025-09-04T15:25:18.654Z"
+    //     //       }
+    //     //     ]
+    //     //   }
+    //     // ];
+        
+    //     setRequests(data);
+    //     setFilteredRequests(data);
+    //     setIsLoading(false);
+    //   } catch (error) {
+    //     console.error('Error fetching withdrawal requests:', error);
+    //     setIsLoading(false);
+    //   }
+    // };
+
     const fetchData = async () => {
-      try {
-        // Simulate API call
-        setIsLoading(true);
-        
-        // This would be your actual API call
-        const response = await axios.get('https://swanand-vibes-backend.vercel.app/api/user/wallet/requests');
-        const data = response.data;
-        console.log(data);
-                // Mock data based on the API response structure
-        // const mockData = [
-        //   {
-        //     _id: "68b5650b7505b81ebfa4a48f",
-        //     user: {
-        //       _id: "68b5650b7505b81ebfa4a48e",
-        //       name: "Sarah Johnson",
-        //       email: "sarah.johnson@example.com",
-        //       avatar: "SJ"
-        //     },
-        //     balance: 298,
-        //     transactions: [
-        //       {
-        //         type: "debit",
-        //         amount: 150,
-        //         status: "pending",
-        //         _id: "68bbeea90c470a23bbac9075",
-        //         date: "2025-09-06T08:19:53.278Z"
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     _id: "68b5650b7505b81ebfa4a490",
-        //     user: {
-        //       _id: "68b5650b7505b81ebfa4a48d",
-        //       name: "Michael Chen",
-        //       email: "michael.chen@example.com",
-        //       avatar: "MC"
-        //     },
-        //     balance: 542,
-        //     transactions: [
-        //       {
-        //         type: "debit",
-        //         amount: 200,
-        //         status: "approved",
-        //         _id: "68bbeea90c470a23bbac9076",
-        //         date: "2025-09-05T14:30:22.123Z"
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     _id: "68b5650b7505b81ebfa4a491",
-        //     user: {
-        //       _id: "68b5650b7505b81ebfa4a48c",
-        //       name: "Emma Rodriguez",
-        //       email: "emma.rodriguez@example.com",
-        //       avatar: "ER"
-        //     },
-        //     balance: 125,
-        //     transactions: [
-        //       {
-        //         type: "debit",
-        //         amount: 100,
-        //         status: "rejected",
-        //         _id: "68bbeea90c470a23bbac9077",
-        //         date: "2025-09-04T11:45:10.456Z"
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     _id: "68b5650b7505b81ebfa4a492",
-        //     user: {
-        //       _id: "68b5650b7505b81ebfa4a48b",
-        //       name: "David Kim",
-        //       email: "david.kim@example.com",
-        //       avatar: "DK"
-        //     },
-        //     balance: 876,
-        //     transactions: [
-        //       {
-        //         type: "debit",
-        //         amount: 500,
-        //         status: "pending",
-        //         _id: "68bbeea90c470a23bbac9078",
-        //         date: "2025-09-06T09:12:34.789Z"
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     _id: "68b5650b7505b81ebfa4a493",
-        //     user: {
-        //       _id: "68b5650b7505b81ebfa4a48a",
-        //       name: "Lisa Thompson",
-        //       email: "lisa.thompson@example.com",
-        //       avatar: "LT"
-        //     },
-        //     balance: 321,
-        //     transactions: [
-        //       {
-        //         type: "debit",
-        //         amount: 300,
-        //         status: "processing",
-        //         _id: "68bbeea90c470a23bbac9079",
-        //         date: "2025-09-05T16:20:15.321Z"
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     _id: "68b5650b7505b81ebfa4a494",
-        //     user: {
-        //       _id: "68b5650b7505b81ebfa4a489",
-        //       name: "James Wilson",
-        //       email: "james.wilson@example.com",
-        //       avatar: "JW"
-        //     },
-        //     balance: 654,
-        //     transactions: [
-        //       {
-        //         type: "debit",
-        //         amount: 250,
-        //         status: "pending",
-        //         _id: "68bbeea90c470a23bbac9080",
-        //         date: "2025-09-06T10:05:43.654Z"
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     _id: "68b5650b7505b81ebfa4a495",
-        //     user: {
-        //       _id: "68b5650b7505b81ebfa4a488",
-        //       name: "Olivia Martinez",
-        //       email: "olivia.martinez@example.com",
-        //       avatar: "OM"
-        //     },
-        //     balance: 432,
-        //     transactions: [
-        //       {
-        //         type: "debit",
-        //         amount: 150,
-        //         status: "approved",
-        //         _id: "68bbeea90c470a23bbac9081",
-        //         date: "2025-09-03T13:40:29.987Z"
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     _id: "68b5650b7505b81ebfa4a496",
-        //     user: {
-        //       _id: "68b5650b7505b81ebfa4a487",
-        //       name: "Robert Taylor",
-        //       email: "robert.taylor@example.com",
-        //       avatar: "RT"
-        //     },
-        //     balance: 789,
-        //     transactions: [
-        //       {
-        //         type: "debit",
-        //         amount: 400,
-        //         status: "rejected",
-        //         _id: "68bbeea90c470a23bbac9082",
-        //         date: "2025-09-04T15:25:18.654Z"
-        //       }
-        //     ]
-        //   }
-        // ];
-        
-        setRequests(data);
-        setFilteredRequests(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error fetching withdrawal requests:', error);
-        setIsLoading(false);
-      }
-    };
+  try {
+    setIsLoading(true);
+    
+    const response = await axios.get('https://swanand-vibes-backend.vercel.app/api/user/wallet/requests');
+    const data = response.data;
+    
+    console.log(data);
+    
+    // Extract the withdrawalRequests array from the response
+    const withdrawalRequests = data.withdrawalRequests || [];
+    
+    // Transform the data to match your component's expected structure
+    const formattedRequests = withdrawalRequests.map(request => {
+      // Find the most recent withdrawal transaction
+      const withdrawalTransactions = request.transactions.filter(
+        txn => txn.type === 'debit' && txn.status.includes('withdrawal')
+      );
+      
+      const latestTransaction = withdrawalTransactions[withdrawalTransactions.length - 1];
+      
+      return {
+        _id: request._id,
+        user: request.user,
+        balance: request.balance,
+        transactions: [latestTransaction] // Keep only the latest transaction
+      };
+    });
+    
+    setRequests(formattedRequests);
+    setFilteredRequests(formattedRequests);
+    setIsLoading(false);
+  } catch (error) {
+    console.error('Error fetching withdrawal requests:', error);
+    setIsLoading(false);
+  }
+};
 
     fetchData();
   }, []);
@@ -262,11 +300,25 @@ const WithdrawalRequests = () => {
     }
     
     // Apply status filter
-    if (statusFilter !== 'all') {
-      result = result.filter(request => 
-        request.transactions[0].status === statusFilter
-      );
+    // if (statusFilter !== 'all') {
+    //   result = result.filter(request => 
+    //     request.transactions[0].status === statusFilter
+    //   );
+    // }
+    // In your useEffect filter logic:
+if (statusFilter !== 'all') {
+  result = result.filter(request => {
+    if (statusFilter === 'pending') {
+      return request.transactions[0].status === 'withdrawal-requested';
+    } else if (statusFilter === 'approved') {
+      return request.transactions[0].status === 'withdrawal-approved';
+    } else if (statusFilter === 'rejected') {
+      return request.transactions[0].status === 'withdrawal-rejected';
+    } else {
+      return request.transactions[0].status === statusFilter;
     }
+  });
+}
     
     // Apply sorting
     result.sort((a, b) => {
@@ -315,29 +367,61 @@ const WithdrawalRequests = () => {
     }
   };
 
+  // const updateStatus = async (requestId, newStatus) => {
+  //   try {
+  //     // This would be your actual API call
+  //     console.log({walletId: requests._id ,txnId: requestId, status: newStatus });
+      
+  //     // await axios.patch(`/api/withdrawal-requests/${requestId}`, {walletId: requests._id ,txnId: requestId, status: newStatus });
+      
+  //     // Update local state
+  //     setRequests(requests.map(request => 
+  //       request._id === requestId 
+  //         ? {
+  //             ...request,
+  //             transactions: request.transactions.map(transaction => ({
+  //               ...transaction,
+  //               status: newStatus
+  //             }))
+  //           }
+  //         : request
+  //     ));
+  //   } catch (error) {
+  //     console.error('Error updating status:', error);
+  //   }
+  // };
+
+
   const updateStatus = async (requestId, newStatus) => {
-    try {
-      // This would be your actual API call
-      console.log({walletId: requests._id ,txnId: requestId, status: newStatus });
-      
-      // await axios.patch(`/api/withdrawal-requests/${requestId}`, {walletId: requests._id ,txnId: requestId, status: newStatus });
-      
-      // Update local state
-      setRequests(requests.map(request => 
-        request._id === requestId 
-          ? {
-              ...request,
-              transactions: request.transactions.map(transaction => ({
-                ...transaction,
-                status: newStatus
-              }))
-            }
-          : request
-      ));
-    } catch (error) {
-      console.error('Error updating status:', error);
-    }
-  };
+  try {
+    // Find the request to get the wallet ID
+    const request = requests.find(r => r._id === requestId);
+    
+    if (!request) return;
+    
+    // API call to update status
+    await axios.put(`http://localhost:5000/api/user/wallet/${request._id}/approve-withdrawal`, {
+      walletId: request._id,
+      txnId: request.transactions[0]._id,
+      status: newStatus
+    });
+    
+    // Update local state
+    setRequests(requests.map(req => 
+      req._id === requestId 
+        ? {
+            ...req,
+            transactions: req.transactions.map(transaction => ({
+              ...transaction,
+              status: newStatus
+            }))
+          }
+        : req
+    ));
+  } catch (error) {
+    console.error('Error updating status:', error);
+  }
+};
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -352,28 +436,49 @@ const WithdrawalRequests = () => {
   };
 
 // Functions to get status class and icon
+  // const getStatusClass = (status) => {
+  //   switch (status) {
+  //     case 'pending': return 'status-pending';
+  //     case 'approved': return 'status-approved';
+  //     case 'processing': return 'status-processing';
+  //     case 'rejected': return 'status-rejected';
+  //     case 'completed': return 'status-completed';
+  //     default: return '';
+  //   }
+  // };
+
   const getStatusClass = (status) => {
-    switch (status) {
-      case 'pending': return 'status-pending';
-      case 'approved': return 'status-approved';
-      case 'processing': return 'status-processing';
-      case 'rejected': return 'status-rejected';
-      case 'completed': return 'status-completed';
-      default: return '';
-    }
-  };
+  switch (status) {
+    case 'withdrawal-requested': return 'status-pending';
+    case 'withdrawal-approved': return 'status-approved';
+    case 'withdrawal-rejected': return 'status-rejected';
+    case 'completed': return 'status-completed';
+    default: return '';
+  }
+};
+
+const getStatusIcon = (status) => {
+  switch (status) {
+    case 'withdrawal-requested': return <FiClock />;
+    case 'withdrawal-approved': return <FiCheck />;
+    case 'withdrawal-rejected': return <FiX />;
+    case 'completed': return <FiCheck />;
+    default: return <FiAlertCircle />;
+  }
+};
+
 
   // Functions to get status class and icon
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case 'withdrawal-requested': return <FiClock />;
-      case 'withdrawal-approved': return <FiCheck />;
-      case 'processing': return <FiDollarSign />;
-      case 'withdrawal-rejected': return <FiX />;
-      case 'completed': return <FiCheck />;
-      default: return <FiAlertCircle />;
-    }
-  };
+  // const getStatusIcon = (status) => {
+  //   switch (status) {
+  //     case 'withdrawal-requested': return <FiClock />;
+  //     case 'withdrawal-approved': return <FiCheck />;
+  //     case 'processing': return <FiDollarSign />;
+  //     case 'withdrawal-rejected': return <FiX />;
+  //     case 'completed': return <FiCheck />;
+  //     default: return <FiAlertCircle />;
+  //   }
+  // };
 
   if (isLoading) {
     return (
@@ -514,7 +619,7 @@ const WithdrawalRequests = () => {
         </div>
       </div>
 
-      <div className="stats-cards">
+      {/* <div className="stats-cards">
         <div className="stat-card">
           <div className="stat-icon total">
             <FiDollarSign />
@@ -554,7 +659,48 @@ const WithdrawalRequests = () => {
             <p>Rejected</p>
           </div>
         </div>
-      </div>
+      </div> */}
+      <div className="stats-cards">
+  <div className="stat-card">
+    <div className="stat-icon total">
+      <FiDollarSign />
+    </div>
+    <div className="stat-info">
+      <h3>{requests.length}</h3>
+      <p>Total Requests</p>
+    </div>
+  </div>
+
+  <div className="stat-card">
+    <div className="stat-icon pending">
+      <FiClock />
+    </div>
+    <div className="stat-info">
+      <h3>{requests.filter(r => r.transactions[0].status === 'withdrawal-requested').length}</h3>
+      <p>Pending</p>
+    </div>
+  </div>
+
+  <div className="stat-card">
+    <div className="stat-icon approved">
+      <FiCheck />
+    </div>
+    <div className="stat-info">
+      <h3>{requests.filter(r => r.transactions[0].status === 'withdrawal-approved').length}</h3>
+      <p>Approved</p>
+    </div>
+  </div>
+
+  <div className="stat-card">
+    <div className="stat-icon rejected">
+      <FiX />
+    </div>
+    <div className="stat-info">
+      <h3>{requests.filter(r => r.transactions[0].status === 'withdrawal-rejected').length}</h3>
+      <p>Rejected</p>
+    </div>
+  </div>
+</div>
 
       <div className="requests-table-container">
         <table className="requests-table">
