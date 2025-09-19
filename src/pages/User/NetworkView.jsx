@@ -375,7 +375,7 @@ const NetworkView = () => {
       <div className="network-network-container">
         <div className="network-error-container">
           <div className="network-error-icon">⚠️</div>
-          <h3>Oops! Something went wrong</h3>
+          <h3>You have not Network Or Your you have not any Connections</h3>
           <p>{error}</p>
           <button 
             className="network-retry-button"

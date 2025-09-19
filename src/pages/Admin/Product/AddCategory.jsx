@@ -147,7 +147,7 @@ const filtered = Array.isArray(categories)
                     <div className="avatar">{cat.name.charAt(0).toUpperCase()}</div>
                     <div className="meta">
                       <div className="name">{cat.name}</div>
-                      <div className="id">{cat._id}</div>
+                      {/* <div className="id">{cat._id}</div> */}
                     </div>
                   </div>
 

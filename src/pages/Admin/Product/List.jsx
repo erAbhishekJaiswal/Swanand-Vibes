@@ -318,6 +318,8 @@ const List = () => {
   }
 };
 
+  const handleaddCategory=() => navigate('/admin/category/add');
+
   if (loading) return <Spinner size="lg" />;
   if (error) {
     return (
@@ -342,6 +344,7 @@ const List = () => {
            <button className="add-product-btn" onClick={handleAdd}>
           + Add New Product
         </button>
+        <button className='add-product-btn' onClick={handleaddCategory}>Add Category</button>
         <button className="download-product-btn" onClick={handlegenerateStockReport}>
           Stock Report <LuDownload />
         </button>

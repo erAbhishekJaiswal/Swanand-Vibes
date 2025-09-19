@@ -40,11 +40,26 @@ export const logoutUser = () => {
 export const getCommonProducts = (params = {}) => {
   // Clean up params - remove empty values
   const cleanParams = {};
+  
   Object.keys(params).forEach(key => {
-    if (params[key] !== "" && params[key] !== null && params[key] !== undefined) {
-      cleanParams[key] = params[key];
+    const value = params[key];
+    
+    // Skip empty values
+    if (value === "" || value === null || value === undefined) {
+      return;
+    }
+    
+    // Handle array parameters (convert to comma-separated strings)
+    if (Array.isArray(value) && value.length > 0) {
+      cleanParams[key] = value.join(',');
+    } 
+    // Handle non-array values
+    else if (!Array.isArray(value)) {
+      cleanParams[key] = value;
     }
   });
+  
+  console.log("API Params:", cleanParams);
 
   return axios.get(`${API_URL}/products/common`, {
     params: cleanParams,
@@ -52,7 +67,25 @@ export const getCommonProducts = (params = {}) => {
       indexes: null // Don't use array format for params
     }
   });
-}; 
+};
+// 18-9-2025
+// export const getCommonProducts = (params = {}) => {
+//   // Clean up params - remove empty values
+//   const cleanParams = {};
+//   Object.keys(params).forEach(key => {
+//     if (params[key] !== "" && params[key] !== null && params[key] !== undefined) {
+//       cleanParams[key] = params[key];
+//     }
+//   });
+// console.log(params);
+
+//   return axios.get(`${API_URL}/products/common`, {
+//     params: cleanParams,
+//     paramsSerializer: {
+//       indexes: null // Don't use array format for params
+//     }
+//   });
+// }; 
 
 // export const getCommonProducts = (params) => {
 //   console.log(
@@ -237,24 +270,45 @@ export const submitKyc = (payload) => {
 
 // Cart Api
 //
+// export const addToCart = (payload) => {
+//   const { userId, quantity, id, size , variantId} = payload;
+//   console.log(payload);
+//   return axios.post(`http:localhost:5000/api/user/cart/${id}`, { userId, quantity,size,variantId });
+// };
+
 export const addToCart = (payload) => {
-  const { userId, quantity, id } = payload;
-  console.log(payload);
-  return axios.post(`${API_URL}/user/cart/${id}`, { userId, quantity });
+  const { userId, quantity, id, size, variantId } = payload;
+  console.log("Adding to cart:", payload);
+  
+  return axios.post(`${API_URL}/user/cart/${id}`, { 
+    userId, 
+    quantity, 
+    size, 
+    variantId 
+  });
 };
+
 //
 export const getCart = (id) => {
   return axios.get(`${API_URL}/user/cart/${id}`);
 };
 
 //
-export const removeFromCart = (userId, productId, removedItem) => {
-  return axios.delete(`${API_URL}/user/cart/${productId}`, {
-    data: {
-      item: removedItem,
-      userId: userId,
-    },
-  });
+// export const removeFromCart = (userId, removedItem) => {
+//   console.log(userId, removedItem);
+  
+//   return axios.delete(`http://localhost:5000/api/user/cart/${userId}`, {
+//       item: removedItem,
+//       userId: userId,
+//   });
+// };
+
+export const removeFromCart = (userId, itemId) => {
+  console.log("Sending to backend:", { userId, itemId });
+
+  return axios.delete(`${API_URL}/user/cart/remove`, {
+  data: { userId, itemId }
+});
 };
 
 export const clearCart = (userId) => {

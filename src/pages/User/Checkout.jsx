@@ -1880,8 +1880,14 @@ const Checkout = () => {
           axios.get(`https://swanand-vibes-backend.vercel.app/api/users/${userId}`),
         ]);
 
+        //  const [cartResponse, addressResponse] = await Promise.all([
+        //   axios.get(`http://localhost:5000/api/user/cart/${userId}`),
+        //   axios.get(`http://localhost:5000/api/users/${userId}`),
+        // ]);
+
         setCartItems(cartResponse.data.data?.items || []);
         setSavedAddresses(addressResponse.data || {});
+        console.log(addressResponse.data, cartResponse.data);
         
         // Pre-fill form with user data
         if (addressResponse.data) {
@@ -1913,19 +1919,7 @@ const Checkout = () => {
       name: "Standard Shipping",
       price: 0,
       delivery: "5-7 business days",
-    },
-    {
-      id: "express",
-      name: "Express Shipping",
-      price: 9.99,
-      delivery: "2-3 business days",
-    },
-    {
-      id: "priority",
-      name: "Priority Shipping",
-      price: 19.99,
-      delivery: "1-2 business days",
-    },
+    }
   ];
 
   const handleInputChange = (e) => {
@@ -2074,24 +2068,68 @@ const Checkout = () => {
     }
   };
 
-  const calculateSubtotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.qty, 0);
-  };
 
-  const calculateTax = () => {
-    return calculateSubtotal() * 0.08; // 8% tax
-  };
+  // Get base price (price before tax)
+const getBasePrice = (item) => {
+  const taxRate = item?.product?.tax || 0;
+  return item.price / (1 + taxRate / 100);
+};
 
-  const getShippingCost = () => {
-    const method = shippingMethods.find(
-      (m) => m.id === formData.shippingMethod
-    );
-    return method ? method.price : 0;
-  };
+// Get tax amount from item
+const getTaxAmount = (item) => {
+  return item.price - getBasePrice(item);
+};
 
-  const calculateTotal = () => {
-    return calculateSubtotal() + calculateTax() + getShippingCost();
-  };
+
+// Subtotal (without tax)
+const calculateSubtotal = () => {
+  return cartItems.reduce((total, item) => {
+    const base = getBasePrice(item);
+    return total + base * item.qty;
+  }, 0);
+};
+
+// Tax (based on actual product tax)
+const calculateTax = () => {
+  return cartItems.reduce((total, item) => {
+    const tax = getTaxAmount(item);
+    return total + tax * item.qty;
+  }, 0);
+};
+
+// Shipping stays the same
+const getShippingCost = () => {
+  const method = shippingMethods.find(
+    (m) => m.id === formData.shippingMethod
+  );
+  return method ? method.price : 0;
+};
+
+// Final Total (subtotal + tax + shipping)
+const calculateTotal = () => {
+  return calculateSubtotal() + calculateTax() + getShippingCost();
+};
+
+
+
+  // const calculateSubtotal = () => {
+  //   return cartItems.reduce((total, item) => total + item.price * item.qty, 0);
+  // };
+
+  // const calculateTax = () => {
+  //   return calculateSubtotal() * 0.08; // 8% tax
+  // };
+
+  // const getShippingCost = () => {
+  //   const method = shippingMethods.find(
+  //     (m) => m.id === formData.shippingMethod
+  //   );
+  //   return method ? method.price : 0;
+  // };
+
+  // const calculateTotal = () => {
+  //   return calculateSubtotal() + getShippingCost(); //+ calculateTax()
+  // };
 
   if (isLoading) {
     return <Spinner size="lg" />;
