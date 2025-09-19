@@ -694,7 +694,7 @@ const Dashboard = () => {
                   <i className="fas fa-star"></i>
                 </div>
                 <div className="stat-info">
-                  <h3>{userData.totalOrderAmount}</h3>
+                  <h3>{userData.totalOrderAmount.toFixed(2)}</h3>
                   <p>Total Order Amount</p>
                 </div>
               </div>

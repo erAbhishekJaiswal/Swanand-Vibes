@@ -55,6 +55,7 @@ const Login = () => {
       }
     } else {
       toast.error(data.message);
+      setLoading(false);
     }
   };
 

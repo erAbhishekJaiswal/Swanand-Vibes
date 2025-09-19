@@ -121,7 +121,7 @@ const NetworkView = () => {
         setError(null);
         
         const [resDownline, resUpline] = await Promise.all([
-          axios.get(`https://swanand-vibes-backend.vercel.app/users/downline/${userId}`),
+          axios.get(`https://swanand-vibes-backend.vercel.app/api/users/downline/${userId}`),
           axios.get(`https://swanand-vibes-backend.vercel.app/api/users/upline/${userId}`)
         ]);
         
