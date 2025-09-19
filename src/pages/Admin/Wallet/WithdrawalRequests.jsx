@@ -399,6 +399,14 @@ if (statusFilter !== 'all') {
     
     if (!request) return;
     
+    if(newStatus === "withdrawal-rejected"){
+      // API call to update status
+    await axios.put(`http://localhost:5000/api/user/wallet/${request._id}/reject-withdrawal`, {
+      walletId: request._id,
+      txnId: request.transactions[0]._id,
+      status: newStatus
+    });
+    }
     // API call to update status
     await axios.put(`http://localhost:5000/api/user/wallet/${request._id}/approve-withdrawal`, {
       walletId: request._id,
