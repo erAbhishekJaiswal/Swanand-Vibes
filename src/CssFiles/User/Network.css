@@ -146,7 +146,7 @@
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
-  color: var(--text-secondary);
+  color: #ffffff;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 0.9rem;
@@ -171,7 +171,7 @@
 }
 
 .network-stat-card {
-  background: #2d2d2dc7;
+  background: #ffffffc7;
   padding: 1.5rem;
   border-radius: 1rem;
   text-align: center;
@@ -181,12 +181,12 @@
 .network-stat-value {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--accent-primary);
+  color: #212121;
   margin-bottom: 0.5rem;
 }
 
 .network-stat-label {
-  color: rgb(228, 228, 228);
+  color: rgb(29, 29, 29);
   font-size: 0.9rem;
 }
 
@@ -202,14 +202,14 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: #212121;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid var(--border-color);
 }
 
 /* Table View */
 .network-table-container {
-  background: #2d2d2d7a;
+  background: #ffffff7a;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -221,11 +221,11 @@
 }
 
 .network-network-table th {
-  background: #3d3d3dab;
+  background: #ffffffab;
   padding: 1rem;
   text-align: left;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #212121;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -240,7 +240,7 @@
 
 .network-level-cell {
   font-weight: 600;
-  color: var(--accent-primary);
+  color: #212121;
 }
 
 .network-name-cell {
@@ -258,15 +258,15 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  color: white;
+  color: rgb(29, 29, 29);
 }
 
 .network-email-cell {
-  color: var(--text-secondary);
+  color: #212121;
 }
 
 .network-date-cell {
-  color: var(--text-tertiary);
+  color: #212121;
   font-size: 0.9rem;
 }
 
@@ -289,7 +289,7 @@
 
 /* Tree View */
 .network-tree-view-container {
-  background: #2d2d2d61;
+  background: #ffffff61;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: var(--shadow);
@@ -323,7 +323,7 @@
 
 .network-level-label {
   font-weight: 600;
-  color: var(--text-primary);
+  color: #212121;
 }
 
 .network-toggle-icon {
@@ -348,7 +348,7 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem;
-  background: var(--bg-tertiary);
+  background: #ffffff;
   border-radius: 0.75rem;
   transition: transform 0.2s ease;
 }
@@ -366,7 +366,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  color: white;
+  color: rgb(32, 32, 32);
   flex-shrink: 0;
 }
 
@@ -382,12 +382,12 @@
 
 .network-node-name {
   font-weight: 600;
-  color: var(--text-primary);
+  color: #212121;
 }
 
 .network-node-email {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: #212121;
 }
 
 .network-current-user-level {
@@ -401,7 +401,7 @@
 
 .network-main-node .network-node-name,
 .network-main-node .network-node-email {
-  color: white;
+  color: rgb(31, 31, 31);
 }
 
 /* Cards View */
@@ -418,7 +418,7 @@
 }
 
 .network-network-card {
-  background: #2d2d2d61;
+  background: #ffffff;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: var(--shadow);
@@ -444,8 +444,8 @@
 }
 
 .network-card-level {
-  background: var(--accent-primary);
-  color: white;
+  background: #ffffff61;
+  color: rgb(31, 31, 31);
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
   font-size: 0.8rem;
@@ -460,18 +460,18 @@
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: #212121;
 }
 
 .network-card-email {
-  color: var(--text-secondary);
+  color: #212121;
   margin-bottom: 0.75rem;
   font-size: 0.9rem;
 }
 
 .network-card-meta {
   font-size: 0.8rem;
-  color: var(--text-tertiary);
+  color: #212121;
 }
 
 .network-card-footer {
