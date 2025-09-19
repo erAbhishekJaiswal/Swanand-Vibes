@@ -314,24 +314,59 @@ const Cart = () => {
     }
   };
 
-  const getBasePrice = (item) => {
-    const taxRate = item.product.tax || 0;
-    return item.price / (1 + taxRate / 100);
-  };
+  // const getBasePrice = (item) => {
+  //   const taxRate = item.product.tax || 0;
+  //   return item.price / (1 + taxRate / 100);
+  // };
 
-  const getTaxAmount = (item) => {
-    const basePrice = getBasePrice(item);
-    return item.price - basePrice;
-  };
+  // const getTaxAmount = (item) => {
+  //   const basePrice = getBasePrice(item);
+  //   return item.price - basePrice;
+  // };
 
-  const formatPrice = (amount) => amount.toFixed(2);
+  // const formatPrice = (amount) => amount.toFixed(2);
 
-  // ✅ Calculations
-  const calculateSubtotal = () =>
-    cartItems.reduce((total, item) => total + item.price * item.qty, 0);
+  // // ✅ Calculations
+  // const calculateSubtotal = () =>
+  //   cartItems.reduce((total, item) => total + item.price * item.qty, 0);
 
-  const calculateTax = () => calculateSubtotal() * 0.08; // 8% tax
-  const calculateTotal = () => calculateSubtotal();
+  // const calculateTax = () => calculateSubtotal() * 0.08; // 8% tax
+  // const calculateTotal = () => calculateSubtotal();
+
+
+  // Get base price (price before tax)
+const getBasePrice = (item) => {
+  const taxRate = item?.product?.tax || 0;
+  return item.price / (1 + taxRate / 100);
+};
+
+// Get tax amount from item
+const getTaxAmount = (item) => {
+  const basePrice = getBasePrice(item);
+  return item.price - basePrice;
+};
+
+// Format to 2 decimal places
+const formatPrice = (amount) => amount.toFixed(2);
+
+// ✅ Subtotal (without tax)
+const calculateSubtotal = () =>
+  cartItems.reduce((total, item) => {
+    const base = getBasePrice(item);
+    return total + base * item.qty;
+  }, 0);
+
+// ✅ Total tax
+const calculateTax = () =>
+  cartItems.reduce((total, item) => {
+    const tax = getTaxAmount(item);
+    return total + tax * item.qty;
+  }, 0);
+
+// ✅ Total (subtotal + tax + shipping)
+const calculateTotal = () => {
+  return calculateSubtotal() + calculateTax();
+};
 
   if (loading) return <Spinner size="lg" />;
 
