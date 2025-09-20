@@ -431,8 +431,8 @@ const Profile = ({ user, onUpdateProfile }) => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        // const userData = await getUserProfile(id);
-        const userData = await axios.get(`http://localhost:5000/api/users/${id}/profile`);
+        const userData = await getUserProfile(id);
+        // const userData = await axios.get(`https//users/${id}/profile`);
         console.log("userData", userData.data);
         
         setFormData({

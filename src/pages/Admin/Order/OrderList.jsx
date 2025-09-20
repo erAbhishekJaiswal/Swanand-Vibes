@@ -872,6 +872,7 @@ import React, { useState, useEffect } from 'react';
 import { FiSearch, FiFilter, FiEye, FiChevronLeft, FiChevronRight, FiChevronDown, FiChevronUp, FiDollarSign, FiPackage, FiClock, FiCheck, FiX, FiCalendar } from 'react-icons/fi';
 import '../../../CssFiles/Admin/order/OrderList.css';
 import Spinner from '../../../components/Spinner';
+import {toast} from 'react-hot-toast';
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -888,6 +889,7 @@ const OrderList = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [updatedStatus, setUpdatedStatus] = useState('');
 //   const [darkMode, setDarkMode] = useState(() => {
 //     if (typeof window !== 'undefined') {
 //       return localStorage.getItem('darkMode') === 'true' || 
@@ -1018,9 +1020,9 @@ const OrderList = () => {
   };
 
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR'
     }).format(amount);
   };
 
@@ -1049,6 +1051,19 @@ const OrderList = () => {
 //   const toggleDarkMode = () => {
 //     setDarkMode(!darkMode);
 //   };
+
+  const handleUpdateStatus = async (orderId, updatedStatus) => {
+    try {
+      console.log(orderId, updatedStatus);
+      
+      await axios.put(`https://swanand-vibes-backend.vercel.app/api/order/${orderId}`, { deliveryStatus: updatedStatus });
+      fetchOrders(currentPage, itemsPerPage, searchTerm, statusFilter, startDate, endDate);
+      toast.success('Order status updated successfully');
+    } catch (error) {
+      console.error('Error updating order status:', error);
+      toast.error('Failed to update order status');
+    }
+  };
 
   if (isLoading) {
     return (
@@ -1379,6 +1394,16 @@ const OrderList = () => {
                   </div>
                   <div className="detail-item">
                     <span className="order-detail-label">Status:</span>
+                    <select name="status" id="status" value={selectedOrder.deliveryStatus} 
+                    // onChange={handleStatusChange}
+                    onChange={(e) => setUpdatedStatus(e.target.value )}
+                    >
+                      <option value="pending">Pending</option>
+                      <option value="processing">Processing</option>
+                      <option value="shipped">Shipped</option>
+                      <option value="delivered">Delivered</option>
+                      <option value="cancelled">Cancelled</option>
+                    </select>
                     <span className={`detail-value status-badge ${getStatusClass(selectedOrder.deliveryStatus)}`}>
                       {getStatusIcon(selectedOrder.deliveryStatus)}
                       {selectedOrder.deliveryStatus}
@@ -1484,7 +1509,7 @@ const OrderList = () => {
                 Close
               </button>
               {selectedOrder.deliveryStatus !== 'delivered' && selectedOrder.deliveryStatus !== 'cancelled' && (
-                <button className="btn primary">
+                <button className="btn primary" onClick={() => handleUpdateStatus()}>
                   Update Status
                 </button>
               )}
