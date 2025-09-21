@@ -20,12 +20,14 @@ import ResetPassword from "../components/ResetPassword";
 import OtpForgetVerification from "../components/OtpForgetPassword";
 import TermsAndConditions from "./Common/TermsAndConditions";
 import PrivacyPolicy from "./Common/PrivacyPolicy";
+import AutoLogoutManager from "../utills/AutoLogoutManager";
 
 const Main = () => {
   return (
     <main className="main-content">
       {/* <BrowserRouter> */}
       <Toaster position="top-center" reverseOrder={false} />
+      <AutoLogoutManager />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin/*" element={

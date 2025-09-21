@@ -1,4 +1,6 @@
 /* Home.css - Light Mode */
+
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap');
 :root {
   --primary-bg: #f8fafc;
   --secondary-bg: rgba(226, 232, 240, 0.7);
@@ -19,7 +21,10 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Alan Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
   background-color: #ececec;
   color: var(--text-primary);
   line-height: 1.6;
@@ -307,7 +312,7 @@ section {
   background: transparent;
   border: 1px solid var(--border-color);
   border-radius: 16px;
-  padding: 1.5rem;
+  padding: 1rem;
   text-align: center;
   transition: all 0.3s ease;
 }
@@ -328,14 +333,14 @@ section {
 }
 
 .product-card h3 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
   color: #232323;
 }
 
 .product-price {
   color: var(--primary-accent);
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: .4rem;
   font-size: 1.2rem;
 }
 
@@ -457,6 +462,6 @@ section {
   }
   
   .feature-card, .product-card {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 }

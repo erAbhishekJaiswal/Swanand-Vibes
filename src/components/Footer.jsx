@@ -51,7 +51,7 @@ const Footer = () => {
       <div className="footer-bottom">
         <div className="footer-divider"></div>
         <div className="bottom-content">
-          <p>© 2025 Kumarinfotech. All rights reserved.</p>
+          <p>©2025 by Swanand Vibes. All rights reserved . Developed and designed by Kumarinfotech.</p>
           {/* <div className="footer-links">
             <Link to="/terms" className="footer-link">Terms of Service</Link>
             <Link to="/policy" className="footer-link">Privacy Policy</Link>

@@ -344,8 +344,8 @@ body {
   padding: 0 20px;
   z-index: 1100;
   transition: all 0.3s ease;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(180deg, rgb(255 255 255), rgb(255 255 255 / 50%));
+  border-bottom: 1px solid #d5d5d5 ;
 }
 
 .nav-container {
@@ -447,7 +447,7 @@ body {
 .hamburger {
   width: 22px;
   height: 2px;
-  background: var(--text-primary);
+  background: #000000;
   position: relative;
   display: inline-block;
   transition: transform 0.22s ease;
@@ -460,7 +460,7 @@ body {
   left: 0;
   width: 22px;
   height: 2px;
-  background: var(--text-primary);
+  background: #000000;
   transition: transform 0.22s ease, top 0.22s ease, bottom 0.22s ease;
 }
 
@@ -519,7 +519,7 @@ body {
     visibility: hidden;
     flex-direction: column;
     gap: 1.25rem;
-    background: rgb(229 229 229 / 90%);
+    background: rgba(240, 239, 239, 0.95);
     padding: 1.5rem 1rem;
     height: calc(100vh - 64px);
     overflow-y: auto;

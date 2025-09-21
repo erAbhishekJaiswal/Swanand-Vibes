@@ -606,10 +606,10 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
 
   const [userData, setUserData] = useState({
-    name: "Raj Sharma",
-    cart: "Silver",
-    walletBalance: 5250,
-    kycStatus: "Pending",
+    name: "Loading",
+    cart: "Loading",
+    walletBalance: 0,
+    kycStatus: "",
     orders: 0,
     totalOrderAmount: 0,
     gifts: [],

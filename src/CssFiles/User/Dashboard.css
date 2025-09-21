@@ -3,7 +3,10 @@
   display: flex;
   min-height: 100vh;
   /* background-color: #f5f7f9; */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Alan Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .dashboard-sidebar {

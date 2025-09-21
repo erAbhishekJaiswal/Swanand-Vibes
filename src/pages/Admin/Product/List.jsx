@@ -214,16 +214,228 @@
 
 
 
+// *************************************
+// import React, { useState, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import '../../../CssFiles/Admin/product/list.css';
+// import { getAllProducts, deleteProduct, generateStockReport } from '../../../utills/apicall';
+// import Spinner from '../../../components/Spinner';
+// import { toast } from 'react-hot-toast';
+// import {FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+// import axios from 'axios';
+// import { LuDownload } from "react-icons/lu";
+
+// const List = () => {
+//   const navigate = useNavigate();
+//   const [products, setProducts] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [page, setPage] = useState(1);
+//   const [limit] = useState(10); // You can make this dynamic if needed
+//   const [totalPages, setTotalPages] = useState(1);
+
+//   const fetchProducts = async () => {
+//     try {
+//       setLoading(true);
+//       const response = await getAllProducts(page, limit, ' ', ' '); // Pass pagination params
+//       setProducts(response.data.data);
+//       setTotalPages(response.data.totalPages);
+//       console.log(response.data);
+//     } catch (err) {
+//       setError('Failed to fetch products. Please try again later.');
+//       console.error('Error fetching products:', err);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchProducts();
+//   }, [page]);
+
+//   const handleDelete = async (productId) => {
+//     if (window.confirm('Are you sure you want to delete this product?')) {
+//       try {
+//         await deleteProduct(productId);
+//         toast.success('Product deleted successfully.');
+//         fetchProducts(); // Refresh after deletion
+//       } catch (err) {
+//         toast.error('Failed to delete product.');
+//         console.error('Error deleting product:', err);
+//       }
+//     }
+//   };
+
+//   const handleEdit = (id) => navigate(`/admin/product/edit/${id}`);
+//   const handleAdd = () => navigate('/admin/product/add');
+//   const handleView = (id) => navigate(`/admin/product/${id}`);
+
+//   const handlePrevPage = () => setPage((prev) => Math.max(prev - 1, 1));
+//   const handleNextPage = () => setPage((prev) => Math.min(prev + 1, totalPages));
+
+//   // const handlegenerateStockReport = () => {
+//   //   try {
+//   //     const res = generateStockReport();
+//   //     // download the file
+//   //        const url = window.URL.createObjectURL(new Blob([res.data]));
+//   //   const link = document.createElement('a');
+//   //   link.href = url;
+//   //   link.setAttribute('download', 'stock_report.xlsx');
+//   //   document.body.appendChild(link);
+//   //   link.click();
+//   //   link.remove();
+
+//   //     // console.log(res.data);
+//   //     toast.success('Stock report generated successfully.');
+//   //   } catch (error) {
+//   //     console.error('Error generating stock report:', error);
+//   //     toast.error('Failed to generate stock report.');
+//   //   }
+//   // };
+
+//   const handlegenerateStockReport = async () => {
+//   try {
+//     const res = await axios.get('https://swanand-vibes-backend.vercel.app/api/products/stock', {
+//       responseType: 'blob', // 👈 required!
+//     });
+
+//     const blob = new Blob([res.data], {
+//       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+//     });
+
+//     const url = window.URL.createObjectURL(blob);
+//     const link = document.createElement('a');
+//     link.href = url;
+//     link.setAttribute('download', 'stock_report.xlsx');
+//     document.body.appendChild(link);
+//     link.click();
+//     link.remove();
+
+//     toast.success('Stock report generated successfully.');
+//   } catch (error) {
+//     console.error('Error generating stock report:', error);
+//     toast.error('Failed to generate stock report.');
+//   }
+// };
+
+//   const handleaddCategory=() => navigate('/admin/category/add');
+
+//   if (loading) return <Spinner size="lg" />;
+//   if (error) {
+//     return (
+//       <div className="product-list-container">
+//         <div className="error-message">
+//           <span className="error-icon">⚠️</span>
+//           <h3>{error}</h3>
+//           <button onClick={() => window.location.reload()} className="retry-btn">
+//             Try Again
+//           </button>
+//         </div>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="product-list-container">
+//       <div className="product-list-header">
+//         <h1>Product Inventory</h1>
+//         <p>Manage your product catalog with ease</p>
+//         <div className="add-product-stock-btn-container">
+//            <button className="add-product-btn" onClick={handleAdd}>
+//           + Add New Product
+//         </button>
+//         <button className='add-product-btn' onClick={handleaddCategory}>Add Category</button>
+//         <button className="download-product-btn" onClick={handlegenerateStockReport}>
+//           Stock Report <LuDownload />
+//         </button>
+//         </div>
+       
+//       </div>
+
+//       <div className="products-grid">
+//         {products.map((product) => (
+//           <div key={product._id} className="product-cards">
+//             <div className="product-image">
+//               <img
+//                 src={product.images[0]?.url || 'https://via.placeholder.com/300x200/1e293b/ffffff?text=No+Image'}
+//                 alt={product.name}
+//               />
+//               <div className="product-overlay">
+//                 <button onClick={() => handleView(product._id)} className="action-btn view-btn">
+//                   View
+//                 </button>
+//               </div>
+//             </div>
+
+//             <div className="product-list-info">
+//               <h3 className="product-name">{product.name}</h3>
+//               <p className="product-description">{product.description?.substring(0, 60)}...</p>
+
+//               <div className="product-details">
+//                 <div className="product-price">₹{product.price}</div>
+//                 <span className="product-category">{product.category}</span>
+//               </div>
+
+//               <div className="product-stock">
+//                 <span className={`stock-status ${product.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
+//                   {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+//                 </span>
+//               </div>
+
+//               <div className="product-actions">
+//                 <button onClick={() => handleEdit(product._id)} className="product-action-btn edit-btn">
+//                   {/* <span className="btn-icon"></span>  */}
+//                   Edit
+//                 </button>
+//                 <button onClick={() => handleDelete(product._id)} className="product-action-btn delete-btn">
+//                   {/* <span className="btn-icon"></span>  */}
+//                   Delete
+//                 </button>
+//               </div>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+
+//       {products.length === 0 && (
+//         <div className="empty-state">
+//           <div className="empty-icon">📦</div>
+//           <h3>No products found</h3>
+//           <p>Get started by adding your first product</p>
+//           <button className="add-product-btn primary" onClick={handleAdd}>
+//             + Add New Product
+//           </button>
+//         </div>
+//       )}
+
+//       {/* Pagination Controls */}
+//       <div className="pagination">
+//         <button className='user-pagination-btn' onClick={handlePrevPage} disabled={page === 1}>
+//           <FiArrowLeft />
+//         </button>
+//         <span className="user-pagination-text">
+//          {" "} Page {page} of {totalPages} {" "}
+//         </span>
+//         <button className='user-pagination-btn' onClick={handleNextPage} disabled={page === totalPages}>
+//           <FiArrowRight />
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default List;
+// ***********************
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../../CssFiles/Admin/product/list.css';
-import { getAllProducts, deleteProduct, generateStockReport } from '../../../utills/apicall';
+import { getAllProducts, deleteProduct } from '../../../utills/apicall';
 import Spinner from '../../../components/Spinner';
 import { toast } from 'react-hot-toast';
-import {FiArrowLeft, FiArrowRight } from 'react-icons/fi';
-import axios from 'axios';
+import { FiArrowLeft, FiArrowRight, FiEdit, FiTrash2, FiEye, FiPlus, FiDownload, FiBox } from 'react-icons/fi';
 import { LuDownload } from "react-icons/lu";
+import axios from 'axios';
 
 const List = () => {
   const navigate = useNavigate();
@@ -231,16 +443,20 @@ const List = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
-  const [limit] = useState(10); // You can make this dynamic if needed
+  const [limit] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await getAllProducts(page, limit, ' ', ' '); // Pass pagination params
+      const response = await getAllProducts(page, limit, ' ', ' ');
       setProducts(response.data.data);
-      setTotalPages(response.data.totalPages);
       console.log(response.data);
+      
+      setTotalPages(response.data.totalPages);
+      setTotalItems(response.data.totalItems);
     } catch (err) {
       setError('Failed to fetch products. Please try again later.');
       console.error('Error fetching products:', err);
@@ -258,7 +474,7 @@ const List = () => {
       try {
         await deleteProduct(productId);
         toast.success('Product deleted successfully.');
-        fetchProducts(); // Refresh after deletion
+        fetchProducts();
       } catch (err) {
         toast.error('Failed to delete product.');
         console.error('Error deleting product:', err);
@@ -269,58 +485,67 @@ const List = () => {
   const handleEdit = (id) => navigate(`/admin/product/edit/${id}`);
   const handleAdd = () => navigate('/admin/product/add');
   const handleView = (id) => navigate(`/admin/product/${id}`);
+  const handleaddCategory = () => navigate('/admin/category/add');
 
   const handlePrevPage = () => setPage((prev) => Math.max(prev - 1, 1));
   const handleNextPage = () => setPage((prev) => Math.min(prev + 1, totalPages));
 
-  // const handlegenerateStockReport = () => {
-  //   try {
-  //     const res = generateStockReport();
-  //     // download the file
-  //        const url = window.URL.createObjectURL(new Blob([res.data]));
-  //   const link = document.createElement('a');
-  //   link.href = url;
-  //   link.setAttribute('download', 'stock_report.xlsx');
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   link.remove();
-
-  //     // console.log(res.data);
-  //     toast.success('Stock report generated successfully.');
-  //   } catch (error) {
-  //     console.error('Error generating stock report:', error);
-  //     toast.error('Failed to generate stock report.');
-  //   }
-  // };
-
   const handlegenerateStockReport = async () => {
-  try {
-    const res = await axios.get('https://swanand-vibes-backend.vercel.app/api/products/stock', {
-      responseType: 'blob', // 👈 required!
+    try {
+      const res = await axios.get('https://swanand-vibes-backend.vercel.app/api/products/stock', {
+        responseType: 'blob',
+      });
+
+      const blob = new Blob([res.data], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      });
+
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'stock_report.xlsx');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      toast.success('Stock report generated successfully.');
+    } catch (error) {
+      console.error('Error generating stock report:', error);
+      toast.error('Failed to generate stock report.');
+    }
+  };
+
+  const getVariantInfo = (product) => {
+    if (!product.variants || product.variants.length === 0) {
+      return { minPrice: product.price || 0, maxPrice: product.price || 0, totalStock: product.stock || 0 };
+    }
+
+    const prices = product.variants.map(v => v.price);
+    const stocks = product.variants.map(v => v.stock);
+    
+    return {
+      minPrice: Math.min(...prices),
+      maxPrice: Math.max(...prices),
+      totalStock: stocks.reduce((sum, stock) => sum + stock, 0),
+      variantCount: product.variants.length
+    };
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
     });
+  };
 
-    const blob = new Blob([res.data], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    });
+  if (loading) return (
+    <div className="loading-container">
+      <Spinner size="lg" />
+      <p>Loading products...</p>
+    </div>
+  );
 
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.setAttribute('download', 'stock_report.xlsx');
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-
-    toast.success('Stock report generated successfully.');
-  } catch (error) {
-    console.error('Error generating stock report:', error);
-    toast.error('Failed to generate stock report.');
-  }
-};
-
-  const handleaddCategory=() => navigate('/admin/category/add');
-
-  if (loading) return <Spinner size="lg" />;
   if (error) {
     return (
       <div className="product-list-container">
@@ -338,94 +563,175 @@ const List = () => {
   return (
     <div className="product-list-container">
       <div className="product-list-header">
-        <h1>Product Inventory</h1>
-        <p>Manage your product catalog with ease</p>
-        <div className="add-product-stock-btn-container">
-           <button className="add-product-btn" onClick={handleAdd}>
-          + Add New Product
-        </button>
-        <button className='add-product-btn' onClick={handleaddCategory}>Add Category</button>
-        <button className="download-product-btn" onClick={handlegenerateStockReport}>
-          Stock Report <LuDownload />
-        </button>
-        </div>
-       
-      </div>
-
-      <div className="products-grid">
-        {products.map((product) => (
-          <div key={product._id} className="product-cards">
-            <div className="product-image">
-              <img
-                src={product.images[0]?.url || 'https://via.placeholder.com/300x200/1e293b/ffffff?text=No+Image'}
-                alt={product.name}
-              />
-              <div className="product-overlay">
-                <button onClick={() => handleView(product._id)} className="action-btn view-btn">
-                  View
-                </button>
-              </div>
-            </div>
-
-            <div className="product-list-info">
-              <h3 className="product-name">{product.name}</h3>
-              <p className="product-description">{product.description?.substring(0, 60)}...</p>
-
-              <div className="product-details">
-                <div className="product-price">₹{product.price}</div>
-                <span className="product-category">{product.category}</span>
-              </div>
-
-              <div className="product-stock">
-                <span className={`stock-status ${product.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
-                  {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
-                </span>
-              </div>
-
-              <div className="product-actions">
-                <button onClick={() => handleEdit(product._id)} className="product-action-btn edit-btn">
-                  {/* <span className="btn-icon"></span>  */}
-                  Edit
-                </button>
-                <button onClick={() => handleDelete(product._id)} className="product-action-btn delete-btn">
-                  {/* <span className="btn-icon"></span>  */}
-                  Delete
-                </button>
-              </div>
-            </div>
+        <div className="header-content">
+          <div className="header-text">
+            <h1>📦 Product Inventory</h1>
+            <p>Manage {totalItems} products in your catalog</p>
           </div>
-        ))}
+          <div className="header-actions">
+            <button className="btn-primary" onClick={handleAdd}>
+              <FiPlus /> Add Product
+            </button>
+            <button className="btn-secondary" onClick={handleaddCategory}>
+              <FiBox /> Add Category
+            </button>
+            <button className="btn-success" onClick={handlegenerateStockReport}>
+              <FiDownload /> Stock Report
+            </button>
+          </div>
+        </div>
       </div>
 
-      {products.length === 0 && (
+      {products.length > 0 ? (
+        <>
+          <div className="products-grid">
+            {products.map((product) => {
+              const variantInfo = getVariantInfo(product);
+              const hasVariants = product.variants && product.variants.length > 0;
+              
+              return (
+                <div key={product._id} className="product-card">
+                  <div className="product-image">
+                    <img
+                      src={product.images[0]?.url || 'https://via.placeholder.com/300x200/1e293b/ffffff?text=No+Image'}
+                      alt={product.name}
+                    />
+                    <div className="product-badges">
+                      {!product.isActive && <span className="badge-inactive">Inactive</span>}
+                      {hasVariants && <span className="badge-variants">{variantInfo.variantCount} variants</span>}
+                    </div>
+                  </div>
+
+                  <div className="product-content">
+                    <div className="product-header">
+                      <h3 className="product-name">{product.name}</h3>
+                      <p className="product-brand">{product.brand}</p>
+                    </div>
+
+                    <p className="product-description">
+                      {product.description?.substring(0, 80)}...
+                    </p>
+
+                    <div className="product-details">
+                      <div className="detail-row">
+                        <span className="detail-label">Category:</span>
+                        <span className="detail-value">{product.category}</span>
+                      </div>
+                      
+                      <div className="detail-row">
+                        <span className="detail-label">Price:</span>
+                        <span className="detail-value">
+                          {hasVariants ? (
+                            `₹${variantInfo.minPrice} - ₹${variantInfo.maxPrice}`
+                          ) : (
+                            `₹${variantInfo.minPrice}`
+                          )}
+                        </span>
+                      </div>
+
+                      <div className="detail-row">
+                        <span className="detail-label">Stock:</span>
+                        <span className={`detail-value ${variantInfo.totalStock === 0 ? 'out-of-stock' : 'in-stock'}`}>
+                          {variantInfo.totalStock} units
+                        </span>
+                      </div>
+
+                      <div className="detail-row">
+                        <span className="detail-label">Tax:</span>
+                        <span className="detail-value">{product.tax}%</span>
+                      </div>
+
+                      <div className="detail-row">
+                        <span className="detail-label">Updated:</span>
+                        <span className="detail-value">{formatDate(product.updatedAt)}</span>
+                      </div>
+                    </div>
+
+                    {hasVariants && (
+                      <div className="variants-preview">
+                        <div className="variants-header">
+                          <span>Variants:</span>
+                          <span>{product.variants.length} sizes</span>
+                        </div>
+                        <div className="variants-list">
+                          {product.variants.slice(0, 3).map((variant, index) => (
+                            <span key={index} className="variant-tag">
+                              {variant.size} (₹{variant.price})
+                            </span>
+                          ))}
+                          {product.variants.length > 3 && (
+                            <span className="variant-more">+{product.variants.length - 3} more</span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="product-actions">
+                      <button onClick={() => handleView(product._id)} className="btn-action view">
+                        <FiEye /> View
+                      </button>
+                      <button onClick={() => handleEdit(product._id)} className="btn-action edit">
+                        <FiEdit /> Edit
+                      </button>
+                      <button onClick={() => handleDelete(product._id)} className="btn-action delete">
+                        <FiTrash2 /> Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="pagination">
+              <button 
+                className="pagination-btn" 
+                onClick={handlePrevPage} 
+                disabled={page === 1}
+              >
+                <FiArrowLeft /> Previous
+              </button>
+              
+              <div className="pagination-info">
+                Page {page} of {totalPages} • {totalItems} total products
+              </div>
+              
+              <button 
+                className="pagination-btn" 
+                onClick={handleNextPage} 
+                disabled={page === totalPages}
+              >
+                Next <FiArrowRight />
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
         <div className="empty-state">
           <div className="empty-icon">📦</div>
           <h3>No products found</h3>
-          <p>Get started by adding your first product</p>
-          <button className="add-product-btn primary" onClick={handleAdd}>
-            + Add New Product
+          <p>Get started by adding your first product to the catalog</p>
+          <button className="btn-primary" onClick={handleAdd}>
+            <FiPlus /> Add New Product
           </button>
         </div>
       )}
-
-      {/* Pagination Controls */}
-      <div className="pagination">
-        <button className='user-pagination-btn' onClick={handlePrevPage} disabled={page === 1}>
-          <FiArrowLeft />
-        </button>
-        <span className="user-pagination-text">
-         {" "} Page {page} of {totalPages} {" "}
-        </span>
-        <button className='user-pagination-btn' onClick={handleNextPage} disabled={page === totalPages}>
-          <FiArrowRight />
-        </button>
-      </div>
     </div>
   );
 };
 
 export default List;
 
+
+
+
+
+
+
+
+// *****************************************************************************
 
 
 

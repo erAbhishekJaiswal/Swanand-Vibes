@@ -247,7 +247,7 @@ const Home = () => {
               <button onClick={() => navigate('/register')} className="btn-primary">
                 {t("cta_register")}
               </button>
-              <button onClick={() => navigate('/learn-more')} className="btn-outline-light">
+              <button onClick={() => navigate('/about')} className="btn-outline-light">
                 {t("cta_learn")}
               </button>
             </div>

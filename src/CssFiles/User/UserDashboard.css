@@ -3,7 +3,10 @@
   display: flex;
   flex-direction: column;
   /* height: 100vh; */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Alan Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
   /* background-color: #f8f9fa; */
 }
 

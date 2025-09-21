@@ -47,7 +47,8 @@
 
 .contact-method {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
   gap: 1rem;
   padding: 1.5rem;
   background: transparent;
