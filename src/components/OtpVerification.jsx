@@ -77,7 +77,9 @@ const OtpVerification = () => {
   };
 
   const handleSubmit = async (otpValue) => {
-    if (otpValue.length === 6) {
+
+    try {
+          if (otpValue.length === 6) {
       // onVerify(otpValue);
       // console.log({...state, otpValue});
       // const formdata = {...state, otpValue};
@@ -93,7 +95,11 @@ const OtpVerification = () => {
     }else {
       toast.error('Invalid OTP');
     }
-    
+    } catch (error) {
+      console.log(error);
+      toast.error('Invalid OTP');
+       navigate('/register');
+    }
   };
 
   const handleResend = () => {

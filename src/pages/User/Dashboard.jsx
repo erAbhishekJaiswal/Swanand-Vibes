@@ -609,7 +609,7 @@ const Dashboard = () => {
     name: "Loading",
     cart: "Loading",
     walletBalance: 0,
-    kycStatus: "",
+    kycStatus: "Loading",
     orders: 0,
     totalOrderAmount: 0,
     gifts: [],
@@ -694,7 +694,7 @@ const Dashboard = () => {
                   <i className="fas fa-star"></i>
                 </div>
                 <div className="stat-info">
-                  <h3>{userData.totalOrderAmount.toFixed(2)}</h3>
+                  <h3>₹{userData.totalOrderAmount.toFixed(1)}</h3>
                   <p>Total Order Amount</p>
                 </div>
               </div>

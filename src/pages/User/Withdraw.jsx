@@ -213,7 +213,7 @@ const Withdraw = () => {
               <div className="form-group">
                 <label htmlFor="amount">Withdrawal Amount</label>
                 <div className="amount-input-container">
-                  <span className="currency-symbol">$</span>
+                  <span className="currency-symbol">₹</span>
                   <input
                     type="number"
                     id="amount"
@@ -234,7 +234,7 @@ const Withdraw = () => {
                       onClick={() => setAmount(quickAmount.toString())}
                       disabled={isSubmitting || (wallet && wallet.balance < quickAmount)}
                     >
-                      ${quickAmount}
+                    ₹{quickAmount}
                     </button>
                   ))}
                 </div>
@@ -242,7 +242,7 @@ const Withdraw = () => {
 
               <div className="form-info">
                 {/* <FiInfo /> */}
-                <p>Minimum withdrawal amount: $10. Processing may take 3-5 business days.</p>
+                <p>Minimum withdrawal amount: ₹10. Processing may take 3-5 business days.</p>
               </div>
 
               <button
@@ -287,13 +287,13 @@ const Withdraw = () => {
                 <strong>Processing Time:</strong> 3-5 business days
               </li>
               <li>
-                <strong>Minimum Amount:</strong> $10
+                <strong>Minimum Amount:</strong> ₹10
               </li>
               <li>
                 <strong>Transaction Fee:</strong> 1% (min $2)
               </li>
               <li>
-                <strong>Daily Limit:</strong> $5,000
+                <strong>Daily Limit:</strong> ₹5,000
               </li>
             </ul>
           </div>

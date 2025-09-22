@@ -427,13 +427,310 @@
 // export default List;
 // ***********************
 
+// import React, { useState, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import '../../../CssFiles/Admin/product/list.css';
+// import { getAllProducts, deleteProduct } from '../../../utills/apicall';
+// import Spinner from '../../../components/Spinner';
+// import { toast } from 'react-hot-toast';
+// import { FiArrowLeft, FiArrowRight, FiEdit, FiTrash2, FiEye, FiPlus, FiDownload, FiBox } from 'react-icons/fi';
+// import { LuDownload } from "react-icons/lu";
+// import axios from 'axios';
+
+// const List = () => {
+//   const navigate = useNavigate();
+//   const [products, setProducts] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [page, setPage] = useState(1);
+//   const [limit] = useState(10);
+//   const [totalPages, setTotalPages] = useState(1);
+//   const [totalItems, setTotalItems] = useState(0);
+//   const [selectedProduct, setSelectedProduct] = useState(null);
+
+//   const fetchProducts = async () => {
+//     try {
+//       setLoading(true);
+//       const response = await getAllProducts(page, limit, ' ', ' ');
+//       setProducts(response.data.data);
+//       console.log(response.data);
+      
+//       setTotalPages(response.data.totalPages);
+//       setTotalItems(response.data.totalItems);
+//     } catch (err) {
+//       setError('Failed to fetch products. Please try again later.');
+//       console.error('Error fetching products:', err);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchProducts();
+//   }, [page]);
+
+//   const handleDelete = async (productId) => {
+//     if (window.confirm('Are you sure you want to delete this product?')) {
+//       try {
+//         await deleteProduct(productId);
+//         toast.success('Product deleted successfully.');
+//         fetchProducts();
+//       } catch (err) {
+//         toast.error('Failed to delete product.');
+//         console.error('Error deleting product:', err);
+//       }
+//     }
+//   };
+
+//   const handleEdit = (id) => navigate(`/admin/product/edit/${id}`);
+//   const handleAdd = () => navigate('/admin/product/add');
+//   const handleView = (id) => navigate(`/admin/product/${id}`);
+//   const handleaddCategory = () => navigate('/admin/category/add');
+
+//   const handlePrevPage = () => setPage((prev) => Math.max(prev - 1, 1));
+//   const handleNextPage = () => setPage((prev) => Math.min(prev + 1, totalPages));
+
+//   const handlegenerateStockReport = async () => {
+//     try {
+//       const res = await axios.get('https://swanand-vibes-backend.vercel.app/api/products/stock', {
+//         responseType: 'blob',
+//       });
+
+//       const blob = new Blob([res.data], {
+//         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+//       });
+
+//       const url = window.URL.createObjectURL(blob);
+//       const link = document.createElement('a');
+//       link.href = url;
+//       link.setAttribute('download', 'stock_report.xlsx');
+//       document.body.appendChild(link);
+//       link.click();
+//       link.remove();
+
+//       toast.success('Stock report generated successfully.');
+//     } catch (error) {
+//       console.error('Error generating stock report:', error);
+//       toast.error('Failed to generate stock report.');
+//     }
+//   };
+
+//   const getVariantInfo = (product) => {
+//     if (!product.variants || product.variants.length === 0) {
+//       return { minPrice: product.price || 0, maxPrice: product.price || 0, totalStock: product.stock || 0 };
+//     }
+
+//     const prices = product.variants.map(v => v.price);
+//     const stocks = product.variants.map(v => v.stock);
+    
+//     return {
+//       minPrice: Math.min(...prices),
+//       maxPrice: Math.max(...prices),
+//       totalStock: stocks.reduce((sum, stock) => sum + stock, 0),
+//       variantCount: product.variants.length
+//     };
+//   };
+
+//   const formatDate = (dateString) => {
+//     return new Date(dateString).toLocaleDateString('en-US', {
+//       year: 'numeric',
+//       month: 'short',
+//       day: 'numeric'
+//     });
+//   };
+
+//   if (loading) return (
+//     <div className="loading-container">
+//       <Spinner size="lg" />
+//       <p>Loading products...</p>
+//     </div>
+//   );
+
+//   if (error) {
+//     return (
+//       <div className="product-list-container">
+//         <div className="error-message">
+//           <span className="error-icon">⚠️</span>
+//           <h3>{error}</h3>
+//           <button onClick={() => window.location.reload()} className="retry-btn">
+//             Try Again
+//           </button>
+//         </div>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="product-list-container">
+//       <div className="product-list-header">
+//         <div className="header-content">
+//           <div className="header-text">
+//             <h1>📦 Product Inventory</h1>
+//             <p>Manage {totalItems} products in your catalog</p>
+//           </div>
+//           <div className="header-actions">
+//             <button className="btn-primary" onClick={handleAdd}>
+//               <FiPlus /> Add Product
+//             </button>
+//             <button className="btn-secondary" onClick={handleaddCategory}>
+//               <FiBox /> Add Category
+//             </button>
+//             <button className="btn-success" onClick={handlegenerateStockReport}>
+//               <FiDownload /> Stock Report
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+
+//       {products.length > 0 ? (
+//         <>
+//           <div className="products-grid">
+//             {products.map((product) => {
+//               const variantInfo = getVariantInfo(product);
+//               const hasVariants = product.variants && product.variants.length > 0;
+              
+//               return (
+//                 <div key={product._id} className="product-card">
+//                   <div className="product-image">
+//                     <img
+//                       src={product.images[0]?.url || 'https://via.placeholder.com/300x200/1e293b/ffffff?text=No+Image'}
+//                       alt={product.name}
+//                     />
+//                     <div className="product-badges">
+//                       {!product.isActive && <span className="badge-inactive">Inactive</span>}
+//                       {hasVariants && <span className="badge-variants">{variantInfo.variantCount} variants</span>}
+//                     </div>
+//                   </div>
+
+//                   <div className="product-content">
+//                     <div className="product-header">
+//                       <h3 className="product-name">{product.name}</h3>
+//                       <p className="product-brand">{product.brand}</p>
+//                     </div>
+
+//                     <p className="product-description">
+//                       {product.description?.substring(0, 80)}...
+//                     </p>
+
+//                     <div className="product-details">
+//                       <div className="detail-row">
+//                         <span className="detail-label">Category:</span>
+//                         <span className="detail-value">{product?.category?.name}</span>
+//                       </div>
+                      
+//                       <div className="detail-row">
+//                         <span className="detail-label">Price:</span>
+//                         <span className="detail-value">
+//                           {hasVariants ? (
+//                             `₹${variantInfo.minPrice} - ₹${variantInfo.maxPrice}`
+//                           ) : (
+//                             `₹${variantInfo.minPrice}`
+//                           )}
+//                         </span>
+//                       </div>
+
+//                       <div className="detail-row">
+//                         <span className="detail-label">Stock:</span>
+//                         <span className={`detail-value ${variantInfo.totalStock === 0 ? 'out-of-stock' : 'in-stock'}`}>
+//                           {variantInfo.totalStock} units
+//                         </span>
+//                       </div>
+
+//                       <div className="detail-row">
+//                         <span className="detail-label">Tax:</span>
+//                         <span className="detail-value">{product.tax}%</span>
+//                       </div>
+
+//                       <div className="detail-row">
+//                         <span className="detail-label">Updated:</span>
+//                         <span className="detail-value">{formatDate(product.updatedAt)}</span>
+//                       </div>
+//                     </div>
+
+//                     {hasVariants && (
+//                       <div className="variants-preview">
+//                         <div className="variants-header">
+//                           <span>Variants:</span>
+//                           <span>{product.variants.length} sizes</span>
+//                         </div>
+//                         <div className="variants-list">
+//                           {product.variants.slice(0, 3).map((variant, index) => (
+//                             <span key={index} className="variant-tag">
+//                               {variant.size} (₹{variant.price})
+//                             </span>
+//                           ))}
+//                           {product.variants.length > 3 && (
+//                             <span className="variant-more">+{product.variants.length - 3} more</span>
+//                           )}
+//                         </div>
+//                       </div>
+//                     )}
+
+//                     <div className="product-actions">
+//                       <button onClick={() => handleView(product._id)} className="btn-action view">
+//                         <FiEye /> View
+//                       </button>
+//                       <button onClick={() => handleEdit(product._id)} className="btn-action edit">
+//                         <FiEdit /> Edit
+//                       </button>
+//                       <button onClick={() => handleDelete(product._id)} className="btn-action delete">
+//                         <FiTrash2 /> Delete
+//                       </button>
+//                     </div>
+//                   </div>
+//                 </div>
+//               );
+//             })}
+//           </div>
+
+//           {/* Pagination */}
+//           {totalPages > 1 && (
+//             <div className="pagination">
+//               <button 
+//                 className="pagination-btn" 
+//                 onClick={handlePrevPage} 
+//                 disabled={page === 1}
+//               >
+//                 <FiArrowLeft /> Previous
+//               </button>
+              
+//               <div className="pagination-info">
+//                 Page {page} of {totalPages} • {totalItems} total products
+//               </div>
+              
+//               <button 
+//                 className="pagination-btn" 
+//                 onClick={handleNextPage} 
+//                 disabled={page === totalPages}
+//               >
+//                 Next <FiArrowRight />
+//               </button>
+//             </div>
+//           )}
+//         </>
+//       ) : (
+//         <div className="empty-state">
+//           <div className="empty-icon">📦</div>
+//           <h3>No products found</h3>
+//           <p>Get started by adding your first product to the catalog</p>
+//           <button className="btn-primary" onClick={handleAdd}>
+//             <FiPlus /> Add New Product
+//           </button>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default List;
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../../CssFiles/Admin/product/list.css';
 import { getAllProducts, deleteProduct } from '../../../utills/apicall';
 import Spinner from '../../../components/Spinner';
 import { toast } from 'react-hot-toast';
-import { FiArrowLeft, FiArrowRight, FiEdit, FiTrash2, FiEye, FiPlus, FiDownload, FiBox } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight, FiEdit, FiTrash2, FiEye, FiPlus, FiDownload, FiBox, FiChevronDown, FiChevronUp, FiFilter } from 'react-icons/fi';
 import { LuDownload } from "react-icons/lu";
 import axios from 'axios';
 
@@ -446,7 +743,10 @@ const List = () => {
   const [limit] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [sortField, setSortField] = useState('updatedAt');
+  const [sortOrder, setSortOrder] = useState('desc');
+  const [expandedProduct, setExpandedProduct] = useState(null);
+  const [showFilters, setShowFilters] = useState(false);
 
   const fetchProducts = async () => {
     try {
@@ -539,6 +839,23 @@ const List = () => {
     });
   };
 
+  const toggleExpand = (productId) => {
+    if (expandedProduct === productId) {
+      setExpandedProduct(null);
+    } else {
+      setExpandedProduct(productId);
+    }
+  };
+
+  const handleSort = (field) => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortOrder('desc');
+    }
+  };
+
   if (loading) return (
     <div className="loading-container">
       <Spinner size="lg" />
@@ -578,109 +895,179 @@ const List = () => {
             <button className="btn-success" onClick={handlegenerateStockReport}>
               <FiDownload /> Stock Report
             </button>
+            <button 
+              className={`btn-filter ${showFilters ? 'active' : ''}`}
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              <FiFilter /> Filters
+            </button>
           </div>
         </div>
       </div>
 
       {products.length > 0 ? (
         <>
-          <div className="products-grid">
-            {products.map((product) => {
-              const variantInfo = getVariantInfo(product);
-              const hasVariants = product.variants && product.variants.length > 0;
-              
-              return (
-                <div key={product._id} className="product-card">
-                  <div className="product-image">
-                    <img
-                      src={product.images[0]?.url || 'https://via.placeholder.com/300x200/1e293b/ffffff?text=No+Image'}
-                      alt={product.name}
-                    />
-                    <div className="product-badges">
-                      {!product.isActive && <span className="badge-inactive">Inactive</span>}
-                      {hasVariants && <span className="badge-variants">{variantInfo.variantCount} variants</span>}
-                    </div>
-                  </div>
-
-                  <div className="product-content">
-                    <div className="product-header">
-                      <h3 className="product-name">{product.name}</h3>
-                      <p className="product-brand">{product.brand}</p>
-                    </div>
-
-                    <p className="product-description">
-                      {product.description?.substring(0, 80)}...
-                    </p>
-
-                    <div className="product-details">
-                      <div className="detail-row">
-                        <span className="detail-label">Category:</span>
-                        <span className="detail-value">{product.category}</span>
-                      </div>
-                      
-                      <div className="detail-row">
-                        <span className="detail-label">Price:</span>
-                        <span className="detail-value">
+          <div className="table-container">
+            <table className="products-table">
+              <thead>
+                <tr>
+                  <th className="product-image-col">Image</th>
+                  <th 
+                    className="product-name-col sortable"
+                    onClick={() => handleSort('name')}
+                  >
+                    Name {sortField === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}
+                  </th>
+                  <th 
+                    className="product-price-col sortable"
+                    onClick={() => handleSort('price')}
+                  >
+                    Price {sortField === 'price' && (sortOrder === 'asc' ? '↑' : '↓')}
+                  </th>
+                  <th 
+                    className="product-stock-col sortable"
+                    onClick={() => handleSort('stock')}
+                  >
+                    Stock {sortField === 'stock' && (sortOrder === 'asc' ? '↑' : '↓')}
+                  </th>
+                  <th className="product-category-col">Category</th>
+                  <th 
+                    className="product-updated-col sortable"
+                    onClick={() => handleSort('updatedAt')}
+                  >
+                    Updated {sortField === 'updatedAt' && (sortOrder === 'asc' ? '↑' : '↓')}
+                  </th>
+                  <th className="product-status-col">Status</th>
+                  <th className="product-actions-col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {products?.map((product) => {
+                  const variantInfo = getVariantInfo(product);
+                  const hasVariants = product?.variants && product?.variants?.length > 0;
+                  const isExpanded = expandedProduct === product._id;
+                  
+                  return (
+                    <React.Fragment key={product?._id}>
+                      <tr className="product-row">
+                        <td className="product-image-cell">
+                          <img
+                            src={product?.images[0]?.url || 'https://via.placeholder.com/50x50/1e293b/ffffff?text=No+Image'}
+                            alt={product?.name}
+                            className="product-thumbnail"
+                          />
+                        </td>
+                        <td className="product-name-cell">
+                          <div className="product-name-info">
+                            <div className="product-name">{product?.name}</div>
+                            <div className="product-brand">{product?.brand}</div>
+                          </div>
+                        </td>
+                        <td className="product-price-cell">
                           {hasVariants ? (
-                            `₹${variantInfo.minPrice} - ₹${variantInfo.maxPrice}`
+                            <div className="price-range">
+                              <span className="min-price">₹{variantInfo?.minPrice}</span>
+                              <span className="range-separator">-</span>
+                              <span className="max-price">₹{variantInfo?.maxPrice}</span>
+                              {variantInfo?.variantCount > 1 && (
+                                <div className="variant-count">{variantInfo?.variantCount} variants</div>
+                              )}
+                            </div>
                           ) : (
-                            `₹${variantInfo.minPrice}`
+                            <div className="single-price">₹{variantInfo?.minPrice}</div>
                           )}
-                        </span>
-                      </div>
-
-                      <div className="detail-row">
-                        <span className="detail-label">Stock:</span>
-                        <span className={`detail-value ${variantInfo.totalStock === 0 ? 'out-of-stock' : 'in-stock'}`}>
-                          {variantInfo.totalStock} units
-                        </span>
-                      </div>
-
-                      <div className="detail-row">
-                        <span className="detail-label">Tax:</span>
-                        <span className="detail-value">{product.tax}%</span>
-                      </div>
-
-                      <div className="detail-row">
-                        <span className="detail-label">Updated:</span>
-                        <span className="detail-value">{formatDate(product.updatedAt)}</span>
-                      </div>
-                    </div>
-
-                    {hasVariants && (
-                      <div className="variants-preview">
-                        <div className="variants-header">
-                          <span>Variants:</span>
-                          <span>{product.variants.length} sizes</span>
-                        </div>
-                        <div className="variants-list">
-                          {product.variants.slice(0, 3).map((variant, index) => (
-                            <span key={index} className="variant-tag">
-                              {variant.size} (₹{variant.price})
-                            </span>
-                          ))}
-                          {product.variants.length > 3 && (
-                            <span className="variant-more">+{product.variants.length - 3} more</span>
-                          )}
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="product-actions">
-                      <button onClick={() => handleView(product._id)} className="btn-action view">
-                        <FiEye /> View
-                      </button>
-                      <button onClick={() => handleEdit(product._id)} className="btn-action edit">
-                        <FiEdit /> Edit
-                      </button>
-                      <button onClick={() => handleDelete(product._id)} className="btn-action delete">
-                        <FiTrash2 /> Delete
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+                        </td>
+                        <td className="product-stock-cell">
+                          <div className={`stock-indicator ${variantInfo?.totalStock === 0 ? 'out-of-stock' : 'in-stock'}`}>
+                            <div className="stock-value">{variantInfo?.totalStock}</div>
+                            <div className="stock-label">units</div>
+                          </div>
+                        </td>
+                        <td className="product-category-cell">
+                          {product?.category?.name}
+                        </td>
+                        <td className="product-updated-cell">
+                          {formatDate(product?.updatedAt)}
+                        </td>
+                        <td className="product-status-cell">
+                          <span className={`status-badge ${product?.isActive ? 'active' : 'inactive'}`}>
+                            {product?.isActive ? 'Active' : 'Inactive'}
+                          </span>
+                        </td>
+                        <td className="product-actions-cell">
+                          <div className="action-buttons">
+                            <button 
+                              onClick={() => handleView(product?._id)} 
+                              className="btn-action view"
+                              title="View"
+                            >
+                              <FiEye />
+                            </button>
+                            <button 
+                              onClick={() => handleEdit(product?._id)} 
+                              className="btn-action edit"
+                              title="Edit"
+                            >
+                              <FiEdit />
+                            </button>
+                            <button 
+                              onClick={() => handleDelete(product?._id)} 
+                              className="btn-action delete"
+                              title="Delete"
+                            >
+                              <FiTrash2 />
+                            </button>
+                            {hasVariants && (
+                              <button 
+                                onClick={() => toggleExpand(product?._id)} 
+                                className="btn-action expand"
+                                title={isExpanded ? "Collapse" : "Expand"}
+                              >
+                                {isExpanded ? <FiChevronUp /> : <FiChevronDown />}
+                              </button>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                      
+                      {isExpanded && hasVariants && (
+                        <tr className="variant-details-row">
+                          <td colSpan="8">
+                            <div className="variant-details">
+                              <h4>Product Variants</h4>
+                              <div className="variants-grid">
+                                {product.variants.map((variant, index) => (
+                                  <div key={index} className="variant-card">
+                                    <div className="variant-header">
+                                      <span className="variant-size">Size: {variant.size}</span>
+                                      <span className="variant-price">₹{variant.price}</span>
+                                    </div>
+                                    <div className="variant-stock">
+                                      <span className={`stock-badge ${variant.stock === 0 ? 'out-of-stock' : 'in-stock'}`}>
+                                        {variant.stock} in stock
+                                      </span>
+                                    </div>
+                                    {variant.images && variant.images.length > 0 && (
+                                      <div className="variant-images">
+                                        <img 
+                                          src={variant.images[0].url} 
+                                          alt={`Variant ${variant.size}`}
+                                          className="variant-image"
+                                        />
+                                      </div>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
 
           {/* Pagination */}
@@ -723,8 +1110,6 @@ const List = () => {
 };
 
 export default List;
-
-
 
 
 

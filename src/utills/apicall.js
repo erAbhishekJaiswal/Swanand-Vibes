@@ -185,6 +185,13 @@ export const generateStockReport = () => {
     });
 };
 
+export const getCategories = () => {
+  return axios.get(`${API_URL}/category/`);
+};
+
+
+
+
 //  Users Api
 //
 // export const getAllUsers = () => {

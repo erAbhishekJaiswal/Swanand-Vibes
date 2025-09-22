@@ -214,7 +214,7 @@
 .network-table-container {
   background: #ffffff7a;
   border-radius: 1rem;
-  overflow: hidden;
+  overflow: auto;
   box-shadow: var(--shadow);
 }
 
@@ -238,7 +238,7 @@
 }
 
 .network-table-row:hover {
-  background: var(--bg-tertiary);
+  background: #ccccccec;
 }
 
 .network-level-cell {

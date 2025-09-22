@@ -147,7 +147,7 @@ const ContactList = () => {
 
       <div className="contact-controls">
         <div className="search-box">
-          <FiSearch className="search-icon" />
+          {/* <FiSearch className="search-icon" /> */}
           <input
             type="text"
             placeholder="Search contacts..."

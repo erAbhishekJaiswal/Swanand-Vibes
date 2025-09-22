@@ -586,9 +586,9 @@ const getStatusIcon = (status) => {
       </div>
        </div> */}
 
-      <div className="requests-controls">
-        <div className="search-box">
-          <FiSearch className="search-icon" />
+      <div className="withdrawal-requests-controls">
+        <div className="withdrawal-search-box">
+          {/* <FiSearch className="search-icon" /> */}
           <input
             type="text"
             placeholder="Search users or amount..."
@@ -597,9 +597,9 @@ const getStatusIcon = (status) => {
           />
         </div>
 
-        <div className="filter-controls">
-          <div className="filter-group">
-            <FiFilter className="filter-icon" />
+        <div className="withdrawal-filter-controls">
+          <div className="withdrawal-filter-group">
+            <FiFilter className="withdrawal-filter-icon" />
             <select 
               value={statusFilter} 
               onChange={(e) => setStatusFilter(e.target.value)}
@@ -613,7 +613,7 @@ const getStatusIcon = (status) => {
             </select>
           </div>
 
-          <div className="filter-group">
+          <div className="withdrawal-filter-group">
             <select 
               value={itemsPerPage} 
               onChange={(e) => setItemsPerPage(Number(e.target.value))}
@@ -668,7 +668,7 @@ const getStatusIcon = (status) => {
           </div>
         </div>
       </div> */}
-      <div className="stats-cards">
+      <div className="withdrawal-stats-cards">
   <div className="stat-card">
     <div className="stat-icon total">
       <FiDollarSign />
@@ -715,7 +715,7 @@ const getStatusIcon = (status) => {
           <thead>
             <tr>
               <th onClick={() => handleSort('name')}>
-                <div className="table-header">
+                <div className="withdrawal-table-header">
                   User
                   {sortField === 'name' && (
                     sortDirection === 'asc' ? <FiChevronUp /> : <FiChevronDown />
@@ -723,7 +723,7 @@ const getStatusIcon = (status) => {
                 </div>
               </th>
               <th onClick={() => handleSort('amount')}>
-                <div className="table-header">
+                <div className="withdrawal-table-header">
                   Amount
                   {sortField === 'amount' && (
                     sortDirection === 'asc' ? <FiChevronUp /> : <FiChevronDown />
@@ -731,7 +731,7 @@ const getStatusIcon = (status) => {
                 </div>
               </th>
               <th onClick={() => handleSort('balance')}>
-                <div className="table-header">
+                <div className="withdrawal-table-header">
                   Balance
                   {sortField === 'balance' && (
                     sortDirection === 'asc' ? <FiChevronUp /> : <FiChevronDown />
@@ -739,7 +739,7 @@ const getStatusIcon = (status) => {
                 </div>
               </th>
               <th onClick={() => handleSort('status')}>
-                <div className="table-header">
+                <div className="withdrawal-table-header">
                   Status
                   {sortField === 'status' && (
                     sortDirection === 'asc' ? <FiChevronUp /> : <FiChevronDown />
@@ -747,7 +747,7 @@ const getStatusIcon = (status) => {
                 </div>
               </th>
               <th onClick={() => handleSort('date')}>
-                <div className="table-header">
+                <div className="withdrawal-table-header">
                   Request Date
                   {sortField === 'date' && (
                     sortDirection === 'asc' ? <FiChevronUp /> : <FiChevronDown />

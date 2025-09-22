@@ -149,7 +149,7 @@ const Gallery = () => {
       <div className="gallery-filters">
         <div className="gallery-filter-group">
           <div className="search-box">
-            <FiSearch className="search-icon" />
+            {/* <FiSearch className="search-icon" /> */}
             <input
               type="text"
               placeholder="Search images..."
@@ -159,7 +159,7 @@ const Gallery = () => {
           </div>
 
           <div className="category-filter">
-            <FiFilter className="filter-icon" />
+            {/* <FiFilter className="filter-icon" /> */}
             <select 
               value={selectedCategory} 
               onChange={(e) => handleCategoryChange(e.target.value)}
@@ -173,7 +173,7 @@ const Gallery = () => {
             </select>
           </div>
 
-          <div className="date-filter">
+          {/* <div className="date-filter">
             <FiCalendar className="filter-icon" />
             <input
               type="date"
@@ -191,14 +191,14 @@ const Gallery = () => {
             <button onClick={applyDateFilter} className="apply-btn">
               Apply
             </button>
-          </div>
+          </div> */}
 
           <button onClick={clearFilters} className="clear-filters-btn">
             Clear Filters
           </button>
         </div>
 
-        <div className="results-info">
+        {/* <div className="results-info">
           <span>{totalItems} images found</span>
           <select 
             value={itemsPerPage} 
@@ -209,7 +209,7 @@ const Gallery = () => {
             <option value="36">36 per page</option>
             <option value="48">48 per page</option>
           </select>
-        </div>
+        </div> */}
       </div>
 
       {/* Gallery Content */}

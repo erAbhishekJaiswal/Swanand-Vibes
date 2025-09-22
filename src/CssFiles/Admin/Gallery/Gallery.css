@@ -22,7 +22,7 @@
   display: flex;
   justify-content: space-between;
   padding: 25px;
-  border: 1px solid;
+  /* border: 1px solid; */
     border-radius: 10px;
     margin-bottom: 15px;
   color: #212121;
@@ -35,6 +35,13 @@
 
 .add-gallery-btn{
   padding: 12px;
+  background: #4b6cb7;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
 }
 
 .gallery-controls {
@@ -362,6 +369,14 @@
     align-items: stretch;
   }
 
+  .gallery-add-gallery{
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .gallery-search-box {
+    width: 100%;
+  }
   .gallery-controls {
     flex-direction: column;
     align-items: stretch;

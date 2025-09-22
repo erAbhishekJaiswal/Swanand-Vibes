@@ -566,7 +566,7 @@ const Contact = () => {
     e.preventDefault();
 
     if (formData.phone.length !== 10) {
-      toast.error("कृपया 10 अंकी वैध फोन नंबर प्रविष्ट करा.");
+      toast.error("Please enter a valid 10-digit phone number.");
       return;
     }
 
@@ -574,7 +574,7 @@ const Contact = () => {
     try {
       const res = await contactcreate(formData);
       console.log(res);
-      toast.success("धन्यवाद! आम्ही लवकरच आपल्याशी संपर्क करू.");
+      toast.success("Message sent successfully");
       setFormData({
         name: "",
         email: "",
@@ -583,7 +583,7 @@ const Contact = () => {
         message: "",
       });
     } catch (error) {
-      toast.error("त्रुटी आली आहे. कृपया पुन्हा प्रयत्न करा.");
+      toast.error("Failed to send message");
       console.error(error);
     } finally {
       setLoading(false);

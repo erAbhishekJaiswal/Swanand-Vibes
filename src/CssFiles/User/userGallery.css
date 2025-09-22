@@ -48,7 +48,7 @@
   background: transparent;
   border-radius: 6px;
   cursor: pointer;
-  color: #ececec;
+  color: #001aff;
   transition: all 0.2s;
 }
 
@@ -69,9 +69,9 @@
 .gallery-filters {
   /* background: white; */
   border-radius: 12px;
-  padding: 20px;
+  /* padding: 20px; */
   margin-bottom: 25px;
-  border: 1px solid #202020;
+  /* border: 1px solid #202020; */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
 }
 
@@ -122,8 +122,9 @@
 }
 
 .category-filter select, .date-filter input {
-  /* border: none; */
-  border: 1px solid #1e293b;
+  border: none;
+  /* border: 1px solid #1e293b; */
+  width: 100%;
   border-radius: 5px;
   background: none;
   font-size: 14px;
@@ -163,6 +164,7 @@
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
+  margin-top: 0px;
 }
 
 .clear-filters-btn:hover {
@@ -181,10 +183,10 @@
 
 .results-info select {
   padding: 6px 10px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #1d1d1d;
   border-radius: 6px;
   background: transparent;
-  color: #e8e8e9;
+  color: #000000;
   cursor: pointer;
 }
 

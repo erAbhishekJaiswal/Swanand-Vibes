@@ -247,17 +247,17 @@
 
 .requests-header h1 {
   font-size: 28px;
-  color: #444444;
+  color: #292929;
   margin: 0 0 8px 0;
 }
 
 .requests-header p {
-  color: #656565;
+  color: #272727;
   margin: 0;
   font-size: 16px;
 }
 
-.requests-controls {
+.withdrawal-requests-controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -266,61 +266,61 @@
   gap: 15px;
 }
 
-.search-box {
+.withdrawal-search-box {
   position: relative;
   width: 300px;
 }
 
-.search-box input {
+.withdrawal-search-box input {
   width: 100%;
   padding: 12px 15px 12px 40px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #252525;
   border-radius: 8px;
   font-size: 14px;
   /* background: white; */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.search-icon {
+.withdrawal-search-icon {
   position: absolute;
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #94a3b8;
+  color: #242424;
 }
 
-.filter-controls {
+.withdrawal-filter-controls {
   display: flex;
   gap: 15px;
 }
 
-.filter-group {
+.withdrawal-filter-group {
   display: flex;
   align-items: center;
   gap: 10px;
   /* background: white; */
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #222222;
 }
 
-.filter-icon {
-  color: #cecece;
+.withdrawal-filter-icon {
+  color: #272727;
 }
 
-.filter-group select {
+.withdrawal-filter-group select {
   border: none;
   background: none;
   font-size: 14px;
-  color: #c0c0c0;
+  color: #202020;
   cursor: pointer;
 }
 
-.filter-group select:focus {
+.withdrawal-filter-group select:focus {
   outline: none;
 }
 
-.stats-cards {
+.withdrawal-stats-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
@@ -335,7 +335,7 @@
   align-items: center;
   gap: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
-  border: 1px solid #f1f5f9;
+  border: 1px solid #2c2c2c;
 }
 
 .stat-icon {
@@ -409,7 +409,7 @@
   background: rgb(5, 72, 139);
 }
 
-.table-header {
+.withdrawal-table-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -810,7 +810,7 @@
     width: 100%;
   }
   
-  .filter-controls {
+  .withdrawal-filter-controls {
     width: 100%;
     justify-content: space-between;
   }
@@ -850,7 +850,7 @@
     grid-template-columns: 1fr;
   }
   
-  .filter-controls {
+  .withdrawal-filter-controls {
     flex-direction: column;
     gap: 10px;
   }

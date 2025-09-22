@@ -32,16 +32,10 @@ const Login = () => {
   const handleSubmit = async (e) => {
     
     e.preventDefault();
-    setLoading(true);
+    try {
+       setLoading(true);
     const res = await authlogin(formData);
-    const data = res.data;
-    // fetch("http://localhost:5000/api/auth/login", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(formData),
-    // });
-    // const data = await res.json();
-
+    const data = res.data;  
     if (res.status === 200) {
       loginUser(data);
 
@@ -57,6 +51,14 @@ const Login = () => {
       toast.error(data.message);
       setLoading(false);
     }
+    } catch (error) {
+     setLoading(false);
+      console.error("Error logging in:", error);
+      toast.error(`${error.response.data.message} Error`);
+      setFormData({ email: "", password: "" });
+    }
+
+  
   };
 
   if (loading) {

@@ -364,7 +364,7 @@ const GalleryList = () => {
     if (!window.confirm('Are you sure you want to delete this image?')) return;
 
     try {
-      await axios.delete(`https://swanand-vibes-backend.vercel.app/gallery/${id}`);
+      await axios.delete(`https://swanand-vibes-backend.vercel.app/api/gallery/${id}`);
       toast.success('Image deleted successfully');
       fetchImages();
     } catch (error) {
