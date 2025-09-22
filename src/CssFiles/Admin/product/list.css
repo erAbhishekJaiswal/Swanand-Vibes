@@ -525,7 +525,8 @@
   }
   
   .pagination {
-    flex-direction: column;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
     gap: 12px;
   }
   

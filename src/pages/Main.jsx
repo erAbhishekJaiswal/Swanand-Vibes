@@ -21,6 +21,7 @@ import OtpForgetVerification from "../components/OtpForgetPassword";
 import TermsAndConditions from "./Common/TermsAndConditions";
 import PrivacyPolicy from "./Common/PrivacyPolicy";
 import AutoLogoutManager from "../utills/AutoLogoutManager";
+// import Footer from "../components/Footer";
 
 const Main = () => {
   return (
@@ -59,6 +60,7 @@ const Main = () => {
            {/* Not Authorized Page */}
         <Route path="/not-authorized" element={<NotAuthorized />} />
         </Routes>
+        {/* <Footer /> */}
       {/* </BrowserRouter> */}
     </main>
   );

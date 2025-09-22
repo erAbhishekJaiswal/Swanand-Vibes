@@ -2005,7 +2005,7 @@ const OrderList = () => {
               disabled={currentPage === 1}
               onClick={() => fetchOrders(currentPage - 1, itemsPerPage, searchTerm, statusFilter, startDate, endDate)}
             >
-              <FiChevronLeft /> Previous
+              <FiChevronLeft /> 
             </button>
             
             {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
@@ -2030,13 +2030,14 @@ const OrderList = () => {
                 </button>
               );
             })}
+
             
             <button 
               className="pagination-btn"
               disabled={currentPage === totalPages}
               onClick={() => fetchOrders(currentPage + 1, itemsPerPage, searchTerm, statusFilter, startDate, endDate)}
             >
-              Next <FiChevronRight />
+               <FiChevronRight />
             </button>
           </div>
         </div>

@@ -750,30 +750,63 @@ const EditProduct = () => {
   };
 
   // Upload images to Cloudinary
+  // const uploadImagesToCloudinary = async (imageFiles, signatureData) => {
+  //   const { timestamp, signature, cloudName, apiKey } = signatureData;
+  //   const uploadedImages = [];
+    
+  //   for (const image of imageFiles) {
+  //     const imageFormData = new FormData();
+  //     imageFormData.append("file", image);
+  //     imageFormData.append("api_key", apiKey);
+  //     imageFormData.append("timestamp", timestamp);
+  //     imageFormData.append("signature", signature);
+
+  //     const uploadRes = await axios.post(
+  //       `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+  //       imageFormData
+  //     );
+
+  //     uploadedImages.push({
+  //       public_id: uploadRes.data.public_id,
+  //       url: uploadRes.data.secure_url,
+  //     });
+  //   }
+    
+  //   return uploadedImages;
+  // };
+
   const uploadImagesToCloudinary = async (imageFiles, signatureData) => {
-    const { timestamp, signature, cloudName, apiKey } = signatureData;
-    const uploadedImages = [];
-    
-    for (const image of imageFiles) {
-      const imageFormData = new FormData();
-      imageFormData.append("file", image);
-      imageFormData.append("api_key", apiKey);
-      imageFormData.append("timestamp", timestamp);
-      imageFormData.append("signature", signature);
+  const { timestamp, signature, cloudName, apiKey } = signatureData;
+  const uploadedImages = [];
 
-      const uploadRes = await axios.post(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        imageFormData
-      );
-
-      uploadedImages.push({
-        public_id: uploadRes.data.public_id,
-        url: uploadRes.data.secure_url,
-      });
+  for (const image of imageFiles) {
+    // Skip if it's already an uploaded image (i.e., object with `url`)
+    if (image.url && image.public_id) {
+      uploadedImages.push(image); // already uploaded
+      continue;
     }
-    
-    return uploadedImages;
-  };
+
+    // If it's a new File, upload it
+    const imageFormData = new FormData();
+    imageFormData.append("file", image);
+    imageFormData.append("api_key", apiKey);
+    imageFormData.append("timestamp", timestamp);
+    imageFormData.append("signature", signature);
+
+    const uploadRes = await axios.post(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      imageFormData
+    );
+
+    uploadedImages.push({
+      public_id: uploadRes.data.public_id,
+      url: uploadRes.data.secure_url,
+    });
+  }
+
+  return uploadedImages;
+};
+
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -792,6 +825,8 @@ const EditProduct = () => {
         "https://swanand-vibes-backend.vercel.app/api/products/signature"
       );
       const signatureData = sigRes.data;
+      console.log(signatureData);
+      
 
       // 2. Upload main product images to Cloudinary
       const uploadedMainImages = await uploadImagesToCloudinary(images, signatureData);
@@ -813,6 +848,13 @@ const EditProduct = () => {
       // 4. Calculate total stock from variants
       const totalStock = variantsWithUploadedImages.reduce((total, variant) => total + parseInt(variant.stock || 0), 0);
 
+      console.log({
+        ...formData,
+        stock: totalStock,
+        images: uploadedMainImages,
+        variants: variantsWithUploadedImages,
+      });
+      
       // 5. Update product data
       const updatedProduct = await updateProduct(id, {
         ...formData,

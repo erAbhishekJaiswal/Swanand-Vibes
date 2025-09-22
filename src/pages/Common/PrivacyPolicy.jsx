@@ -1,6 +1,7 @@
 // PrivacyPolicy.js
 import React, { useState } from 'react';
 import '../../CssFiles/common/PrivacyPolicy.css';
+import Footer from '../../components/Footer';
 
 const PrivacyPolicy = () => {
   const [activeSection, setActiveSection] = useState('introduction');
@@ -207,14 +208,7 @@ const PrivacyPolicy = () => {
         </main>
       </div>
 
-      <footer className="policy-footer">
-        <p>© {new Date().getFullYear()} Company Name. All rights reserved.</p>
-        <div className="footer-links">
-          <a href="/terms">Terms of Service</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/cookies">Cookie Policy</a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

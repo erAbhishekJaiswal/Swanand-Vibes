@@ -4,6 +4,7 @@ import "./css/ResetForget.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {toast} from 'react-hot-toast';
+import Footer from "./Footer";
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
@@ -90,6 +91,7 @@ const ForgetPassword = () => {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

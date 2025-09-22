@@ -49,14 +49,6 @@
 
 // export default UserList
 
-
-
-
-
-
-
-
-
 // import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 // import { useNavigate } from 'react-router-dom';
@@ -247,98 +239,118 @@
 
 // export default UserList;
 
-
-
-
-
-
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../../../CssFiles/Admin/user/UserList.css';
-import { getAllUsers, deleteUser } from '../../../utills/apicall';
-import Spinner from '../../../components/Spinner';
-import { toast } from 'react-hot-toast';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../../CssFiles/Admin/user/UserList.css";
+import { getAllUsers, deleteUser } from "../../../utills/apicall";
+import Spinner from "../../../components/Spinner";
+import { toast } from "react-hot-toast";
 
 const UserList = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+    // Filters
+  const [searchTerm, setSearchTerm] = useState("");
+  const [roleFilter, setRoleFilter] = useState("all");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(searchTerm);
+  const [debouncedRoleFilter, setDebouncedRoleFilter] = useState(roleFilter);
 
-  // Filters
-  const [searchTerm, setSearchTerm] = useState('');
-  const [roleFilter, setRoleFilter] = useState('all');
+
 
   // Pagination
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
 
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+      setDebouncedRoleFilter(roleFilter);
+    }, 500); // 500ms debounce time
+
+    return () => {
+      clearTimeout(handler); // Clean up
+    };
+  }, [searchTerm, roleFilter]);
+
   const fetchUsers = async () => {
     try {
       setLoading(true);
 
+      // const params = {
+      //   page,
+      //   limit,
+      //   search: searchTerm !== '' ? searchTerm : '',
+      //   role: roleFilter !== 'all' ? roleFilter : ''};
+
       const params = {
         page,
         limit,
-        search: searchTerm !== '' ? searchTerm : '',
-        role: roleFilter !== 'all' ? roleFilter : ''};
+        search: debouncedSearchTerm !== "" ? debouncedSearchTerm : "",
+        role: debouncedRoleFilter !== "all" ? debouncedRoleFilter : "",
+      };
 
       const response = await getAllUsers(params);
       console.log(response.data.data);
-      const result = response.data
+      const result = response.data;
       if (result.success) {
         setUsers(response.data.data);
         setTotalPages(response.data.totalPages);
       } else {
-        setError('Failed to load users.');
+        setError("Failed to load users.");
       }
     } catch (error) {
-      console.error('Error fetching users:', error);
-      setError('Failed to load users. Please try again later.');
+      console.error("Error fetching users:", error);
+      setError("Failed to load users. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
 
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, [page, searchTerm, roleFilter]);
+
   useEffect(() => {
     fetchUsers();
-  }, [page, searchTerm, roleFilter]);
+  }, [page, debouncedSearchTerm, debouncedRoleFilter]);
 
   const handleDeleteUser = async (userId, userName) => {
     if (window.confirm(`Are you sure you want to delete ${userName}?`)) {
       try {
         await deleteUser(userId);
-        toast.success('User deleted successfully!');
+        toast.success("User deleted successfully!");
         fetchUsers();
       } catch (error) {
-        console.error('Error deleting user:', error);
-        toast.error('Failed to delete user. Please try again.');
+        console.error("Error deleting user:", error);
+        toast.error("Failed to delete user. Please try again.");
       }
     }
   };
 
   const getRoleBadgeClass = (role) => {
     switch (role) {
-      case 'admin':
-        return 'badge admin';
-      case 'moderator':
-        return 'badge moderator';
-      case 'user':
-        return 'badge user';
+      case "admin":
+        return "badge admin";
+      case "moderator":
+        return "badge moderator";
+      case "user":
+        return "badge user";
       default:
-        return 'badge';
+        return "badge";
     }
   };
 
   const getRoleDisplayName = (role) => {
     switch (role) {
-      case 'admin':
-        return 'Administrator';
-      case 'moderator':
-        return 'Moderator';
-      case 'user':
-        return 'User';
+      case "admin":
+        return "Administrator";
+      case "moderator":
+        return "Moderator";
+      case "user":
+        return "User";
       default:
         return role;
     }
@@ -376,8 +388,10 @@ const UserList = () => {
     <div className="user-list-container">
       <div className="user-list-header">
         <div className="header-content">
-          <h2 className='user-list-title'>User Management</h2>
-          <p className='user-list-subtitle'>Manage your system users and permissions</p>
+          <h2 className="user-list-title">User Management</h2>
+          <p className="user-list-subtitle">
+            Manage your system users and permissions
+          </p>
         </div>
       </div>
 
@@ -417,26 +431,23 @@ const UserList = () => {
           <thead>
             <tr>
               <th>
-                <div className="table-header">#</div></th>
+                <div className="userlist-table-header">#</div>
+              </th>
               <th>
-                <div className="table-header">Name
-                </div>
-                </th>
+                <div className="userlist-table-header">Name</div>
+              </th>
               <th>
-                <div className="table-header">
-                    Email
-                </div></th>
+                <div className="userlist-table-header">Email</div>
+              </th>
               <th>
-                <div className="table-header">
-                    Role
-                </div></th>
+                <div className="userlist-table-header">Role</div>
+              </th>
               <th>
-               <div className="table-header">Joined</div> 
-                </th>
+                <div className="userlist-table-header">Joined</div>
+              </th>
               <th>
-                <div className="table-header">Actions
-                </div>
-                </th>
+                <div className="userlist-table-header">Actions</div>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -454,10 +465,7 @@ const UserList = () => {
                   {new Date(user.createdAt || Date.now()).toLocaleDateString()}
                 </td>
                 <td className="action-buttons">
-                  <button
-                    onClick={() => handleViewUser(user._id)}
-                    title="View"
-                  >
+                  <button onClick={() => handleViewUser(user._id)} title="View">
                     👁️
                   </button>
                   <button
@@ -483,13 +491,13 @@ const UserList = () => {
           >
             ⬅ Prev
           </button>
-          <span  className="user-pagination-text">
+          <span className="user-pagination-text">
             Page {page} of {totalPages}
           </span>
           <button
             disabled={page === totalPages}
             onClick={() => setPage((prev) => prev + 1)}
-             className="user-pagination-btn"
+            className="user-pagination-btn"
           >
             Next ➡
           </button>
@@ -500,16 +508,16 @@ const UserList = () => {
         <div className="empty-state">
           <h3>No users found</h3>
           <p>
-            {searchTerm || roleFilter !== 'all'
-              ? 'Try adjusting your search or filter criteria.'
-              : 'No users available in the system.'}
+            {searchTerm || roleFilter !== "all"
+              ? "Try adjusting your search or filter criteria."
+              : "No users available in the system."}
           </p>
-          {(searchTerm || roleFilter !== 'all') && (
+          {(searchTerm || roleFilter !== "all") && (
             <button
               className="clear-filters-btn"
               onClick={() => {
-                setSearchTerm('');
-                setRoleFilter('all');
+                setSearchTerm("");
+                setRoleFilter("all");
                 setPage(1);
               }}
             >
@@ -523,11 +531,6 @@ const UserList = () => {
 };
 
 export default UserList;
-
-
-
-
-
 
 // UserList.js (Updated)
 // import React, { useEffect, useState } from 'react'
@@ -564,7 +567,7 @@ export default UserList;
 //     // Filter users based on search term and role filter
 //     useEffect(() => {
 //         let results = users;
-        
+
 //         // Apply search filter
 //         if (searchTerm) {
 //             results = results.filter(user =>
@@ -572,12 +575,12 @@ export default UserList;
 //                 user.email.toLowerCase().includes(searchTerm.toLowerCase())
 //             );
 //         }
-        
+
 //         // Apply role filter
 //         if (roleFilter !== 'all') {
 //             results = results.filter(user => user.role === roleFilter);
 //         }
-        
+
 //         setFilteredUsers(results);
 //     }, [users, searchTerm, roleFilter]);
 
@@ -612,7 +615,7 @@ export default UserList;
 //             default: return role;
 //         }
 //     };
-    
+
 //     const handleViewUser = (id) => {
 //         navigate(`/admin/detail/${id}`);
 //     };
@@ -726,8 +729,8 @@ export default UserList;
 //                             <button className="action-btn edit-btn" title="Edit User">
 //                                 <span className="btn-icon">✏️</span>
 //                             </button>
-//                             <button 
-//                                 className="action-btn delete-btn" 
+//                             <button
+//                                 className="action-btn delete-btn"
 //                                 title="Delete User"
 //                                 onClick={() => handleDeleteUser(user.id, user.name)}
 //                             >
@@ -749,13 +752,13 @@ export default UserList;
 //                     <div className="empty-icon">👥</div>
 //                     <h3>No users found</h3>
 //                     <p>
-//                         {searchTerm || roleFilter !== 'all' 
+//                         {searchTerm || roleFilter !== 'all'
 //                             ? 'Try adjusting your search or filter criteria'
 //                             : 'No users available in the system'
 //                         }
 //                     </p>
 //                     {(searchTerm || roleFilter !== 'all') && (
-//                         <button 
+//                         <button
 //                             className="clear-filters-btn"
 //                             onClick={() => {
 //                                 setSearchTerm('');
@@ -787,10 +790,3 @@ export default UserList;
 // };
 
 // export default UserList;
-
-
-
-
-
-
-

@@ -1,6 +1,7 @@
 // TermsAndConditions.js
 import React, { useState } from 'react';
 import '../../CssFiles/common/TermsAndConditions.css';
+import Footer from '../../components/Footer';
 
 const TermsAndConditions = () => {
   const [accepted, setAccepted] = useState(false);
@@ -110,6 +111,7 @@ const TermsAndConditions = () => {
           </div> */}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

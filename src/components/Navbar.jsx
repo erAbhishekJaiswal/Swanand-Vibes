@@ -411,7 +411,7 @@ const Navbar = () => {
                 <div>
                   <Link to="/user/cart" onClick={handleNavLinkClick} className="notification-btn futuristic-btn">
                     <span className="btn-icon">🛒</span>
-                    <span className="cart-count" aria-live="polite">{cartItems.length}</span>
+                    <span className="nav-cart-count" aria-live="polite">{cartItems.length}</span>
                   </Link>
                 </div>
 

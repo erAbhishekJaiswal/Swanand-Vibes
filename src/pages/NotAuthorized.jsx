@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import '../CssFiles/NotAuthorized.css';
+import Footer from "../components/Footer";
 
 const NotAuthorized = () => {
   return (
@@ -19,7 +20,8 @@ const NotAuthorized = () => {
         Go Back Home
       </Link>
       </div>
-      
+
+      <Footer />
     </div>
   );
 };

@@ -2091,6 +2091,7 @@ import { getCommonProducts, getFilters } from "../../utills/apicall";
 import Spinner from "../../components/Spinner";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import Footer from "../../components/Footer";
 
 const ProductList = () => {
   const navigate = useNavigate();
@@ -2614,6 +2615,8 @@ const ProductList = () => {
           </main>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

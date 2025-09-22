@@ -7,6 +7,7 @@ import { isAuthenticated, getUserRole , loginUser} from "../../utills/authServic
 import { loginUser as authlogin } from '../../utills/apicall';
 import { toast } from "react-hot-toast";
 import Spinner from "../../components/Spinner";
+import Footer from "../../components/Footer";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -147,6 +148,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

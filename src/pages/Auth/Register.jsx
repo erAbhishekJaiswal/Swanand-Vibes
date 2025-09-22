@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { registerUser,verifyUser } from '../../utills/apicall';
 import {toast} from 'react-hot-toast';
 import Spinner from "../../components/Spinner"
+import Footer from '../../components/Footer';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -201,6 +202,7 @@ const Register = () => {
           <p>Already have an account? <Link to="/login" className="auth-link">Sign in</Link></p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

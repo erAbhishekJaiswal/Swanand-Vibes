@@ -20,6 +20,7 @@ import UploadImage from "./Gallery/UploadImage";
 import GiftUpload from "./Gift/GiftUpload";
 import GalleryList from "./Gallery/GalleryList";
 import GiftList from "./Gift/GiftList";
+import Footer from "../../components/Footer";
 const Pages = () => {
   return (
     <div>
@@ -47,6 +48,7 @@ const Pages = () => {
           <Route path="/giftupload" element={<GiftUpload/>}/>
           <Route path="/giftlist" element={<GiftList/>}/>
         </Routes>
+        <Footer />
     </div>
   );
 };

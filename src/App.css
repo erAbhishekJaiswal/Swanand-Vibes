@@ -9,4 +9,5 @@
   padding: 0px;
   margin-top: 60px; /* Adjust based on header height */
   /* margin-bottom: 40px; /* Adjust based on footer height */
+  min-height: 90vh;
 }

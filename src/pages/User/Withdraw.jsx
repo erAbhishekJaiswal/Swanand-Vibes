@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import { FiDollarSign, FiWallet, FiAlertCircle, FiCheck, FiX, FiInfo, FiArrowLeft } from 'react-icons/fi';
 import '../../CssFiles/User/Withdraw.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Withdraw = () => {
   const [amount, setAmount] = useState('');
@@ -12,6 +13,8 @@ const Withdraw = () => {
   const [message, setMessage] = useState({ type: '', text: '' });
   const [withdrawalHistory, setWithdrawalHistory] = useState([]);
   const userId = localStorage.getItem('userId'); // Get user ID from storage
+
+  const navigate = useNavigate();
 
   // Fetch wallet data and KYC status
   useEffect(() => {
@@ -120,10 +123,14 @@ const Withdraw = () => {
     }
   };
 
+  const handleSupportClick = () => {
+    navigate('/contact');
+  }
+
   const formatCurrency = (value) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR',
     }).format(value);
   };
 
@@ -167,7 +174,7 @@ const Withdraw = () => {
           <div className="balance-card">
             <div className="balance-info">
               <div className="balance-icon">
-                {/* <FiDollarSign /> */}
+                ₹
               </div>
               <div className="balance-details">
                 <h3>Available Balance</h3>
@@ -290,7 +297,7 @@ const Withdraw = () => {
                 <strong>Minimum Amount:</strong> ₹10
               </li>
               <li>
-                <strong>Transaction Fee:</strong> 1% (min $2)
+                <strong>Transaction Fee:</strong> 1% (min ₹2)
               </li>
               <li>
                 <strong>Daily Limit:</strong> ₹5,000
@@ -301,7 +308,7 @@ const Withdraw = () => {
           <div className="help-card">
             <h4>Need Help?</h4>
             <p>If you have any questions about withdrawals, contact our support team.</p>
-            <button className="support-button">Contact Support</button>
+            <button className="support-button" onClick={handleSupportClick}>Contact Support</button>
           </div>
         </div>
       </div>

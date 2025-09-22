@@ -322,8 +322,8 @@ export const clearCart = (userId) => {
   return axios.delete(`${API_URL}/user/cart/${userId}/clear`);
 };
 
-export const updateCartItem = (userId, productId, quantity) => {
-  return axios.put(`${API_URL}/user/cart/${userId}/${productId}`, { quantity });
+export const updateCartItem = (userId, itemId, quantity) => {
+  return axios.put(`${API_URL}/user/cart/${userId}`, { quantity, itemId , userId});
 };
 
 // Wallet Api

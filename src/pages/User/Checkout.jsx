@@ -772,30 +772,6 @@
 
 // export default Checkout;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Checkout.js
 // import React, { useEffect, useState } from "react";
 // import "../../CssFiles/User/Checkout.css";
@@ -824,7 +800,6 @@
 //     shippingPrice: 0,
 //     taxPrice: 0,
 //     totalPrice: 0,
-
 
 //     // Shipping Method
 //     shippingMethod: "standard",
@@ -987,7 +962,6 @@
 //       };
 //       console.log(addressPayload);
 
-      
 //       // save to DB
 //       const res = await axios.put(
 //         `http://localhost:5000/api/users/${userId}/address`,
@@ -1301,8 +1275,8 @@
 //                   <div className="saved-addresses">
 //                     <h3>Select a Saved Address</h3>
 //                     {savedAddresses.map((address, index) => (
-//                       <div 
-//                         key={index} 
+//                       <div
+//                         key={index}
 //                         className={`address-option ${selectedAddress === address ? 'selected' : ''}`}
 //                         onClick={() => handleAddressSelect(address)}
 //                       >
@@ -1816,34 +1790,13 @@
 
 // export default Checkout;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import "../../CssFiles/User/Checkout.css";
 import axios from "axios";
 import { getUserId } from "../../utills/authService";
-import { placeOrder } from '../../utills/apicall';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
+import { placeOrder } from "../../utills/apicall";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import Spinner from "../../components/Spinner";
 
 const Checkout = () => {
@@ -1876,8 +1829,12 @@ const Checkout = () => {
       try {
         setIsLoading(true);
         const [cartResponse, addressResponse] = await Promise.all([
-          axios.get(`https://swanand-vibes-backend.vercel.app/api/user/cart/${userId}`),
-          axios.get(`https://swanand-vibes-backend.vercel.app/api/users/${userId}`),
+          axios.get(
+            `https://swanand-vibes-backend.vercel.app/api/user/cart/${userId}`
+          ),
+          axios.get(
+            `https://swanand-vibes-backend.vercel.app/api/users/${userId}`
+          ),
         ]);
 
         //  const [cartResponse, addressResponse] = await Promise.all([
@@ -1888,7 +1845,7 @@ const Checkout = () => {
         setCartItems(cartResponse.data.data?.items || []);
         setSavedAddresses(addressResponse.data || {});
         console.log(addressResponse.data, cartResponse.data);
-        
+
         // Pre-fill form with user data
         if (addressResponse.data) {
           setFormData((prev) => ({
@@ -1919,7 +1876,7 @@ const Checkout = () => {
       name: "Standard Shipping",
       price: 0,
       delivery: "5-7 business days",
-    }
+    },
   ];
 
   const handleInputChange = (e) => {
@@ -1938,7 +1895,11 @@ const Checkout = () => {
     const newErrors = {};
 
     if (step === 1) {
-      if (!formData.mobile) newErrors.mobile = "Mobile number is required";
+      if (!formData.mobile) {
+        newErrors.mobile = "Mobile number is required";
+      } else if (!/^\d{10}$/.test(formData.mobile)) {
+        newErrors.mobile = "Mobile number must be exactly 10 digits";
+      }
       if (!formData.address) newErrors.address = "Address is required";
       if (!formData.city) newErrors.city = "City is required";
       if (!formData.state) newErrors.state = "State is required";
@@ -1958,10 +1919,10 @@ const Checkout = () => {
   const handleAddressNext = async () => {
     try {
       if (!validateStep(1)) return;
-      
+
       setIsLoading(true);
       const addressPayload = {
-        userId,
+        // userId,
         mobile: formData.mobile,
         address: formData.address,
         apartment: formData.apartment,
@@ -1971,11 +1932,15 @@ const Checkout = () => {
         country: formData.country,
       };
 
+      console.log(addressPayload);
+
       // Use consistent API endpoint
       const res = await axios.put(
         `https://swanand-vibes-backend.vercel.app/api/users/${userId}/address`,
         addressPayload
       );
+
+      console.log(res.data);
 
       if (res.status === 200) {
         // Refresh user data
@@ -1983,6 +1948,8 @@ const Checkout = () => {
           `https://swanand-vibes-backend.vercel.app/api/users/${userId}`
         );
         setSavedAddresses(addressResponse.data);
+        console.log(addressResponse);
+
         nextStep();
       }
     } catch (error) {
@@ -2000,8 +1967,15 @@ const Checkout = () => {
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
-      const totalPrice = calculateTotal();
+      // const totalPrice = calculateTotal();
+      const totalPrice = Math.round(calculateTotal() * 100);
 
+      console.log(totalPrice);
+      
+      if (totalPrice > 50000000) {
+        toast.error("Order amount exceeds Razorpay's ₹5,00,000 limit.");
+        return;
+      }
       // 1. Create Razorpay Order on backend
       const { data: order } = await axios.post(
         "https://swanand-vibes-backend.vercel.app/api/pay/create-order",
@@ -2068,49 +2042,45 @@ const Checkout = () => {
     }
   };
 
-
   // Get base price (price before tax)
-const getBasePrice = (item) => {
-  const taxRate = item?.product?.tax || 0;
-  return item.price / (1 + taxRate / 100);
-};
+  const getBasePrice = (item) => {
+    const taxRate = item?.product?.tax || 0;
+    return item.price / (1 + taxRate / 100);
+  };
 
-// Get tax amount from item
-const getTaxAmount = (item) => {
-  return item.price - getBasePrice(item);
-};
+  // Get tax amount from item
+  const getTaxAmount = (item) => {
+    return item.price - getBasePrice(item);
+  };
 
+  // Subtotal (without tax)
+  const calculateSubtotal = () => {
+    return cartItems.reduce((total, item) => {
+      const base = getBasePrice(item);
+      return total + base * item.qty;
+    }, 0);
+  };
 
-// Subtotal (without tax)
-const calculateSubtotal = () => {
-  return cartItems.reduce((total, item) => {
-    const base = getBasePrice(item);
-    return total + base * item.qty;
-  }, 0);
-};
+  // Tax (based on actual product tax)
+  const calculateTax = () => {
+    return cartItems.reduce((total, item) => {
+      const tax = getTaxAmount(item);
+      return total + tax * item.qty;
+    }, 0);
+  };
 
-// Tax (based on actual product tax)
-const calculateTax = () => {
-  return cartItems.reduce((total, item) => {
-    const tax = getTaxAmount(item);
-    return total + tax * item.qty;
-  }, 0);
-};
+  // Shipping stays the same
+  const getShippingCost = () => {
+    const method = shippingMethods.find(
+      (m) => m.id === formData.shippingMethod
+    );
+    return method ? method.price : 0;
+  };
 
-// Shipping stays the same
-const getShippingCost = () => {
-  const method = shippingMethods.find(
-    (m) => m.id === formData.shippingMethod
-  );
-  return method ? method.price : 0;
-};
-
-// Final Total (subtotal + tax + shipping)
-const calculateTotal = () => {
-  return calculateSubtotal() + calculateTax() + getShippingCost();
-};
-
-
+  // Final Total (subtotal + tax + shipping)
+  const calculateTotal = () => {
+    return calculateSubtotal() + calculateTax() + getShippingCost();
+  };
 
   // const calculateSubtotal = () => {
   //   return cartItems.reduce((total, item) => total + item.price * item.qty, 0);
@@ -2188,7 +2158,9 @@ const calculateTotal = () => {
 
                   <div className="form-row">
                     <div className="form-group">
-                      <label className="checkout-label" htmlFor="email">Email Address *</label>
+                      <label className="checkout-label" htmlFor="email">
+                        Email Address *
+                      </label>
                       <input
                         type="email"
                         id="email"
@@ -2200,7 +2172,9 @@ const calculateTotal = () => {
                       />
                     </div>
                     <div className="form-group">
-                      <label className="checkout-label" htmlFor="mobile">Mobile Number *</label>
+                      <label className="checkout-label" htmlFor="mobile">
+                        Mobile Number *
+                      </label>
                       <input
                         type="tel"
                         id="mobile"
@@ -2217,7 +2191,9 @@ const calculateTotal = () => {
                   </div>
 
                   <div className="form-group">
-                    <label className="checkout-label" htmlFor="address">Street Address *</label>
+                    <label className="checkout-label" htmlFor="address">
+                      Street Address *
+                    </label>
                     <input
                       type="text"
                       id="address"
@@ -2248,7 +2224,9 @@ const calculateTotal = () => {
 
                   <div className="form-row">
                     <div className="form-group">
-                      <label className="checkout-label" htmlFor="city">City *</label>
+                      <label className="checkout-label" htmlFor="city">
+                        City *
+                      </label>
                       <input
                         type="text"
                         id="city"
@@ -2263,7 +2241,9 @@ const calculateTotal = () => {
                       )}
                     </div>
                     <div className="form-group">
-                      <label className="checkout-label" htmlFor="state">State *</label>
+                      <label className="checkout-label" htmlFor="state">
+                        State *
+                      </label>
                       <input
                         type="text"
                         id="state"
@@ -2278,7 +2258,9 @@ const calculateTotal = () => {
                       )}
                     </div>
                     <div className="form-group">
-                      <label className="checkout-label" htmlFor="zipCode">ZIP Code *</label>
+                      <label className="checkout-label" htmlFor="zipCode">
+                        ZIP Code *
+                      </label>
                       <input
                         type="text"
                         id="zipCode"
@@ -2295,7 +2277,9 @@ const calculateTotal = () => {
                   </div>
 
                   <div className="form-group">
-                    <label className="checkout-label" htmlFor="country">Country</label>
+                    <label className="checkout-label" htmlFor="country">
+                      Country
+                    </label>
                     <select
                       id="country"
                       name="country"

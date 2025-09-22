@@ -3,6 +3,7 @@ import './css/ResetForget.css';
 import { Link, useNavigate,useLocation, } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import Footer from './Footer';
 // import { resetPassword } from '../utills/apicall';
 
 const ResetPassword = () => {
@@ -167,6 +168,8 @@ const ResetPassword = () => {
           </div>
         )}
       </div>
+
+      <Footer />
     </div>
   );
 };

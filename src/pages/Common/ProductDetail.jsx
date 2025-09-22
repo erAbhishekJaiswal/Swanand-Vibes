@@ -994,6 +994,7 @@ import { toast } from "react-hot-toast";
 import { getUserId } from "../../utills/authService";
 import axios from "axios";
 import Spinner from "../../components/Spinner";
+import Footer from "../../components/Footer";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -1256,6 +1257,8 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
