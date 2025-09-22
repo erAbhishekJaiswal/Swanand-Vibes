@@ -115,6 +115,7 @@ const UploadImage = () => {
           <option className="gift-category-option">Certificate</option>
           <option className="gift-category-option">Business Plan</option>
           <option className="gift-category-option">Product Catalog</option>
+          <option className="gift-category-option">Banner</option>
         </select>
 
         {!previewImage ? (
