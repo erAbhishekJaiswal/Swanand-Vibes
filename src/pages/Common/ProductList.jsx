@@ -2182,7 +2182,7 @@ const ProductList = () => {
       }
     } catch (error) {
       console.error("Error fetching products:", error);
-      toast.error("Failed to fetch products");
+      toast.error("Products are Not Found");
     } finally {
       setIsLoading(false);
     }
