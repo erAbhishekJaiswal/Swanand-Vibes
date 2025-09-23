@@ -800,7 +800,14 @@
   .withdrawal-requests-container {
     padding: 15px;
   }
-  
+  .requests-header{
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .requests-header-text{
+    text-align: center;
+  }
   .requests-controls {
     flex-direction: column;
     align-items: stretch;

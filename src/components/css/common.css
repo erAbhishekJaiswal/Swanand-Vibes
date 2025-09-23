@@ -603,14 +603,14 @@ body {
 
 .futuristic-sidebar.expanded {
   width: 275px;
-  height: 90vh;
+  height: 100vh;
   position: fixed;
   z-index: 10000;
 }
 
 .futuristic-sidebar.collapsed {
   width: 55px;
-  height: 90vh;
+  height: 100vh;
   position: fixed;
   z-index: 10000;
 }

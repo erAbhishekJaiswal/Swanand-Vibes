@@ -17,6 +17,7 @@ import Footer from "../../components/Footer";
 const Pages = () => {
   return (
     <div  >
+      <div className="user-content-page-panel">
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/" element={<Dashboard />} />
@@ -34,6 +35,7 @@ const Pages = () => {
           <Route path="/network" element={<NetworkView />} />
           <Route path="/gallery" element={<Gallery />} />
         </Routes>
+      </div>
         <Footer />
     </div>
   );

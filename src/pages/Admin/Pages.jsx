@@ -24,6 +24,7 @@ import Footer from "../../components/Footer";
 const Pages = () => {
   return (
     <div>
+      <div className="admin-content-page-panel">
         <Routes>
           <Route path="/" element={<AdminDashboard />} />
           <Route path="/dashboard" element={<AdminDashboard />} />
@@ -48,6 +49,7 @@ const Pages = () => {
           <Route path="/giftupload" element={<GiftUpload/>}/>
           <Route path="/giftlist" element={<GiftList/>}/>
         </Routes>
+      </div>
         <Footer />
     </div>
   );

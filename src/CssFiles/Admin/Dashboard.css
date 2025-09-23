@@ -4,6 +4,13 @@
     padding: 0px;
 } */
 
+.admin-content-page-panel{
+    min-height: 100vh;
+}
+
+.user-content-page-panel{
+    min-height: 100vh;
+}
 /* Dashboard.css */
 .dashboard-container {
   display: flex;
