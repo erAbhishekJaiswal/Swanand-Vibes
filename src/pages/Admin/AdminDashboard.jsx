@@ -107,7 +107,7 @@ const AdminDashboard = () => {
               </div>
             </div>
 
-            <div className="recent-activities">
+            {/* <div className="recent-activities">
               <h3>Recent Activities</h3>
               <div className="activity-list">
                 <div className="activity-item">
@@ -144,7 +144,7 @@ const AdminDashboard = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </main>
       </div>

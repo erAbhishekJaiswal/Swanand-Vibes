@@ -895,12 +895,12 @@ const List = () => {
             <button className="btn-success" onClick={handlegenerateStockReport}>
               <FiDownload /> Stock Report
             </button>
-            <button 
+            {/* <button 
               className={`btn-filter ${showFilters ? 'active' : ''}`}
               onClick={() => setShowFilters(!showFilters)}
             >
               <FiFilter /> Filters
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

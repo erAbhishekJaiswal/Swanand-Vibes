@@ -407,7 +407,7 @@ import { getUserProfile, updateUserProfile } from "../../utills/apicall";
 import { toast } from 'react-hot-toast';
 import Spinner from "../../components/Spinner";
 import { useNavigate } from "react-router-dom";
-import Footer from "../../components/Footer";
+// import Footer from "../../components/Footer";
 
 const Profile = ({ user, onUpdateProfile }) => {
   const [refLink, setRefLink] = useState("");
@@ -765,7 +765,7 @@ const Profile = ({ user, onUpdateProfile }) => {
         </div>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

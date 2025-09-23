@@ -1141,7 +1141,7 @@ const ProductDetail = () => {
         <div className="product-info">
           <div className="product-header">
             <h1>{productData?.name}</h1>
-            <div className="product-rating-large">
+            {/* <div className="product-rating-large">
               <span className="rating-stars">
                 {"★".repeat(Math.floor(productData?.rating || 0))}
                 {"☆".repeat(5 - Math.floor(productData?.rating || 0))}
@@ -1149,7 +1149,7 @@ const ProductDetail = () => {
               <span className="rating-value">
                 {productData?.rating} • {productData?.numOfReviews} Reviews
               </span>
-            </div>
+            </div> */}
 
             {/* ✅ Show price (general OR variant) */}
             {selectedVariant ? (
