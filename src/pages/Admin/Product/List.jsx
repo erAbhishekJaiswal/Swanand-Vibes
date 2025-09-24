@@ -914,28 +914,28 @@ const List = () => {
                   <th className="product-image-col">Image</th>
                   <th 
                     className="product-name-col sortable"
-                    onClick={() => handleSort('name')}
+                    
                   >
-                    Name {sortField === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}
+                    Name 
                   </th>
                   <th 
                     className="product-price-col sortable"
-                    onClick={() => handleSort('price')}
+                    
                   >
-                    Price {sortField === 'price' && (sortOrder === 'asc' ? '↑' : '↓')}
+                    Price 
                   </th>
                   <th 
                     className="product-stock-col sortable"
-                    onClick={() => handleSort('stock')}
+                    
                   >
-                    Stock {sortField === 'stock' && (sortOrder === 'asc' ? '↑' : '↓')}
+                    Stock 
                   </th>
                   <th className="product-category-col">Category</th>
                   <th 
                     className="product-updated-col sortable"
-                    onClick={() => handleSort('updatedAt')}
+                  
                   >
-                    Updated {sortField === 'updatedAt' && (sortOrder === 'asc' ? '↑' : '↓')}
+                    Updated
                   </th>
                   <th className="product-status-col">Status</th>
                   <th className="product-actions-col">Actions</th>
@@ -966,15 +966,15 @@ const List = () => {
                         <td className="product-price-cell">
                           {hasVariants ? (
                             <div className="price-range">
-                              <span className="min-price">₹{variantInfo?.minPrice}</span>
+                              <span className="min-price">₹{variantInfo?.minPrice.toLocaleString()}</span>
                               <span className="range-separator">-</span>
-                              <span className="max-price">₹{variantInfo?.maxPrice}</span>
+                              <span className="max-price">₹{variantInfo?.maxPrice === variantInfo?.minPrice.toLocaleString() ? '': variantInfo?.maxPrice.toLocaleString() }</span>
                               {variantInfo?.variantCount > 1 && (
                                 <div className="variant-count">{variantInfo?.variantCount} variants</div>
                               )}
                             </div>
                           ) : (
-                            <div className="single-price">₹{variantInfo?.minPrice}</div>
+                            <div className="single-price">₹{variantInfo?.minPrice.toLocaleString()}</div>
                           )}
                         </td>
                         <td className="product-stock-cell">

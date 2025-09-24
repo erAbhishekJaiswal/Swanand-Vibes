@@ -8,35 +8,42 @@ import { useDispatch } from "react-redux";
 import {toggleSidebar} from '../store/sidebar';
 import { MdContactPage } from "react-icons/md";
 import { PiNetworkDuotone } from "react-icons/pi";
-
+import { MdOutlineDashboard } from "react-icons/md";
+import { FaUsers } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { VscVerifiedFilled } from "react-icons/vsc";
+import { BiMoneyWithdraw } from "react-icons/bi";
+import { GrGallery } from "react-icons/gr";
+import { CiGift } from "react-icons/ci";
+import { TiShoppingCart } from "react-icons/ti";
 const Sidebar = ({ isCollapsed, toggle }) => {
   // const [isExpanded, setIsExpanded] = useState(true);
   const location = useLocation();
 
   const menuItems = [
-    { icon: '📊', text: 'DashBoard', path: '/admin/' },
-    { icon: '👤', text: 'Users', path: '/admin/users', active: true },
+    { icon: <MdOutlineDashboard />, text: 'DashBoard', path: '/admin/' },
+    { icon: <FaUsers />, text: 'Users', path: '/admin/users', active: true },
     { icon: '📦', text: 'Products', path: '/admin/products' },
     { icon: '🛍️', text: 'Orders', path: '/admin/orderlist' },
-    { icon: '🪪', text: 'KYC', path: '/admin/kyc' },
-    { icon: '💰', text: 'Withdraw', path: '/admin/withdraw' },
+    { icon: <VscVerifiedFilled />, text: 'KYC', path: '/admin/kyc' },
+    { icon: <BiMoneyWithdraw />, text: 'Withdraw', path: '/admin/withdraw' },
     { icon: <MdContactPage />, text: 'Contact List', path: '/admin/contactlist' },
-    { icon: '🖼️', text: 'Gallery', path: '/admin/gallery' },
-    { icon: '🎁', text: 'add gift', path: '/admin/giftlist' },
+    { icon: <GrGallery />, text: 'Gallery', path: '/admin/gallery' },
+    { icon: <CiGift />, text: 'add gift', path: '/admin/giftlist' },
     
     // { icon: '🌡️', text: 'Monitoring', path: '/admin/monitoring' },
     // { icon: '🛠️', text: 'Settings', path: '/admin/settings' }
   ];
 
   const UserMenuItems = [
-     { icon: '📊', text: 'DashBoard', path: '/user/dashboard' },
-    { icon: '👤', text: 'Profile', path: '/user/profile' },
+     { icon: <MdOutlineDashboard />, text: 'DashBoard', path: '/user/dashboard' },
+    { icon: <FaUser />, text: 'Profile', path: '/user/profile' },
     { icon: '📦', text: 'Orders', path: '/user/orders' },
-    { icon: '🛒', text: 'Cart', path: '/user/cart' },
+    { icon: <TiShoppingCart />, text: 'Cart', path: '/user/cart' },
     { icon: <GiWallet />, text: 'Wallet', path: '/user/wallet' },
     { icon: <PiNetworkDuotone />, text: 'Network', path: '/user/network' },
-    { icon: '🖼️', text: 'Gallery', path: '/user/gallery' },
-    // { icon: '🎁', text: 'add gift', path: '/user/giftlist' },
+    { icon: <GrGallery />, text: 'Gallery', path: '/user/gallery' },
+    // { icon: <CiGift />, text: 'add gift', path: '/user/giftlist' },
     // { icon: '⚙️', text: 'Settings', path: '/user/settings' }
   ];
 

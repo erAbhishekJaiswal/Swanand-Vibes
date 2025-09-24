@@ -1522,6 +1522,7 @@ import '../../../CssFiles/Admin/order/OrderList.css';
 import Spinner from '../../../components/Spinner';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import Pagination from '../../../components/Pagination';
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -1550,14 +1551,25 @@ const OrderList = () => {
       const params = new URLSearchParams({
         page: page.toString(),
         limit: limit.toString(),
-        ...(search && { search }),
+        ...(search && { search}),
         ...(status !== 'all' && { status }),
         ...(start && { startDate: start }),
         ...(end && { endDate: end })
       });
 
+      console.log({
+        page: page.toString(),
+        limit: limit.toString(),
+        ...(search && { search }),
+        ...(status !== 'all' && { status }),
+        ...(start && { startDate: start }),
+        ...(end && { endDate: end })
+      });
+      
+      // Replace with actual API call
       const response = await fetch(`https://swanand-vibes-backend.vercel.app/api/order?${params}`);
       const data = await response.json();
+      console.log(data);
       
       if (data.success) {
         setOrders(data.data);
@@ -1766,8 +1778,8 @@ const OrderList = () => {
             <FiPackage />
           </div>
           <div className="stat-info">
-            <h3>{orders.filter(o => o.deliveryStatus === 'processing').length}</h3>
-            <p>Processing</p>
+            <h3>{orders.filter(o => o.deliveryStatus === 'shipped').length}</h3>
+            <p>Shipped</p>
           </div>
         </div>
 
@@ -1793,6 +1805,9 @@ const OrderList = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            <button className="search-btn" onClick={() => applyDateFilter()}>
+              <FiSearch />
+            </button>
           </div>
 
           <button 
@@ -1813,10 +1828,10 @@ const OrderList = () => {
               >
                 <option value="all">All Status</option>
                 <option value="pending">Pending</option>
-                <option value="processing">Processing</option>
+                {/* <option value="processing">Processing</option> */}
                 <option value="shipped">Shipped</option>
                 <option value="delivered">Delivered</option>
-                <option value="cancelled">Cancelled</option>
+                {/* <option value="cancelled">Cancelled</option> */}
               </select>
             </div>
 
@@ -1993,7 +2008,7 @@ const OrderList = () => {
       </div>
 
       {/* Pagination */}
-      {totalPages > 1 && (
+      {/* {totalPages > 1 && (
         <div className="pagination-controls">
           <div className="pagination-info">
             Page {currentPage} of {totalPages} • {totalOrders} total orders
@@ -2041,7 +2056,17 @@ const OrderList = () => {
             </button>
           </div>
         </div>
-      )}
+      )} */}
+
+      <Pagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  totalItems={totalOrders}
+  onPageChange={(pageNum) =>
+    fetchOrders(pageNum, itemsPerPage, searchTerm, statusFilter, startDate, endDate)
+  }
+/>
+
 
       {/* Order Detail Modal */}
       {selectedOrder && (
@@ -2078,7 +2103,7 @@ const OrderList = () => {
                         className="status-select"
                       >
                         <option value="pending">Pending</option>
-                        <option value="processing">Processing</option>
+                        {/* <option value="processing">Processing</option> */}
                         <option value="shipped">Shipped</option>
                         <option value="delivered">Delivered</option>
                         <option value="cancelled">Cancelled</option>

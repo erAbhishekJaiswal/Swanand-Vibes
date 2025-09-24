@@ -2367,7 +2367,7 @@ const ProductList = () => {
                     className={`filter-item ${selectedCategory === "" ? "active" : ""}`}
                     onClick={() => handleCategoryChange("")}
                   >
-                    All Products ({totalItems})
+                    All Products 
                   </button>
                   {availableFilters.categories.map((cat) => (
                     <button

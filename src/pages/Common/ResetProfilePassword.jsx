@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import '../../components/css/ResetForget.css';
 import { Link, useNavigate,useLocation, } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import {getUserRole} from '../../utills/authService'
 import axios from 'axios';
-// import { resetPassword } from '../utills/apicall';
 
 const ResetProfilePassword = () => {
     const navigate = useNavigate();
@@ -161,9 +161,13 @@ const ResetProfilePassword = () => {
             <div className="reset-success-icon">✓</div>
             <h3>Password Reset Successful</h3>
             <p>Your password has been successfully reset.</p>
-            <a href="/login" className="reset-auth-button">
-              Back to Login
-            </a>
+            {getUserRole() === "admin" ? 
+             <Link to={"/admin/profile"} className="reset-auth-button">
+              Back to Profile
+            </Link> :
+             <Link to={"/user/profile"} className="reset-auth-button">
+              Back to Profile
+            </Link>}
           </div>
         )}
       </div>

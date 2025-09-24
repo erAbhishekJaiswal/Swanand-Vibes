@@ -402,7 +402,7 @@
 import React, { useEffect, useState } from "react";
 import "../../CssFiles/profile.css";
 import axios from "axios";
-import { getUserId, logoutUser } from "../../utills/authService";
+import { getUserId, logoutUser, getUserRole} from "../../utills/authService";
 import { getUserProfile, updateUserProfile } from "../../utills/apicall";
 import { toast } from 'react-hot-toast';
 import Spinner from "../../components/Spinner";
@@ -564,7 +564,12 @@ const Profile = ({ user, onUpdateProfile }) => {
  const handlePasswordChange = async () => {
    const resetToken = localStorage.getItem("refreshToken");
    const email = formData?.email;
-   navigate('/user/profile/reset-password', {state: {resetToken, email}})
+   if (getUserRole() === "admin") {
+     navigate('/admin/profile/reset-password', {state: {resetToken, email}})
+   }else {
+     navigate('/user/profile/reset-password', {state: {resetToken, email}})
+   }
+   
  }
 
   if (isLoading) {
@@ -671,7 +676,7 @@ const Profile = ({ user, onUpdateProfile }) => {
               </div>
             </div>
 
-            <div className="referral-section">
+           { getUserRole() === "user" && <div className="referral-section">
               <h3>Your Referral Link</h3>
               <div className="referral-input-group">
                 <input 
@@ -688,7 +693,7 @@ const Profile = ({ user, onUpdateProfile }) => {
                   Share Link
                 </button>
               </div>
-            </div>
+            </div>}
 
             <div className="form-actions">
               {isEditing ? (

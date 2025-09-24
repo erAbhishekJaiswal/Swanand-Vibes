@@ -233,8 +233,19 @@ export const getUserAddress = (userId) => {
 
 // Kyc
 //
-export const getAllKycs = () => {
-  return axios.get(`${API_URL}/user/kyc`);
+// export const getAllKycs = () => {
+//   return axios.get(`${API_URL}/user/kyc`);
+// };
+
+// ✅ Get all KYC records with query parameters
+export const getAllKycs = async (params = {}) => {
+  try {
+    const response = await axios.get(`${API_URL}/user/kyc`, { params });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch KYC list:', error);
+    throw error;
+  }
 };
 //
 export const approveKyc = (id) => {

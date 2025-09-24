@@ -2,7 +2,7 @@
 .admin-dashboard {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
   font-family: "Alan Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
