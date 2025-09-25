@@ -622,18 +622,16 @@ const Dashboard = () => {
 
     const [topusers, setTopusers] = useState([
     {
-      id: "ORD001",
-      date: "2023-04-10",
-      amount: 2499,
-      status: "Delivered",
-      items: 1,
+      userId: "ORD001",
+      name: "Loading",
+      amount: 0,
+      email: "Loading",
     },
     {
-      id: "ORD002",
-      date: "2023-04-05",
-      amount: 4297,
-      status: "Shipped",
-      items: 2,
+      userId: "ORD002",
+      name: "Loading",
+      amount: 0,
+      email: "Loading",
     },
   ]);
 
@@ -810,9 +808,9 @@ const Dashboard = () => {
                 {topusers.slice(0, 5).map((order) => (
                   <div key={order.userId} className="order-item">
                     <div className="order-info">
-                      <h4>User Name: {order.name}</h4>
+                      <h4>User Name: {order?.name}</h4>
                       <p>
-                         {order.email}
+                         {order?.email}
                       </p>
                     </div>
                     <div
