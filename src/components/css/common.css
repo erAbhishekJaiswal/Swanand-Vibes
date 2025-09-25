@@ -684,12 +684,12 @@ body {
 
 .sidebar-nav .nav-link:hover {
   background: var(--glass-bg);
-  color: var(--text-primary);
+  color: #1326f3;
 }
 
 .sidebar-nav .nav-item.active .nav-link {
   background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
-  color: var(--text-primary);
+  color: #1326f3;
   border-right: 2px solid var(--primary-accent);
 }
 

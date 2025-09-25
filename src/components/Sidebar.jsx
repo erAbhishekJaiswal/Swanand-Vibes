@@ -16,6 +16,9 @@ import { BiMoneyWithdraw } from "react-icons/bi";
 import { GrGallery } from "react-icons/gr";
 import { CiGift } from "react-icons/ci";
 import { TiShoppingCart } from "react-icons/ti";
+import { LuBoxes } from "react-icons/lu";
+import { MdOutlineShoppingBag } from "react-icons/md";
+import { CiSettings } from "react-icons/ci";
 const Sidebar = ({ isCollapsed, toggle }) => {
   // const [isExpanded, setIsExpanded] = useState(true);
   const location = useLocation();
@@ -23,8 +26,8 @@ const Sidebar = ({ isCollapsed, toggle }) => {
   const menuItems = [
     { icon: <MdOutlineDashboard />, text: 'DashBoard', path: '/admin/' },
     { icon: <FaUsers />, text: 'Users', path: '/admin/users', active: true },
-    { icon: '📦', text: 'Products', path: '/admin/products' },
-    { icon: '🛍️', text: 'Orders', path: '/admin/orderlist' },
+    { icon: <LuBoxes />, text: 'Products', path: '/admin/products' },
+    { icon: <MdOutlineShoppingBag />, text: 'Orders', path: '/admin/orderlist' },
     { icon: <VscVerifiedFilled />, text: 'KYC', path: '/admin/kyc' },
     { icon: <BiMoneyWithdraw />, text: 'Withdraw', path: '/admin/withdraw' },
     { icon: <MdContactPage />, text: 'Contact List', path: '/admin/contactlist' },
@@ -38,13 +41,13 @@ const Sidebar = ({ isCollapsed, toggle }) => {
   const UserMenuItems = [
      { icon: <MdOutlineDashboard />, text: 'DashBoard', path: '/user/dashboard' },
     { icon: <FaUser />, text: 'Profile', path: '/user/profile' },
-    { icon: '📦', text: 'Orders', path: '/user/orders' },
+    { icon: <LuBoxes />, text: 'Orders', path: '/user/orders' },
     { icon: <TiShoppingCart />, text: 'Cart', path: '/user/cart' },
     { icon: <GiWallet />, text: 'Wallet', path: '/user/wallet' },
     { icon: <PiNetworkDuotone />, text: 'Network', path: '/user/network' },
     { icon: <GrGallery />, text: 'Gallery', path: '/user/gallery' },
     // { icon: <CiGift />, text: 'add gift', path: '/user/giftlist' },
-    // { icon: '⚙️', text: 'Settings', path: '/user/settings' }
+    // { icon: <CiSettings />, text: 'Settings', path: '/user/settings' }
   ];
 
   // const handleExpand = () => {

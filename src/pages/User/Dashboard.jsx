@@ -599,6 +599,11 @@ import "../../CssFiles/User/UserDashboard.css";
 import axios from "axios";
 import { getUserId } from "../../utills/authService";
 import { useNavigate } from "react-router-dom";
+import { IoIosCart } from "react-icons/io";
+import { LuBoxes } from "react-icons/lu";
+import { LuReceiptIndianRupee } from "react-icons/lu";
+import { MdOutlineAccountBalanceWallet } from "react-icons/md";
+import { CgFileDocument } from "react-icons/cg";
 
 const Dashboard = () => {
   const id = getUserId();
@@ -640,7 +645,7 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  const [orders, setOrders] = useState([
+  const [topusers, setTopusers] = useState([
     {
       id: "ORD001",
       date: "2023-04-10",
@@ -671,7 +676,8 @@ const Dashboard = () => {
             <div className="user-stats">
               <div className="stat-card">
                 <div className="stat-icon level">
-                  <i className="fas fa-trophy"></i>
+                  {/* <i className="fas fa-trophy"></i> */}
+                  <IoIosCart />
                 </div>
                 <div className="stat-info">
                   <h3>{userData.cart}</h3>
@@ -681,7 +687,8 @@ const Dashboard = () => {
 
               <div className="stat-card">
                 <div className="stat-icon order">
-                  <i className="fas fa-trophy"></i>
+                  {/* <i className="fas fa-trophy"></i> */}
+                  <LuBoxes />
                 </div>
                 <div className="stat-info">
                   <h3>{userData.orders}</h3>
@@ -691,7 +698,8 @@ const Dashboard = () => {
 
               <div className="stat-card">
                 <div className="stat-icon points">
-                  <i className="fas fa-star"></i>
+                  {/* <i className="fas fa-star"></i> */}
+                  <LuReceiptIndianRupee />
                 </div>
                 <div className="stat-info">
                   <h3>₹{userData.totalOrderAmount.toFixed(1)}</h3>
@@ -700,7 +708,8 @@ const Dashboard = () => {
               </div>
               <div className="stat-card">
                 <div className="stat-icon wallet">
-                  <i className="fas fa-wallet"></i>
+                  {/* <i className="fas fa-wallet"></i> */}
+                  < MdOutlineAccountBalanceWallet />
                 </div>
                 <div className="stat-info">
                   <h3>₹{userData.walletBalance}</h3>
@@ -709,7 +718,7 @@ const Dashboard = () => {
               </div>
               <div className="stat-card">
                 <div className="stat-icon kyc">
-                  <i className="fas fa-id-card"></i>
+                  <CgFileDocument />
                 </div>
                 <div className="stat-info">
                   <h3
@@ -795,18 +804,18 @@ const Dashboard = () => {
               {/* Recent Orders */}
               <div className="dashboard-card recent-orders">
                 <h3 className="section-title">Recent Orders</h3>
-                {orders.slice(0, 2).map((order) => (
-                  <div key={order.id} className="order-item">
+                {topusers.slice(0, 2).map((order) => (
+                  <div key={order.userId} className="order-item">
                     <div className="order-info">
-                      <h4>Order #{order.id}</h4>
+                      <h4>User Name: {order.name}</h4>
                       <p>
-                        ₹{order.amount} • {order.items} item(s)
+                        ₹{order.amount}
                       </p>
                     </div>
                     <div
                       className={`order-status ${order.status.toLowerCase()}`}
                     >
-                      {order.status}
+                      {order.email}
                     </div>
                   </div>
                 ))}

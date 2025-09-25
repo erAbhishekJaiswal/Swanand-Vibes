@@ -62,8 +62,8 @@
 }
 
 .cart-count {
-  position: absolute;
-  right: 20px;
+  /* position: absolute;
+  right: 20px; */
   background-color: #e74c3c;
   color: white;
   border-radius: 50%;
