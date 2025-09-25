@@ -370,16 +370,24 @@ export const getOrders = (userId) => {
 
 
 // contact api 
-export const contactslist = () =>{
-    return axios.get(`${API_URL}/contact`);
-}
+// export const contactslist = () =>{
+//     return axios.get(`${API_URL}/contact`);
+// }
+
+// Update the contactslist function to accept query parameters
+export const contactslist = (params) => {
+  return axios.get(`http://localhost:5000/api/contact`, {
+    params
+  });
+};
+
 
 export const contactdelete = (id) => {
   return axios.delete(`${API_URL}/order/contact/${id}`);
 }
 
-export const contactupdate = (id, newStatus) => {
-  return axios.put(`${API_URL}/contact/${id}`, { status: newStatus });
+export const contactupdate = (id, status) => {
+  return axios.put(`${API_URL}/contact/${id}`,  status);
 }
 
 export const contactcreate = (contactData) => {

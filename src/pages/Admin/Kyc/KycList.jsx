@@ -545,6 +545,7 @@ import { FiUserCheck, FiClock, FiXCircle, FiEye, FiFilter, FiChevronLeft, FiChev
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../components/Spinner';
 import { getAllKycs } from '../../../utills/apicall';
+import Pagination from '../../../components/Pagination';
 
 const KYCList = () => {
   const [kycList, setKycList] = useState([]);
@@ -567,8 +568,18 @@ const KYCList = () => {
         search: searchTerm,
         status: statusFilter !== 'all' ? statusFilter : undefined
       };
+
+      console.log({
+        page: currentPage,
+        limit: 2,
+        search: searchTerm,
+        status: statusFilter !== 'all' ? statusFilter : undefined
+      });
+      
       const res = await getAllKycs(params);
 
+      console.log(res);
+      
       if (res.success) {
         setKycList(res.data);
         setTotalPages(res.totalPages);
@@ -582,7 +593,11 @@ const KYCList = () => {
 
   // Re-fetch data on filter/pagination changes
   useEffect(() => {
-    fetchKycData();
+    // set time delay of 2 seconds
+    setTimeout(() => {
+      fetchKycData();
+    }, 1000);
+    // fetchKycData();
   }, [searchTerm, statusFilter, currentPage]);
 
   // Helpers
@@ -594,6 +609,11 @@ const KYCList = () => {
       day: 'numeric'
     });
   };
+
+  const pageChange = (page) => {
+    setCurrentPage(page);
+    fetchKycData();
+  }
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -755,12 +775,12 @@ const KYCList = () => {
           </div>
 
           {/* Pagination */}
-          {totalPages > 1 && (
+          {/* {totalPages > 1 && (
             <div className="pagination-controls">
               <button
                 className="pagination-btn"
                 disabled={currentPage === 1}
-                onClick={() => setCurrentPage(prev => prev - 1)}
+                onClick={() => pageChange(prev => prev - 1)}
               >
                 <FiChevronLeft />
               </button>
@@ -769,7 +789,7 @@ const KYCList = () => {
                 <button
                   key={i + 1}
                   className={`pagination-btn ${currentPage === i + 1 ? 'active' : ''}`}
-                  onClick={() => setCurrentPage(i + 1)}
+                  onClick={() => pageChange(i + 1)}
                 >
                   {i + 1}
                 </button>
@@ -778,12 +798,19 @@ const KYCList = () => {
               <button
                 className="pagination-btn"
                 disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage(prev => prev + 1)}
+                onClick={() => pageChange(prev => prev + 1)}
               >
                 <FiChevronRight />
               </button>
             </div>
-          )}
+          )} */}
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={pageChange}
+          />
+
         </div>
       </div>
     </div>

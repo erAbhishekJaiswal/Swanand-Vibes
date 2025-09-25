@@ -620,6 +620,23 @@ const Dashboard = () => {
     gifts: [],
   });
 
+    const [topusers, setTopusers] = useState([
+    {
+      id: "ORD001",
+      date: "2023-04-10",
+      amount: 2499,
+      status: "Delivered",
+      items: 1,
+    },
+    {
+      id: "ORD002",
+      date: "2023-04-05",
+      amount: 4297,
+      status: "Shipped",
+      items: 2,
+    },
+  ]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -638,6 +655,7 @@ const Dashboard = () => {
           kycStatus: fatchdashboard.data.kycStatus,
           gifts: fatchdashboard.data.gifts,
         });
+        setTopusers(fatchdashboard.data.topWithdrawalUsers);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -645,22 +663,7 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  const [topusers, setTopusers] = useState([
-    {
-      id: "ORD001",
-      date: "2023-04-10",
-      amount: 2499,
-      status: "Delivered",
-      items: 1,
-    },
-    {
-      id: "ORD002",
-      date: "2023-04-05",
-      amount: 4297,
-      status: "Shipped",
-      items: 2,
-    },
-  ]);
+
 
   const handleOnclickOrders = () => {
     navigate("/user/orders")
@@ -803,28 +806,28 @@ const Dashboard = () => {
             <div className="dashboard-sections">
               {/* Recent Orders */}
               <div className="dashboard-card recent-orders">
-                <h3 className="section-title">Recent Orders</h3>
-                {topusers.slice(0, 2).map((order) => (
+                <h3 className="section-title">Top Users Withdraws</h3>
+                {topusers.slice(0, 5).map((order) => (
                   <div key={order.userId} className="order-item">
                     <div className="order-info">
                       <h4>User Name: {order.name}</h4>
                       <p>
-                        ₹{order.amount}
+                         {order.email}
                       </p>
                     </div>
                     <div
-                      className={`order-status ${order.status.toLowerCase()}`}
+                      className={`order-status `}
                     >
-                      {order.email}
+                      ₹{order.amount}
                     </div>
                   </div>
                 ))}
-                <button
+                {/* <button
                   className="view-all-btn"
                   onClick={handleOnclickOrders}
                 >
                   View All Orders
-                </button>
+                </button> */}
               </div>
 
               {/* Network Info */}

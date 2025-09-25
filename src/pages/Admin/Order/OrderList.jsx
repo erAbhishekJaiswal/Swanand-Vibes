@@ -1518,6 +1518,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { FiSearch, FiFilter, FiEye, FiChevronLeft, FiChevronRight, FiChevronDown, FiChevronUp, FiDollarSign, FiPackage, FiClock, FiCheck, FiX, FiCalendar, FiUser, FiTruck, FiCreditCard, FiShoppingCart, FiRefreshCw } from 'react-icons/fi';
+import { GrView } from "react-icons/gr";
+import { MdDeleteOutline } from "react-icons/md";
 import '../../../CssFiles/Admin/order/OrderList.css';
 import Spinner from '../../../components/Spinner';
 import { toast } from 'react-hot-toast';
@@ -1541,6 +1543,10 @@ const OrderList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [updatedStatus, setUpdatedStatus] = useState('');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [totalPendingOrders, setTotalPendingOrders] = useState(0);
+  const [totalDeliveredOrders, setTotalDeliveredOrders] = useState(0);
+  const [totalshippedOrders, setTotalShippedOrders] = useState(0);
+  
 
   // Fetch orders from API
   const fetchOrders = async (page = 1, limit = 10, search = "", status = "all", start = "", end = "") => {
@@ -1577,6 +1583,9 @@ const OrderList = () => {
         setTotalOrders(data.totalOrders);
         setTotalPages(data.totalPages);
         setCurrentPage(data.page);
+        setTotalPendingOrders(data.totalPendingOrders);
+        setTotalDeliveredOrders(data.totalDeliveredOrders);
+        setTotalShippedOrders(data.totalshippedOrders);
       } else {
         console.error('Error fetching orders:', data.error);
         toast.error('Failed to fetch orders');
@@ -1768,7 +1777,9 @@ const OrderList = () => {
             <FiClock />
           </div>
           <div className="stat-info">
-            <h3>{orders.filter(o => o.deliveryStatus === 'pending').length}</h3>
+            <h3>{totalPendingOrders}
+              {/* {orders.filter(o => o.deliveryStatus === 'pending').length} */}
+              </h3>
             <p>Pending</p>
           </div>
         </div>
@@ -1778,7 +1789,9 @@ const OrderList = () => {
             <FiPackage />
           </div>
           <div className="stat-info">
-            <h3>{orders.filter(o => o.deliveryStatus === 'shipped').length}</h3>
+            <h3>{totalshippedOrders}
+              {/* {orders.filter(o => o.deliveryStatus === 'shipped').length} */}
+              </h3>
             <p>Shipped</p>
           </div>
         </div>
@@ -1788,7 +1801,9 @@ const OrderList = () => {
             <FiCheck />
           </div>
           <div className="stat-info">
-            <h3>{orders.filter(o => o.deliveryStatus === 'delivered').length}</h3>
+            <h3>{totalDeliveredOrders}
+              {/* {orders.filter(o => o.deliveryStatus === 'delivered').length} */}
+              </h3>
             <p>Delivered</p>
           </div>
         </div>
@@ -1985,7 +2000,7 @@ const OrderList = () => {
                           onClick={() => setSelectedOrder(order)}
                           title="View Details"
                         >
-                          <FiEye />
+                          <GrView />
                         </button>
                       </div>
                     </td>

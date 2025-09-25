@@ -4,7 +4,7 @@ import { FiSearch, FiFilter, FiDollarSign, FiUser, FiClock, FiCheck, FiX, FiAler
 import '../../../CssFiles/Admin/Withdrawal/WithdrawalRequests.css';
 import axios from 'axios';
 import Spinner from "../../../components/Spinner";
-
+import Pagination from '../../../components/Pagination';
 const WithdrawalRequests = () => {
   const [requests, setRequests] = useState([]);
   const [filteredRequests, setFilteredRequests] = useState([]);
@@ -846,13 +846,13 @@ const getStatusIcon = (status) => {
         </table>
       </div>
 
-      {filteredRequests.length > 0 && (
+      {totalPages > 1 && (
         <div className="pagination-controls">
           <div className="pagination-info">
             Showing {indexOfFirstItem + 1} to {Math.min(indexOfLastItem, filteredRequests.length)} of {filteredRequests.length} requests
           </div>
           
-          <div className="pagination-buttons">
+          {/* <div className="pagination-buttons">
             <button 
               className="pagination-btn"
               disabled={currentPage === 1}
@@ -892,7 +892,15 @@ const getStatusIcon = (status) => {
             >
               <FiArrowRight />
             </button>
-          </div>
+          </div> */}
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalItems={filteredRequests.length}
+            onPageChange={paginate}
+          />
+
         </div>
       )}
 
