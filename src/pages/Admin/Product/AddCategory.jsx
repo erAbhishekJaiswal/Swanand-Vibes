@@ -18,10 +18,10 @@ export default function AddCategory() {
       setLoading(true);
       setError('');
       // Replace the URL with your real API endpoint
-      const res = await fetch('https://swanand-vibes-backend.vercel.app/api/category/');
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/category/`);
       if (!res.ok) throw new Error('Failed to fetch categories');
       const data = await res.json();
-      console.log(res, data);
+      // console.log(res, data);
       
       setCategories(data.categories);
       setLoading(false);
@@ -40,7 +40,7 @@ export default function AddCategory() {
       setLoading(true);
       setError('');
       setSuccess('');
-      const res = await fetch('https://swanand-vibes-backend.vercel.app/api/category', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/category`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name.trim() }),
@@ -67,7 +67,7 @@ export default function AddCategory() {
     try {
       setLoading(true);
       setError('');
-      const res = await fetch(`https://swanand-vibes-backend.vercel.app/api/category/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/category/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Failed to delete category');
       setCategories(prev => prev.filter(c => c._id !== id));
       setSuccess('Category deleted');

@@ -30,7 +30,7 @@ const WithdrawalRequests = () => {
     }
 
     const res = await axios.get(
-      `https://swanand-vibes-backend.vercel.app/api/user/wallet/withdrawal-report?start=${encodeURIComponent(
+      `${import.meta.env.VITE_API_URL}/user/wallet/withdrawal-report?start=${encodeURIComponent(
         startDate
       )}&end=${encodeURIComponent(endDate)}`,
       { responseType: "blob" }
@@ -78,7 +78,7 @@ const WithdrawalRequests = () => {
     //     // This would be your actual API call
     //     const response = await axios.get('https://swanand-vibes-backend.vercel.app/api/user/wallet/requests');
     //     const data = response.data;
-    //     console.log(data);
+    //     // console.log(data);
     //             // Mock data based on the API response structure
     //     // const mockData = [
     //     //   {
@@ -248,10 +248,10 @@ const WithdrawalRequests = () => {
   try {
     setIsLoading(true);
     
-    const response = await axios.get('https://swanand-vibes-backend.vercel.app/api/user/wallet/requests');
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/wallet/requests`);
     const data = response.data;
     
-    console.log(data);
+    // console.log(data);
     
     // Extract the withdrawalRequests array from the response
     const withdrawalRequests = data.withdrawalRequests || [];
@@ -370,7 +370,7 @@ if (statusFilter !== 'all') {
   // const updateStatus = async (requestId, newStatus) => {
   //   try {
   //     // This would be your actual API call
-  //     console.log({walletId: requests._id ,txnId: requestId, status: newStatus });
+  //     // console.log({walletId: requests._id ,txnId: requestId, status: newStatus });
       
   //     // await axios.patch(`/api/withdrawal-requests/${requestId}`, {walletId: requests._id ,txnId: requestId, status: newStatus });
       
@@ -401,14 +401,14 @@ if (statusFilter !== 'all') {
     
     if(newStatus === "withdrawal-rejected"){
       // API call to update status
-    await axios.put(`https://swanand-vibes-backend.vercel.app/api/user/wallet/${request._id}/reject-withdrawal`, {
+    await axios.put(`${import.meta.env.VITE_API_URL}/user/wallet/${request._id}/reject-withdrawal`, {
       walletId: request._id,
       txnId: request.transactions[0]._id,
       status: newStatus
     });
     }
     // API call to update status
-    await axios.put(`https://swanand-vibes-backend.vercel.app/api/user/wallet/${request._id}/approve-withdrawal`, {
+    await axios.put(`${import.meta.env.VITE_API_URL}/user/wallet/${request._id}/approve-withdrawal`, {
       walletId: request._id,
       txnId: request.transactions[0]._id,
       status: newStatus

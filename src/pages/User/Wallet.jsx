@@ -23,7 +23,7 @@ const Wallet = () => {
         const response = await fetchWallet(userId);
         // axios.get(`http://localhost:5000/api/user/wallet/${userId}`);
         setWalletData(response.data);
-        console.log(response.data);
+        // console.log(response.data);
 
       } catch (err) {
         toast.error('Error fetching wallet data:', err);

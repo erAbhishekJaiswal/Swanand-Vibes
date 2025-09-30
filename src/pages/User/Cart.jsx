@@ -20,7 +20,7 @@
 //       setLoading(true);
 //       const userCart = await getCart(id);
 //       // axios.get(`http://localhost:5000/api/user/cart/${id}`);
-//       console.log(userCart.data.data);
+//       // console.log(userCart.data.data);
 //       setCartItems(userCart.data.data.items);
 //       setLoading(false);
 //     };
@@ -255,7 +255,7 @@
 //       try {
 //         const userCart = await getCart(userId);
 //         setCartItems(userCart.data.data.items || []);
-//         console.log(userCart.data.data);
+//         // console.log(userCart.data.data);
 //       } catch (err) {
 //         toast.error("Failed to load cart");
 //       }
@@ -283,14 +283,14 @@
 
 //   // ✅ Remove item
 //   // const removeItem = async (itemId) => {
-//   //   console.log("Removing item with ID:", itemId);
+//   //   // console.log("Removing item with ID:", itemId);
 
 //   //   const updatedCart = cartItems.filter(item => item._id !== itemId);
 //   //   setCartItems(updatedCart);
 
 //   //   try {
 //   //     const response = await removeFromCart(userId, itemId);
-//   //     console.log("Item removed successfully:", response);
+//   //     // console.log("Item removed successfully:", response);
 
 //   //     toast.success("Item removed from cart");
 //   //   } catch (err) {
@@ -299,7 +299,7 @@
 //   // };
 
 //   const removeItem = async (itemId) => {
-//     console.log("Removing item with ID:", itemId);
+//     // console.log("Removing item with ID:", itemId);
 
 //     const updatedCart = cartItems.filter((item) => item._id !== itemId);
 //     setCartItems(updatedCart);
@@ -310,7 +310,7 @@
 //       //     itemId
 //       //   })
 //       await removeFromCart(userId, itemId);
-//       // console.log("Item removed successfully:", response.data);
+//       // // console.log("Item removed successfully:", response.data);
 
 //       toast.success("Item removed from cart");
 //     } catch (err) {
@@ -594,7 +594,7 @@ const Cart = () => {
       setLoading(true);
       try {
         const userCart = await getCart(userId);
-        console.log(userCart);
+        // // console.log(userCart);
         
         setCartItems(userCart.data.data.items || []);
       } catch (err) {
@@ -615,13 +615,13 @@ const Cart = () => {
     );
 
     try {
-      console.log(userId, itemId, newQty);
+      // // console.log(userId, itemId, newQty);
       
       await updateCartItem(userId, itemId, newQty);
       toast.success("Quantity updated");
 
     } catch (err) {
-      console.log(err);
+      // // console.log(err);
       toast.error("Failed to update quantity");
     }
   };
@@ -634,6 +634,7 @@ const Cart = () => {
       await removeFromCart(userId, itemId);
       toast.success("Item removed from cart");
     } catch (err) {
+      console.error("Error removing item:", err);
       toast.error("Error removing item");
     }
   };

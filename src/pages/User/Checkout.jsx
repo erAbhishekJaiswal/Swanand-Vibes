@@ -66,7 +66,7 @@
 //           axios.get(`http://localhost:5000/api/users/address/${userId}`)
 //         ]);
 //       const data = cartResponse.data.data.items;
-//       console.log({address: addressResponse.data, cart: data});
+//       // console.log({address: addressResponse.data, cart: data});
 //       setCartItems(data);
 //       // setAddress(addressResponse.data);
 //       setSavedAddresses(addressResponse.data || []);
@@ -79,7 +79,7 @@
 //   //   const fetchAddress = async () => {
 //   //     const response = await axios.get(`http://localhost:5000/api/user/address/${userId}`);
 //   //     const data = response.data;
-//   //     console.log(data);
+//   //     // console.log(data);
 //   //     setAddress(data);
 //   //   };
 //   //   fetchAddress();
@@ -176,7 +176,7 @@
 //   };
 
 //   // const handleAddressNext = async() => {
-//   //   console.log(formData);
+//   //   // console.log(formData);
 
 //   //   const res = await axios.put('http://localhost:5000/api/user/address', formData);
 //   //   if (res.status === 200) {
@@ -202,13 +202,13 @@
 //       zipCode: formData.zipCode,
 //       country: formData.country,
 //     };
-//     console.log(addressPayload);
+//     // console.log(addressPayload);
 
 //     // save to DB
 //     const res = await axios.put("http://localhost:5000/api/user/address", addressPayload);
 
 //     if (res.status === 200) {
-//       console.log("Address saved:", res.data);
+//       // console.log("Address saved:", res.data);
 
 //       // update local state
 //       setAddress(res.data);
@@ -838,7 +838,7 @@
 
 //         setCartItems(cartResponse.data.data?.items || []);
 //         setSavedAddresses(addressResponse.data || []);
-//         console.log(addressResponse.data);
+//         // console.log(addressResponse.data);
 
 //         // If user has saved addresses, pre-select the first one
 //         if (addressResponse.data && addressResponse.data.length > 0) {
@@ -960,7 +960,7 @@
 //         zipCode: formData.zipCode,
 //         country: formData.country,
 //       };
-//       console.log(addressPayload);
+//       // console.log(addressPayload);
 
 //       // save to DB
 //       const res = await axios.put(
@@ -969,7 +969,7 @@
 //       );
 
 //       if (res.status === 200) {
-//         console.log("Address saved:", res.data);
+//         // console.log("Address saved:", res.data);
 //         // Refresh saved addresses
 //         const addressResponse = await axios.get(
 //           `https://swanand-vibes-backend.vercel.app/api/users/address/${userId}`
@@ -993,7 +993,7 @@
 //   //   e.preventDefault();
 //   //   if (validateStep(2)) {
 //   //     // Process order submission
-//   //     console.log("Order submitted:", {
+//   //     // console.log("Order submitted:", {
 //   //       ...formData,
 //   //       cartItems,
 //   //       shippingMethod: formData.shippingMethod,
@@ -1029,7 +1029,7 @@
 //   //     //   }
 //   //     // );
 
-//   //     console.log("Order response:", orderResponse.data);
+//   //     // console.log("Order response:", orderResponse.data);
 //   //     setIsLoading(false);
 //   //     toast.success("Order placed successfully!");
 //   //     // alert("Order placed successfully!");
@@ -1830,10 +1830,10 @@ const Checkout = () => {
         setIsLoading(true);
         const [cartResponse, addressResponse] = await Promise.all([
           axios.get(
-            `https://swanand-vibes-backend.vercel.app/api/user/cart/${userId}`
+            `${import.meta.env.VITE_API_URL}/user/cart/${userId}`
           ),
           axios.get(
-            `https://swanand-vibes-backend.vercel.app/api/users/${userId}`
+            `${import.meta.env.VITE_API_URL}/users/${userId}`
           ),
         ]);
 
@@ -1844,7 +1844,7 @@ const Checkout = () => {
 
         setCartItems(cartResponse.data.data?.items || []);
         setSavedAddresses(addressResponse.data || {});
-        console.log(addressResponse.data, cartResponse.data);
+        // // console.log(addressResponse.data, cartResponse.data);
 
         // Pre-fill form with user data
         if (addressResponse.data) {
@@ -1932,28 +1932,28 @@ const Checkout = () => {
         country: formData.country,
       };
 
-      console.log(addressPayload);
+      // // console.log(addressPayload);
 
       // Use consistent API endpoint
       const res = await axios.put(
-        `https://swanand-vibes-backend.vercel.app/api/users/${userId}/address`,
+        `${import.meta.env.VITE_API_URL}/users/${userId}/address`,
         addressPayload
       );
 
-      console.log(res.data);
+      // // console.log(res.data);
 
       if (res.status === 200) {
         // Refresh user data
         const addressResponse = await axios.get(
-          `https://swanand-vibes-backend.vercel.app/api/users/${userId}`
+          `${import.meta.env.VITE_API_URL}/users/${userId}`
         );
         setSavedAddresses(addressResponse.data);
-        console.log(addressResponse);
+        // // console.log(addressResponse);
 
         nextStep();
       }
     } catch (error) {
-      console.error("Error saving address:", error);
+      // console.error("Error saving address:", error);
       toast.error("Failed to save address");
     } finally {
       setIsLoading(false);
@@ -1970,7 +1970,7 @@ const Checkout = () => {
       // const totalPrice = calculateTotal();
       const totalPrice = Math.round(calculateTotal() * 100);
 
-      console.log(totalPrice);
+      // // console.log(totalPrice);
       
       if (totalPrice > 50000000) {
         toast.error("Order amount exceeds Razorpay's ₹5,00,000 limit.");
@@ -1978,7 +1978,7 @@ const Checkout = () => {
       }
       // 1. Create Razorpay Order on backend
       const { data: order } = await axios.post(
-        "https://swanand-vibes-backend.vercel.app/api/pay/create-order",
+        `${import.meta.env.VITE_API_URL}/pay/create-order`,
         { amount: totalPrice }
       );
 
@@ -1994,7 +1994,7 @@ const Checkout = () => {
           try {
             // 3. Verify payment with backend
             await axios.post(
-              "https://swanand-vibes-backend.vercel.app/api/pay/verify",
+              `${import.meta.env.VITE_API_URL}/pay/verify`,
               {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,

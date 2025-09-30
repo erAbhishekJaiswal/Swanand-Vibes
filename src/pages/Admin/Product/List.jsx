@@ -10,7 +10,7 @@
 //         const fetchProducts = async () => {
 //             const response = await axios.get('http://localhost:5000/api/products/')
 //             setProducts(response.data.data)
-//             console.log(response.data)
+//             // console.log(response.data)
 //         }
 //         fetchProducts()
 //     }, [])
@@ -80,7 +80,7 @@
 //                 const response = await getAllProducts();
 //                 // axios.get('http://localhost:5000/api/products/');
 //                 setProducts(response.data.data);
-//                 console.log(response.data);
+//                 // console.log(response.data);
 //             } catch (err) {
 //                 setError('Failed to fetch products. Please try again later.');
 //                 console.error('Error fetching products:', err);
@@ -240,7 +240,7 @@
 //       const response = await getAllProducts(page, limit, ' ', ' '); // Pass pagination params
 //       setProducts(response.data.data);
 //       setTotalPages(response.data.totalPages);
-//       console.log(response.data);
+//       // console.log(response.data);
 //     } catch (err) {
 //       setError('Failed to fetch products. Please try again later.');
 //       console.error('Error fetching products:', err);
@@ -285,7 +285,7 @@
 //   //   link.click();
 //   //   link.remove();
 
-//   //     // console.log(res.data);
+//   //     // // console.log(res.data);
 //   //     toast.success('Stock report generated successfully.');
 //   //   } catch (error) {
 //   //     console.error('Error generating stock report:', error);
@@ -453,7 +453,7 @@
 //       setLoading(true);
 //       const response = await getAllProducts(page, limit, ' ', ' ');
 //       setProducts(response.data.data);
-//       console.log(response.data);
+//       // console.log(response.data);
       
 //       setTotalPages(response.data.totalPages);
 //       setTotalItems(response.data.totalItems);
@@ -753,7 +753,7 @@ const List = () => {
       setLoading(true);
       const response = await getAllProducts(page, limit, ' ', ' ');
       setProducts(response.data.data);
-      console.log(response.data);
+      // console.log(response.data);
       
       setTotalPages(response.data.totalPages);
       setTotalItems(response.data.totalItems);

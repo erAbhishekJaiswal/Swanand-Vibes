@@ -33,10 +33,10 @@
 //     e.preventDefault();
 //     setLoading(true);
 //     // Handle form submission
-//     console.log(formData);
+//     // console.log(formData);
 //     // const res = await axios.post("/api/contact/", formData )
 //     const res = await contactcreate(formData);
-//     console.log(res);
+//     // console.log(res);
 //     toast.success("Thank you for your message! We will get back to you soon.");
 //     setFormData({
 //       name: "",
@@ -307,7 +307,7 @@
 //     e.preventDefault();
 //     setLoading(true);
 //     const res = await contactcreate(formData);
-//     console.log(res);
+//     // console.log(res);
 //     toast.success("धन्यवाद! आम्ही लवकरच आपल्याशी संपर्क करू.");
 //     setFormData({
 //       name: "",
@@ -573,7 +573,7 @@ const Contact = () => {
     setLoading(true);
     try {
       const res = await contactcreate(formData);
-      console.log(res);
+      // // console.log(res);
       toast.success("Message sent successfully");
       setFormData({
         name: "",
@@ -584,7 +584,7 @@ const Contact = () => {
       });
     } catch (error) {
       toast.error("Failed to send message");
-      console.error(error);
+      // console.error(error);
     } finally {
       setLoading(false);
     }
@@ -819,7 +819,7 @@ export default Contact;
 //     e.preventDefault();
 //     setLoading(true);
 //     const res = await contactcreate(formData);
-//     console.log(res);
+//     // console.log(res);
 //     toast.success(t("send_message")); // localized toast
 //     setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
 //     setLoading(false);

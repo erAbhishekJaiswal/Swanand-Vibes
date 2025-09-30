@@ -8,7 +8,7 @@
 //             try {
 //                 const response = await axios.get('http://localhost:5000/api/users/');
 //                 setUsers(response.data);
-//                 console.log(response.data);
+//                 // console.log(response.data);
 //             } catch (error) {
 //                 console.error('Error fetching users:', error);
 //             }
@@ -293,7 +293,7 @@ const UserList = () => {
       };
 
       const response = await getAllUsers(params);
-      console.log(response.data.data);
+      // console.log(response.data.data);
       const result = response.data;
       if (result.success) {
         setUsers(response.data.data);

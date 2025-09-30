@@ -31,9 +31,9 @@ const AdminDashboard = () => {
     });
     const fetchStats = async () => {
       try {
-        const response = await fetch(`https://swanand-vibes-backend.vercel.app/api/users/dashboard/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/dashboard/${id}`);
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         
         setStats({
       users: data.userCount,

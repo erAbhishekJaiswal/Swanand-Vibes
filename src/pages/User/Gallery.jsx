@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { FiSearch, FiFilter, FiCalendar, FiChevronLeft, FiChevronRight, FiGrid, FiImage, FiDownload, FiEye } from 'react-icons/fi';
 import '../../CssFiles/User/userGallery.css';
 import Spinner from '../../components/Spinner';
+import { toast } from 'react-hot-toast';
 const Gallery = () => {
   const [images, setImages] = useState([]);
   const [filteredImages, setFilteredImages] = useState([]);
@@ -35,9 +36,9 @@ const Gallery = () => {
           ...(endDate && { endDate })
         });
 
-        const response = await fetch(`https://swanand-vibes-backend.vercel.app/api/gallery/common?${params}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/gallery/common?${params}`);
         const data = await response.json();
-        console.log(data);
+        // // console.log(data);
         
         if (data.data) {
           setImages(data.data);
@@ -51,6 +52,7 @@ const Gallery = () => {
         }
       } catch (error) {
         console.error('Error fetching gallery data:', error);
+        toast.error('Error fetching gallery data');
       } finally {
         setIsLoading(false);
       }

@@ -27,7 +27,7 @@ const GiftList = () => {
   const fetchGifts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('https://swanand-vibes-backend.vercel.app/api/gift/');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/gift/`);
       setGifts(response.data);
       
       const uniqueLevels = [...new Set(response.data.map(gift => gift.achievementLevel))];
@@ -63,7 +63,7 @@ const GiftList = () => {
     if (!window.confirm('Are you sure you want to delete this gift?')) return;
 
     try {
-      await axios.delete(`https://swanand-vibes-backend.vercel.app/api/gift/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/gift/${id}`);
       toast.success('Gift deleted successfully');
       fetchGifts();
     } catch (error) {
@@ -89,7 +89,7 @@ const GiftList = () => {
 
       // If new image selected, upload to Cloudinary
       if (editingGift.newImage) {
-        const sigRes = await axios.get("https://swanand-vibes-backend.vercel.app/api/products/signature");
+        const sigRes = await axios.get(`${import.meta.env.VITE_API_URL}/products/signature`);
         const { timestamp, signature, cloudName, apiKey } = sigRes.data;
 
         const data = new FormData();
@@ -107,7 +107,7 @@ const GiftList = () => {
       }
 
       // Update gift in database
-      await axios.put(`https://swanand-vibes-backend.vercel.app/api/gift/${editingGift._id}`, {
+      await axios.put(`h${import.meta.env.VITE_API_URL}/gift/${editingGift._id}`, {
         title: editingGift.title,
         description: editingGift.description,
         achievementLevel: editingGift.achievementLevel,

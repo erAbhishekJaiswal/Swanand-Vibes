@@ -52,8 +52,8 @@ const GiftUpload = () => {
     setLoading(true);
     try {
       // 🔹 Get Cloudinary signature from backend
-      const sigRes = await axios.get("https://swanand-vibes-backend.vercel.app/api/products/signature");
-      console.log(sigRes.data);
+      const sigRes = await axios.get(`${import.meta.env.VITE_API_URL}/products/signature`);
+      // console.log(sigRes.data);
       
       const { timestamp, signature, cloudName, apiKey } = sigRes.data;
 
@@ -70,14 +70,14 @@ const GiftUpload = () => {
       );
 
       const { secure_url } = uploadRes.data;
-      console.log({
-        ...formData,
-        imageUrl: secure_url,
-      });
+      // // console.log({
+      //   ...formData,
+      //   imageUrl: secure_url,
+      // });
       
 
       // 🔹 Save gift/offer to DB
-      await axios.post("https://swanand-vibes-backend.vercel.app/api/gift/", {
+      await axios.post(`${import.meta.env.VITE_API_URL}/gift/`, {
         ...formData,
         imageUrl: secure_url,
       });

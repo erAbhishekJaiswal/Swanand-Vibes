@@ -16,7 +16,7 @@ const ResetPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { state } = useLocation();
-  console.log(state);
+  // // console.log(state);
   
     // const inputRefs = useRef([]);
 
@@ -41,17 +41,17 @@ const ResetPassword = () => {
     // Simulate API call
     try {
         const response = await axios.post(
-          "https://swanand-vibes-backend.vercel.app/api/auth/password/reset-password",
+          `${import.meta.env.VITE_API_URL}/auth/password/reset-password`,
           { email: state.useremail || state.email , resetToken : state.resetToken, newPassword: formData.password, }
         )
-        console.log(response.data);
+        // // console.log(response.data);
         toast.success(response.data.message);
         setIsLoading(false);
         setIsSubmitted(true);
         navigate('/login');
         
     } catch (error) {
-        console.log(error);
+        // // console.log(error);
         setIsLoading(false);
         toast.error(error.response);
     }

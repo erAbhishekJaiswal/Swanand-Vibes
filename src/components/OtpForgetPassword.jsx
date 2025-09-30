@@ -11,7 +11,7 @@ const OtpForgetVerification = () => {
     const isLoading = false;
 
       const { state } = useLocation();
-    //  console.log(state);// get data from Register page
+    //  // console.log(state);// get data from Register page
   const navigate = useNavigate();
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [timer, setTimer] = useState(300);
@@ -76,26 +76,30 @@ const OtpForgetVerification = () => {
     try {
           if (otpValue.length === 6) {
       // onVerify(otpValue);
-      console.log({state, otpValue});
+      // // console.log({state, otpValue});
       // const formdata = {...state, otpValue};
     //   const res = await registerUser({...state, otpValue});
     const uemail = typeof state.email === 'string' ? state.email : state.email?.email;
-    // console.log(useremail);
+    // // console.log(useremail);
     
-    const res = await axios.post('https://swanand-vibes-backend.vercel.app/api/auth/password/verify-otp', { email: uemail, otp: otpValue});
-      console.log(res.data);
+    const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/password/verify-otp`, { email: uemail, otp: otpValue});
+      // // console.log(res.data);
       const {resetToken, useremail} = res.data;
+
+      // // console.log(resetToken, useremail);
+
       if(res.status === 200){
         toast.success('OTP verified successfully');
         navigate('/reset-password' , { state: {resetToken, email: useremail}});
-      }else {
+      } else {
       toast.error('Invalid OTP');
       navigate('/login');}
-    }else {
-      toast.error('Invalid OTP');
     }
+    // else {
+    //   toast.error('Invalid OTP');
+    // }
     } catch (error) {
-     console.log(error);
+    //  // console.log(error);
       toast.error('Invalid OTP');
       navigate('/login');
     }

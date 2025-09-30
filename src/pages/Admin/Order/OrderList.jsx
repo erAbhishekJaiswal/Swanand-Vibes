@@ -31,7 +31,7 @@
 //         // Simulate API call
 //         const response = await fetch('http://localhost:5000/api/order');
 //         const data = await response.json();
-//         console.log(data.data);
+//         // console.log(data.data);
         
 //         // Mock data
 //         const mockOrders = [
@@ -909,7 +909,7 @@
 
 //       const response = await fetch(`https://swanand-vibes-backend.vercel.app/api/order?${params}`);
 //       const data = await response.json();
-//       console.log(data);
+//       // console.log(data);
       
 //       if (data.success) {
 //         setOrders(data.data);
@@ -1048,7 +1048,7 @@
 
 //   const handleUpdateStatus = async (orderId, updatedStatus) => {
 //     try {
-//       console.log(orderId, updatedStatus);
+//       // console.log(orderId, updatedStatus);
       
 //       await axios.put(`https://swanand-vibes-backend.vercel.app/api/order/${orderId}`, { deliveryStatus: updatedStatus });
 //       fetchOrders(currentPage, itemsPerPage, searchTerm, statusFilter, startDate, endDate);
@@ -1563,19 +1563,19 @@ const OrderList = () => {
         ...(end && { endDate: end })
       });
 
-      console.log({
-        page: page.toString(),
-        limit: limit.toString(),
-        ...(search && { search }),
-        ...(status !== 'all' && { status }),
-        ...(start && { startDate: start }),
-        ...(end && { endDate: end })
-      });
+      // // console.log({
+      //   page: page.toString(),
+      //   limit: limit.toString(),
+      //   ...(search && { search }),
+      //   ...(status !== 'all' && { status }),
+      //   ...(start && { startDate: start }),
+      //   ...(end && { endDate: end })
+      // });
       
       // Replace with actual API call
-      const response = await fetch(`https://swanand-vibes-backend.vercel.app/api/order?${params}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/order?${params}`);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       
       if (data.success) {
         setOrders(data.data);
@@ -1722,7 +1722,7 @@ const OrderList = () => {
 
   const handleUpdateStatus = async (orderId, newStatus) => {
     try {
-      await axios.put(`https://swanand-vibes-backend.vercel.app/api/order/${orderId}`, { 
+      await axios.put(`${import.meta.env.VITE_API_URL}/order/${orderId}`, { 
         deliveryStatus: newStatus 
       });
       fetchOrders(currentPage, itemsPerPage, searchTerm, statusFilter, startDate, endDate);

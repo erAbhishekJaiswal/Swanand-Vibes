@@ -198,7 +198,7 @@
 //       //   }
 //       // );
 
-//       console.log("Product updated:", updatedProduct.data);
+//       // console.log("Product updated:", updatedProduct.data);
       
 //       // Show success message
 //       toast.success("Product updated successfully!");
@@ -822,10 +822,10 @@ const EditProduct = () => {
     try {
       // 1. Get Cloudinary signature from backend
       const sigRes = await axios.get(
-        "https://swanand-vibes-backend.vercel.app/api/products/signature"
+        `${import.meta.env.VITE_API_URL}/products/signature`
       );
       const signatureData = sigRes.data;
-      console.log(signatureData);
+      // console.log(signatureData);
       
 
       // 2. Upload main product images to Cloudinary
@@ -848,12 +848,12 @@ const EditProduct = () => {
       // 4. Calculate total stock from variants
       const totalStock = variantsWithUploadedImages.reduce((total, variant) => total + parseInt(variant.stock || 0), 0);
 
-      console.log({
-        ...formData,
-        stock: totalStock,
-        images: uploadedMainImages,
-        variants: variantsWithUploadedImages,
-      });
+      // // console.log({
+      //   ...formData,
+      //   stock: totalStock,
+      //   images: uploadedMainImages,
+      //   variants: variantsWithUploadedImages,
+      // });
       
       // 5. Update product data
       const updatedProduct = await updateProduct(id, {
@@ -863,7 +863,7 @@ const EditProduct = () => {
         variants: variantsWithUploadedImages,
       });
 
-      console.log("Product updated:", updatedProduct.data);
+      // console.log("Product updated:", updatedProduct.data);
       
       // Show success message
       toast.success("Product updated successfully!");

@@ -41,12 +41,12 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log(formData);
+    // console.log(formData);
     try {
         // const res = await registerUser(formData);
     const res = await verifyUser(formData);
     const data = res.data;
-    // console.log(data);
+    // // console.log(data);
 
     // fetch("http://localhost:5000/api/auth/register", {
     //   method: "POST",
@@ -56,7 +56,7 @@ const Register = () => {
     // const data = await res.json();
 
     if (res.status === 200) {
-      console.log(data);
+      // console.log(data);
       
       // Handle successful registration
       toast.success("Registration successful!");

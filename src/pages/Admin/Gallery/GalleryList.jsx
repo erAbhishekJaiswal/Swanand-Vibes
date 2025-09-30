@@ -98,7 +98,7 @@
 //       );
 
 //       toast.success('Image updated successfully');
-//       console.log(response.data);
+//       // console.log(response.data);
       
 //       setShowEditModal(false);
 //       setEditingImage(null);
@@ -331,7 +331,7 @@ const GalleryList = () => {
   const fetchImages = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('https://swanand-vibes-backend.vercel.app/api/gallery/');
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/gallery/`);
       setImages(response.data);
       
       const uniqueCategories = [...new Set(response.data.map(img => img.category))];
@@ -364,7 +364,7 @@ const GalleryList = () => {
     if (!window.confirm('Are you sure you want to delete this image?')) return;
 
     try {
-      await axios.delete(`https://swanand-vibes-backend.vercel.app/api/gallery/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/gallery/${id}`);
       toast.success('Image deleted successfully');
       fetchImages();
     } catch (error) {
@@ -387,7 +387,7 @@ const GalleryList = () => {
 
       // 🔹 If new image selected, upload to Cloudinary
       if (editingImage.newImage) {
-        const sigRes = await axios.get("https://swanand-vibes-backend.vercel.app/api/products/signature");
+        const sigRes = await axios.get(`${import.meta.env.VITE_API_URL}/products/signature`);
         const { timestamp, signature, cloudName, apiKey } = sigRes.data;
 
         const data = new FormData();
@@ -405,7 +405,7 @@ const GalleryList = () => {
       }
 
       // 🔹 Update DB
-      await axios.put(`https://swanand-vibes-backend.vercel.app/api/gallery/${editingImage._id}`, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/gallery/${editingImage._id}`, {
         title: editingImage.title,
         category: editingImage.category,
         imageUrl

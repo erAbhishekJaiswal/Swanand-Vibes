@@ -10,7 +10,7 @@
 
 // const ProductDetail = () => {
 //   const { id } = useParams();
-//   console.log(id);
+//   // console.log(id);
 //   const userid = getUserId();
   
 //   const [selectedImage, setSelectedImage] = useState(0);
@@ -30,7 +30,7 @@
 //     const response = await getCommonProductById(id)
 //     // axios.get(`https://swanand-vibes-backend.vercel.app/api/products/common/${id}`);
 //     setProductData(response.data.data);
-//     console.log(response.data.data);
+//     // console.log(response.data.data);
 //     setLoading(false);
 //   };
 
@@ -141,12 +141,12 @@
 //       userId: userid
 //     };
 //     try {
-//       console.log(productToAdd);
+//       // console.log(productToAdd);
 //        addToCart(productToAdd);
 //     toast.success(`${productData.name} added to cart!`);
 //     } catch (error) {
 //       toast.error(error.message);
-//       console.log(error);
+//       // console.log(error);
 //     }
    
 //   };
@@ -425,7 +425,7 @@
 //     // const response = await getCommonProductById(id);
 //     const response = await axios.get(`http://localhost:5000/api/products/${id}`);
 //     setProductData(response.data.data);
-//     console.log(response.data);
+//     // console.log(response.data);
 
 //     // Auto-select first variant if exists
 //     if (response.data.data.variants?.length > 0) {
@@ -458,7 +458,7 @@
 //       toast.success(`${productData.name} (${selectedVariant.size}) added to cart!`);
 //     } catch (error) {
 //       toast.error(error.message);
-//       console.log(error);
+//       // console.log(error);
 //     }
 //   };
 
@@ -616,7 +616,7 @@
 //     const response = await axios.get(`http://localhost:5000/api/products/${id}`);
 //     setProductData(response.data.data);
 
-//     console.log(response.data.data);
+//     // console.log(response.data.data);
     
 //     // Auto-select first variant if exists
 //     if (response.data.data.variants?.length > 0) {
@@ -649,7 +649,7 @@
 //       toast.success(`${productData.name} (${selectedVariant.size}) added to cart!`);
 //     } catch (error) {
 //       toast.error(error.message);
-//       console.log(error);
+//       // console.log(error);
 //     }
 //   };
 
@@ -819,7 +819,7 @@
 //     setLoading(true);
 //     const response = await axios.get(`http://localhost:5000/api/products/common/${id}`);
 //     setProductData(response.data.data);
-//     console.log(response.data.data);
+//     // console.log(response.data.data);
 //     setLoading(false);
 //   };
 
@@ -840,7 +840,7 @@
 
 //     try {
 //       // addToCart(productToAdd);
-//       console.log(productToAdd);
+//       // console.log(productToAdd);
       
 //       axios.post(`http://localhost:5000/api/user/cart/product/${id}`, productToAdd);
 //       if (selectedVariant) {
@@ -850,7 +850,7 @@
 //       }
 //     } catch (error) {
 //       toast.error(error.message);
-//       console.log(error);
+//       // console.log(error);
 //     }
 //   };
 
@@ -1014,7 +1014,7 @@ const ProductDetail = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://swanand-vibes-backend.vercel.app/api/products/common/${id}`
+        `${import.meta.env.VITE_API_URL}/products/common/${id}`
       );
       setProductData(response.data.data);
       setLoading(false);
@@ -1042,7 +1042,7 @@ const ProductDetail = () => {
   //     quantity,
   //   };
 
-  //   console.log(productToAdd);
+  //   // console.log(productToAdd);
     
   //   try {
   //     await axios.post(
@@ -1068,7 +1068,7 @@ const ProductDetail = () => {
     return;
   }
 
-  console.log(selectedVariant);
+  // // console.log(selectedVariant);
   
 
   const productToAdd = {
@@ -1082,11 +1082,11 @@ const ProductDetail = () => {
     // size: selectedVariant?.size || null, // ✅ required if variantId missing
   };
 
-  console.log("Adding to cart:", productToAdd);
+  // // console.log("Adding to cart:", productToAdd);
 
   try {
     const response = await axios.post(
-      `https://swanand-vibes-backend.vercel.app/api/user/cart/${id}`, // ✅ keep your route
+      `${import.meta.env.VITE_API_URL}/user/cart/${id}`, // ✅ keep your route
       productToAdd
     );
 

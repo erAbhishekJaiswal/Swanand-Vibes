@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL =  "https://swanand-vibes-backend.vercel.app/api";
+const API_URL = import.meta.env.VITE_API_URL
 // "https://swanand-vibes-backend.vercel.app/api";
 
 export const fetchAdminData = async (token) => {
@@ -10,7 +10,7 @@ export const fetchAdminData = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(res.data);
+    // console.log(res.data);
     return res.data;
   } catch (err) {
     console.error("Access denied or failed:", err.response?.data || err.message);
@@ -26,7 +26,7 @@ export const registerUser = (formData) => {
 };
 
 export const verifyUser = (formData) => {
-  // console.log(formData);
+  // // console.log(formData);
   const { name, email, password } = formData;
   return axios.post(`${API_URL}/auth/request-otp`, { name, email, password });
 };
@@ -74,7 +74,7 @@ export const getCommonProducts = (params = {}) => {
     }
   });
   
-  console.log("API Params:", cleanParams);
+  // console.log("API Params:", cleanParams);
 
   return axios.get(`${API_URL}/products/common`, {
     params: cleanParams,
@@ -92,7 +92,7 @@ export const getCommonProducts = (params = {}) => {
 //       cleanParams[key] = params[key];
 //     }
 //   });
-// console.log(params);
+// // console.log(params);
 
 //   return axios.get(`${API_URL}/products/common`, {
 //     params: cleanParams,
@@ -103,7 +103,7 @@ export const getCommonProducts = (params = {}) => {
 // }; 
 
 // export const getCommonProducts = (params) => {
-//   console.log(
+//   // console.log(
 //    params
 //   );
   
@@ -166,7 +166,7 @@ export const getCommonProductById = (id) => {
 // admin api
 //
 export const getAllProducts = (page, limit, search, category) => {
-  console.log(page, limit, search, category);
+  // console.log(page, limit, search, category);
 
   return axios.get(
     `${API_URL}/products?page=${page}&limit=${limit}&search=${search}&category=${category}`
@@ -214,7 +214,7 @@ export const getCategories = () => {
 // };
 
 export const getAllUsers = (params ) => {
-  console.log(params);
+  // console.log(params);
   
   return axios.get(
     `${API_URL}/users`,{ params }
@@ -282,7 +282,7 @@ export const getKycByUserId = (userId) => {
 // for users
 //
 export const submitKyc = (payload) => {
-  // console.log(payload);
+  // // console.log(payload);
   
   return axios.post(`${API_URL}/user/kyc/submit`, payload, {
     headers: { "Content-Type": "application/json" },
@@ -305,13 +305,13 @@ export const submitKyc = (payload) => {
 //
 // export const addToCart = (payload) => {
 //   const { userId, quantity, id, size , variantId} = payload;
-//   console.log(payload);
+//   // console.log(payload);
 //   return axios.post(`http:localhost:5000/api/user/cart/${id}`, { userId, quantity,size,variantId });
 // };
 
 export const addToCart = (payload) => {
   const { userId, quantity, id, size, variantId } = payload;
-  console.log("Adding to cart:", payload);
+  // console.log("Adding to cart:", payload);
   
   return axios.post(`${API_URL}/user/cart/${id}`, { 
     userId, 
@@ -328,7 +328,7 @@ export const getCart = (id) => {
 
 //
 // export const removeFromCart = (userId, removedItem) => {
-//   console.log(userId, removedItem);
+//   // console.log(userId, removedItem);
   
 //   return axios.delete(`http://localhost:5000/api/user/cart/${userId}`, {
 //       item: removedItem,
@@ -337,7 +337,7 @@ export const getCart = (id) => {
 // };
 
 export const removeFromCart = (userId, itemId) => {
-  console.log("Sending to backend:", { userId, itemId });
+  // console.log("Sending to backend:", { userId, itemId });
 
   return axios.delete(`${API_URL}/user/cart/remove`, {
   data: { userId, itemId }
@@ -371,7 +371,7 @@ export const debitWallet = (userId, amount) => {
 
 // Orders Api
 export const placeOrder = (userId, orderData) => {
-  console.log(`Placing order for user ${userId}:`, orderData);
+  // console.log(`Placing order for user ${userId}:`, orderData);
 
   return axios.post(`${API_URL}/order/${userId}`, orderData);
 };

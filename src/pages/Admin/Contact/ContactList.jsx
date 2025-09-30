@@ -27,7 +27,7 @@
 //       const res = await contactslist()
 //     // .then(res => res.json())
 //     // .then(data => {
-//       // console.log(data);
+//       // // console.log(data);
 //       const data = res.data
       
 //       const formatted = data.map(contact => ({
@@ -479,18 +479,18 @@ const ContactList = () => {
         ...(priority !== 'all' && { priority })
       };
 
-      console.log({
-        page,
-        limit: itemsPerPage,
-        ...(search && { search }),
-        ...(status !== 'all' && { status }),
-        ...(priority !== 'all' && { priority })
-      });
+      // // console.log({
+      //   page,
+      //   limit: itemsPerPage,
+      //   ...(search && { search }),
+      //   ...(status !== 'all' && { status }),
+      //   ...(priority !== 'all' && { priority })
+      // });
       
       // Assuming your contactslist function can accept params
       const res = await contactslist(params);
       const data = res.data;
-      console.log(data);
+      // console.log(data);
       
       // If your backend returns paginated data, adjust accordingly
       const formatted = data.contacts ? data.contacts.map(contact => ({

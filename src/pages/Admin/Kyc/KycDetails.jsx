@@ -7,7 +7,7 @@
 
 //   useEffect( async () => {
 //     const res = await axios.get(`http://localhost:5000/api/user/kyc/${id}`)
-//     console.log(res.data);
+//     // console.log(res.data);
 //   }, [id])
 
 //   return (
@@ -46,7 +46,7 @@
 //       setLoading(true);
 //       const res = await getKycById(id);
 //       // axios.get(`http://localhost:5000/api/user/kyc/${id}`)
-//       console.log(res.data);
+//       // console.log(res.data);
 //       setKycData(res.data);
 //       setLoading(false);
 //     }
@@ -58,7 +58,7 @@
 //     if (confirmed) {
 //       const response = await approveKyc(id);
 //       // axios.put(`http://localhost:5000/api/user/kyc/${id}/approve`);
-//       console.log(response.data);
+//       // console.log(response.data);
 //       alert("KYC Approved Successfully");
 //       // Optionally, you can redirect or show a success message
 //     } else {
@@ -71,7 +71,7 @@
 //     if (confirmed) {
 //       const response = await rejectKyc(id);
 //       // axios.put(`http://localhost:5000/api/user/kyc/${id}/reject`);
-//       console.log(response.data);
+//       // console.log(response.data);
 //       alert("KYC Rejected Successfully");
 //       // Optionally, you can redirect or show a success message
 //     } else {
@@ -170,7 +170,7 @@ const KycDetails = () => {
       setLoading(true);
       try {
         const res = await getKycById(id);
-        console.log(res.data);
+        // console.log(res.data);
         setKycData(res.data);
       } catch (error) {
         console.error('Error fetching KYC data:', error);
@@ -186,7 +186,7 @@ const KycDetails = () => {
     setActionLoading(true);
     try {
       const response = await approveKyc(id);
-      console.log(response.data);
+      // console.log(response.data);
       setKycData(prev => ({ ...prev, status: 'approved' }));
       toast.success('KYC Approved Successfully');
       setShowApproveModal(false);
@@ -202,7 +202,7 @@ const KycDetails = () => {
     setActionLoading(true);
     try {
       const response = await rejectKyc(id);
-      console.log(response.data);
+      // console.log(response.data);
       setKycData(prev => ({ ...prev, status: 'rejected' }));
       toast.success('KYC Rejected Successfully');
       setShowRejectModal(false);

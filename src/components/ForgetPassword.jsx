@@ -19,10 +19,10 @@ const ForgetPassword = () => {
     // Simulate API call
     try {
       const response = await axios.post(
-        "https://swanand-vibes-backend.vercel.app/api/auth/password/request-otp",
+        `${import.meta.env.VITE_API_URL}/auth/password/request-otp`,
         { email }
       );
-      console.log(response.data);
+      // // console.log(response.data);
       setTimeout(() => {
         setIsLoading(false);
         setIsSubmitted(true);
@@ -31,7 +31,7 @@ const ForgetPassword = () => {
         navigate("/otp-forget-verification" , { state: {email} });
       }, 1000);
     } catch (error) {
-      console.log(error);
+      // // console.log(error);
       setIsLoading(false);
       toast.error(error.response.data.message);
     }

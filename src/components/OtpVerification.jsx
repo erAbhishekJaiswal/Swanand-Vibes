@@ -13,15 +13,15 @@ const OtpVerification = () => {
     const isLoading = false;
 
       const { state } = useLocation();
-    //  console.log(state);// get data from Register page
+    //  // console.log(state);// get data from Register page
   const navigate = useNavigate();
-  // console.log(state);
+  // // console.log(state);
   // const [registerData, setRegisterData] = useState(state);
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [timer, setTimer] = useState(60);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
   const inputRefs = useRef([]);
-  // console.log(registerData);
+  // // console.log(registerData);
   
 
   useEffect(() => {
@@ -81,10 +81,10 @@ const OtpVerification = () => {
     try {
           if (otpValue.length === 6) {
       // onVerify(otpValue);
-      // console.log({...state, otpValue});
+      // // console.log({...state, otpValue});
       // const formdata = {...state, otpValue};
       const res = await registerUser({...state, otpValue});
-      console.log(res);
+      // // console.log(res);
       
       if(res.status === 201){
         toast.success('OTP verified successfully');
@@ -96,7 +96,7 @@ const OtpVerification = () => {
       toast.error('Invalid OTP');
     }
     } catch (error) {
-      console.log(error);
+      // // console.log(error);
       toast.error('Invalid OTP');
        navigate('/register');
     }

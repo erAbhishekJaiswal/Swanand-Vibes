@@ -9,7 +9,7 @@ import Spinner from '../../components/Spinner';
 
 const OrderDetail = () => {
   const { id } = useParams();
-  console.log(id);
+  // // console.log(id);
 
   const [order, setOrder] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -20,12 +20,12 @@ const OrderDetail = () => {
     const fetchOrderDetail = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(`https://swanand-vibes-backend.vercel.app/api/order/${id}`
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/order/${id}`
         //     , {
         //   params: { userId }
         // }
     );
-    console.log(response.data.data);
+    // // console.log(response.data.data);
     
         setOrder(response.data.data);
       } catch (err) {

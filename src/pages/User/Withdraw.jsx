@@ -21,8 +21,8 @@ const Withdraw = () => {
     const fetchUserData = async () => {
       try {
         // Fetch wallet data  http://localhost:5000/api/user/wallet/68b5650b7505b81ebfa4a48e/withdraw-request
-        const walletResponse = await axios.get(`https://swanand-vibes-backend.vercel.app/api/user/wallet/${userId}`);
-        console.log(walletResponse);
+        const walletResponse = await axios.get(`${import.meta.env.VITE_API_URL}/user/wallet/${userId}`);
+        // console.log(walletResponse);
         if (walletResponse.status === 200) {
           // const walletData = await walletResponse.json();
           setWallet(walletResponse.data);
@@ -39,10 +39,10 @@ const Withdraw = () => {
         }
 
         // Fetch KYC status
-        const kycResponse = await fetch(`https://swanand-vibes-backend.vercel.app/api/user/kyc/user/${userId}`);
+        const kycResponse = await fetch(`${import.meta.env.VITE_API_URL}/user/kyc/user/${userId}`);
         if (kycResponse.ok) {
           const kycData = await kycResponse.json();
-          console.log(kycData);
+          // console.log(kycData);
           
           setKycStatus(kycData.status || 'not-submitted');
         }
@@ -79,7 +79,7 @@ const Withdraw = () => {
     setMessage({ type: '', text: '' });
 
     try {
-      const response = await fetch(`https://swanand-vibes-backend.vercel.app/api/user/wallet/${userId}/withdraw-request`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/user/wallet/${userId}/withdraw-request`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

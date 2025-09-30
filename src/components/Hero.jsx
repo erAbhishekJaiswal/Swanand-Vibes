@@ -145,10 +145,10 @@
 //     try {
 //       const category = "Banner";
 //       const res = await axios.get(`http://localhost:5000/api/gallery/${category}`);
-//       console.log(res);
+//       // console.log(res);
 //       setBanners(res.data);
 //     } catch (error) {
-//       console.log(error);
+//       // console.log(error);
 //     }
 //   };
 
@@ -342,6 +342,7 @@ import "./css/Hero.css";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -355,13 +356,15 @@ const Hero = () => {
     try {
       setIsLoading(true);
       const category = "Banner";
-      const res = await axios.get(`https://swanand-vibes-backend.vercel.app/api/gallery/${category}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/gallery/${category}`);
       setBanners(res.data);
       setCurrentSlide(0);
     } catch (error) {
-      console.error("Error fetching banners:", error);
+      // console.error("Error fetching banners:", error);
+      toast.error("Failed to load banners");
     } finally {
       setIsLoading(false);
+      toast.error("No banners available");
     }
   };
 

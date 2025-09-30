@@ -1,12 +1,13 @@
 // PaymentPage.js
 import React from "react";
 import axios from "axios";
+import {toast} from 'react-hot-toast';
 
 const PaymentPage = () => {
   const handlePayment = async () => {
     try {
       // Step 1: Get order from backend
-      const { data: order } = await axios.post("https://swanand-vibes-backend.vercel.app/api/pay/create-order", {
+      const { data: order } = await axios.post(`${import.meta.env.VITE_API_URL}/pay/create-order`, {
         amount: 500, // ₹500
       });
 
@@ -20,11 +21,11 @@ const PaymentPage = () => {
         order_id: "razorpay_ABC123",//order.id,
         handler: async function (response) {
           // Step 3: Verify payment on backend
-          const verify = await axios.post("https://swanand-vibes-backend.vercel.app/api/pay/verify", response);
+          const verify = await axios.post(`${import.meta.env.VITE_API_URL}/pay/verify`, response);
           if (verify.data.success) {
-            alert("Payment Successful ✅");
+            toast.success("Payment Successful ✅");
           } else {
-            alert("Payment Verification Failed ❌");
+            toast.error("Payment Verification Failed ❌");
           }
         },
         prefill: {

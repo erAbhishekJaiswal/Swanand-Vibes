@@ -19,7 +19,7 @@
 //         const response = await getUserById(id);
 //         // axios.get(`http://localhost:5000/api/users/${id}`);
 //         setUser(response.data);
-//         console.log(response.data);
+//         // console.log(response.data);
 
 //       } catch (error) {
 //         console.error('Error fetching user details:', error);
@@ -89,9 +89,9 @@ const UserDetails = () => {
       try {
         setLoading(true);
         // Replace with actual API call
-        const response = await axios.get(`https://swanand-vibes-backend.vercel.app/api/users/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/${id}`);
         const data = response.data;
-        console.log(data);
+        // console.log(data);
         
         if (response.status === 200) {
           setUser(data);
@@ -120,7 +120,7 @@ const UserDetails = () => {
   const handleSave = async () => {
     try {
       // Replace with actual API call
-      const response = await fetch(`https://swanand-vibes-backend.vercel.app/api/admin/users/${userId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/users/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

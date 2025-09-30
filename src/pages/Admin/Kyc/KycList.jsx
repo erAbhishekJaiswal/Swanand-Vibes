@@ -209,7 +209,7 @@
 //       try {
 //         setLoading(true);
 //         const response = await getAllKycs();
-//         console.log(response);
+//         // console.log(response);
         
 //         setKycList(response.data);
 //         setFilteredKycList(response.data);
@@ -569,16 +569,16 @@ const KYCList = () => {
         status: statusFilter !== 'all' ? statusFilter : undefined
       };
 
-      console.log({
-        page: currentPage,
-        limit: 2,
-        search: searchTerm,
-        status: statusFilter !== 'all' ? statusFilter : undefined
-      });
+      // // console.log({
+      //   page: currentPage,
+      //   limit: 2,
+      //   search: searchTerm,
+      //   status: statusFilter !== 'all' ? statusFilter : undefined
+      // });
       
       const res = await getAllKycs(params);
 
-      console.log(res);
+      // console.log(res);
       
       if (res.success) {
         setKycList(res.data);

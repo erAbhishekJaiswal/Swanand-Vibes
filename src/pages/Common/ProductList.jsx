@@ -33,7 +33,7 @@
 //   //   const fetchProducts = async () => {
 //   //     // const res = await getCommonProducts();
 //   //     const res = await axios.get('http://localhost:5000/api/products/common');
-//   //     console.log(res.data.data);
+//   //     // console.log(res.data.data);
 //   //     setProducts(res.data.data);
 //   //     setFilteredProducts(res.data.data);
 //   //     setIsLoading(false);
@@ -141,14 +141,14 @@
 //     toast.success(`${product.name} added to cart!`);
 //     // API Call to Add to Cart
 //     try {
-//       console.log({ userId, id, quantity });
+//       // console.log({ userId, id, quantity });
 
 //       const response = await addToCart({ userId, id, quantity });
 //       // axios.post(
 //       //   `https://swanand-vibes-backend.vercel.app/api/user/cart/${id}`,
 //       //   { userId, quantity }
 //       // );
-//       console.log("Cart updated:", response.data);
+//       // console.log("Cart updated:", response.data);
 
 //     } catch (error) {
 //       console.error("Error adding product to cart:", error);
@@ -438,7 +438,7 @@
 //     const fetchFilters = async () => {
 //       try {
 //         const response = await getFilters();
-//         console.log(response);
+//         // console.log(response);
 
 //         setAvailableFilters({
 //           categories: response?.data?.data.categories || [],
@@ -585,7 +585,7 @@
 //     // API Call to Add to Cart
 //     try {
 //       const response = await addToCart({ userId, id, quantity });
-//       console.log("Cart updated:", response.data);
+//       // console.log("Cart updated:", response.data);
 //       toast.success(`${product.name} added to cart!`);
 //     } catch (error) {
 //       console.error("Error adding product to cart:", error);
@@ -985,7 +985,7 @@
 
 //       if (data.success) {
 //         setProducts(data.data);
-//         console.log(data);
+//         // console.log(data);
 
 //         setTotalPages(data.totalPages);
 //         setTotalItems(data.totalItems);
@@ -1404,7 +1404,7 @@
 //   //       }
 //   //     });
 
-//   //     console.log(params);
+//   //     // console.log(params);
 
 //   //     const { data } = await
 //   //     axios.get(`http://localhost:5000/api/products/common?limit=${params.limit}&search=${params.search || ""}&category=${params.category || ""}&page=${params.page}&minPrice=${params.minPrice}&maxPrice=${99999999}&brands=${params.brands || ""}&minRating=${params.minRating}&sort=${params.sort || ""}&size=${params.size || ""}&page=${params.page}&limit=${params.limit}`)
@@ -1412,7 +1412,7 @@
 
 //   //     if (data.success) {
 //   //       setProducts(data.data);
-//   //       console.log(data.data);
+//   //       // console.log(data.data);
 
 //   //       setTotalPages(data.totalPages);
 //   //       setTotalItems(data.totalItems);
@@ -1473,13 +1473,13 @@
 //         cleanParams.sizes = cleanParams.sizes.join(",");
 //       }
 
-//       console.log("Fetching products with params:", cleanParams);
+//       // console.log("Fetching products with params:", cleanParams);
 
 //       const { data } = await getCommonProducts(cleanParams);
 
 //       if (data.success) {
 //         setProducts(data.data);
-//         console.log(data.data);
+//         // console.log(data.data);
 
 //         setTotalPages(data.totalPages);
 //         setTotalItems(data.totalItems);
@@ -1588,7 +1588,7 @@
 
 //   //   dispatch(addItemToCart(productToAdd));
 
-//   //   console.log({productToAdd,
+//   //   // console.log({productToAdd,
 //   //       userId,
 //   //       id: product.id,
 //   //       quantity: 1,
@@ -1649,7 +1649,7 @@
 //   //       variantId: variantData.variantId
 //   //     };
 
-//   //     console.log("Adding to cart:", cartData);
+//   //     // console.log("Adding to cart:", cartData);
 
 //   //     // Make API call
 //   //     const response = await addToCart(cartData);
@@ -1710,7 +1710,7 @@
 //   //       variantId: hasVariants ? variant?._id || product.variantId : null,
 //   //     };
 
-//   //     console.log("Adding to cart:", cartData);
+//   //     // console.log("Adding to cart:", cartData);
 
 //   //     // ✅ Use single route (works for both variant & non-variant)
 //   //     const url = `http://localhost:5000/api/user/cart/${product.id}`;
@@ -1769,7 +1769,7 @@
 //       variantId: hasVariants ? (variant?.id || product.variantId) : null,
 //     };
 
-//     console.log("Adding to cart:", cartData);
+//     // console.log("Adding to cart:", cartData);
 
 //     const url = `https://swanand-vibes-backend.vercel.app/api/user/cart/${product.id}`;
 //     const response = await axios.post(url, cartData);
@@ -2174,7 +2174,7 @@ const ProductList = () => {
       if (cleanParams.sizes) cleanParams.sizes = cleanParams.sizes.join(",");
 
       const { data } = await getCommonProducts(cleanParams);
-      console.log("Fetching products with params:", cleanParams);
+      // // console.log("Fetching products with params:", cleanParams);
       
 
       if (data.success) {
@@ -2185,7 +2185,7 @@ const ProductList = () => {
         toast.error(data.error || "Failed to fetch products");
       }
     } catch (error) {
-      console.error("Error fetching products:", error);
+      // console.error("Error fetching products:", error);
       toast.error("Products are Not Found");
     } finally {
       setIsLoading(false);
@@ -2210,7 +2210,8 @@ const ProductList = () => {
           sizes: data?.sizes || [],
         });
       } catch (error) {
-        console.error("Error fetching filters:", error);
+        // console.error("Error fetching filters:", error);
+        toast.error("Failed to fetch filters");
       }
     };
     fetchFilters();
@@ -2286,7 +2287,7 @@ const ProductList = () => {
         variantId: hasVariants ? (variant?.id || product.variantId) : null,
       };
 
-      const url = `https://swanand-vibes-backend.vercel.app/api/user/cart/${product.id}`;
+      const url = `${import.meta.env.VITE_API_URL}/user/cart/${product.id}`;
       const response = await axios.post(url, cartData);
 
       if (response.data.success) {
@@ -2302,7 +2303,7 @@ const ProductList = () => {
         toast.error(response.data.message || "Error adding to cart");
       }
     } catch (error) {
-      console.error("Error adding product to cart:", error);
+      // console.error("Error adding product to cart:", error);
       toast.error(error.response?.data?.message || "Error adding product to cart");
     }
   }, [dispatch, navigate]);
@@ -2703,7 +2704,7 @@ export default React.memo(ProductList);
 //       setProducts(data.data);
 //       setTotalPages(data.totalPages);
 //       setTotalItems(data.totalItems);
-//       console.log(data);
+//       // console.log(data);
 //     } catch (error) {
 //       console.error(error);
 //       toast.error("Failed to fetch products");
@@ -2733,7 +2734,7 @@ export default React.memo(ProductList);
 //       try {
 //         const response = await getFilters();
 //         const data = response?.data?.data;
-//         console.log(data);
+//         // console.log(data);
 
 //         setAvailableFilters({
 //           categories: data?.categories || [],
@@ -3057,7 +3058,7 @@ export default React.memo(ProductList);
 //     const fetchFilters = async () => {
 //       try {
 //         const response = await getFilters();
-//         console.log(response);
+//         // console.log(response);
 
 //         setAvailableFilters({
 //           categories: response?.data?.data.categories || [],
@@ -3112,7 +3113,7 @@ export default React.memo(ProductList);
 //         }
 //         })
 //         setProducts(data.data);
-//         console.log(data);
+//         // console.log(data);
 
 //         setFilteredProducts(data.data);
 //         setTotalPages(data.totalPages);
@@ -3213,7 +3214,7 @@ export default React.memo(ProductList);
 //     // API Call to Add to Cart
 //     try {
 //       const response = await addToCart({ userId, id, quantity });
-//       console.log("Cart updated:", response.data);
+//       // console.log("Cart updated:", response.data);
 //       toast.success(`${product.name} added to cart!`);
 //     } catch (error) {
 //       console.error("Error adding product to cart:", error);

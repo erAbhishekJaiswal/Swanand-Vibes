@@ -604,6 +604,7 @@ import { LuBoxes } from "react-icons/lu";
 import { LuReceiptIndianRupee } from "react-icons/lu";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 import { CgFileDocument } from "react-icons/cg";
+import { toast } from "react-hot-toast";
 
 const Dashboard = () => {
   const id = getUserId();
@@ -638,12 +639,12 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(id);
+        // // console.log(id);
 
         const fatchdashboard = await axios.get(
-          `https://swanand-vibes-backend.vercel.app/api/users/dashboard/user/${id}`
+          `${import.meta.env.VITE_API_URL}/users/dashboard/user/${id}`
         );
-        console.log(fatchdashboard.data);
+        // // console.log(fatchdashboard.data);
         setUserData({
           name: fatchdashboard.data.user.name,
           cart: fatchdashboard.data.cartCount,
@@ -656,6 +657,7 @@ const Dashboard = () => {
         setTopusers(fatchdashboard.data.topWithdrawalUsers);
       } catch (error) {
         console.error("Error fetching user data:", error);
+        toast.error("Error fetching user data");
       }
     };
     fetchData();

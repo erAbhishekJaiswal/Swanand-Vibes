@@ -85,7 +85,7 @@
 //       try {
 //         const response = await getOrders(userId);
 //         const data = response.data.data;
-//         console.log('Fetched orders:', data);
+//         // console.log('Fetched orders:', data);
 //         setOrders(data);
 //       } catch (error) {
 //         console.error('Error fetching orders:', error);
@@ -370,7 +370,7 @@
 //         setIsLoading(true);
 //         const response = await getOrders(userId);
 //         const data = response.data.data;
-//         console.log('Fetched orders:', data);
+//         // console.log('Fetched orders:', data);
 //         setOrders(data);
 //       } catch (error) {
 //         console.error('Error fetching orders:', error);
@@ -423,7 +423,7 @@
 
 //   const handleCancelOrder = (id) => {
 //     // Handle order cancellation
-//     console.log(`Cancel order with ID: ${id}`);
+//     // console.log(`Cancel order with ID: ${id}`);
 //     toast.success('Order cancelled successfully');
 //   }
 

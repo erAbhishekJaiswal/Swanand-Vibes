@@ -33,7 +33,7 @@
 //       //   `http://localhost:5000/api/users/${id}/profile`
 //       // );
 //       setFormData(userData.data);
-//       console.log(userData.data);
+//       // console.log(userData.data);
 //       setLoading(false);
 //     };
 //     fetchData();
@@ -48,12 +48,12 @@
 
 //   // const handleSubmit = (e) => {
 //   //   e.preventDefault();
-//   //   console.log(formData);
+//   //   // console.log(formData);
     
 //   //   onUpdateProfile(formData);
 //   //   try {
 //   //     const res = axios.put(`http://localhost:5000/api/users/${id}/profile`, formData);
-//   //     console.log(res);
+//   //     // console.log(res);
 //   //   } catch (error) {
       
 //   //   }
@@ -83,7 +83,7 @@
 //   try {
 //     const res = await updateUserProfile(id, formData);
 //     toast.success("Profile updated successfully");
-//     console.log("Updated user:", res.data);
+//     // console.log("Updated user:", res.data);
 //     setIsEditing(false);
 //   } catch (error) {
 //     console.error("Profile update failed:", error);
@@ -143,7 +143,7 @@
 //           text: "Check out this page!",
 //           url: link,
 //         })
-//         .then(() => console.log("Shared successfully"))
+//         .then(() => // console.log("Shared successfully"))
 //         .catch((error) => console.error("Error sharing:", error));
 //     } else {
 //       alert("Sharing not supported in your browser. Copy link instead.");
@@ -434,7 +434,7 @@ const Profile = ({ user, onUpdateProfile }) => {
       try {
         const userData = await getUserProfile(id);
         // const userData = await axios.get(`https//users/${id}/profile`);
-        console.log("userData", userData.data);
+        // console.log("userData", userData.data);
         
         setFormData({
           name: userData.data.user.name || "Loading...",
@@ -544,7 +544,7 @@ const Profile = ({ user, onUpdateProfile }) => {
           text: "Check out this amazing platform!",
           url: link,
         })
-        .then(() => console.log("Shared successfully"))
+        .then(() => toast.success("Referral link shared successfully!"))
         .catch((error) => console.error("Error sharing:", error));
     } else {
       navigator.clipboard.writeText(link);

@@ -371,7 +371,7 @@
 //       const sigRes = await axios.get("https://swanand-vibes-backend.vercel.app/api/products/signature");
 //       const { timestamp, signature, cloudName, apiKey } = sigRes.data;
 
-//       console.log({timestamp,signature,cloudName,apiKey});
+//       // console.log({timestamp,signature,cloudName,apiKey});
       
 //       const uploadedFiles = {
 //         aadhaar: [],
@@ -409,7 +409,7 @@
 //         userId,
 //         kycData: { ...form, files: uploadedFiles },
 //       };
-//       console.log(payload);
+//       // console.log(payload);
 
 //       const response = await submitKyc(payload);
 //     //  const response = await axios.post("http://localhost:5000/api/user/kyc/submit", payload, {
@@ -790,7 +790,7 @@ export default function AddKyc() {
     setLoading(true);
 
     try {
-      const sigRes = await axios.get("https://swanand-vibes-backend.vercel.app/api/products/signature");
+      const sigRes = await axios.get(`${import.meta.env.VITE_API_URL}/products/signature`);
       const { timestamp, signature, cloudName, apiKey } = sigRes.data;
 
       const uploadedFiles = {

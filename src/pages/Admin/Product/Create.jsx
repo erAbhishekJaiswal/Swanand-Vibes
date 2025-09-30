@@ -46,7 +46,7 @@
 //       const { timestamp, signature, cloudName, apiKey } = sigRes.data;
 
 //       // 2. Prepare FormData for image upload
-//       console.log({
+//       // console.log({
 //         images,
 //         previewImages,
 //       });
@@ -80,7 +80,7 @@
 //         }
 //       );
 
-//       console.log("Product created:", newProduct.data);
+//       // console.log("Product created:", newProduct.data);
 //       alert("Product uploaded successfully!");
 
 //       // Reset form
@@ -368,7 +368,7 @@
 //       //   }
 //       // );
 
-//       console.log("Product created:", newProduct.data);
+//       // console.log("Product created:", newProduct.data);
       
 //       // Show success message
 //       toast.success("Product uploaded successfully!");
@@ -649,15 +649,15 @@
 //     try {
 //       const response = await axios.get("https://swanand-vibes-backend.vercel.app/api/category");
 //       setCategoryOptions(response.data.categories);
-//       console.log(response.data.categories);
+//       // console.log(response.data.categories);
       
 //     } catch (error) {
 //       console.error("Error fetching categories:", error);
 //     }
 //   };
 
-//   // const listing = categoryOptions.map((category) => console.log(category.name));
-//   // console.log(listing);
+//   // const listing = categoryOptions.map((category) => // console.log(category.name));
+//   // // console.log(listing);
   
 //   // Handle text input changes
 //   const handleChange = (e) => {
@@ -958,7 +958,7 @@
 //       //   user: "689ff606db12335b27127163", // Example user ID
 //       // });
 
-//       console.log("Product created:", newProduct.data);
+//       // console.log("Product created:", newProduct.data);
       
 //       // Show success message
 //       toast.success("Product uploaded successfully!");
@@ -1446,7 +1446,7 @@ const CreateProduct = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("https://swanand-vibes-backend.vercel.app/api/category");
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/category`);
       setCategoryOptions(response.data.categories);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -1709,7 +1709,7 @@ const CreateProduct = () => {
     try {
       // 1. Get Cloudinary signature from backend
       const sigRes = await axios.get(
-        "https://swanand-vibes-backend.vercel.app/api/products/signature"
+        `${import.meta.env.VITE_API_URL}/products/signature`
       );
       const signatureData = sigRes.data;
 
@@ -1734,7 +1734,7 @@ const CreateProduct = () => {
 
       // 4. Send product data with images to backend
       const newProduct =  await axios.post(
-        "https://swanand-vibes-backend.vercel.app/api/products/",
+        `${import.meta.env.VITE_API_URL}/products/`,
         {
           ...formData,
           stock: totalStock,
@@ -1742,7 +1742,7 @@ const CreateProduct = () => {
           variants: variantsWithUploadedImages,
           user: "689ff606db12335b27127163", // Example user ID
         })
-        console.log("Product created:", newProduct.data);
+        // console.log("Product created:", newProduct.data);
         
       // await createProduct({
       //   ...formData,
@@ -1752,7 +1752,7 @@ const CreateProduct = () => {
       //   user: "689ff606db12335b27127163", // Example user ID
       // });
 
-      console.log("Product created:", newProduct.data);
+      // console.log("Product created:", newProduct.data);
       
       // Show success message
       toast.success("Product uploaded successfully!");
@@ -2164,7 +2164,7 @@ export default CreateProduct;
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
 //     const productData = { name, variants };
-//     console.log("Submitting Product:", productData);
+//     // console.log("Submitting Product:", productData);
 
 //     // 👉 send `productData` to backend using fetch/axios
 //   };
@@ -2479,7 +2479,7 @@ export default CreateProduct;
 //       );
 
 //       toast.success("Product uploaded successfully!");
-//       console.log("Created product:", res.data);
+//       // console.log("Created product:", res.data);
 
 //       // Reset
 //       setFormData({
