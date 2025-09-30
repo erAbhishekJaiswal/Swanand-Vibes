@@ -266,14 +266,14 @@ const Home = () => {
                 <div className="homepage-product-info">
                   <h3 className="homepage-product-name">{product.name}</h3>
                   <div className="homepage-product-price">{product.price}</div>
-                  <div className="homepage-product-rating">
+                  {/* <div className="homepage-product-rating">
                     <FiStar className="homepage-rating-star" />
                     <FiStar className="homepage-rating-star" />
                     <FiStar className="homepage-rating-star" />
                     <FiStar className="homepage-rating-star" />
                     <FiStar className="homepage-rating-star" />
                     <span className="homepage-rating-text">(4.8)</span>
-                  </div>
+                  </div> */}
                 </div>
                 <button 
                   onClick={() => navigate('/products')} 

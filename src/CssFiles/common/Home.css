@@ -604,6 +604,7 @@ body {
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
+  padding: 20px;
   border: 1px solid #f1f5f9;
 }
 
@@ -616,6 +617,7 @@ body {
   position: relative;
   height: 200px;
   overflow: hidden;
+  border-radius: 10px;
 }
 
 .homepage-product-image {

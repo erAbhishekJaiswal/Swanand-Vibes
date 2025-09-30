@@ -274,6 +274,7 @@
   height: 200px;
   overflow: hidden;
   cursor: pointer;
+  margin-bottom: 0px;
 }
 
 .product-image img {
@@ -345,7 +346,7 @@
 .product-info h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
   cursor: pointer;
   color: #2d3748;
 }
@@ -357,21 +358,21 @@
 .product-brand {
   color: #718096;
   font-size: 0.9rem;
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
 }
 
 .product-description {
   color: #4a5568;
   font-size: 0.9rem;
   line-height: 1.5;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 }
 
 .product-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 }
 
 .rating {

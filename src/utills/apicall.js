@@ -3,6 +3,21 @@ import axios from "axios";
 const API_URL =  "https://swanand-vibes-backend.vercel.app/api";
 // "https://swanand-vibes-backend.vercel.app/api";
 
+export const fetchAdminData = async (token) => {
+  try {
+    const res = await axios.get(`${API_URL}/admin-only`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(res.data);
+    return res.data;
+  } catch (err) {
+    console.error("Access denied or failed:", err.response?.data || err.message);
+  }
+};
+
+
 // User Auth Api
 //
 export const registerUser = (formData) => {

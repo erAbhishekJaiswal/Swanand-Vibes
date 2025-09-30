@@ -2092,6 +2092,7 @@ import Spinner from "../../components/Spinner";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import Footer from "../../components/Footer";
+import TruncateText from "../../components/TruncateText";
 
 const ProductList = () => {
   const navigate = useNavigate();
@@ -2173,6 +2174,8 @@ const ProductList = () => {
       if (cleanParams.sizes) cleanParams.sizes = cleanParams.sizes.join(",");
 
       const { data } = await getCommonProducts(cleanParams);
+      console.log("Fetching products with params:", cleanParams);
+      
 
       if (data.success) {
         setProducts(data.data);
@@ -2324,10 +2327,10 @@ const ProductList = () => {
   return (
     <div className="products-container">
       {/* Header */}
-      <div className="products-header">
+      {/* <div className="products-header">
         <h1>🛍️ Swanand Vibes</h1>
         <p>Discover unique products for your lifestyle</p>
-      </div>
+      </div> */}
 
       <div className="products-content">
         {/* Mobile Filter Toggle */}
@@ -2354,6 +2357,7 @@ const ProductList = () => {
                 <input
                   type="text"
                   placeholder="Search products..."
+                  defaultValue={searchQuery}
                   onChange={(e) => debouncedSearch(e.target.value)}
                   className="search-input"
                 />
@@ -2499,7 +2503,7 @@ const ProductList = () => {
 
                     <div className="product-info">
                       <h3 onClick={() => navigate(`/product/${product.id}`)}>
-                        {product.name}
+                        <TruncateText text={product.name} limit={25} />
                       </h3>
                       
                       <p className="product-brand">{product.brand}</p>
@@ -2526,11 +2530,11 @@ const ProductList = () => {
 
                         <div className="price-section">
                           <span className="price">₹{product.price}</span>
-                          {product.variantPrice && product.variantPrice !== product.price && (
+                          {/* {product.variantPrice && product.variantPrice !== product.price && (
                             <span className="variant-price">
                               From ₹{product.variantPrice}
                             </span>
-                          )}
+                          )} */}
                         </div>
                       </div>
 

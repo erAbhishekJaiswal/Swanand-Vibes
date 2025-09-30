@@ -1185,7 +1185,7 @@ const ProductDetail = () => {
                     }}
                   >
                     {variant.size} • ₹
-                    {(variant.price + (productData.tax || 0)).toFixed(2)}
+                    {(variant.price.toFixed(2))}
                   </button>
                 ))}
               </div>
@@ -1240,10 +1240,7 @@ const ProductDetail = () => {
                 selectedVariant.stock > 0 ? (
                   <>
                     Add to Cart • ₹
-                    {(
-                      (selectedVariant.price + (productData.tax || 0)) *
-                      quantity
-                    ).toFixed(2)}
+                    {(selectedVariant.price * quantity).toFixed(2)}
                   </>
                 ) : (
                   "Out of Stock"
