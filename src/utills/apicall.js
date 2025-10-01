@@ -247,10 +247,6 @@ export const getUserAddress = (userId) => {
 };
 
 // Kyc
-//
-// export const getAllKycs = () => {
-//   return axios.get(`${API_URL}/user/kyc`);
-// };
 
 // ✅ Get all KYC records with query parameters
 export const getAllKycs = async (params = {}) => {
@@ -391,7 +387,7 @@ export const getOrders = (userId) => {
 
 // Update the contactslist function to accept query parameters
 export const contactslist = (params) => {
-  return axios.get(`http://localhost:5000/api/contact`, {
+  return axios.get(`${API_URL}/contact`, {
     params
   });
 };

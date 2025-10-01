@@ -7,7 +7,7 @@ const GiftUpload = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    achievementLevel: "Silver",
+    // achievementLevel: "Silver",
     validity: "",
   });
   const [image, setImage] = useState(null);
@@ -86,7 +86,7 @@ const GiftUpload = () => {
       setFormData({
         title: "",
         description: "",
-        achievementLevel: "Silver",
+        // achievementLevel: "Silver",
         validity: "",
       });
       setImage(null);
@@ -119,7 +119,7 @@ const GiftUpload = () => {
           onChange={handleInputChange}
         />
 
-        <select
+        {/* <select
           name="achievementLevel"
           value={formData.achievementLevel}
           onChange={handleInputChange}
@@ -127,7 +127,7 @@ const GiftUpload = () => {
           <option className="gift-category-option">Silver</option>
           <option className="gift-category-option">Gold</option>
           <option className="gift-category-option">Platinum</option>
-        </select>
+        </select> */}
 
         <input
           type="date"

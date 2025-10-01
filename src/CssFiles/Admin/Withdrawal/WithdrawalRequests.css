@@ -629,7 +629,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 10000;
   padding: 20px;
 }
 
@@ -708,7 +708,7 @@
 
 .detail-value {
   flex: 1;
-  color: #dfdfdf;
+  color: #222222;
 }
 
 .detail-value a {

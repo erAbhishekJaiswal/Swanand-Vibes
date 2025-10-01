@@ -407,6 +407,7 @@ import { getUserProfile, updateUserProfile } from "../../utills/apicall";
 import { toast } from 'react-hot-toast';
 import Spinner from "../../components/Spinner";
 import { useNavigate } from "react-router-dom";
+// import Order from "../../../../backend/models/Order";
 // import Footer from "../../components/Footer";
 
 const Profile = ({ user, onUpdateProfile }) => {
@@ -424,6 +425,7 @@ const Profile = ({ user, onUpdateProfile }) => {
     companyid: "",
     avatar: null,
     kycstatus: "",
+    Orders: 0,
   });
 
   const id = getUserId();
@@ -434,7 +436,7 @@ const Profile = ({ user, onUpdateProfile }) => {
       try {
         const userData = await getUserProfile(id);
         // const userData = await axios.get(`https//users/${id}/profile`);
-        // console.log("userData", userData.data);
+        console.log("userData", userData.data);
         
         setFormData({
           name: userData.data.user.name || "Loading...",
@@ -445,6 +447,7 @@ const Profile = ({ user, onUpdateProfile }) => {
           avatar: userData.data.user.avatar || null,
           referralCode: userData.data.user.referralCode || "",
           kycstatus: userData.data.kyc || "",
+          Orders: userData.data.Isorder || 0,
         });
         setIsLoading(false);
       } catch (error) {
@@ -676,7 +679,7 @@ const Profile = ({ user, onUpdateProfile }) => {
               </div>
             </div>
 
-           { getUserRole() === "user" && <div className="referral-section">
+           { getUserRole() === "user" && formData?.Orders !== 0 && <div className="referral-section">
               <h3>Your Referral Link</h3>
               <div className="referral-input-group">
                 <input 

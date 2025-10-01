@@ -637,10 +637,10 @@ const ContactList = () => {
 
   return (
     <div className="admin-contact-container">
-      <div className="contact-header">
+      {/* <div className="contact-header">
         <h1>Contact Management</h1>
         <p>Manage user inquiries and messages</p>
-      </div>
+      </div> */}
 
       <div className="contact-controls">
         <div className="search-box">
@@ -735,7 +735,7 @@ const ContactList = () => {
         </div>
       )}
 
-      <div className="contacts-table-container">
+    {!loading &&  <div className="contacts-table-container">
         <table className="contacts-table">
           <thead>
             <tr>
@@ -814,7 +814,7 @@ const ContactList = () => {
             )}
           </tbody>
         </table>
-      </div>
+      </div>}
 
       {/* {!loading && totalPages > 1 && (
         <div className="pagination">
@@ -847,12 +847,12 @@ const ContactList = () => {
       )} */}
 
      
-      <Pagination
+      {!loading &&  <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         totalItems={totalContacts}
         onPageChange={fetchPage}
-      />
+      />}
       
 
       {selectedContact && (

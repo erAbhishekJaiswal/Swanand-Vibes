@@ -360,11 +360,11 @@ const Hero = () => {
       setBanners(res.data);
       setCurrentSlide(0);
     } catch (error) {
-      // console.error("Error fetching banners:", error);
+      console.error("Error fetching banners:", error);
       toast.error("Failed to load banners");
     } finally {
       setIsLoading(false);
-      toast.error("No banners available");
+      // toast.error("No banners available");
     }
   };
 

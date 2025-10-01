@@ -22,7 +22,7 @@ const GiftList = () => {
 
   useEffect(() => {
     filterGifts();
-  }, [gifts, selectedLevel, searchTerm]);
+  }, [gifts, searchTerm]);
 
   const fetchGifts = async () => {
     try {
@@ -30,8 +30,8 @@ const GiftList = () => {
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/gift/`);
       setGifts(response.data);
       
-      const uniqueLevels = [...new Set(response.data.map(gift => gift.achievementLevel))];
-      setAchievementLevels(uniqueLevels);
+      // const uniqueLevels = [...new Set(response.data.map(gift => gift.achievementLevel))];
+      // setAchievementLevels(uniqueLevels);
     } catch (error) {
       toast.error('Failed to fetch gifts');
       console.error('Error fetching gifts:', error);
@@ -44,9 +44,9 @@ const GiftList = () => {
     let filtered = gifts;
 
     // Filter by achievement level
-    if (selectedLevel !== 'all') {
-      filtered = filtered.filter(gift => gift.achievementLevel === selectedLevel);
-    }
+    // if (selectedLevel !== 'all') {
+    //   filtered = filtered.filter(gift => gift.achievementLevel === selectedLevel);
+    // }
 
     // Filter by search term
     if (searchTerm) {
@@ -110,7 +110,7 @@ const GiftList = () => {
       await axios.put(`h${import.meta.env.VITE_API_URL}/gift/${editingGift._id}`, {
         title: editingGift.title,
         description: editingGift.description,
-        achievementLevel: editingGift.achievementLevel,
+        // achievementLevel: editingGift.achievementLevel,
         validity: editingGift.validity,
         imageUrl
       });
@@ -186,7 +186,7 @@ const GiftList = () => {
           />
         </div>
 
-        <select
+        {/* <select
           value={selectedLevel}
           onChange={(e) => setSelectedLevel(e.target.value)}
           className="gift-level-filter"
@@ -197,7 +197,7 @@ const GiftList = () => {
               {level}
             </option>
           ))}
-        </select>
+        </select> */}
       </div>
 
       <div className="gift-stats">
@@ -234,13 +234,16 @@ const GiftList = () => {
               </div>
               
               <div className="gift-info">
-                <h3 className="gift-title">{gift.title}</h3>
-                <p className="gift-description">{gift.description}</p>
+               
                 
                 <div className="gift-meta">
-                  <span className={`gift-level ${getLevelBadgeClass(gift.achievementLevel)}`}>
+                  {/* <span className={`gift-level ${getLevelBadgeClass(gift.achievementLevel)}`}>
                     {gift.achievementLevel}
-                  </span>
+                  </span> */}
+                  <div className='gift-title-desc'>
+                     <h3 className="gift-title">{gift.title}</h3>
+                <p className="gift-description">{gift.description}</p>
+                  </div>
                   
                   <div className="gift-validity">
                     <span className="validity-label">Valid until:</span>
@@ -301,7 +304,7 @@ const GiftList = () => {
                 />
               </div>
 
-              <div className="gift-form-group">
+              {/* <div className="gift-form-group">
                 <label htmlFor="achievementLevel">Achievement Level *</label>
                 <select
                   id="achievementLevel"
@@ -318,7 +321,7 @@ const GiftList = () => {
                   <option value="Gold">Gold</option>
                   <option value="Platinum">Platinum</option>
                 </select>
-              </div>
+              </div> */}
 
               <div className="gift-form-group">
                 <label htmlFor="validity">Validity Date *</label>
