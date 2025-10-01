@@ -22,7 +22,7 @@ const Withdraw = () => {
       try {
         // Fetch wallet data  http://localhost:5000/api/user/wallet/68b5650b7505b81ebfa4a48e/withdraw-request
         const walletResponse = await axios.get(`${import.meta.env.VITE_API_URL}/user/wallet/${userId}`);
-        // console.log(walletResponse);
+        console.log(walletResponse);
         if (walletResponse.status === 200) {
           // const walletData = await walletResponse.json();
           setWallet(walletResponse.data);
@@ -32,7 +32,8 @@ const Withdraw = () => {
           // Filter withdrawal transactions
           if (walletResponse.data.transactions) {
             const withdrawals = walletResponse.data.transactions.filter(
-              transaction => transaction.type === 'debit' && transaction.status.includes('withdrawal')
+              transaction => transaction.type === 'debit' 
+              // && transaction.status.includes('withdrawal')
             );
             setWithdrawalHistory(withdrawals);
           }
@@ -88,7 +89,7 @@ const Withdraw = () => {
       });
 
       const data = await response.json();
-
+      console.log(data);
       if (response.ok) {
         setMessage({ type: 'success', text: data.message || 'Withdrawal request submitted successfully' });
         setAmount('');

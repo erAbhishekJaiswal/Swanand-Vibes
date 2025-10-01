@@ -23,7 +23,7 @@ const Wallet = () => {
         const response = await fetchWallet(userId);
         // axios.get(`http://localhost:5000/api/user/wallet/${userId}`);
         setWalletData(response.data);
-        // console.log(response.data);
+        console.log(response.data);
 
       } catch (err) {
         toast.error('Error fetching wallet data:', err);
@@ -214,8 +214,8 @@ const Wallet = () => {
                 ></div>
               </div>
               <div className="graph-labels">
-                <span>$0</span>
-                <span>$2,000</span>
+                <span>{formatCurrency(0)}</span>
+                <span>{formatCurrency(2000)}</span>
               </div>
             </div>
           </div>
@@ -294,13 +294,13 @@ const Wallet = () => {
                   </div>
                   <div className="transaction-details">
                     <h4 className="transaction-title">
-                      {transaction.description}
+                      {transaction.description || (transaction.type === 'credit' ? 'Earning' : 'Withdrawal')}
                       {transaction.level && (
                         <span className="level-tag">Level {transaction.level}</span>
                       )}
                     </h4>
                     <p className="transaction-info">
-                      {transaction.fromUser ? `From: ${transaction.fromUser.name}` : 'Withdrawal processing'}
+                      {transaction.fromUser ? `From: ${transaction.fromUser.name}` : `${transaction.status}`}
                     </p>
                     <p className="transaction-date">
                       {formatDate(transaction.date)}
