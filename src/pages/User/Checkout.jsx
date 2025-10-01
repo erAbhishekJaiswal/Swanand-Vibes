@@ -1873,9 +1873,15 @@ const Checkout = () => {
   const shippingMethods = [
     {
       id: "standard",
-      name: "Standard Shipping",
-      price: 0,
+      name: "Delivery",
+      price: 40,
       delivery: "5-7 business days",
+    },
+    {
+      id: "self-pickup",
+      name: "Self Pickup",
+      price: 0,
+      delivery: "Pickup Any time",
     },
   ];
 
@@ -1964,83 +1970,157 @@ const Checkout = () => {
     setCurrentStep((prev) => prev - 1);
   };
 
-  const handleSubmit = async () => {
-    try {
-      setIsLoading(true);
-      // const totalPrice = calculateTotal();
-      const totalPrice = Math.round(calculateTotal() * 100);
+  // const handleSubmit = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     // const totalPrice = calculateTotal();
+  //     const totalPrice = Math.round(calculateTotal() * 100);
 
-      // // console.log(totalPrice);
+  //     // // console.log(totalPrice);
       
-      if (totalPrice > 50000000) {
-        toast.error("Order amount exceeds Razorpay's ₹5,00,000 limit.");
-        return;
-      }
-      // 1. Create Razorpay Order on backend
-      const { data: order } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/pay/create-order`,
-        { amount: totalPrice }
-      );
+  //     if (totalPrice > 50000000) {
+  //       toast.error("Order amount exceeds Razorpay's ₹5,00,000 limit.");
+  //       return;
+  //     }
+  //     // 1. Create Razorpay Order on backend
+  //     const { data: order } = await axios.post(
+  //       `${import.meta.env.VITE_API_URL}/pay/create-order`,
+  //       { amount: totalPrice }
+  //     );
 
-      // 2. Razorpay Options - Replace with your actual key
-      const options = {
-        key: "rzp_test_R8Ij82dWVJ1p71", // Use your actual Razorpay key
-        amount: order.amount,
-        currency: order.currency,
-        name: "Swanand Vibes",
-        description: "Order Payment",
-        order_id: order.id,
-        handler: async function (response) {
-          try {
-            // 3. Verify payment with backend
-            await axios.post(
-              `${import.meta.env.VITE_API_URL}/pay/verify`,
-              {
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature,
-              }
-            );
+  //     // 2. Razorpay Options - Replace with your actual key
+  //     const options = {
+  //       key: "rzp_test_R8Ij82dWVJ1p71", // Use your actual Razorpay key
+  //       amount: order.amount,
+  //       currency: order.currency,
+  //       name: "Swanand Vibes",
+  //       description: "Order Payment",
+  //       order_id: order.id,
+  //       handler: async function (response) {
+  //         try {
+  //           // 3. Verify payment with backend
+  //           await axios.post(
+  //             `${import.meta.env.VITE_API_URL}/pay/verify`,
+  //             {
+  //               razorpay_order_id: response.razorpay_order_id,
+  //               razorpay_payment_id: response.razorpay_payment_id,
+  //               razorpay_signature: response.razorpay_signature,
+  //             }
+  //           );
 
-            // 4. Place final order
-            await placeOrder(userId, {
-              ...formData,
-              cartItems,
-              shippingMethod: formData.shippingMethod,
-              itemsPrice: calculateSubtotal(),
-              shippingPrice: getShippingCost(),
-              taxPrice: calculateTax(),
-              totalPrice: totalPrice,
-              paymentStatus: "Paid",
-              paidAt: new Date().toISOString(),
-            });
+  //           // 4. Place final order
+  //           await placeOrder(userId, {
+  //             ...formData,
+  //             cartItems,
+  //             shippingMethod: formData.shippingMethod,
+  //             itemsPrice: calculateSubtotal(),
+  //             shippingPrice: getShippingCost(),
+  //             taxPrice: calculateTax(),
+  //             totalPrice: totalPrice,
+  //             paymentStatus: "Paid",
+  //             paidAt: new Date().toISOString(),
+  //           });
 
-            toast.success("Payment successful, order placed!");
-            navigate("/user/orders");
-          } catch (error) {
-            console.error("Order placement error:", error);
-            toast.error("Order placement failed after payment");
-          }
-        },
-        prefill: {
-          name: savedAddresses?.name || "Customer",
-          email: savedAddresses?.email || "customer@example.com",
-          contact: formData.mobile,
-        },
-        theme: {
-          color: "#3b82f6",
-        },
-      };
+  //           toast.success("Payment successful, order placed!");
+  //           navigate("/user/orders");
+  //         } catch (error) {
+  //           console.error("Order placement error:", error);
+  //           toast.error("Order placement failed after payment");
+  //         }
+  //       },
+  //       prefill: {
+  //         name: savedAddresses?.name || "Customer",
+  //         email: savedAddresses?.email || "customer@example.com",
+  //         contact: formData.mobile,
+  //       },
+  //       theme: {
+  //         color: "#3b82f6",
+  //       },
+  //     };
 
-      const razor = new window.Razorpay(options);
-      razor.open();
-    } catch (err) {
-      console.error("Payment error:", err);
-      toast.error("Payment failed. Please try again.");
-    } finally {
-      setIsLoading(false);
+  //     const razor = new window.Razorpay(options);
+  //     razor.open();
+  //   } catch (err) {
+  //     console.error("Payment error:", err);
+  //     toast.error("Payment failed. Please try again.");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+
+  const handleSubmit = async () => {
+  try {
+    setIsLoading(true);
+    const shippingCost = getShippingCost();
+    const totalPrice = Math.round(calculateTotal() * 100); // in paise for Razorpay
+
+    if (totalPrice > 50000000) {
+      toast.error("Order amount exceeds Razorpay's ₹5,00,000 limit.");
+      return;
     }
-  };
+
+    // 1. Create Razorpay Order on backend
+    const { data: order } = await axios.post(
+      `${import.meta.env.VITE_API_URL}/pay/create-order`,
+      { amount: totalPrice }
+    );
+
+    const options = {
+      key: "rzp_test_R8Ij82dWVJ1p71",
+      amount: order.amount,
+      currency: order.currency,
+      name: "Swanand Vibes",
+      description: "Order Payment",
+      order_id: order.id,
+      handler: async function (response) {
+        try {
+          // 3. Verify payment with backend
+          await axios.post(`${import.meta.env.VITE_API_URL}/pay/verify`, {
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+          });
+
+          // 4. Place final order with shipping method and cost
+          await placeOrder(userId, {
+            ...formData,
+            cartItems,
+            shippingMethod: formData.shippingMethod,
+            itemsPrice: calculateSubtotal(),
+            shippingPrice: shippingCost, // ✅ Added dynamic shipping
+            taxPrice: calculateTax(),
+            totalPrice: totalPrice / 100, // back to ₹
+            paymentStatus: "Paid",
+            paidAt: new Date().toISOString(),
+          });
+
+          toast.success("Payment successful, order placed!");
+          navigate("/user/orders");
+        } catch (error) {
+          console.error("Order placement error:", error);
+          toast.error("Order placement failed after payment");
+        }
+      },
+      prefill: {
+        name: savedAddresses?.name || "Customer",
+        email: savedAddresses?.email || "customer@example.com",
+        contact: formData.mobile,
+      },
+      theme: { color: "#3b82f6" },
+    };
+
+    const razor = new window.Razorpay(options);
+    razor.open();
+  } catch (err) {
+    console.error("Payment error:", err);
+    toast.error("Payment failed. Please try again.");
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+
 
   // Get base price (price before tax)
   const getBasePrice = (item) => {
@@ -2070,17 +2150,31 @@ const Checkout = () => {
   };
 
   // Shipping stays the same
-  const getShippingCost = () => {
-    const method = shippingMethods.find(
-      (m) => m.id === formData.shippingMethod
-    );
-    return method ? method.price : 0;
-  };
+  // const getShippingCost = () => {
+  //   const method = shippingMethods.find(
+  //     (m) => m.id === formData.shippingMethod
+  //   );
+  //   return method ? method.price : 0;
+  // };
+
+  // ✅ Shipping stays the same
+const getShippingCost = () => {
+  const method = shippingMethods.find(
+    (m) => m.id === formData.shippingMethod
+  );
+  return method ? method.price : 0;
+};
+
+// ✅ Final Total (subtotal + tax + shipping)
+const calculateTotal = () => {
+  return calculateSubtotal() + calculateTax() + getShippingCost();
+};
+
 
   // Final Total (subtotal + tax + shipping)
-  const calculateTotal = () => {
-    return calculateSubtotal() + calculateTax() + getShippingCost();
-  };
+  // const calculateTotal = () => {
+  //   return calculateSubtotal() + calculateTax() + getShippingCost();
+  // };
 
   // const calculateSubtotal = () => {
   //   return cartItems.reduce((total, item) => total + item.price * item.qty, 0);

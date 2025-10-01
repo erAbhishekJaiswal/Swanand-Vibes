@@ -464,6 +464,22 @@
   font-size: 0.9rem;
 }
 
+.kyclist-action-buttons{
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.kyc-delete-btn {
+  background: #dc2626;
+  color: white;
+  margin-left: 8px;
+}
+.kyc-delete-btn:hover {
+  background: #b91c1c;
+}
+
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .kyc-admin-content {

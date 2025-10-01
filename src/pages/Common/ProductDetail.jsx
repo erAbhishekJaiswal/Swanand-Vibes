@@ -1199,7 +1199,7 @@ const ProductDetail = () => {
                 <strong>Size:</strong> {selectedVariant.size}
               </p>
               <p>
-                <strong>Price:</strong> ₹{selectedVariant.price}
+                <strong>Price:</strong> ₹{selectedVariant.price} All Included
               </p>
               <p>
                 <strong>Tax:</strong> {productData.tax}%
