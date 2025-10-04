@@ -19,7 +19,7 @@ const AdminWallet = () => {
   });
   const [totalPages, setTotalPages] = useState(0);
   const [CurrentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(10);
 
 //   useEffect(() => {
 //     fetchWalletData();
@@ -61,30 +61,36 @@ useEffect(() => {
 const fetchWalletData = async () => {
   try {
     setLoading(true);
-
+    // console.log(`Fetching wallet data for page ${CurrentPage} with limit ${itemsPerPage} ${import.meta.env.VITE_API_URL}`);
+    
     const response = await axios.get(
-      `http://localhost:5000/api/user/wallet/adminwallet?page=${CurrentPage}&limit=${itemsPerPage}`
+      `${import.meta.env.VITE_API_URL}/user/wallet/adminwallet?page=${CurrentPage}&limit=${itemsPerPage}`
     );
 
     const data = response.data;
+    console.log(`Wallet data fetched successfully:`, data);
+    
 
     setWalletData(data);
-    setTotalPages(data.pagination.totalPages);
+setTotalPages(data?.pagination?.totalPages || 0);
 
     // Calculate stats from full filtered transaction data
-    const credits = data.transactions.filter(t => t.type === 'credit');
-    const debits = data.transactions.filter(t => t.type === 'debit');
+const credits = (data.transactions || []).filter(t => t.type === 'credit');
+const debits = (data.transactions || []).filter(t => t.type === 'debit');
+
 
     setStats({
       totalCredit: credits.reduce((sum, t) => sum + t.amount, 0),
       totalDebit: debits.reduce((sum, t) => sum + t.amount, 0),
-      transactionCount: data.pagination.total,
+      transactionCount: data?.pagination?.total || 0,
+
     });
 
     setLoading(false);
   } catch (error) {
     toast.error("Failed to load wallet data");
     setLoading(false);
+    console.error(error);
   }
 };
 
@@ -107,10 +113,18 @@ const fetchWalletData = async () => {
     });
   };
 
+  // const getFilteredTransactions = () => {
+  //   if (activeFilter === 'all') return walletData.transactions;
+  //   return walletData.transactions.filter(t => t.type === activeFilter);
+  // };
   const getFilteredTransactions = () => {
-    if (activeFilter === 'all') return walletData.transactions;
-    return walletData.transactions.filter(t => t.type === activeFilter);
-  };
+  const transactions = walletData?.transactions;
+  if (!Array.isArray(transactions)) return [];
+  
+  if (activeFilter === 'all') return transactions;
+  return transactions.filter(t => t.type === activeFilter);
+};
+
 
   const getTransactionIcon = (type) => {
     return type === 'credit' ? '📥' : '📤';
@@ -228,8 +242,8 @@ const filteredTransactions = getFilteredTransactions(); // still used for fronte
         </div>
 
         <div className="transactions-list">
-          {filteredTransactions.length > 0 ? (
-            filteredTransactions.map((transaction, index) => (
+          {filteredTransactions?.length > 0 ? (
+            filteredTransactions?.map((transaction, index) => (
               <div key={index} className="transaction-item">
                 <div className="transaction-main">
                   <div className="transaction-icon" style={{ backgroundColor: `${getTransactionColor(transaction.type)}20` }}>

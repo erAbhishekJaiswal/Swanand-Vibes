@@ -19,6 +19,7 @@ import { TiShoppingCart } from "react-icons/ti";
 import { LuBoxes } from "react-icons/lu";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { CiSettings } from "react-icons/ci";
+import { MdSell } from "react-icons/md";
 const Sidebar = ({ isCollapsed, toggle }) => {
   // const [isExpanded, setIsExpanded] = useState(true);
   const location = useLocation();
@@ -33,6 +34,7 @@ const Sidebar = ({ isCollapsed, toggle }) => {
     { icon: <MdContactPage />, text: 'Contact List', path: '/admin/contactlist' },
     { icon: <GrGallery />, text: 'Gallery', path: '/admin/gallery' },
     { icon: <CiGift />, text: 'add gift', path: '/admin/giftlist' },
+    { icon: <GiWallet />, text: 'Wallet', path: '/admin/adminwallet' },
     
     // { icon: '🌡️', text: 'Monitoring', path: '/admin/monitoring' },
     // { icon: '🛠️', text: 'Settings', path: '/admin/settings' }
@@ -40,6 +42,7 @@ const Sidebar = ({ isCollapsed, toggle }) => {
 
   const UserMenuItems = [
      { icon: <MdOutlineDashboard />, text: 'DashBoard', path: '/user/dashboard' },
+    { icon: <MdSell />, text: 'Products', path: '/products' },
     { icon: <FaUser />, text: 'Profile', path: '/user/profile' },
     { icon: <LuBoxes />, text: 'Orders', path: '/user/orders' },
     { icon: <TiShoppingCart />, text: 'Cart', path: '/user/cart' },
@@ -75,9 +78,10 @@ const Sidebar = ({ isCollapsed, toggle }) => {
             key={index} 
             className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
             // className={`nav-item ${item.active ? 'active' : ''}`}
+            title={item.text}
           >
-            <Link to={item.path} className="nav-link">
-              <span className="item-icon">{item.icon}</span>
+            <Link to={item.path} className="nav-link" title={item.text}>
+              <span className="item-icon" title={item.text}>{item.icon}</span>
               {isCollapsed && <span className="item-text">{item.text}</span>}
             </Link>
           </div>
@@ -94,9 +98,10 @@ const Sidebar = ({ isCollapsed, toggle }) => {
                 key={index}
                 className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
                 // className={`nav-item ${item.active ? 'active' : ''}`}
+                title={item.text}
               >
-                <Link to={item.path} className="nav-link">
-                  <span className="item-icon">{item.icon}</span>
+                <Link to={item.path} className="nav-link" title={item.text}>
+                  <span className="item-icon" title={item.text}>{item.icon}</span>
                   {isCollapsed && <span className="item-text">{item.text}</span>}
                 </Link>
               </div>
