@@ -83,22 +83,52 @@ const OrderDetail = () => {
     return steps;
   };
 
-  const handleDownloadInvoice = async () => {
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/order/${id}/invoice`, {
-        responseType: 'blob'
-      });
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'invoice.pdf');
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error('Error downloading invoice:', error); 
-    }
+const handleDownloadInvoice = async (orderId) => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/order/${orderId}/invoice`, {
+      responseType: "blob", // Crucial for downloading PDFs correctly
+    });
+
+    // Create a blob URL from the PDF data
+    const blob = new Blob([response.data], { type: "application/pdf" });
+    const url = window.URL.createObjectURL(blob);
+
+    // Create a temporary <a> element to trigger download
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `invoice-${orderId}.pdf`);
+    document.body.appendChild(link);
+    link.click();
+
+    // Clean up
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("Error downloading invoice:", error);
+    alert("Failed to download invoice. Please try again.");
   }
+};
+
+
+//   const handleDownloadInvoice = async (orderId) => {
+//   try {
+//     const response = await axios.get(`/api/orders/${orderId}/invoice`, {
+//       responseType: "blob", // crucial for PDFs
+//       // withCredentials: true, // if cookies or sessions are used
+//     });
+
+//     const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/pdf' }));
+//     const link = document.createElement("a");
+//     link.href = url;
+//     link.setAttribute("download", `invoice-${orderId}.pdf`);
+//     document.body.appendChild(link);
+//     link.click();
+//     link.remove();
+//   } catch (error) {
+//     console.error("Download invoice error:", error);
+//   }
+// };
+
 
   if (isLoading) {
     return (
