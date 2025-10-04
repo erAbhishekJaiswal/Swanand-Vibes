@@ -716,13 +716,13 @@
 }
 
 /* Actions */
-.action-buttons {
+.orderlist-action-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
 }
 
-.order-action-btn {
+.orderlist-action-btn {
   padding: 10px 16px;
   border-radius: 8px;
   font-size: 14px;
@@ -734,7 +734,7 @@
   border: none;
 }
 
-.order-action-btn:hover { background: #475569; }
+.orderlist-action-btn:hover { background: #475569; }
 
 .cancel-btn { background: #ef4444; }
 .cancel-btn:hover { background: #dc2626; }
@@ -764,7 +764,7 @@
   .progress-tracker { flex-direction: column; gap: 20px; align-items: center; }
   .step-connector { display: none; }
   .action-buttons { flex-direction: column; }
-  .order-action-btn { width: 100%; }
+  .orderlist-action-btn { width: 100%; }
   .order-dates{
     color: #212121;
   }

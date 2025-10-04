@@ -1,6 +1,6 @@
 // OrderDetail.js
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getUserId } from '../../utills/authService';
 import '../../CssFiles/User/OrderDetail.css';
@@ -9,6 +9,7 @@ import Spinner from '../../components/Spinner';
 
 const OrderDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   // // console.log(id);
 
   const [order, setOrder] = useState(null);
@@ -81,6 +82,23 @@ const OrderDetail = () => {
     
     return steps;
   };
+
+  const handleDownloadInvoice = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/order/${id}/invoice`, {
+        responseType: 'blob'
+      });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'invoice.pdf');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Error downloading invoice:', error); 
+    }
+  }
 
   if (isLoading) {
     return (
@@ -258,10 +276,10 @@ const OrderDetail = () => {
         </div>
 
         {/* Order Actions */}
-        {/* <div className="order-actions-card">
+        <div className="order-actions-card">
           <h2>Order Actions</h2>
-          <div className="action-buttons">
-            {!order.isDelivered && order.deliveryStatus !== 'cancelled' && (
+          <div className="orderlist-action-buttons">
+            {/* {!order.isDelivered && order.deliveryStatus !== 'cancelled' && (
               <button className="order-action-btn cancel-btn">
                 Cancel Order
               </button>
@@ -275,15 +293,16 @@ const OrderDetail = () => {
                   Write a Review
                 </button>
               </>
-            )}
-            <button className="order-action-btn help-btn">
+            )} */}
+
+            <button onClick={() => navigate("/contact")} className="orderlist-action-btn help-btn">
               Get Help
             </button>
-            <button className="order-action-btn invoice-btn">
+            <button onClick={() => handleDownloadInvoice(order._id)} className="orderlist-action-btn invoice-btn">
               Download Invoice
             </button>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
