@@ -2425,7 +2425,7 @@ const ProductList = () => {
               )}
 
               {/* Rating */}
-              {/* <div className="sidebar-section">
+              <div className="sidebar-section">
                 <h3>⭐ Rating</h3>
                 <div className="rating-filters">
                   {[4, 3, 2, 1].map((star) => (
@@ -2438,7 +2438,7 @@ const ProductList = () => {
                     </button>
                   ))}
                 </div>
-              </div> */}
+              </div>
 
               <button className="reset-filters-btn" onClick={resetFilters}>
                 🗑️ Clear All Filters
@@ -2516,18 +2516,21 @@ const ProductList = () => {
                       </p>
 
                       <div className="product-meta">
-                        <div className="rating">
-                           {product.variants?.length > 1 && (
+
+                         <div className="rating">
+                          <span className="stars">
+                            {"★".repeat(Math.floor(product.rating))}
+                            {"☆".repeat(5 - Math.floor(product.rating))}
+                          </span>
+                          <span className="rating-count">({product.rating})</span>
+                        </div>
+                        
+                          {product.variants?.length > 0 && (
                         <div className="variants-info">
                           {product.variants.length} sizes available
                         </div>
                       )}
-                          {/* <span className="stars">
-                            {"★".repeat(Math.floor(product.rating))}
-                            {"☆".repeat(5 - Math.floor(product.rating))}
-                          </span> */}
-                          {/* <span className="rating-count">({product.rating})</span> */}
-                        </div>
+                       
 
                         <div className="price-section">
                           <span className="price">₹{product.price}</span>

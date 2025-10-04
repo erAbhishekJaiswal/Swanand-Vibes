@@ -988,8 +988,8 @@
 
 
 import React, { useEffect, useState } from "react";
-import "../../CssFiles/Admin/product/productcommon.css";
-import { useParams } from "react-router-dom";
+import "../../CssFiles/Admin/product/Detail.css";
+import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { getUserId } from "../../utills/authService";
 import axios from "axios";
@@ -999,12 +999,20 @@ import Footer from "../../components/Footer";
 const ProductDetail = () => {
   const { id } = useParams();
   const userId = getUserId();
+  const navigate = useNavigate();
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [productData, setProductData] = useState(null);
   const [loading, setLoading] = useState(true);
+  
+  // Rating & Review States
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [userRating, setUserRating] = useState(0);
+  const [reviewComment, setReviewComment] = useState("");
+  const [isSubmittingReview, setIsSubmittingReview] = useState(false);
+  const [userHasReviewed, setUserHasReviewed] = useState(false);
 
   useEffect(() => {
     fetchProduct(id);
@@ -1017,6 +1025,21 @@ const ProductDetail = () => {
         `${import.meta.env.VITE_API_URL}/products/common/${id}`
       );
       setProductData(response.data.data);
+      console.log(response.data.data);
+      
+      
+      // Check if user has already reviewed this product
+      if (userId && response.data.data.reviews) {
+        const userReview = response.data.data.reviews.find(
+          review => review.user === userId
+        );
+        setUserHasReviewed(!!userReview);
+        if (userReview) {
+          setUserRating(userReview.rating);
+          setReviewComment(userReview.comment);
+        }
+      }
+      
       setLoading(false);
     } catch (error) {
       toast.error("Failed to load product");
@@ -1030,83 +1053,119 @@ const ProductDetail = () => {
       ? selectedVariant.images.map((img) => img.url)
       : productData?.images?.map((img) => img.url) || [];
 
-  // const handleAddToCart = async () => {
-  //   if (!userId) {
-  //     toast.error("Please login to add products to cart");
-  //     return;
-  //   }
-
-  //   const productToAdd = {
-  //     userId,
-  //     variantId: selectedVariant?.id || null, // ✅ API returns "id"
-  //     quantity,
-  //   };
-
-  //   // console.log(productToAdd);
-    
-  //   try {
-  //     await axios.post(
-  //       `http://localhost:5000/api/user/cart/product/${id}`,
-  //       productToAdd
-  //     );
-
-  //     if (selectedVariant) {
-  //       toast.success(
-  //         `${productData.name} (${selectedVariant.size}) added to cart!`
-  //       );
-  //     } else {
-  //       toast.success(`${productData.name} added to cart!`);
-  //     }
-  //   } catch (error) {
-  //     toast.error(error.response?.data?.message || "Error adding to cart");
-  //   }
-  // };
-
   const handleAddToCart = async () => {
-  if (!userId) {
-    toast.error("Please login to add products to cart");
-    return;
-  }
+    if (!userId) {
+      toast.error("Please login to add products to cart");
+      navigate("/login");
+      return;
+    }
 
-  // // console.log(selectedVariant);
-  
+    const productToAdd = {
+      userId,
+      productId: id,
+      quantity,
+      variantId: selectedVariant?._id || null,
+      size: selectedVariant?._id ? null : selectedVariant?.size || null,
+    };
 
-  const productToAdd = {
-    userId,
-    productId: id, // ✅ Backend requires this
-    quantity,
-    variantId: selectedVariant?._id || null,
-    size: selectedVariant?._id ? null : selectedVariant?.size || null,
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/user/cart/${id}`,
+        productToAdd
+      );
 
-    // variantId: selectedVariant?._id || null, // ✅ use _id from DB, not id
-    // size: selectedVariant?.size || null, // ✅ required if variantId missing
+      if (response.data.success) {
+        if (selectedVariant) {
+          toast.success(
+            `${productData.name} (${selectedVariant.size}) added to cart!`
+          );
+        } else {
+          toast.success(`${productData.name} added to cart!`);
+        }
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Error adding to cart");
+    }
   };
 
-  // // console.log("Adding to cart:", productToAdd);
-
-  try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/user/cart/${id}`, // ✅ keep your route
-      productToAdd
-    );
-
-    if (response.data.success) {
-      if (selectedVariant) {
-        toast.success(
-          `${productData.name} (${selectedVariant.size}) added to cart!`
-        );
-      } else {
-        toast.success(`${productData.name} added to cart!`);
-      }
+  // ✅ Rating & Review Functions
+  const handleSubmitReview = async () => {
+    if (!userId) {
+      toast.error("Please login to submit a review");
+      navigate("/login");
+      return;
     }
-  } catch (error) {
-    toast.error(error.response?.data?.message || "Error adding to cart");
-  }
-};
+
+    if (userRating === 0) {
+      toast.error("Please select a rating");
+      return;
+    }
+
+    if (!reviewComment.trim()) {
+      toast.error("Please write a review comment");
+      return;
+    }
+
+    setIsSubmittingReview(true);
+    try {
+      console.log({ rating: userRating, comment: reviewComment, userid: userId });
+      
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_URL}/products/rate/${id}`,
+        {
+          rating: userRating,
+          comment: reviewComment,
+          userid: userId,
+        }
+      );
+
+      if (response.data.success) {
+        toast.success("Review submitted successfully!");
+        setProductData(response.data.data);
+        setUserHasReviewed(true);
+        setShowReviewForm(false);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.error || "Failed to submit review");
+    } finally {
+      setIsSubmittingReview(false);
+    }
+  };
+
+  const handleEditReview = () => {
+    setShowReviewForm(true);
+  };
+
+  const handleCancelReview = () => {
+    setShowReviewForm(false);
+    if (!userHasReviewed) {
+      setUserRating(0);
+      setReviewComment("");
+    }
+  };
 
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () =>
     quantity > 1 && setQuantity((prev) => prev - 1);
+
+  // Helper function to render star ratings
+  const renderStars = (rating, interactive = false, onStarClick = null) => {
+    return (
+      <div className="stars-container">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <span
+            key={star}
+            className={`star ${interactive ? 'interactive' : ''} ${
+              star <= rating ? 'filled' : ''
+            }`}
+            onClick={() => interactive && onStarClick && onStarClick(star)}
+          >
+            ★
+          </span>
+        ))}
+      </div>
+    );
+  };
 
   if (loading) return <Spinner size="lg" />;
 
@@ -1141,15 +1200,14 @@ const ProductDetail = () => {
         <div className="product-info">
           <div className="product-header">
             <h1>{productData?.name}</h1>
-            {/* <div className="product-rating-large">
-              <span className="rating-stars">
-                {"★".repeat(Math.floor(productData?.rating || 0))}
-                {"☆".repeat(5 - Math.floor(productData?.rating || 0))}
-              </span>
+            
+            {/* Rating Display */}
+            <div className="product-rating-large">
+              {renderStars(Math.floor(productData?.rating || 0))}
               <span className="rating-value">
-                {productData?.rating} • {productData?.numOfReviews} Reviews
+                {productData?.rating?.toFixed(1) || '0.0'} • {productData?.numOfReviews || 0} Reviews
               </span>
-            </div> */}
+            </div>
 
             {/* ✅ Show price (general OR variant) */}
             {selectedVariant ? (
@@ -1159,9 +1217,7 @@ const ProductDetail = () => {
             ) : productData?.variants?.length > 0 ? (
               <div className="product-price-large">
                 From ₹{" "}
-                {Math.min(...productData.variants.map((v) => v.price)).toFixed(
-                  2
-                )}
+                {Math.min(...productData.variants.map((v) => v.price)).toFixed(2)}
               </div>
             ) : (
               <div className="product-price-large">Price not available</div>
@@ -1252,6 +1308,88 @@ const ProductDetail = () => {
               )}
             </button>
           </div>
+
+          {/* ✅ Rating & Review Section */}
+          <div className="review-section">
+            <div className="review-header">
+              <h3>Customer Reviews</h3>
+              {!showReviewForm && (
+                <button 
+                  className="review-btn futuristic-btn secondary"
+                  onClick={() => setShowReviewForm(true)}
+                >
+                  {userHasReviewed ? 'Edit Review' : 'Write a Review'}
+                </button>
+              )}
+            </div>
+
+            {/* Review Form */}
+            {showReviewForm && (
+              <div className="review-form">
+                <h4>{userHasReviewed ? 'Edit Your Review' : 'Write Your Review'}</h4>
+                <div className="rating-input">
+                  <label>Your Rating:</label>
+                  {renderStars(userRating, true, setUserRating)}
+                  <span className="rating-text">
+                    {userRating > 0 ? `${userRating} star${userRating > 1 ? 's' : ''}` : 'Select rating'}
+                  </span>
+                </div>
+                <div className="comment-input">
+                  <label>Your Review:</label>
+                  <textarea
+                    value={reviewComment}
+                    onChange={(e) => setReviewComment(e.target.value)}
+                    placeholder="Share your experience with this product..."
+                    rows="4"
+                  />
+                </div>
+                <div className="review-actions">
+                  <button
+                    onClick={handleSubmitReview}
+                    className="futuristic-btn primary"
+                    disabled={isSubmittingReview}
+                  >
+                    {isSubmittingReview ? 'Submitting...' : 'Submit Review'}
+                  </button>
+                  <button
+                    onClick={handleCancelReview}
+                    className="futuristic-btn outline"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Reviews List */}
+            <div className="reviews-list">
+              {productData?.reviews && productData.reviews.length > 0 ? (
+                productData.reviews.map((review, index) => (
+                  <div key={index} className="review-item">
+                    <div className="review-header">
+                      <div className="reviewer-info">
+                        <strong>{review.name}</strong>
+                        <div className="review-meta">
+                          {renderStars(review.rating)}
+                          <span className="review-date">
+                            {new Date(review.createdAt || Date.now()).toLocaleDateString()}
+                          </span>
+                        </div>
+                      </div>
+                      {review.user === userId && (
+                        <span className="your-review-badge">Your Review</span>
+                      )}
+                    </div>
+                    <p className="review-comment">{review.comment}</p>
+                  </div>
+                ))
+              ) : (
+                <div className="no-reviews">
+                  <p>No reviews yet. Be the first to review this product!</p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1261,3 +1399,680 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+
+
+// import React, { useEffect, useState } from "react";
+// import "../../CssFiles/Admin/product/Detail.css";
+// import { useParams, useNavigate } from "react-router-dom";
+// import { toast } from "react-hot-toast";
+// import { getUserId } from "../../utills/authService";
+// import axios from "axios";
+// import Spinner from "../../components/Spinner";
+// import Footer from "../../components/Footer";
+
+// const ProductDetail = () => {
+//   const { id } = useParams();
+//   const userId = getUserId();
+//   const navigate = useNavigate();
+
+//   const [selectedImage, setSelectedImage] = useState(0);
+//   const [selectedVariant, setSelectedVariant] = useState(null);
+//   const [quantity, setQuantity] = useState(1);
+//   const [productData, setProductData] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const [reviews, setReviews] = useState([]);
+//   const [showReviewForm, setShowReviewForm] = useState(false);
+//   const [reviewData, setReviewData] = useState({
+//     rating: 5,
+//     comment: "",
+//   });
+//   const [reviewLoading, setReviewLoading] = useState(false);
+
+//   useEffect(() => {
+//     fetchProduct(id);
+//     fetchReviews(id);
+//   }, [id]);
+
+//   const fetchProduct = async (id) => {
+//     try {
+//       setLoading(true);
+//       const response = await axios.get(
+//         `${import.meta.env.VITE_API_URL}/products/common/${id}`
+//       );
+//       setProductData(response.data.data);
+//       setLoading(false);
+//     } catch (error) {
+//       toast.error("Failed to load product");
+//       setLoading(false);
+//     }
+//   };
+
+//   const fetchReviews = async (productId) => {
+//     try {
+//       const response = await axios.get(
+//         `${import.meta.env.VITE_API_URL}/reviews/product/${productId}`
+//       );
+//       setReviews(response.data.data || []);
+//     } catch (error) {
+//       console.error("Failed to load reviews");
+//     }
+//   };
+
+//   const handleAddReview = async () => {
+//     if (!userId) {
+//       toast.error("Please login to add review");
+//       navigate("/login");
+//       return;
+//     }
+
+//     if (!reviewData.comment.trim()) {
+//       toast.error("Please enter your comment");
+//       return;
+//     }
+
+//     setReviewLoading(true);
+//     try {
+//       await axios.post(
+//         `${import.meta.env.VITE_API_URL}/reviews`,
+//         {
+//           productId: id,
+//           userId,
+//           rating: reviewData.rating,
+//           comment: reviewData.comment,
+//         }
+//       );
+
+//       toast.success("Review added successfully!");
+//       setReviewData({ rating: 5, comment: "" });
+//       setShowReviewForm(false);
+//       fetchReviews(id); // Refresh reviews
+//     } catch (error) {
+//       toast.error(error.response?.data?.message || "Error adding review");
+//     } finally {
+//       setReviewLoading(false);
+//     }
+//   };
+
+//   const handleAddToCart = async () => {
+//     if (!userId) {
+//       toast.error("Please login to add products to cart");
+//       navigate("/login");
+//       return;
+//     }
+
+//     const productToAdd = {
+//       userId,
+//       productId: id,
+//       quantity,
+//       variantId: selectedVariant?._id || null,
+//       size: selectedVariant?._id ? null : selectedVariant?.size || null,
+//     };
+
+//     try {
+//       const response = await axios.post(
+//         `${import.meta.env.VITE_API_URL}/user/cart/${id}`,
+//         productToAdd
+//       );
+
+//       if (response.data.success) {
+//         if (selectedVariant) {
+//           toast.success(
+//             `${productData.name} (${selectedVariant.size}) added to cart!`
+//           );
+//         } else {
+//           toast.success(`${productData.name} added to cart!`);
+//         }
+//       }
+//     } catch (error) {
+//       toast.error(error.response?.data?.message || "Error adding to cart");
+//     }
+//   };
+
+//   const increaseQuantity = () => setQuantity((prev) => prev + 1);
+//   const decreaseQuantity = () =>
+//     quantity > 1 && setQuantity((prev) => prev - 1);
+
+//   const calculateAverageRating = () => {
+//     if (reviews.length === 0) return 0;
+//     const total = reviews.reduce((sum, review) => sum + review.rating, 0);
+//     return (total / reviews.length).toFixed(1);
+//   };
+
+//   const getRatingDistribution = () => {
+//     const distribution = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+//     reviews.forEach(review => {
+//       distribution[review.rating]++;
+//     });
+//     return distribution;
+//   };
+
+//   if (loading) return <Spinner size="lg" />;
+
+//   return (
+//     <div className="product-detail-container">
+//       <button onClick={() => window.history.back()} className="back-button">
+//         ← Back to Products
+//       </button>
+
+//       <div className="product-detail">
+//         {/* Product Gallery */}
+//         <div className="product-gallery">
+//           <div className="main-image">
+//             <img src={productData?.images?.[selectedImage]?.url} alt={productData?.name} />
+//           </div>
+//           <div className="image-thumbnails">
+//             {productData?.images?.map((img, index) => (
+//               <div
+//                 key={index}
+//                 className={`thumbnail ${selectedImage === index ? "active" : ""}`}
+//                 onClick={() => setSelectedImage(index)}
+//               >
+//                 <img src={img.url} alt={`${productData.name} view ${index + 1}`} />
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+
+//         {/* Product Info */}
+//         <div className="product-info">
+//           <div className="product-header">
+//             <h1>{productData?.name}</h1>
+            
+//             {/* Rating Summary */}
+//             <div className="rating-summary">
+//               <div className="overall-rating">
+//                 <span className="rating-score">{calculateAverageRating()}</span>
+//                 <div className="rating-stars-large">
+//                   {"★".repeat(Math.round(calculateAverageRating()))}
+//                   {"☆".repeat(5 - Math.round(calculateAverageRating()))}
+//                 </div>
+//                 <span className="rating-count">({reviews.length} reviews)</span>
+//               </div>
+//             </div>
+
+//             {/* Price */}
+//             {selectedVariant ? (
+//               <div className="product-price-large">
+//                 ₹ {(selectedVariant.price + (productData.tax || 0)).toFixed(2)}
+//               </div>
+//             ) : productData?.variants?.length > 0 ? (
+//               <div className="product-price-large">
+//                 From ₹{" "}
+//                 {Math.min(...productData.variants.map((v) => v.price)).toFixed(2)}
+//               </div>
+//             ) : (
+//               <div className="product-price-large">Price not available</div>
+//             )}
+//           </div>
+
+//           {/* Variant Selection */}
+//           {productData?.variants?.length > 0 && (
+//             <div className="product-variants">
+//               <h3>Select Variant</h3>
+//               <div className="variant-options">
+//                 {productData.variants.map((variant) => (
+//                   <button
+//                     key={variant.id}
+//                     className={`variant-option ${
+//                       selectedVariant?.id === variant.id ? "active" : ""
+//                     }`}
+//                     onClick={() => {
+//                       setSelectedVariant(variant);
+//                       setSelectedImage(0);
+//                     }}
+//                   >
+//                     {variant.size} • ₹{variant.price.toFixed(2)}
+//                   </button>
+//                 ))}
+//               </div>
+//             </div>
+//           )}
+
+//           {/* Product Details */}
+//           {selectedVariant ? (
+//             <div className="variant-details">
+//               <p><strong>Size:</strong> {selectedVariant.size}</p>
+//               <p><strong>Price:</strong> ₹{selectedVariant.price} All Included</p>
+//               <p><strong>Tax:</strong> {productData.tax}%</p>
+//               <p><strong>Stock:</strong> {selectedVariant.stock > 0 ? `${selectedVariant.stock} available` : "Out of Stock"}</p>
+//             </div>
+//           ) : (
+//             <div className="general-product-details">
+//               <p>{productData?.description}</p>
+//               <p><strong>Total Stock:</strong> {productData?.stock}</p>
+//             </div>
+//           )}
+
+//           {/* Purchase Section */}
+//           <div className="purchase-section">
+//             <div className="quantity-selector">
+//               <button onClick={decreaseQuantity} className="quantity-btn">-</button>
+//               <span className="quantity-value">{quantity}</span>
+//               <button onClick={increaseQuantity} className="quantity-btn">+</button>
+//             </div>
+//             <button
+//               onClick={handleAddToCart}
+//               className="add-to-cart-btn futuristic-btn primary"
+//               disabled={selectedVariant?.stock === 0}
+//             >
+//               {selectedVariant ? (
+//                 selectedVariant.stock > 0 ? (
+//                   <>Add to Cart • ₹{(selectedVariant.price * quantity).toFixed(2)}</>
+//                 ) : (
+//                   "Out of Stock"
+//                 )
+//               ) : productData?.variants?.length > 0 ? (
+//                 <>Select a Variant</>
+//               ) : (
+//                 "Unavailable"
+//               )}
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Reviews & Ratings Section */}
+//       <div className="reviews-section">
+//         <div className="reviews-header">
+//           <h2>Customer Reviews & Ratings</h2>
+//           <button 
+//             className="add-review-btn"
+//             onClick={() => setShowReviewForm(!showReviewForm)}
+//           >
+//             {showReviewForm ? "Cancel Review" : "Write a Review"}
+//           </button>
+//         </div>
+
+//         {/* Review Form */}
+//         {showReviewForm && (
+//           <div className="review-form">
+//             <h3>Share Your Experience</h3>
+//             <div className="rating-input">
+//               <label>Your Rating:</label>
+//               <div className="star-rating">
+//                 {[1, 2, 3, 4, 5].map((star) => (
+//                   <button
+//                     key={star}
+//                     type="button"
+//                     className={`star-btn ${star <= reviewData.rating ? "active" : ""}`}
+//                     onClick={() => setReviewData({...reviewData, rating: star})}
+//                   >
+//                     ★
+//                   </button>
+//                 ))}
+//               </div>
+//             </div>
+//             <div className="comment-input">
+//               <label>Your Review:</label>
+//               <textarea
+//                 value={reviewData.comment}
+//                 onChange={(e) => setReviewData({...reviewData, comment: e.target.value})}
+//                 placeholder="Share your thoughts about this product..."
+//                 rows="4"
+//               />
+//             </div>
+//             <button 
+//               onClick={handleAddReview} 
+//               className="submit-review-btn"
+//               disabled={reviewLoading}
+//             >
+//               {reviewLoading ? "Submitting..." : "Submit Review"}
+//             </button>
+//           </div>
+//         )}
+
+//         {/* Reviews Statistics */}
+//         <div className="reviews-stats">
+//           <div className="overall-rating-card">
+//             <div className="average-rating">
+//               <span className="rating-number">{calculateAverageRating()}</span>
+//               <div className="rating-stars">
+//                 {"★".repeat(Math.round(calculateAverageRating()))}
+//                 {"☆".repeat(5 - Math.round(calculateAverageRating()))}
+//               </div>
+//               <span className="total-reviews">{reviews.length} reviews</span>
+//             </div>
+//           </div>
+
+//           <div className="rating-distribution">
+//             {[5, 4, 3, 2, 1].map((rating) => {
+//               const count = getRatingDistribution()[rating];
+//               const percentage = reviews.length > 0 ? (count / reviews.length) * 100 : 0;
+//               return (
+//                 <div key={rating} className="rating-bar">
+//                   <span className="rating-label">{rating} ★</span>
+//                   <div className="bar-container">
+//                     <div 
+//                       className="bar-fill" 
+//                       style={{ width: `${percentage}%` }}
+//                     ></div>
+//                   </div>
+//                   <span className="rating-count">{count}</span>
+//                 </div>
+//               );
+//             })}
+//           </div>
+//         </div>
+
+//         {/* Reviews List */}
+//         <div className="reviews-list">
+//           {reviews.length > 0 ? (
+//             reviews.map((review) => (
+//               <div key={review._id} className="review-card">
+//                 <div className="review-header">
+//                   <div className="reviewer-info">
+//                     <div className="reviewer-avatar">
+//                       {review.userId?.name?.charAt(0)?.toUpperCase() || 'U'}
+//                     </div>
+//                     <div className="reviewer-details">
+//                       <h4>{review.userId?.name || 'Anonymous'}</h4>
+//                       <span className="review-date">
+//                         {new Date(review.createdAt).toLocaleDateString()}
+//                       </span>
+//                     </div>
+//                   </div>
+//                   <div className="review-rating">
+//                     <span className="stars">
+//                       {"★".repeat(review.rating)}
+//                       {"☆".repeat(5 - review.rating)}
+//                     </span>
+//                   </div>
+//                 </div>
+//                 <div className="review-comment">
+//                   <p>{review.comment}</p>
+//                 </div>
+//               </div>
+//             ))
+//           ) : (
+//             <div className="no-reviews">
+//               <p>No reviews yet. Be the first to review this product!</p>
+//             </div>
+//           )}
+//         </div>
+//       </div>
+
+//       <Footer />
+//     </div>
+//   );
+// };
+
+// export default ProductDetail;
+
+
+
+// import React, { useEffect, useState } from "react";
+// import "../../CssFiles/Admin/product/productcommon.css";
+// import { useParams, useNavigate } from "react-router-dom";
+// import { toast } from "react-hot-toast";
+// import { getUserId } from "../../utills/authService";
+// import axios from "axios";
+// import Spinner from "../../components/Spinner";
+// import Footer from "../../components/Footer";
+
+// const ProductDetail = () => {
+//   const { id } = useParams();
+//   const userId = getUserId();
+//   const navigate = useNavigate();
+
+//   const [selectedImage, setSelectedImage] = useState(0);
+//   const [selectedVariant, setSelectedVariant] = useState(null);
+//   const [quantity, setQuantity] = useState(1);
+//   const [productData, setProductData] = useState(null);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     fetchProduct(id);
+//   }, [id]);
+
+//   const fetchProduct = async (id) => {
+//     try {
+//       setLoading(true);
+//       const response = await axios.get(
+//         `${import.meta.env.VITE_API_URL}/products/common/${id}`
+//       );
+//       setProductData(response.data.data);
+//       setLoading(false);
+//     } catch (error) {
+//       toast.error("Failed to load product");
+//       setLoading(false);
+//     }
+//   };
+
+//   // ✅ Decide which images to show
+//   const productImages =
+//     selectedVariant && selectedVariant.images?.length > 0
+//       ? selectedVariant.images.map((img) => img.url)
+//       : productData?.images?.map((img) => img.url) || [];
+
+//   // const handleAddToCart = async () => {
+//   //   if (!userId) {
+//   //     toast.error("Please login to add products to cart");
+//   //     return;
+//   //   }
+
+//   //   const productToAdd = {
+//   //     userId,
+//   //     variantId: selectedVariant?.id || null, // ✅ API returns "id"
+//   //     quantity,
+//   //   };
+
+//   //   // console.log(productToAdd);
+    
+//   //   try {
+//   //     await axios.post(
+//   //       `http://localhost:5000/api/user/cart/product/${id}`,
+//   //       productToAdd
+//   //     );
+
+//   //     if (selectedVariant) {
+//   //       toast.success(
+//   //         `${productData.name} (${selectedVariant.size}) added to cart!`
+//   //       );
+//   //     } else {
+//   //       toast.success(`${productData.name} added to cart!`);
+//   //     }
+//   //   } catch (error) {
+//   //     toast.error(error.response?.data?.message || "Error adding to cart");
+//   //   }
+//   // };
+
+//   const handleAddToCart = async () => {
+//   if (!userId) {
+//     toast.error("Please login to add products to cart");
+//     navigate("/login");
+//     return;
+//   }
+
+//   // // console.log(selectedVariant);
+  
+
+//   const productToAdd = {
+//     userId,
+//     productId: id, // ✅ Backend requires this
+//     quantity,
+//     variantId: selectedVariant?._id || null,
+//     size: selectedVariant?._id ? null : selectedVariant?.size || null,
+
+//     // variantId: selectedVariant?._id || null, // ✅ use _id from DB, not id
+//     // size: selectedVariant?.size || null, // ✅ required if variantId missing
+//   };
+
+//   // // console.log("Adding to cart:", productToAdd);
+
+//   try {
+//     const response = await axios.post(
+//       `${import.meta.env.VITE_API_URL}/user/cart/${id}`, // ✅ keep your route
+//       productToAdd
+//     );
+
+//     if (response.data.success) {
+//       if (selectedVariant) {
+//         toast.success(
+//           `${productData.name} (${selectedVariant.size}) added to cart!`
+//         );
+//       } else {
+//         toast.success(`${productData.name} added to cart!`);
+//       }
+//     }
+//   } catch (error) {
+//     toast.error(error.response?.data?.message || "Error adding to cart");
+//   }
+// };
+
+//   const increaseQuantity = () => setQuantity((prev) => prev + 1);
+//   const decreaseQuantity = () =>
+//     quantity > 1 && setQuantity((prev) => prev - 1);
+
+//   if (loading) return <Spinner size="lg" />;
+
+//   return (
+//     <div className="product-detail-container">
+//       <button onClick={() => window.history.back()} className="back-button">
+//         ← Back to Products
+//       </button>
+
+//       <div className="product-detail">
+//         {/* ✅ Product / Variant Images */}
+//         <div className="product-gallery">
+//           <div className="main-image">
+//             <img src={productImages[selectedImage]} alt={productData?.name} />
+//           </div>
+//           <div className="image-thumbnails">
+//             {productImages?.map((img, index) => (
+//               <div
+//                 key={index}
+//                 className={`thumbnail ${
+//                   selectedImage === index ? "active" : ""
+//                 }`}
+//                 onClick={() => setSelectedImage(index)}
+//               >
+//                 <img src={img} alt={`${productData.name} view ${index + 1}`} />
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+
+//         {/* ✅ Product / Variant Info */}
+//         <div className="product-info">
+//           <div className="product-header">
+//             <h1>{productData?.name}</h1>
+//             {/* <div className="product-rating-large">
+//               <span className="rating-stars">
+//                 {"★".repeat(Math.floor(productData?.rating || 0))}
+//                 {"☆".repeat(5 - Math.floor(productData?.rating || 0))}
+//               </span>
+//               <span className="rating-value">
+//                 {productData?.rating} • {productData?.numOfReviews} Reviews
+//               </span>
+//             </div> */}
+
+//             {/* ✅ Show price (general OR variant) */}
+//             {selectedVariant ? (
+//               <div className="product-price-large">
+//                 ₹ {(selectedVariant.price + (productData.tax || 0)).toFixed(2)}
+//               </div>
+//             ) : productData?.variants?.length > 0 ? (
+//               <div className="product-price-large">
+//                 From ₹{" "}
+//                 {Math.min(...productData.variants.map((v) => v.price)).toFixed(
+//                   2
+//                 )}
+//               </div>
+//             ) : (
+//               <div className="product-price-large">Price not available</div>
+//             )}
+//           </div>
+
+//           {/* ✅ Variant Selection */}
+//           {productData?.variants?.length > 0 && (
+//             <div className="product-variants">
+//               <h3>Select Variant</h3>
+//               <div className="variant-options">
+//                 {productData.variants.map((variant) => (
+//                   <button
+//                     key={variant.id}
+//                     className={`variant-option ${
+//                       selectedVariant?.id === variant.id ? "active" : ""
+//                     }`}
+//                     onClick={() => {
+//                       setSelectedVariant(variant);
+//                       setSelectedImage(0);
+//                     }}
+//                   >
+//                     {variant.size} • ₹
+//                     {(variant.price.toFixed(2))}
+//                   </button>
+//                 ))}
+//               </div>
+//             </div>
+//           )}
+
+//           {/* ✅ Show selected variant details */}
+//           {selectedVariant ? (
+//             <div className="variant-details">
+//               <p>
+//                 <strong>Size:</strong> {selectedVariant.size}
+//               </p>
+//               <p>
+//                 <strong>Price:</strong> ₹{selectedVariant.price} All Included
+//               </p>
+//               <p>
+//                 <strong>Tax:</strong> {productData.tax}%
+//               </p>
+//               <p>
+//                 <strong>Stock:</strong>{" "}
+//                 {selectedVariant.stock > 0
+//                   ? `${selectedVariant.stock} available`
+//                   : "Out of Stock"}
+//               </p>
+//             </div>
+//           ) : (
+//             <div className="general-product-details">
+//               <p>{productData?.description}</p>
+//               <p>
+//                 <strong>Total Stock:</strong> {productData?.stock}
+//               </p>
+//             </div>
+//           )}
+
+//           {/* ✅ Quantity + Cart */}
+//           <div className="purchase-section">
+//             <div className="quantity-selector">
+//               <button onClick={decreaseQuantity} className="quantity-btn">
+//                 -
+//               </button>
+//               <span className="quantity-value">{quantity}</span>
+//               <button onClick={increaseQuantity} className="quantity-btn">
+//                 +
+//               </button>
+//             </div>
+//             <button
+//               onClick={handleAddToCart}
+//               className="add-to-cart-btn futuristic-btn primary"
+//               disabled={selectedVariant?.stock === 0}
+//             >
+//               {selectedVariant ? (
+//                 selectedVariant.stock > 0 ? (
+//                   <>
+//                     Add to Cart • ₹
+//                     {(selectedVariant.price * quantity).toFixed(2)}
+//                   </>
+//                 ) : (
+//                   "Out of Stock"
+//                 )
+//               ) : productData?.variants?.length > 0 ? (
+//                 <>Select a Variant</>
+//               ) : (
+//                 "Unavailable"
+//               )}
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+
+//       <Footer />
+//     </div>
+//   );
+// };
+
+// export default ProductDetail;

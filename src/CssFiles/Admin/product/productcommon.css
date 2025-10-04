@@ -745,14 +745,14 @@
   display: flex;
   align-items: center;
   background: var(--glass-bg);
-  border: 1px solid var(--border-color);
+  /* border: 1px solid var(--border-color); */
   border-radius: 8px;
   overflow: hidden;
 }
 
 .quantity-btn {
   padding: 0.8rem 1rem;
-  background: none;
+  background: white;
   border: none;
   color: #2f2f2f;
   font-size: 1.2rem;

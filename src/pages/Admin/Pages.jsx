@@ -22,6 +22,7 @@ import GalleryList from "./Gallery/GalleryList";
 import GiftList from "./Gift/GiftList";
 import Footer from "../../components/Footer";
 import ResetProfilePassword from "../Common/ResetProfilePassword";
+import AdminWallet from "./Wallet/AdminWallet";
 const Pages = () => {
   return (
     <div>
@@ -50,6 +51,7 @@ const Pages = () => {
           <Route path="/giftupload" element={<GiftUpload/>}/>
           <Route path="/giftlist" element={<GiftList/>}/>
           <Route path="/profile/reset-password" element={<ResetProfilePassword />} />
+          <Route path="/adminwallet" element={<AdminWallet />} />
         </Routes>
       </div>
         <Footer />
