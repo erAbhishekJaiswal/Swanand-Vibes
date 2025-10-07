@@ -214,7 +214,7 @@ const PurchaseListPage = () => {
 
     useEffect(() => {
       axios
-        .get("http://localhost:5000/api/vendor/")
+        .get("https://swanand-vibes-backend.vercel.app/api/vendor/")
         .then((res) => setVendors(res.data.data || res.data))
         .catch((error) => {
           // console.log('Error fetching vendors');
@@ -321,7 +321,7 @@ const PurchaseListPage = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // In real implementation, you would call your API:
-      const response = await axios.get('http://localhost:5000/api/purchase/', {
+      const response = await axios.get('https://swanand-vibes-backend.vercel.app/api/purchase/', {
         params: { ...filters, page, limit: purchasesPerPage }
       });
 

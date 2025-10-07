@@ -20,7 +20,7 @@ const PurchaseDetailPage = () => {
       setError(null);
       
       // Simulate API call - replace with actual API
-      const response = await fetch(`http://localhost:5000/api/purchase/${id}`);
+      const response = await fetch(`https://swanand-vibes-backend.vercel.app/api/purchase/${id}`);
       const data = await response.json();
       
       if (!response.ok) {
@@ -86,19 +86,19 @@ const PurchaseDetailPage = () => {
     );
   };
 
-  const handlePrintInvoice = () => {
-    window.print();
-  };
+  // const handlePrintInvoice = () => {
+  //   window.print();
+  // };
 
   const handleDownloadInvoice = () => {
     // Implement download functionality
     console.log('Download invoice');
   };
 
-  const handleEditPurchase = () => {
-    // Navigate to edit page
-    console.log('Edit purchase');
-  };
+  // const handleEditPurchase = () => {
+  //   // Navigate to edit page
+  //   console.log('Edit purchase');
+  // };
 
 //   const handleUpdateStatus = (newStatus) => {
 //     // Implement status update
@@ -184,13 +184,13 @@ const PurchaseDetailPage = () => {
           </div>
           
           <div className="ecom-purchase-detail-page__header-actions">
-            <button 
+            {/* <button 
               className="ecom-purchase-detail-page__action-btn ecom-purchase-detail-page__action-btn--secondary"
               onClick={handlePrintInvoice}
             >
               <i className="fas fa-print"></i>
               Print
-            </button>
+            </button> */}
             <button 
               className="ecom-purchase-detail-page__action-btn ecom-purchase-detail-page__action-btn--secondary"
               onClick={handleDownloadInvoice}
@@ -198,13 +198,13 @@ const PurchaseDetailPage = () => {
               <i className="fas fa-download"></i>
               Download
             </button>
-            <button 
+            {/* <button 
               className="ecom-purchase-detail-page__action-btn ecom-purchase-detail-page__action-btn--primary"
               onClick={handleEditPurchase}
             >
               <i className="fas fa-edit"></i>
               Edit Purchase
-            </button>
+            </button> */}
           </div>
         </div>
 
@@ -288,7 +288,7 @@ const PurchaseDetailPage = () => {
             <i className="fas fa-warehouse"></i>
             Inventory Lots ({lots.length})
           </button>
-          <button
+          {/* <button
             className={`ecom-purchase-detail-page__tab ${
               activeTab === 'documents' ? 'ecom-purchase-detail-page__tab--active' : ''
             }`}
@@ -296,7 +296,7 @@ const PurchaseDetailPage = () => {
           >
             <i className="fas fa-file"></i>
             Documents ({purchase.invoiceFiles.length})
-          </button>
+          </button> */}
         </div>
 
         {/* Tab Content */}
