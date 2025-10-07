@@ -23,6 +23,10 @@ import GiftList from "./Gift/GiftList";
 import Footer from "../../components/Footer";
 import ResetProfilePassword from "../Common/ResetProfilePassword";
 import AdminWallet from "./Wallet/AdminWallet";
+import AdminPurchaseForm from "./Purchase/AdminPurchaseForm";
+import VendorCreateForm from "./Purchase/VendorCreateForm";
+import PurchaseListPage from "./Purchase/PurchaseListPage";
+import PurchaseDetailPage from "./Purchase/PurchaseDetailPage";
 const Pages = () => {
   return (
     <div>
@@ -52,6 +56,10 @@ const Pages = () => {
           <Route path="/giftlist" element={<GiftList/>}/>
           <Route path="/profile/reset-password" element={<ResetProfilePassword />} />
           <Route path="/adminwallet" element={<AdminWallet />} />
+          <Route path="/adminpurchaseform" element={<AdminPurchaseForm />} />
+          <Route path="/vendorcreateform" element={<VendorCreateForm />} />
+          <Route path="/purchaselist" element={<PurchaseListPage />} />
+          <Route path="/purchasedetail/:id" element={<PurchaseDetailPage />} />
         </Routes>
       </div>
         <Footer />

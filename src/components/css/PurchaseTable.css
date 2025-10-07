@@ -1,0 +1,352 @@
+.ecom-purchase-table {
+  width: 100%;
+}
+
+.ecom-purchase-table__container {
+  overflow-x: auto;
+}
+
+.ecom-purchase-table__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
+}
+
+.ecom-purchase-table__header {
+  background: #f8f9fa;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.ecom-purchase-table__th {
+  padding: 1rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ecom-purchase-table__th--sortable {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ecom-purchase-table__th--sortable:hover {
+  background: #e9ecef;
+}
+
+.ecom-purchase-table__th-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ecom-purchase-table__sort-icon {
+  color: #6c757d;
+  font-size: 0.8rem;
+  transition: color 0.3s ease;
+}
+
+.ecom-purchase-table__sort-icon--active {
+  color: #667eea;
+}
+
+.ecom-purchase-table__body {
+  background: white;
+}
+
+.ecom-purchase-table__row {
+  border-bottom: 1px solid #f8f9fa;
+  transition: background-color 0.3s ease;
+}
+
+.ecom-purchase-table__row:hover {
+  background: #f8f9fa;
+}
+
+.ecom-purchase-table__td {
+  padding: 1rem 0.75rem;
+  vertical-align: middle;
+}
+
+/* Invoice Column */
+.ecom-purchase-table__invoice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ecom-purchase-table__invoice-number {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.ecom-purchase-table__notes {
+  color: #ffa726;
+  cursor: help;
+}
+
+/* Vendor Column */
+.ecom-purchase-table__vendor-name {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+}
+
+.ecom-purchase-table__created-by {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+/* Items Column */
+.ecom-purchase-table__items-count {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.ecom-purchase-table__items-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ecom-purchase-table__item-preview {
+  font-size: 0.8rem;
+  color: #6c757d;
+  background: #f8f9fa;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.ecom-purchase-table__more-items {
+  font-size: 0.7rem;
+  color: #667eea;
+  font-style: italic;
+}
+
+/* Amount Column */
+.ecom-purchase-table__total-amount {
+  font-weight: 700;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.ecom-purchase-table__quantity {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+/* Status Badges */
+.ecom-purchase-table__status,
+.ecom-purchase-table__payment-status {
+  padding: 0.4rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.ecom-purchase-table__status--received {
+  background: #e3f2fd;
+  color: #2196f3;
+}
+
+.ecom-purchase-table__status--processing {
+  background: #fff3e0;
+  color: #ff9800;
+}
+
+.ecom-purchase-table__status--completed {
+  background: #e8f5e8;
+  color: #4caf50;
+}
+
+.ecom-purchase-table__status--cancelled {
+  background: #ffebee;
+  color: #f44336;
+}
+
+.ecom-purchase-table__payment-status--paid {
+  background: #e8f5e8;
+  color: #4caf50;
+}
+
+.ecom-purchase-table__payment-status--pending {
+  background: #fff3e0;
+  color: #ff9800;
+}
+
+.ecom-purchase-table__payment-status--partial {
+  background: #e3f2fd;
+  color: #2196f3;
+}
+
+.ecom-purchase-table__payment-status--cancelled {
+  background: #ffebee;
+  color: #f44336;
+}
+
+.ecom-purchase-table__payment-method {
+  font-size: 0.7rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+}
+
+/* Date Column */
+.ecom-purchase-table__date {
+  font-size: 0.9rem;
+  color: #2c3e50;
+}
+
+/* Actions */
+.ecom-purchase-table__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ecom-purchase-table__action-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.ecom-purchase-table__action-btn--view {
+  background: #e3f2fd;
+  color: #2196f3;
+}
+
+.ecom-purchase-table__action-btn--view:hover {
+  background: #2196f3;
+  color: white;
+}
+
+.ecom-purchase-table__action-btn--delete {
+  background: #fff3e0;
+  color: #ff0000;
+}
+
+.ecom-purchase-table__action-btn--edit:hover {
+  background: #ff0000;
+  color: white;
+}
+
+.ecom-purchase-table__action-btn--download {
+  background: #e8f5e8;
+  color: #4caf50;
+}
+
+.ecom-purchase-table__action-btn--download:hover {
+  background: #4caf50;
+  color: white;
+}
+
+/* Skeleton Loading */
+.ecom-purchase-table__skeleton {
+  padding: 1rem;
+}
+
+.ecom-purchase-table__skeleton-row {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.ecom-purchase-table__skeleton-cell {
+  background: #f0f0f0;
+  border-radius: 4px;
+  animation: ecom-purchase-table-pulse 1.5s infinite;
+}
+
+.ecom-purchase-table__skeleton-cell--invoice {
+  width: 120px;
+  height: 20px;
+}
+
+.ecom-purchase-table__skeleton-cell--vendor {
+  width: 150px;
+  height: 20px;
+}
+
+.ecom-purchase-table__skeleton-cell--amount {
+  width: 100px;
+  height: 20px;
+}
+
+.ecom-purchase-table__skeleton-cell--status {
+  width: 80px;
+  height: 20px;
+}
+
+.ecom-purchase-table__skeleton-cell--date {
+  width: 100px;
+  height: 20px;
+}
+
+.ecom-purchase-table__skeleton-cell--actions {
+  width: 120px;
+  height: 20px;
+}
+
+@keyframes ecom-purchase-table-pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Empty State */
+.ecom-purchase-table__empty {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.ecom-purchase-table__empty-icon {
+  font-size: 4rem;
+  color: #e9ecef;
+  margin-bottom: 1.5rem;
+}
+
+.ecom-purchase-table__empty-title {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin: 0 0 1rem 0;
+}
+
+.ecom-purchase-table__empty-text {
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ecom-purchase-table__th {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  .ecom-purchase-table__td {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .ecom-purchase-table__actions {
+    flex-direction: column;
+  }
+  
+  .ecom-purchase-table__action-btn {
+    width: 28px;
+    height: 28px;
+  }
+}

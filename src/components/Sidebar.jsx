@@ -1,11 +1,11 @@
 // Sidebar.js
-import React, { useState } from 'react';
+import React from 'react';
 import './css/common.css';
 import { Link, useLocation } from 'react-router-dom';
 import { getUserRole , isAuthenticated} from "../utills/authService";
 import { GiWallet } from "react-icons/gi";
-import { useDispatch } from "react-redux";
-import {toggleSidebar} from '../store/sidebar';
+// import { useDispatch } from "react-redux";
+// import {toggleSidebar} from '../store/sidebar';
 import { MdContactPage } from "react-icons/md";
 import { PiNetworkDuotone } from "react-icons/pi";
 import { MdOutlineDashboard } from "react-icons/md";
@@ -20,6 +20,8 @@ import { LuBoxes } from "react-icons/lu";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { CiSettings } from "react-icons/ci";
 import { MdSell } from "react-icons/md";
+import { TiPlus } from "react-icons/ti";
+import { RiBillFill } from "react-icons/ri";
 const Sidebar = ({ isCollapsed, toggle }) => {
   // const [isExpanded, setIsExpanded] = useState(true);
   const location = useLocation();
@@ -28,13 +30,14 @@ const Sidebar = ({ isCollapsed, toggle }) => {
     { icon: <MdOutlineDashboard />, text: 'DashBoard', path: '/admin/' },
     { icon: <FaUsers />, text: 'Users', path: '/admin/users', active: true },
     { icon: <LuBoxes />, text: 'Products', path: '/admin/products' },
-    { icon: <MdOutlineShoppingBag />, text: 'Orders', path: '/admin/orderlist' },
-    { icon: <VscVerifiedFilled />, text: 'KYC', path: '/admin/kyc' },
-    { icon: <BiMoneyWithdraw />, text: 'Withdraw', path: '/admin/withdraw' },
+    { icon: <MdOutlineShoppingBag />, text: 'Orders List', path: '/admin/orderlist' },
+    { icon: <VscVerifiedFilled />, text: 'KYC List', path: '/admin/kyc' },
+    { icon: <BiMoneyWithdraw />, text: 'Withdraw Request', path: '/admin/withdraw' },
     { icon: <MdContactPage />, text: 'Contact List', path: '/admin/contactlist' },
     { icon: <GrGallery />, text: 'Gallery', path: '/admin/gallery' },
-    { icon: <CiGift />, text: 'add gift', path: '/admin/giftlist' },
-    { icon: <GiWallet />, text: 'Wallet', path: '/admin/adminwallet' },
+    { icon: <CiGift />, text: 'Gifts', path: '/admin/giftlist' },
+    { icon: <GiWallet />, text: 'Admin Wallet', path: '/admin/adminwallet' },
+    { icon: <RiBillFill />, text: 'Purchase List', path: '/admin/purchaselist' },
     
     // { icon: '🌡️', text: 'Monitoring', path: '/admin/monitoring' },
     // { icon: '🛠️', text: 'Settings', path: '/admin/settings' }
