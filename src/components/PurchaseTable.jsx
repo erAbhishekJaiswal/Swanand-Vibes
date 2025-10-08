@@ -79,11 +79,12 @@ const PurchaseTable = ({ purchases, onSort, sortConfig, isLoading }) => {
       // Handle deletion logic here
       try {
         alert("Purchase delete within 24 hours");
-        const res = await axios.delete(`http://localhost:5000/api/purchase/${id}`)
+        const res = await axios.delete(`${import.meta.env.VITE_API_URL}/purchase/${id}`)
         console.log(res.data);
         window.location.reload();
       } catch (error) {
         console.error(error);
+        toast.error("Failed to delete purchase due to over 24 hours.");
       }
     }
   };
