@@ -141,45 +141,6 @@ const AdminDashboard = () => {
               </div>
 
             </div>
-
-            {/* <div className="recent-activities">
-              <h3>Recent Activities</h3>
-              <div className="activity-list">
-                <div className="activity-item">
-                  <div className="activity-icon">
-                    <i className="fas fa-shopping-cart"></i>
-                  </div>
-                  <div className="activity-details">
-                    <p>
-                      New order <strong>#ORD003</strong> placed
-                    </p>
-                    <span className="activity-time">2 hours ago</span>
-                  </div>
-                </div>
-                <div className="activity-item">
-                  <div className="activity-icon">
-                    <i className="fas fa-user-plus"></i>
-                  </div>
-                  <div className="activity-details">
-                    <p>
-                      New user <strong>Rahul Verma</strong> registered
-                    </p>
-                    <span className="activity-time">5 hours ago</span>
-                  </div>
-                </div>
-                <div className="activity-item">
-                  <div className="activity-icon">
-                    <i className="fas fa-question-circle"></i>
-                  </div>
-                  <div className="activity-details">
-                    <p>
-                      New inquiry from <strong>Meena Desai</strong>
-                    </p>
-                    <span className="activity-time">Yesterday</span>
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
         </main>
       </div>

@@ -99,7 +99,7 @@ const OtpForgetVerification = () => {
     //   toast.error('Invalid OTP');
     // }
     } catch (error) {
-    //  // console.log(error);
+     console.error(error);
       toast.error('Invalid OTP');
       navigate('/login');
     }

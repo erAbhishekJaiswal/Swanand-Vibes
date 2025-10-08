@@ -1,77 +1,8 @@
-// import React from 'react'
-// import { useState, useEffect } from 'react'
-// import axios from 'axios';
-// import { useParams } from 'react-router-dom';
-// import {getUserById} from '../../../utills/apicall';
-// import Spinner from '../../../components/Spinner';
-// import { toast } from 'react-hot-toast';
-
-// const UserDetails = () => {
-//   const { id } = useParams();
-//   const [user, setUser] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const fetchUserDetails = async () => {
-//       setLoading(true);
-//       try {
-//         const response = await getUserById(id);
-//         // axios.get(`http://localhost:5000/api/users/${id}`);
-//         setUser(response.data);
-//         // console.log(response.data);
-
-//       } catch (error) {
-//         console.error('Error fetching user details:', error);
-//         toast.error('Failed to load user details. Please try again later.');
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-//     fetchUserDetails();
-//   }, [id]);
-
-//   if (loading) {
-//     return <Spinner size="lg" />;
-//   }
-
-//   // if (error) {
-//   //   return <div>{error}</div>;
-//   // }
-
-//   return (
-//     <div>
-//         <h1>User Details</h1>
-//         <p>ID: {user.id}</p>
-//         <p>Name: {user.name}</p>
-//         <p>Email: {user.email}</p>
-//         <p>Role: {user.role}</p>
-
-//     </div>
-//   )
-// }
-
-// export default UserDetails
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import { FiUser, FiMail, FiCalendar, FiCreditCard, FiUsers, FiShare2, FiEdit, FiSave, FiX, FiDollarSign, FiKey } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
 import Spinner from '../../../components/Spinner';
-import {getUserById} from '../../../utills/apicall';
+// import {getUserById} from '../../../utills/apicall';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../../../CssFiles/Admin/user/userDetail.css';
@@ -117,36 +48,36 @@ const UserDetails = () => {
     }));
   };
 
-  const handleSave = async () => {
-    try {
-      // Replace with actual API call
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/users/${userId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(editData)
-      });
+  // const handleSave = async () => {
+  //   try {
+  //     // Replace with actual API call
+  //     const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/users/${userId}`, {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(editData)
+  //     });
       
-      const data = await response.json();
+  //     const data = await response.json();
       
-      if (data.success) {
-        setUser(data.user);
-        setEditing(false);
-        toast.success('Profile updated successfully');
-      } else {
-        toast.error('Failed to update profile');
-      }
-    } catch (error) {
-      console.error('Error updating user:', error);
-      toast.error('Error updating profile');
-    }
-  };
+  //     if (data.success) {
+  //       setUser(data.user);
+  //       setEditing(false);
+  //       toast.success('Profile updated successfully');
+  //     } else {
+  //       toast.error('Failed to update profile');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error updating user:', error);
+  //     toast.error('Error updating profile');
+  //   }
+  // };
 
-  const handleCancel = () => {
-    setEditData(user);
-    setEditing(false);
-  };
+  // const handleCancel = () => {
+  //   setEditData(user);
+  //   setEditing(false);
+  // };
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -189,12 +120,12 @@ const UserDetails = () => {
             <div className="admin-user-profile-actions">
               {editing ? (
                 <>
-                  <button className="admin-user-profile-btn admin-user-profile-btn-primary" onClick={handleSave}>
+                  {/* <button className="admin-user-profile-btn admin-user-profile-btn-primary" onClick={handleSave}>
                     <FiSave /> Save
                   </button>
                   <button className="admin-user-profile-btn admin-user-profile-btn-secondary" onClick={handleCancel}>
                     <FiX /> Cancel
-                  </button>
+                  </button> */}
                 </>
               ) : (
                 // <button 

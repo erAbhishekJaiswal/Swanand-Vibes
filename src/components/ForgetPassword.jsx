@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import './AuthPages.css';
 import "./css/ResetForget.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
