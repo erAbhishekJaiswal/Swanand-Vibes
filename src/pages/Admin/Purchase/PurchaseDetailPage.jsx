@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 import '../../../CssFiles/Admin/Purchase/PurchaseDetailPage.css';
 
 const PurchaseDetailPage = () => {
@@ -20,8 +21,9 @@ const PurchaseDetailPage = () => {
       setError(null);
       
       // Simulate API call - replace with actual API
-      const response = await fetch(`https://swanand-vibes-backend.vercel.app/api/purchase/${id}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/purchase/${id}`);
       const data = await response.json();
+      // console.log(data);
       
       if (!response.ok) {
         throw new Error(data.message || 'Failed to fetch purchase details');
@@ -90,9 +92,24 @@ const PurchaseDetailPage = () => {
   //   window.print();
   // };
 
-  const handleDownloadInvoice = () => {
+  const handleDownloadInvoice = async (id) => {
     // Implement download functionality
-    console.log('Download invoice');
+    // console.log('Download invoice');
+     try {
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/report/${id}/invoice`, {
+      responseType: "blob",
+    });
+
+    const url = window.URL.createObjectURL(new Blob([res.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `invoice_${id}.pdf`);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } catch (err) {
+    console.error("Invoice download failed:", err);
+  }
   };
 
   // const handleEditPurchase = () => {
@@ -152,6 +169,8 @@ const PurchaseDetailPage = () => {
       </div>
     );
   }
+  // console.log(lots);
+  
 
   return (
     <div className="ecom-purchase-detail-page">
@@ -160,9 +179,9 @@ const PurchaseDetailPage = () => {
         <div className="ecom-purchase-detail-page__header">
           <div className="ecom-purchase-detail-page__header-content">
             <div className="ecom-purchase-detail-page__breadcrumb">
-              <a href="/purchases" className="ecom-purchase-detail-page__breadcrumb-link">
+              <Link to="/admin/purchases" className="ecom-purchase-detail-page__breadcrumb-link">
                 Purchases
-              </a>
+              </Link>
               <i className="fas fa-chevron-right ecom-purchase-detail-page__breadcrumb-separator"></i>
               <span className="ecom-purchase-detail-page__breadcrumb-current">
                 {purchase.invoiceNumber}
@@ -193,7 +212,7 @@ const PurchaseDetailPage = () => {
             </button> */}
             <button 
               className="ecom-purchase-detail-page__action-btn ecom-purchase-detail-page__action-btn--secondary"
-              onClick={handleDownloadInvoice}
+              onClick={()=>handleDownloadInvoice(id)}
             >
               <i className="fas fa-download"></i>
               Download
@@ -527,11 +546,11 @@ const PurchaseDetailPage = () => {
                             <div className="ecom-purchase-detail-page__lot-product">
                               {lot.product && (
                                 <>
-                                  <span className="ecom-purchase-detail-page__lot-product-name">
-                                    {lot.product.name}
-                                  </span>
+                                  {/* <span className="ecom-purchase-detail-page__lot-product-name">
+                                    {lot.product || 'Unknown'}
+                                  </span> */}
                                   <span className="ecom-purchase-detail-page__lot-product-id">
-                                    {lot.product._id}
+                                    {lot.product}
                                   </span>
                                 </>
                               )}

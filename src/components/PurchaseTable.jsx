@@ -85,8 +85,24 @@ const PurchaseTable = ({ purchases, onSort, sortConfig, isLoading }) => {
     }
   };
 
-  const DownloadInvoice = () => {
-    navigate('/admin/purchasedownload');
+  const DownloadInvoice = async (id) => {
+    // Implement download functionality
+    // console.log('Download invoice');
+     try {
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/report/${id}/invoice`, {
+      responseType: "blob",
+    });
+
+    const url = window.URL.createObjectURL(new Blob([res.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `invoice_${id}.pdf`);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  } catch (err) {
+    console.error("Invoice download failed:", err);
+  }
   };
 
   if (isLoading && purchases.length === 0) {
@@ -259,7 +275,7 @@ const PurchaseTable = ({ purchases, onSort, sortConfig, isLoading }) => {
                     <button 
                       className="ecom-purchase-table__action-btn ecom-purchase-table__action-btn--download"
                       title="Download Invoice"
-                      onClick={() => DownloadInvoice(purchase)}
+                      onClick={() => DownloadInvoice(purchase._id)}
                     >
                       {/* <i className="fas fa-download"></i> */}
                       <MdFileDownload />

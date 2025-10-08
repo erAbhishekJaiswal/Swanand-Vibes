@@ -193,28 +193,11 @@ const PurchaseListPage = () => {
   const [totalPurchases, setTotalPurchases] = useState(0);
   const [vendors, setVendors] = useState([]);
 
-  // Mock vendors data (replace with actual API call)
-  // const vendors = [
-  //   { _id: '1', name: 'Tech Supplies Inc.' },
-  //   { _id: '2', name: 'Office Depot' },
-  //   { _id: '3', name: 'Global Electronics' },
-  //   { _id: '4', name: 'Premium Goods Co.' }
-  // ];
 
-  // const vendorData = async () => {
-  //  try {
-  //   const res = await axios.get('http://localhost:5000/api/vendor')
-  //   console.log(res.data.data)
-  //   setVendors(res.data)
-  //  } catch (error) {
-  //   console.error(error)
-  //  }
-  // }
-  // vendorData()
 
     useEffect(() => {
       axios
-        .get("https://swanand-vibes-backend.vercel.app/api/vendor/")
+        .get(`${import.meta.env.VITE_API_URL}/vendor/`)
         .then((res) => setVendors(res.data.data || res.data))
         .catch((error) => {
           // console.log('Error fetching vendors');
@@ -321,7 +304,7 @@ const PurchaseListPage = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // In real implementation, you would call your API:
-      const response = await axios.get('https://swanand-vibes-backend.vercel.app/api/purchase/', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/purchase/`, {
         params: { ...filters, page, limit: purchasesPerPage }
       });
 
@@ -485,6 +468,8 @@ const PurchaseListPage = () => {
     link.click();
     URL.revokeObjectURL(url);
   };
+
+
 
   if (isLoading && purchases.length === 0) {
     return (

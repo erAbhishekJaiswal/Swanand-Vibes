@@ -26,7 +26,7 @@ const VendorCreateForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post("http://localhost:5000/api/vendor/", formData); // Adjust backend route
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/vendor/`, formData); // Adjust backend route
       toast.success("Vendor created successfully!");
       console.log("Vendor created:", data);
       setFormData({

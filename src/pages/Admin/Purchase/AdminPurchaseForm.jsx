@@ -323,7 +323,7 @@ export default function AdminPurchaseForm() {
 
   useEffect(() => {
     axios
-      .get("https://swanand-vibes-backend.vercel.app/api/vendor/")
+      .get(`${import.meta.env.VITE_API_URL}/vendor/`)
       .then((res) => setVendors(res.data.data || res.data))
       .catch((error) => {
         // console.log('Error fetching vendors');
@@ -336,7 +336,7 @@ export default function AdminPurchaseForm() {
     const controller = new AbortController();
     axios
       .get(
-        `https://swanand-vibes-backend.vercel.app/api/products/common?search=${encodeURIComponent(
+        `${import.meta.env.VITE_API_URL}/products/common?search=${encodeURIComponent(
           searchQuery
         )}`,
         { signal: controller.signal }
@@ -459,7 +459,7 @@ export default function AdminPurchaseForm() {
         invoiceFiles.forEach((f) => fd.append("invoiceFiles", f));
         console.log(fd);
         const res = await axios.post(
-          "https://swanand-vibes-backend.vercel.app/api/purchase/",
+          `${import.meta.env.VITE_API_URL}/purchase/`,
           fd,
           {
             headers: { "Content-Type": "multipart/form-data" },
@@ -486,7 +486,7 @@ export default function AdminPurchaseForm() {
         console.log(body);
 
         const res = await axios.post(
-          "https://swanand-vibes-backend.vercel.app/api/purchase/",
+          `${import.meta.env.VITE_API_URL}/purchase/`,
           body
         );
         alert(
