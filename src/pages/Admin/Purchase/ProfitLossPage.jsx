@@ -31,7 +31,7 @@ const ProfitLossPage = () => {
       if (filters.from) params.append('from', filters.from);
       if (filters.to) params.append('to', filters.to);
       
-      const response = await fetch(`http://localhost:5000/api/report/profitandloss?${params}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/report/profitandloss?${params}`);
       const data = await response.json();
       
       if (!response.ok) {
