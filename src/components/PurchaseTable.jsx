@@ -1,13 +1,16 @@
-import React from 'react';
+import React , { useState } from 'react';
 import './css/PurchaseTable.css';
 import { FaEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { MdFileDownload } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
+import Spinner from './Spinner';
 
 
 const PurchaseTable = ({ purchases, onSort, sortConfig, isLoading }) => {
+  const [isLoading2, setIsLoading2] = useState(false);
   const navigate = useNavigate();
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-IN', {
@@ -89,6 +92,7 @@ const PurchaseTable = ({ purchases, onSort, sortConfig, isLoading }) => {
     // Implement download functionality
     // console.log('Download invoice');
      try {
+      setIsLoading2(true);
     const res = await axios.get(`${import.meta.env.VITE_API_URL}/report/${id}/invoice`, {
       responseType: "blob",
     });
@@ -100,8 +104,12 @@ const PurchaseTable = ({ purchases, onSort, sortConfig, isLoading }) => {
     document.body.appendChild(link);
     link.click();
     link.remove();
+    setIsLoading2(false);
+    toast.success("Invoice downloaded successfully.");
   } catch (err) {
     console.error("Invoice download failed:", err);
+    setIsLoading2(false);
+    toast.error("Failed to download invoice.");
   }
   };
 
@@ -278,7 +286,8 @@ const PurchaseTable = ({ purchases, onSort, sortConfig, isLoading }) => {
                       onClick={() => DownloadInvoice(purchase._id)}
                     >
                       {/* <i className="fas fa-download"></i> */}
-                      <MdFileDownload />
+                     {isLoading2 ? <Spinner /> : <MdFileDownload />}
+                      
                     </button>
                   </div>
                 </td>
