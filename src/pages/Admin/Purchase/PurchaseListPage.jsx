@@ -269,6 +269,12 @@ const PurchaseListPage = () => {
               <i className="fas fa-file-invoice"></i>
               Create Purchase
             </button>
+             <button 
+              className="ecom-purchase-list-page__export-btn"
+              onClick={()=>navigate('/admin/profit-loss')}
+            >
+              Profit & Loss
+            </button>
           </div>
         </div>
 

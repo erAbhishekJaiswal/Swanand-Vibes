@@ -27,6 +27,7 @@ import AdminPurchaseForm from "./Purchase/AdminPurchaseForm";
 import VendorCreateForm from "./Purchase/VendorCreateForm";
 import PurchaseListPage from "./Purchase/PurchaseListPage";
 import PurchaseDetailPage from "./Purchase/PurchaseDetailPage";
+import ProfitLossPage from "./Purchase/ProfitLossPage"
 const Pages = () => {
   return (
     <div>
@@ -60,6 +61,7 @@ const Pages = () => {
           <Route path="/vendorcreateform" element={<VendorCreateForm />} />
           <Route path="/purchaselist" element={<PurchaseListPage />} />
           <Route path="/purchasedetail/:id" element={<PurchaseDetailPage />} />
+          <Route path="/profit-loss" element={<ProfitLossPage />} />
         </Routes>
       </div>
         <Footer />

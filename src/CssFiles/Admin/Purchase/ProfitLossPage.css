@@ -1,0 +1,621 @@
+.ecom-profit-loss-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem 0;
+}
+
+.ecom-profit-loss-page__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+.ecom-profit-loss-page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.ecom-profit-loss-page__header-content {
+  flex: 1;
+}
+
+.ecom-profit-loss-page__title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(135deg, #2c3e50, #667eea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ecom-profit-loss-page__subtitle {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin: 0;
+}
+
+.ecom-profit-loss-page__header-actions {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.ecom-profit-loss-page__export-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.ecom-profit-loss-page__export-btn--excel {
+  background: #4caf50;
+  color: white;
+}
+
+.ecom-profit-loss-page__export-btn--excel:hover {
+  background: #45a049;
+  transform: translateY(-1px);
+}
+
+.ecom-profit-loss-page__export-btn--pdf {
+  background: #f44336;
+  color: white;
+}
+
+.ecom-profit-loss-page__export-btn--pdf:hover {
+  background: #da190b;
+  transform: translateY(-1px);
+}
+
+/* Filters */
+.ecom-profit-loss-page__filters {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.ecom-profit-loss-page__filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ecom-profit-loss-page__filter-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ecom-profit-loss-page__filter-input {
+  padding: 0.75rem 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
+  min-width: 150px;
+}
+
+.ecom-profit-loss-page__filter-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.ecom-profit-loss-page__quick-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ecom-profit-loss-page__quick-filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ecom-profit-loss-page__quick-filter-btn {
+  padding: 0.5rem 1rem;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  color: #6c757d;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.ecom-profit-loss-page__quick-filter-btn:hover {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+/* Error State */
+.ecom-profit-loss-page__error {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #ffebee;
+  border: 1px solid #f44336;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.ecom-profit-loss-page__error-icon {
+  font-size: 2rem;
+  color: #f44336;
+  flex-shrink: 0;
+}
+
+.ecom-profit-loss-page__error-content {
+  flex: 1;
+}
+
+.ecom-profit-loss-page__error-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #c62828;
+  margin: 0 0 0.5rem 0;
+}
+
+.ecom-profit-loss-page__error-text {
+  color: #d32f2f;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.ecom-profit-loss-page__error-retry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.ecom-profit-loss-page__error-retry:hover {
+  background: #d32f2f;
+}
+
+/* Metrics */
+.ecom-profit-loss-page__metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.ecom-profit-loss-page__metric-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.3s ease;
+  border-left: 4px solid;
+}
+
+.ecom-profit-loss-page__metric-card:hover {
+  transform: translateY(-2px);
+}
+
+.ecom-profit-loss-page__metric-card--revenue {
+  border-left-color: #667eea;
+}
+
+.ecom-profit-loss-page__metric-card--gross {
+  border-left-color: #4caf50;
+}
+
+.ecom-profit-loss-page__metric-card--net {
+  border-left-color: #ff9800;
+}
+
+.ecom-profit-loss-page__metric-card--cogs {
+  border-left-color: #f44336;
+}
+
+.ecom-profit-loss-page__metric-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.ecom-profit-loss-page__metric-card--revenue .ecom-profit-loss-page__metric-icon {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.ecom-profit-loss-page__metric-card--gross .ecom-profit-loss-page__metric-icon {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+}
+
+.ecom-profit-loss-page__metric-card--net .ecom-profit-loss-page__metric-icon {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+.ecom-profit-loss-page__metric-card--cogs .ecom-profit-loss-page__metric-icon {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+}
+
+.ecom-profit-loss-page__metric-content {
+  flex: 1;
+}
+
+.ecom-profit-loss-page__metric-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.ecom-profit-loss-page__metric-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+  line-height: 1;
+}
+
+.ecom-profit-loss-page__metric-change {
+  display: block;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+/* Statement */
+.ecom-profit-loss-page__statement {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.ecom-profit-loss-page__statement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.ecom-profit-loss-page__statement-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.ecom-profit-loss-page__statement-period {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.ecom-profit-loss-page__statement-content {
+  padding: 0;
+}
+
+.ecom-profit-loss-page__statement-section {
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.ecom-profit-loss-page__statement-section:last-child {
+  border-bottom: none;
+}
+
+.ecom-profit-loss-page__section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  padding: 1.5rem 2rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.ecom-profit-loss-page__statement-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.ecom-profit-loss-page__statement-row:last-child {
+  border-bottom: none;
+}
+
+.ecom-profit-loss-page__statement-row--negative {
+  background: rgba(244, 67, 54, 0.02);
+}
+
+.ecom-profit-loss-page__statement-row--total {
+  background: #f8f9fa;
+  font-weight: 600;
+  border-top: 2px solid #e9ecef;
+}
+
+.ecom-profit-loss-page__statement-row--grand-total {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.ecom-profit-loss-page__statement-row--note {
+  font-size: 0.9rem;
+  color: #6c757d;
+  background: rgba(102, 126, 234, 0.02);
+}
+
+.ecom-profit-loss-page__row-label {
+  font-weight: 500;
+  color: inherit;
+}
+
+.ecom-profit-loss-page__row-value {
+  font-weight: 600;
+  color: inherit;
+}
+
+.ecom-profit-loss-page__row-value--profit {
+  color: #4caf50;
+}
+
+.ecom-profit-loss-page__row-value--net-profit {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.ecom-profit-loss-page__statement-row--grand-total .ecom-profit-loss-page__row-label,
+.ecom-profit-loss-page__statement-row--grand-total .ecom-profit-loss-page__row-value {
+  color: white;
+}
+
+/* Ratios */
+.ecom-profit-loss-page__ratios {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ecom-profit-loss-page__ratios-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+.ecom-profit-loss-page__ratios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.ecom-profit-loss-page__ratio-card {
+  text-align: center;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  transition: transform 0.3s ease;
+}
+
+.ecom-profit-loss-page__ratio-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.ecom-profit-loss-page__ratio-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.ecom-profit-loss-page__ratio-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.ecom-profit-loss-page__ratio-description {
+  font-size: 0.8rem;
+  color: #6c757d;
+  line-height: 1.4;
+}
+
+/* Loading State */
+.ecom-profit-loss-page__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.ecom-profit-loss-page__loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  animation: ecom-profit-loss-page-spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes ecom-profit-loss-page-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Empty State */
+.ecom-profit-loss-page__empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.ecom-profit-loss-page__empty-icon {
+  font-size: 4rem;
+  color: #e9ecef;
+  margin-bottom: 1.5rem;
+}
+
+.ecom-profit-loss-page__empty-title {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin: 0 0 1rem 0;
+}
+
+.ecom-profit-loss-page__empty-text {
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .ecom-profit-loss-page__metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .ecom-profit-loss-page__ratios-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .ecom-profit-loss-page {
+    padding: 1rem 0;
+  }
+  
+  .ecom-profit-loss-page__header {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .ecom-profit-loss-page__header-actions {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .ecom-profit-loss-page__filters {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .ecom-profit-loss-page__quick-filter-buttons {
+    justify-content: center;
+  }
+  
+  .ecom-profit-loss-page__metrics {
+    grid-template-columns: 1fr;
+  }
+  
+  .ecom-profit-loss-page__statement-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .ecom-profit-loss-page__statement-row {
+    padding: 1rem;
+  }
+  
+  .ecom-profit-loss-page__ratios-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ecom-profit-loss-page__error {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ecom-profit-loss-page__container {
+    padding: 0 0.5rem;
+  }
+  
+  .ecom-profit-loss-page__title {
+    font-size: 2rem;
+  }
+  
+  .ecom-profit-loss-page__header-actions {
+    flex-direction: column;
+  }
+  
+  .ecom-profit-loss-page__export-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .ecom-profit-loss-page__metric-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .ecom-profit-loss-page__statement-row {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .ecom-profit-loss-page__quick-filter-buttons {
+    flex-direction: column;
+  }
+  
+  .ecom-profit-loss-page__quick-filter-btn {
+    width: 100%;
+  }
+}
