@@ -43,9 +43,7 @@ export default function AdminPurchaseForm() {
     const controller = new AbortController();
     axios
       .get(
-        `${import.meta.env.VITE_API_URL}/products/common?search=${encodeURIComponent(
-          searchQuery
-        )}`,
+        `${import.meta.env.VITE_API_URL}/products/search?search=${encodeURIComponent(searchQuery)}`,
         { signal: controller.signal }
       )
       .then((res) => {
@@ -76,31 +74,53 @@ export default function AdminPurchaseForm() {
     );
   }
 
-  function onPickProduct(idx, product) {
-    // updateLine(idx, {
-    //   productId: product.id,
-    //   productName: product.name,
-    //   variantIndex: null,
-    //   variantSize: product.variants,
-    //   quantity: 1,
-    //   purchasePrice: 0,
-    // });
+  // function onPickProduct(idx, product) {
+  //   console.log(product);
+  //   updateLine(idx, {
+  //     productId: product.id,
+  //     productName: product.name,
+  //     variants: product.variants, // renamed from variantSize
+  //     variantIndex: null,
+  //     quantity: 1,
+  //     purchasePrice: 0,
+  //     tax: 0,
+  //   });
 
-    console.log(product);
+  //   setProductResults([]);
+  //   setSearchQuery("");
+  // }
+
+  function onPickProduct(idx, product) {
+    const productTax = product.tax || 0; // <- Auto-pick tax
 
     updateLine(idx, {
-      productId: product.id,
+      productId: product._id,
       productName: product.name,
-      variants: product.variants, // renamed from variantSize
+      variants: product.variants || [],
       variantIndex: null,
       quantity: 1,
       purchasePrice: 0,
-      tax: 0,
+      tax: productTax, // <- Set tax from product
     });
 
     setProductResults([]);
     setSearchQuery("");
   }
+
+  // function computeTotals() {
+  //   let subTotal = 0,
+  //     totalTax = 0,
+  //     totalQty = 0;
+  //   for (const ln of lines) {
+  //     const q = Number(ln.quantity || 0);
+  //     const p = Number(ln.purchasePrice || 0);
+  //     const t = Number(ln.tax || 0);
+  //     subTotal += q * p;
+  //     totalTax += Number(t || 0);
+  //     totalQty += q;
+  //   }
+  //   return { subTotal, totalTax, grandTotal: subTotal + totalTax, totalQty };
+  // }
 
   function computeTotals() {
     let subTotal = 0,
@@ -109,18 +129,22 @@ export default function AdminPurchaseForm() {
     for (const ln of lines) {
       const q = Number(ln.quantity || 0);
       const p = Number(ln.purchasePrice || 0);
-      const t = Number(ln.tax || 0);
-      subTotal += q * p;
-      totalTax += Number(t || 0);
+      const taxPercent = Number(ln.tax || 0);
+
+      const itemSubtotal = q * p;
+      const taxAmount = itemSubtotal * (taxPercent / 100);
+
+      subTotal += itemSubtotal;
+      totalTax += taxAmount;
       totalQty += q;
     }
     return { subTotal, totalTax, grandTotal: subTotal + totalTax, totalQty };
   }
 
-  async function handleFileChange(e) {
-    const files = Array.from(e.target.files);
-    setInvoiceFiles(files);
-  }
+  // async function handleFileChange(e) {
+  //   const files = Array.from(e.target.files);
+  //   setInvoiceFiles(files);
+  // }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -137,7 +161,7 @@ export default function AdminPurchaseForm() {
       (l) => l.productId && Number(l.quantity) > 0
     );
     console.log(validItems);
-    
+
     if (validItems.length === 0) {
       setErrors("Add at least one valid product line");
       setLoading(false);
@@ -247,7 +271,7 @@ export default function AdminPurchaseForm() {
             <div className="product-search-results">
               {productResults?.map((p) => (
                 <div
-                  key={p.id}
+                  key={p._id}
                   className="product-result-item"
                   onClick={() => onPickProduct(lines.length - 1, p)}
                 >
@@ -343,24 +367,45 @@ export default function AdminPurchaseForm() {
                     }
                   />
                 </div>
-                <div className="field tax">
+                {/* <div className="field tax">
                   <label>Tax</label>
                   <input
                     type="number"
                     value={ln.tax}
                     onChange={(e) => updateLine(idx, { tax: e.target.value })}
                   />
+                </div> */}
+                <div className="field tax">
+                  <label>Tax (%)</label>
+                  <input
+                    type="number"
+                    value={ln.tax}
+                    onChange={(e) => updateLine(idx, { tax: e.target.value })}
+                    placeholder="Tax %"
+                    readOnly
+                  />
                 </div>
+
                 <div className="field total">
                   <label>Total</label>
                   {/* <div className="line-total">
                     {formatCurrency(ln.quantity * ln.purchasePrice) + ln.tax}
                   </div> */}
-                  <div className="line-total">
+                  {/* <div className="line-total">
                     ₹
                     {formatCurrency(
                       Number(ln.quantity) * Number(ln.purchasePrice) +
                         Number(ln.tax)
+                    )}
+                  </div> */}
+                  <div className="line-total">
+                    ₹
+                    {formatCurrency(
+                      Number(ln.quantity) * Number(ln.purchasePrice) +
+                        (Number(ln.quantity) *
+                          Number(ln.purchasePrice) *
+                          Number(ln.tax)) /
+                          100
                     )}
                   </div>
                 </div>
@@ -384,11 +429,11 @@ export default function AdminPurchaseForm() {
           </div>
         </div>
 
-        <div className="admin-purchase-form-group">
+        {/* <div className="admin-purchase-form-group">
           <label>Invoice files (optional)</label>
           <br />
           <input type="file" multiple onChange={handleFileChange} />
-        </div>
+        </div> */}
 
         <div className="admin-purchase-form-group">
           <label>Payment Method</label>
