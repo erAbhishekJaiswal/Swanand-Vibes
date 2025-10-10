@@ -691,7 +691,7 @@ const Dashboard = () => {
             
             {/* Stats Grid */}
             <div className="ud-stats">
-              <div className="ud-stat-card" onClick={() => navigate('/cart')}>
+              <div className="ud-stat-card" onClick={() => navigate('/user/cart')}>
                 <div className="ud-stat-icon ud-level">
                   <IoIosCart />
                 </div>
@@ -701,7 +701,7 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div className="ud-stat-card" onClick={() => navigate('/orders')}>
+              <div className="ud-stat-card" onClick={() => navigate('/user/orders')}>
                 <div className="ud-stat-icon ud-order">
                   <LuBoxes />
                 </div>
@@ -721,7 +721,7 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div className="ud-stat-card" onClick={() => navigate('/wallet')}>
+              <div className="ud-stat-card" onClick={() => navigate('/user/wallet')}>
                 <div className="ud-stat-icon ud-wallet">
                   <MdOutlineAccountBalanceWallet />
                 </div>
@@ -731,7 +731,7 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div className="ud-stat-card" onClick={() => navigate('/kyc')}>
+              <div className="ud-stat-card" onClick={() => navigate('/user/kyc')}>
                 <div className="ud-stat-icon ud-kyc">
                   <CgFileDocument />
                 </div>
