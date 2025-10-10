@@ -93,6 +93,10 @@
   background: linear-gradient(135deg, #4ecdc4, #44a08d);
 }
 
+.ud-stat-icon.ud-network {
+  background: linear-gradient(135deg, #c5c5c5, #3d3d3d);
+}
+
 .ud-stat-icon.ud-points {
   background: linear-gradient(135deg, #ffd93d, #ff9a3d);
 }
@@ -153,7 +157,7 @@
 /* Recent Orders / Top Users */
 .ud-order-item {
   display: flex;
-  justify-content: between;
+  justify-content: space-between;
   align-items: center;
   padding: 18px 0;
   border-bottom: 1px solid #f1f5f9;

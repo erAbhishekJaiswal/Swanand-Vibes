@@ -1,102 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-// import "../../CssFiles/User/Network.css";
-// import { getUserId } from "../../utills/authService";
-
-// const NetworkView = () => {
-//   const [downline, setDownline] = useState([]);
-//   const [upline, setUpline] = useState([]);
-//   const [viewMode, setViewMode] = useState("table"); // table | tree
-
-//   const userId = getUserId();
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const resDownline = await axios.get(`http://localhost:5000/api/users/downline/${userId}`);
-//       const resUpline = await axios.get(`http://localhost:5000/api/users/upline/${userId}`);
-//       setDownline(resDownline.data.downline);
-//       setUpline(resUpline.data.upline);
-//     };
-//     fetchData();
-//   }, [userId]);
-
-//   return (
-//     <div className="network-network-container">
-//       <h2>My Network</h2>
-//       <div className="network-view-toggle">
-//         <button onClick={() => setViewMode("table")}>Table View</button>
-//         <button onClick={() => setViewMode("tree")}>Tree View</button>
-//       </div>
-
-//       {viewMode === "table" ? (
-//         <div className="network-table-view">
-//           <h3>Upline</h3>
-//           <table>
-//             <thead>
-//               <tr>
-//                 <th>Level</th>
-//                 <th>Name</th>
-//                 <th>Email</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {upline.map((user, i) => (
-//                 <tr key={user._id}>
-//                   <td>{i + 1}</td>
-//                   <td>{user.name}</td>
-//                   <td>{user.email}</td>
-//                 </tr>
-//               ))}
-//             </tbody>
-//           </table>
-
-//           <h3>Downline</h3>
-//           <table>
-//             <thead>
-//               <tr>
-//                 <th>Level</th>
-//                 <th>Name</th>
-//                 <th>Email</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {downline.map((user, i) => (
-//                 <tr key={user._id}>
-//                   <td>{i + 1}</td>
-//                   <td>{user.name}</td>
-//                   <td>{user.email}</td>
-//                 </tr>
-//               ))}
-//             </tbody>
-//           </table>
-//         </div>
-//       ) : (
-//         <div className="network-tree-view">
-//           <h3>Tree Format</h3>
-//           <div className="network-tree">
-//             <div className="network-node main">{userId}</div>
-//             <div className="network-children">
-//               {downline.map((user) => (
-//                 <div className="network-node" key={user._id}>
-//                   {user.name} ({user.email})
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default NetworkView;
-
-
-
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../CssFiles/User/Network.css";
@@ -127,6 +28,8 @@ const NetworkView = () => {
         
         setDownline(resDownline.data.downline || []);
         setUpline(resUpline.data.upline || []);
+        console.log(resDownline, resUpline);
+        
       } catch (err) {
         setError("Failed to load network data. Please try again later.");
         console.error("Network data fetch error:", err);

@@ -606,6 +606,7 @@ import { IoIosCart } from "react-icons/io";
 import { LuBoxes, LuReceiptIndianRupee } from "react-icons/lu";
 import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 import { CgFileDocument } from "react-icons/cg";
+import { PiNetworkDuotone } from "react-icons/pi";
 import { toast } from "react-hot-toast";
 
 const Dashboard = () => {
@@ -616,6 +617,7 @@ const Dashboard = () => {
   const [userData, setUserData] = useState({
     name: "Loading...",
     cart: "Loading...",
+    totalNetwork: 0,
     walletBalance: 0,
     kycStatus: "Loading...",
     orders: 0,
@@ -649,6 +651,7 @@ const Dashboard = () => {
           name: fatchdashboard.data.user.name,
           cart: fatchdashboard.data.cartCount,
           orders: fatchdashboard.data.orderCount,
+          totalNetwork: fatchdashboard.data.totalNetwork,
           totalOrderAmount: fatchdashboard.data.totalOrderAmount,
           walletBalance: fatchdashboard.data.walletBalance,
           kycStatus: fatchdashboard.data.kycStatus,
@@ -709,6 +712,16 @@ const Dashboard = () => {
                 <div className="ud-stat-info">
                   <h3>{userData.orders}</h3>
                   <p>Total Orders</p>
+                </div>
+              </div>
+
+              <div className="ud-stat-card" onClick={() => navigate('/user/network')}>
+                <div className="ud-stat-icon ud-network">
+                  <PiNetworkDuotone />
+                </div>
+                <div className="ud-stat-info">
+                  <h3>{userData?.totalNetwork}</h3>
+                  <p>Total Network</p>
                 </div>
               </div>
 
