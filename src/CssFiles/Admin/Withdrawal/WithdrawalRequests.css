@@ -502,12 +502,12 @@
   color: #15803d;
 }
 
-.action-buttons {
+.withdraw-action-buttons {
   display: flex;
   gap: 8px;
 }
 
-.action-btn {
+.withdraw-action-btn {
   width: 32px;
   height: 32px;
   border-radius: 6px;
@@ -519,39 +519,39 @@
   transition: all 0.2s;
 }
 
-.action-btn.view {
+.withdraw-action-btn.view {
   background: #eff6ff;
   color: #3b82f6;
 }
 
-.action-btn.view:hover {
+.withdraw-action-btn.view:hover {
   background: #dbeafe;
 }
 
-.action-btn.approve {
+.withdraw-action-btn.approve {
   background: #dcfce7;
   color: #16a34a;
 }
 
-.action-btn.approve:hover {
+.withdraw-action-btn.approve:hover {
   background: #bbf7d0;
 }
 
-.action-btn.reject {
+.withdraw-action-btn.reject {
   background: #fef2f2;
   color: #ef4444;
 }
 
-.action-btn.reject:hover {
+.withdraw-action-btn.reject:hover {
   background: #fee2e2;
 }
 
-.action-btn.complete {
+.withdraw-action-btn.complete {
   background: #ede9fe;
   color: #7c3aed;
 }
 
-.action-btn.complete:hover {
+.withdraw-action-btn.complete:hover {
   background: #ddd6fe;
 }
 

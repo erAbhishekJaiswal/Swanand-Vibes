@@ -407,7 +407,7 @@ body {
 .sidebar-nav .nav-item {
   border-radius: 8px;
   overflow: hidden;
-  display: flex;
+  /* display: flex; */
   justify-content: flex-start;
 }
 
@@ -427,7 +427,7 @@ body {
 }
 
 .sidebar-nav .nav-item.active .nav-link {
-  background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), #0066ff0d);
   color: #1326f3;
   border-right: 2px solid var(--primary-accent);
 }

@@ -7,20 +7,32 @@ import Spinner from "../../../components/Spinner";
 import Pagination from '../../../components/Pagination';
 import toast from 'react-hot-toast';
 const WithdrawalRequests = () => {
-  const [requests, setRequests] = useState([]);
+  // const [requests, setRequests] = useState([]);
   const [filteredRequests, setFilteredRequests] = useState([]);
+  // const [searchTerm, setSearchTerm] = useState('');
+  // const [statusFilter, setStatusFilter] = useState('all');
+  // const [sortField, setSortField] = useState('date');
+  // const [sortDirection, setSortDirection] = useState('desc');
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [itemsPerPage, setItemsPerPage] = useState(10);
+  // const [selectedRequest, setSelectedRequest] = useState(null);
+  // const [isLoading, setIsLoading] = useState(true);
+  const today = new Date().toISOString().split("T")[0];
+  const [startDate, setStartDate] = useState("2025-09-01");
+  const [endDate, setEndDate] = useState(today);
+  const [showModal, setShowModal] = useState(false);
+
+  const [requests, setRequests] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [sortField, setSortField] = useState('date');
   const [sortDirection, setSortDirection] = useState('desc');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPage, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const today = new Date().toISOString().split("T")[0];
-  const [startDate, setStartDate] = useState("2025-09-01");
-  const [endDate, setEndDate] = useState(today);
-  const [showModal, setShowModal] = useState(false);
   
 
   const handleWithdrawalReport = async () => {
@@ -49,50 +61,96 @@ const WithdrawalRequests = () => {
   }
 };
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
+// useEffect(() => {
+//   const fetchData = async () => {
+//     try {
+//       setIsLoading(true);
 
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/wallet/requests`);
-      const data = response.data;
+//       const response = await axios.get(`${import.meta.env.VITE_API_URL}/user/wallet/requests`);
+//       const data = response.data;
 
-      console.log(data);
+//       console.log(data);
 
-      const withdrawalRequests = data.withdrawalRequests;
+//       const withdrawalRequests = data.withdrawalRequests;
 
-      // Format to expected structure
-      const formattedRequests = withdrawalRequests.map(request => {
-        const transaction = request.transactions; // Single object now
+//       // Format to expected structure
+//       const formattedRequests = withdrawalRequests.map(request => {
+//         const transaction = request.transactions; // Single object now
 
-        // Optional: Only include if the transaction is valid
-        if (!transaction || transaction.type !== 'debit' || !transaction.status.includes('withdrawal')) {
-          return null;
-        }
+//         // Optional: Only include if the transaction is valid
+//         if (!transaction || transaction.type !== 'debit' || !transaction.status.includes('withdrawal')) {
+//           return null;
+//         }
 
-        return {
-          _id: `${request.walletId}-${transaction._id}`, // using walletId as unique ID
-          user: request.user,
-          balance: request.balance,
-          transactions: [transaction] // Wrapping single object into array to keep UI logic unchanged
-        };
-      }).filter(Boolean); // Remove any nulls
+//         return {
+//           _id: `${request.walletId}-${transaction._id}`, // using walletId as unique ID
+//           user: request.user,
+//           balance: request.balance,
+//           transactions: [transaction] // Wrapping single object into array to keep UI logic unchanged
+//         };
+//       }).filter(Boolean); // Remove any nulls
 
-      console.log(formattedRequests);
+//       console.log(formattedRequests);
 
-      setRequests(formattedRequests);
-      setFilteredRequests(formattedRequests);
+//       setRequests(formattedRequests);
+//       setFilteredRequests(formattedRequests);
       
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error fetching withdrawal requests:', error);
-      setIsLoading(false);
-    }
-  };
+//       setIsLoading(false);
+//     } catch (error) {
+//       console.error('Error fetching withdrawal requests:', error);
+//       setIsLoading(false);
+//     }
+//   };
 
-  fetchData();
-}, []);
+//   fetchData();
+// }, []);
 
+// Fetch data whenever dependencies change
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/user/wallet/requests`, {
+            params: {
+              page: currentPage,
+              limit: itemsPerPage,
+              search: searchTerm || undefined,
+              status:
+                statusFilter === 'pending'
+                  ? 'withdrawal-requested'
+                  : statusFilter === 'approved'
+                    ? 'withdrawal-approved'
+                    : statusFilter === 'rejected'
+                      ? 'withdrawal-rejected'
+                      : (statusFilter === 'all' ? undefined : statusFilter),
+            }
+          }
+        );
+        const data = response.data;
+        // Format into your UI structure
+        const formatted = data.withdrawalRequests.map(request => {
+          const tx = request.transactions;
+          return {
+            _id: `${request.walletId}-${tx._id}`,
+            user: request.user,
+            balance: request.balance,
+            transactions: [tx],
+          };
+        });
+
+        setRequests(formatted);
+        setTotalItems(data.totalItems);
+        setTotalPages(data.totalPages);
+        setIsLoading(false);
+      } catch (err) {
+        console.error("Error fetching withdrawal requests:", err);
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [currentPage, itemsPerPage, searchTerm, statusFilter]);
  
  
  
@@ -164,11 +222,25 @@ if (statusFilter !== 'all') {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentRequests = filteredRequests;
-  const totalPages = Math.ceil(filteredRequests.length / itemsPerPage);
+  const totalPages = Math.ceil(totalPage / itemsPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  //   const paginate = (page) => {
+  //   if (page >= 1 && page <= totalPages) {
+  //     setCurrentPage(page);
+  //   }
+  // };
 
-  const handleSort = (field) => {
+  // const handleSort = (field) => {
+  //   if (sortField === field) {
+  //     setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+  //   } else {
+  //     setSortField(field);
+  //     setSortDirection('asc');
+  //   }
+  // };
+
+    const handleSort = (field) => {
     if (sortField === field) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
     } else {
@@ -177,63 +249,112 @@ if (statusFilter !== 'all') {
     }
   };
 
-
-  const updateStatus = async (requestId, newStatus) => {
-  try {
-    // Find the request using the composite _id (walletId-txnId)
-    const request = requests.find(r => r._id === requestId);
-    if (!request) return;
-
-    setIsLoading(true);
-
-    // Extract walletId and txnId from composite id
-    const [walletId, txnId] = request._id.split("-");
-
-    // Prepare payload
-    const payload = {
-      walletId,
-      txnId,
-      status: newStatus,
-    };
-
-    let endpoint = "";
-    if (newStatus === "withdrawal-rejected") {
-      endpoint = `${import.meta.env.VITE_API_URL}/user/wallet/${walletId}/reject-withdrawal`;
-    } else if (newStatus === "withdrawal-approved") {
-      endpoint = `${import.meta.env.VITE_API_URL}/user/wallet/${walletId}/approve-withdrawal`;
-    } else if (newStatus === "completed") {
-      endpoint = `${import.meta.env.VITE_API_URL}/user/wallet/${walletId}/complete-withdrawal`;
+  // Optionally apply client-side sorting to `requests`
+  const sortedRequests = [...requests].sort((a, b) => {
+    let aValue, bValue;
+    const txA = a.transactions[0];
+    const txB = b.transactions[0];
+    if (sortField === 'date') {
+      aValue = new Date(txA.date);
+      bValue = new Date(txB.date);
+    } else if (sortField === 'amount') {
+      aValue = txA.amount;
+      bValue = txB.amount;
+    } else if (sortField === 'balance') {
+      aValue = a.balance;
+      bValue = b.balance;
+    } else if (sortField === 'name') {
+      aValue = a.user.name.toLowerCase();
+      bValue = b.user.name.toLowerCase();
+    } else {
+      aValue = txA.status;
+      bValue = txB.status;
     }
+    if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
+    if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
+    return 0;
+  });
 
-    console.log("Updating status:", { requestId, newStatus, payload });
+//   const updateStatus = async (requestId, newStatus) => {
+//   try {
+//     // Find the request using the composite _id (walletId-txnId)
+//     const request = requests.find(r => r._id === requestId);
+//     if (!request) return;
 
-    if (endpoint) {
-      await axios.put(endpoint, payload);
+//     setIsLoading(true);
+
+//     // Extract walletId and txnId from composite id
+//     const [walletId, txnId] = request._id.split("-");
+
+//     // Prepare payload
+//     const payload = {
+//       walletId,
+//       txnId,
+//       status: newStatus,
+//     };
+
+//     let endpoint = "";
+//     if (newStatus === "withdrawal-rejected") {
+//       endpoint = `${import.meta.env.VITE_API_URL}/user/wallet/${walletId}/reject-withdrawal`;
+//     } else if (newStatus === "withdrawal-approved") {
+//       endpoint = `${import.meta.env.VITE_API_URL}/user/wallet/${walletId}/approve-withdrawal`;
+//     } else if (newStatus === "completed") {
+//       endpoint = `${import.meta.env.VITE_API_URL}/user/wallet/${walletId}/complete-withdrawal`;
+//     }
+
+//     console.log("Updating status:", { requestId, newStatus, payload });
+
+//     if (endpoint) {
+//       await axios.put(endpoint, payload);
+//     }
+
+//     setIsLoading(false);
+//     toast.success(`Withdrawal ${newStatus.replace("withdrawal-", "")} successfully`);
+
+//     // Update local state
+//     setRequests(
+//       requests.map(req =>
+//         req._id === requestId
+//           ? {
+//               ...req,
+//               transactions: req.transactions.map(transaction => ({
+//                 ...transaction,
+//                 status: newStatus,
+//               })),
+//             }
+//           : req
+//       )
+//     );
+//   } catch (error) {
+//     console.error("Error updating status:", error);
+//     setIsLoading(false);
+//   }
+// };
+
+const updateStatus = async (requestId, newStatus) => {
+    try {
+      setIsLoading(true);
+      const [walletId, txnId] = requestId.split('-');
+      let endpoint = '';
+      if (newStatus === 'withdrawal-rejected') {
+        endpoint = `${import.meta.env.VITE_API_URL}/user/wallet/${walletId}/reject-withdrawal`;
+      } else if (newStatus === 'withdrawal-approved') {
+        endpoint = `${import.meta.env.VITE_API_URL}/user/wallet/${walletId}/approve-withdrawal`;
+      } else if (newStatus === 'completed') {
+        endpoint = `${import.meta.env.VITE_API_URL}/user/wallet/${walletId}/complete-withdrawal`;
+      }
+      if (endpoint) {
+        await axios.put(endpoint, { walletId, txnId, status: newStatus });
+      }
+      toast.success(`Withdrawal ${newStatus.replace('withdrawal-', '')} successfully`);
+      // After updating, refetch current page
+      setCurrentPage(1); // or remain on same page, or refetch by triggering effect
+      setIsLoading(false);
+    } catch (err) {
+      console.error('Error updating status:', err);
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
-    toast.success(`Withdrawal ${newStatus.replace("withdrawal-", "")} successfully`);
-
-    // Update local state
-    setRequests(
-      requests.map(req =>
-        req._id === requestId
-          ? {
-              ...req,
-              transactions: req.transactions.map(transaction => ({
-                ...transaction,
-                status: newStatus,
-              })),
-            }
-          : req
-      )
-    );
-  } catch (error) {
-    console.error("Error updating status:", error);
-    setIsLoading(false);
-  }
-};
-
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -385,7 +506,7 @@ const getStatusIcon = (status) => {
         <div className="withdrawal-filter-controls">
           <div className="withdrawal-filter-group">
             <FiFilter className="withdrawal-filter-icon" />
-            <select 
+            {/* <select 
               value={statusFilter} 
               onChange={(e) => setStatusFilter(e.target.value)}
             >
@@ -395,10 +516,22 @@ const getStatusIcon = (status) => {
               <option value="approved">Approved</option>
               <option value="completed">Completed</option>
               <option value="rejected">Rejected</option>
-            </select>
+            </select> */}
+                  <select
+        value={statusFilter}
+        onChange={(e) => {
+          setStatusFilter(e.target.value);
+          setCurrentPage(1);
+        }}
+      >
+        <option value="all">All Status</option>
+        <option value="pending">Pending</option>
+        <option value="approved">Approved</option>
+        <option value="rejected">Rejected</option>
+      </select>
           </div>
 
-          <div className="withdrawal-filter-group">
+          {/* <div className="withdrawal-filter-group">
             <select 
               value={itemsPerPage} 
               onChange={(e) => setItemsPerPage(Number(e.target.value))}
@@ -408,7 +541,7 @@ const getStatusIcon = (status) => {
               <option value="20">20 per page</option>
               <option value="50">50 per page</option>
             </select>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -579,9 +712,9 @@ const getStatusIcon = (status) => {
                       {formatDate(transaction.date)}
                     </td>
                     <td>
-                      <div className="action-buttons">
+                      <div className="withdraw-action-buttons">
                         <button 
-                          className="action-btn view"
+                          className="withdraw-action-btn view"
                           onClick={() => setSelectedRequest(request)}
                           title="View Details"
                         >
@@ -590,14 +723,14 @@ const getStatusIcon = (status) => {
                         {transaction.status === "withdrawal-requested" && (
                           <>
                             <button 
-                              className="action-btn approve"
+                              className="withdraw-action-btn approve"
                               onClick={() => updateStatus(request._id, 'withdrawal-approved')}
                               title="Approve"
                             >
                               <FiCheck />
                             </button>
                             <button 
-                              className="action-btn reject"
+                              className="withdraw-action-btn reject"
                               onClick={() => updateStatus(request._id, 'withdrawal-rejected')}
                               title="Reject"
                             >
@@ -607,7 +740,7 @@ const getStatusIcon = (status) => {
                         )}
                         {transaction.status === 'withdrawal-approved' && (
                           <button 
-                            className="action-btn complete"
+                            className="withdraw-action-btn complete"
                             onClick={() => updateStatus(request._id, 'completed')}
                             title="Mark as Completed"
                           >
@@ -633,9 +766,9 @@ const getStatusIcon = (status) => {
 
       {totalPages > 1 && (
         <div className="pagination-controls">
-          <div className="pagination-info">
+          {/* <div className="pagination-info">
             Showing {indexOfFirstItem + 1} to {Math.min(indexOfLastItem, filteredRequests.length)} of {filteredRequests.length} requests
-          </div>
+          </div> */}
           
           {/* <div className="pagination-buttons">
             <button 
