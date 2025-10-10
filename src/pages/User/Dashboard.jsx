@@ -611,7 +611,7 @@ import { toast } from "react-hot-toast";
 const Dashboard = () => {
   const id = getUserId();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("dashboard");
+  // const [activeTab, setActiveTab] = useState("dashboard");
 
   const [userData, setUserData] = useState({
     name: "Loading...",
@@ -654,6 +654,7 @@ const Dashboard = () => {
           kycStatus: fatchdashboard.data.kycStatus,
           gifts: fatchdashboard.data.gifts || [],
         });
+        console.log(fatchdashboard)
         setTopusers(fatchdashboard.data.topWithdrawalUsers || []);
       } catch (error) {
         console.error("Error fetching user data:", error);

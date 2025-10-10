@@ -67,9 +67,9 @@ const Home = () => {
   ];
 
   const stats = [
-    { value: "10K+", label: t("stats_users"), icon: <FiUsers /> },
-    { value: "$2M+", label: t("stats_commissions"), icon: <FiDollarSign /> },
-    { value: "500+", label: t("stats_products"), icon: <FiShoppingBag /> },
+    { value: "1K+", label: t("stats_users"), icon: <FiUsers /> },
+    { value: "$1k+", label: t("stats_commissions"), icon: <FiDollarSign /> },
+    { value: "50+", label: t("stats_products"), icon: <FiShoppingBag /> },
     { value: "12", label: t("stats_levels"), icon: <FiBarChart2 /> }
   ];
 
