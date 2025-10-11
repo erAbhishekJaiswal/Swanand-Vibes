@@ -7,6 +7,7 @@ import Spinner from '../../../components/Spinner';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import Pagination from '../../../components/Pagination';
+import { FcShipped } from "react-icons/fc";
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -220,6 +221,38 @@ const OrderList = () => {
     fetchOrders(currentPage, itemsPerPage, searchTerm, statusFilter, startDate, endDate);
     toast.success('Orders refreshed');
   };
+
+   const handleDownload = async (order) => {
+    console.log(order._id);
+    
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/order/shipping-label/${order._id}`, {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch the shipping label PDF');
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a temporary <a> element to trigger download
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `shipping-label-${orderId}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      // Clean up
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error downloading shipping label:', error);
+      // alert('Could not download the shipping label. Please try again.');
+    }
+  };
+
 
   if (isLoading) {
     return (
@@ -484,6 +517,11 @@ const OrderList = () => {
                         >
                           <GrView />
                         </button>
+                      </div>
+                       <div className="action-buttons">
+                            <button onClick={() => handleDownload(order)} >
+                              <FcShipped />
+                            </button>
                       </div>
                     </td>
                   </tr>
