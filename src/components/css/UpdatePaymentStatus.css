@@ -1,0 +1,107 @@
+.update-payment-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.update-payment-container:hover {
+  transform: translateY(-3px);
+}
+
+.update-payment-title {
+  text-align: center;
+  color: #1e3a8a;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.update-payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.update-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.update-form-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.4rem;
+}
+
+.update-form-input,
+.update-form-select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+  font-size: 0.95rem;
+}
+
+.update-form-input:focus,
+.update-form-select:focus {
+  border-color: #1e3a8a;
+  box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.15);
+}
+
+.update-btn {
+  padding: 12px;
+  background: #1e3a8a;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.update-btn:hover {
+  background: #2b4bb6;
+  transform: translateY(-2px);
+}
+
+.success-message {
+  color: #16a34a;
+  background: #dcfce7;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.error-message {
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* 🌐 Responsive Design */
+@media (max-width: 600px) {
+  .update-payment-container {
+    padding: 1.2rem;
+    margin: 1.5rem;
+  }
+
+  .update-btn {
+    font-size: 0.95rem;
+  }
+
+  .update-payment-title {
+    font-size: 1.2rem;
+  }
+}

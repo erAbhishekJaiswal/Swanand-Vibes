@@ -245,7 +245,7 @@ export default function AdminPurchaseForm() {
       {errors && <div className="form-error">{errors}</div>}
       <form onSubmit={handleSubmit}>
         <div className="admin-purchase-form-group">
-          <label>Vendor</label>
+          <label>Company</label>
           <br />
           <select
             value={vendorId}

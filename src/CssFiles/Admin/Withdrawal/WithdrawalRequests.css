@@ -96,6 +96,15 @@
   gap: 6px;
 }
 
+.withdrawal-report-filter-group-status{
+  padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+}
+
 .withdrawal-report-filter-group label {
   font-size: 14px;
   font-weight: 500;

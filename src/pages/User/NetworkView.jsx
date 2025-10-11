@@ -68,7 +68,7 @@ const NetworkView = () => {
               <th>Level</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Join Date</th>
+              <th>Joined (MM/DD/YYYY)</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -84,7 +84,7 @@ const NetworkView = () => {
                 </td>
                 <td className="network-email-cell">{user.email || 'No email'}</td>
                 <td className="network-date-cell">
-                  {user.joinDate ? new Date(user.joinDate).toLocaleDateString() : 'N/A'}
+                  {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
                 </td>
                 <td className="network-status-cell">
                   <span className={`status-badge ${user.status || 'active'}`}>
@@ -211,7 +211,7 @@ const NetworkView = () => {
                 <p className="network-card-email">{user.email || 'No email'}</p>
                 <div className="network-card-meta">
                   <span className="network-meta-item">
-                    Joined: {user.joinDate ? new Date(user.joinDate).toLocaleDateString() : 'N/A'}
+                    Joined: {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
                   </span>
                 </div>
               </div>
@@ -246,7 +246,7 @@ const NetworkView = () => {
                 <p className="network-card-email">{user.email || 'No email'}</p>
                 <div className="network-card-meta">
                   <span className="network-meta-item">
-                    Joined: {user.joinDate ? new Date(user.joinDate).toLocaleDateString() : 'N/A'}
+                    Joined: {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
                   </span>
                 </div>
               </div>

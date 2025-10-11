@@ -5,6 +5,7 @@ import '../../../CssFiles/Admin/Purchase/PurchaseListPage.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaRegClock , FaRegCheckCircle,FaRupeeSign } from "react-icons/fa";
+import { FaCartShopping } from "react-icons/fa6";
 const PurchaseListPage = () => {
   const navigate = useNavigate();
   const [purchases, setPurchases] = useState([]);
@@ -244,7 +245,7 @@ const PurchaseListPage = () => {
           <div className="ecom-purchase-list-page__header-content">
             <h1 className="ecom-purchase-list-page__title">Purchase Management</h1>
             <p className="ecom-purchase-list-page__subtitle">
-              Manage your purchase orders and vendor transactions
+              Manage your purchase orders and Company transactions
             </p>
           </div>
           <div className="ecom-purchase-list-page__header-actions">
@@ -260,14 +261,14 @@ const PurchaseListPage = () => {
               onClick={handleAddVendor}
             >
               <i className="fas fa-plus"></i>
-              Add Vendor
+              Add Company
             </button>
             <button 
               className="ecom-purchase-list-page__action-btn ecom-purchase-list-page__action-btn--primary"
               onClick={handleCreatePurchase}
             >
               <i className="fas fa-file-invoice"></i>
-              Create Purchase
+              New Purchase
             </button>
              <button 
               className="ecom-purchase-list-page__export-btn"
@@ -282,7 +283,8 @@ const PurchaseListPage = () => {
         <div className="ecom-purchase-list-page__stats">
           <div className="ecom-purchase-list-page__stat-card">
             <div className="ecom-purchase-list-page__stat-icon ecom-purchase-list-page__stat-icon--total">
-              <i className="fas fa-shopping-cart"></i>
+              {/* <i className="fas fa-shopping-cart"></i> */}
+              <FaCartShopping />
             </div>
             <div className="ecom-purchase-list-page__stat-content">
               <span className="ecom-purchase-list-page__stat-number">{getStats().total}</span>

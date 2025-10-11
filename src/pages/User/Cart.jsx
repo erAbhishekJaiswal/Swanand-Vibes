@@ -583,27 +583,53 @@ import { toast } from "react-hot-toast";
 import Spinner from "../../components/Spinner";
 import { FiShoppingCart, FiTrash2, FiPlus, FiMinus, FiLock, FiCreditCard, FiSmartphone, FiArrowLeft } from "react-icons/fi";
 import { CiBank } from "react-icons/ci";
+import { useSelector, useDispatch } from "react-redux";
+import { removeItemFromCart, setCartFromBackend } from "../../store/cartSlice";
+
+// import { useSelector, useDispatch } from "react-redux";
+// import { removeItemFromCart } from "../../store/cartSlice"; // ✅ update this path if needed
+
 const Cart = () => {
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
+  // const cartItems = useSelector((state) => state.cart.items);
+  // const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+const dispatch = useDispatch();
+
   const [loading, setLoading] = useState(false);
   const userId = getUserId();
 
-  useEffect(() => {
-    const fetchCart = async () => {
-      setLoading(true);
-      try {
-        const userCart = await getCart(userId);
-        // // console.log(userCart);
+  // useEffect(() => {
+  //   const fetchCart = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const userCart = await getCart(userId);
+  //       // // console.log(userCart);
         
-        setCartItems(userCart.data.data.items || []);
-      } catch (err) {
-        toast.error("Failed to load cart");
-      }
-      setLoading(false);
-    };
-    fetchCart();
-  }, [userId]);
+  //       setCartItems(userCart.data.data.items || []);
+  //     } catch (err) {
+  //       toast.error("Failed to load cart");
+  //     }
+  //     setLoading(false);
+  //   };
+  //   fetchCart();
+  // }, [userId]);
+
+  useEffect(() => {
+  const fetchCart = async () => {
+    setLoading(true);
+    try {
+      const userCart = await getCart(userId);
+      const items = userCart.data.data.items || [];
+      dispatch(setCartFromBackend(items)); // ✅ update Redux instead of local state
+    } catch (err) {
+      toast.error("Failed to load cart");
+    }
+    setLoading(false);
+  };
+  fetchCart();
+}, [userId, dispatch]);
 
   const updateQuantity = async (itemId, newQty, availableStock) => {
     if (newQty < 1 || newQty > availableStock) return;
@@ -626,18 +652,44 @@ const Cart = () => {
     }
   };
 
-  const removeItem = async (itemId) => {
-    const updatedCart = cartItems.filter((item) => item._id !== itemId);
-    setCartItems(updatedCart);
+  // const removeItem = async (itemId) => {
+  //   const updatedCart = cartItems.filter((item) => item._id !== itemId);
+  //   setCartItems(updatedCart);
 
-    try {
-      await removeFromCart(userId, itemId);
-      toast.success("Item removed from cart");
-    } catch (err) {
-      console.error("Error removing item:", err);
-      toast.error("Error removing item");
-    }
-  };
+  //   try {
+  //     await removeFromCart(userId, itemId);
+  //     toast.success("Item removed from cart");
+  //   } catch (err) {
+  //     console.error("Error removing item:", err);
+  //     toast.error("Error removing item");
+  //   }
+  // };
+
+
+  const removeItem = async (itemId) => {
+  try {
+    await removeFromCart(userId, itemId);     // ✅ Remove from backend
+    dispatch(removeItemFromCart(itemId));     // ✅ Remove from Redux/localStorage
+    toast.success("Item removed from cart");
+    // refresh the window
+    window.location.reload();
+  } catch (err) {
+    console.error("Error removing item:", err);
+    toast.error("Error removing item");
+  }
+};
+
+//   const removeItem = async (itemId) => {
+//   try {
+//     await removeFromCart(userId, itemId); // API call
+//     dispatch(removeItemFromCart(itemId)); // ✅ Remove from Redux (auto-updates localStorage)
+//     toast.success("Item removed from cart");
+//   } catch (err) {
+//     console.error("Error removing item:", err);
+//     toast.error("Error removing item");
+//   }
+// };
+
 
   const getBasePrice = (item) => {
     const taxRate = item?.product?.tax || 0;

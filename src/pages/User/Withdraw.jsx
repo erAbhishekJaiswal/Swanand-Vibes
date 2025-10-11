@@ -76,6 +76,12 @@ const Withdraw = () => {
       return;
     }
 
+    // minimum withdrawal amount
+     if (amount < 300) {
+      setMessage({ type: 'error', text: 'Insufficient balance' });
+      return;
+    }
+
     setIsSubmitting(true);
     setMessage({ type: '', text: '' });
 

@@ -1,3 +1,5 @@
+// 
+
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import "../../CssFiles/common/Productlist.css";
 import { useNavigate } from "react-router-dom";
@@ -10,16 +12,19 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import Footer from "../../components/Footer";
 import TruncateText from "../../components/TruncateText";
+import { t } from "i18next";
 
 const ProductList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cartItems = useSelector(state => state.cart.items);
-
+  const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems);
+  
   // State variables
   const [showFilters, setShowFilters] = useState(false);
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [addingToCart, setAddingToCart] = useState({}); // Track which products are being added to cart
 
   // Filters
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -80,8 +85,12 @@ const ProductList = () => {
       const cleanParams = {};
       Object.keys(params).forEach((key) => {
         const value = params[key];
-        if (value !== "" && value !== null && value !== undefined &&
-            !(Array.isArray(value) && value.length === 0)) {
+        if (
+          value !== "" &&
+          value !== null &&
+          value !== undefined &&
+          !(Array.isArray(value) && value.length === 0)
+        ) {
           cleanParams[key] = value;
         }
       });
@@ -91,8 +100,7 @@ const ProductList = () => {
       if (cleanParams.sizes) cleanParams.sizes = cleanParams.sizes.join(",");
 
       const { data } = await getCommonProducts(cleanParams);
-      // // console.log("Fetching products with params:", cleanParams);
-      
+      console.log("Fetching products with params:", data);
 
       if (data.success) {
         setProducts(data.data);
@@ -107,7 +115,15 @@ const ProductList = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [page, limit, searchQuery, selectedCategory, priceRange, selectedFilters, sortOption]);
+  }, [
+    page,
+    limit,
+    searchQuery,
+    selectedCategory,
+    priceRange,
+    selectedFilters,
+    sortOption,
+  ]);
 
   // Fetch products only when dependencies change
   useEffect(() => {
@@ -136,27 +152,27 @@ const ProductList = () => {
 
   // Filter handlers
   const handleBrandFilter = useCallback((brand) => {
-    setSelectedFilters(prev => ({
+    setSelectedFilters((prev) => ({
       ...prev,
       brands: prev.brands.includes(brand)
-        ? prev.brands.filter(b => b !== brand)
-        : [...prev.brands, brand]
+        ? prev.brands.filter((b) => b !== brand)
+        : [...prev.brands, brand],
     }));
     setPage(1);
   }, []);
 
   const handleSizeFilter = useCallback((size) => {
-    setSelectedFilters(prev => ({
+    setSelectedFilters((prev) => ({
       ...prev,
       sizes: prev.sizes.includes(size)
-        ? prev.sizes.filter(s => s !== size)
-        : [...prev.sizes, size]
+        ? prev.sizes.filter((s) => s !== size)
+        : [...prev.sizes, size],
     }));
     setPage(1);
   }, []);
 
   const handleRatingFilter = useCallback((rating) => {
-    setSelectedFilters(prev => ({ ...prev, minRating: rating }));
+    setSelectedFilters((prev) => ({ ...prev, minRating: rating }));
     setPage(1);
   }, []);
 
@@ -174,63 +190,114 @@ const ProductList = () => {
   }, []);
 
   // Add to cart handler
-  const handleQuickAdd = useCallback(async (product) => {
-    const userId = getUserId();
-    if (!userId) {
-      toast.error("Please login to add products to cart");
-      return;
-    }
+  const handleQuickAdd = useCallback(
+    async (product) => {
+      const userId = getUserId();
+      if (!userId) {
+        toast.error("Please login to add products to cart");
+        navigate("/login");
+        return;
+      }
 
-    try {
-      const hasVariants = product.variants && product.variants.length > 0;
-      let variant;
+      // Set loading state for this specific product
+      setAddingToCart(prev => ({ ...prev, [product.id]: true }));
 
-      if (hasVariants) {
-        if (!product.size && !product.variantId) {
-          toast("Please select a variant on the product page", { icon: "ℹ️" });
-          navigate(`/product/${product.id}`);
-          return;
+      try {
+        const hasVariants = product.variants && product.variants.length > 0;
+        let variant;
+
+        if (hasVariants) {
+          if (!product.size && !product.variantId) {
+            toast("Please select a variant on the product page", {
+              icon: "ℹ️",
+            });
+            navigate(`/product/${product.id}`);
+            return;
+          }
+
+          variant =
+            product.variants.find((v) => v.id === product.variantId) ||
+            product.variants.find((v) => v.size === product.size);
         }
 
-        variant = product.variants.find(v => v.id === product.variantId) ||
-                 product.variants.find(v => v.size === product.size);
-      }
-
-      const cartData = {
-        userId,
-        productId: product.id,
-        quantity: 1,
-        size: hasVariants ? (variant?.size || product.size) : product.size || "One Size",
-        variantId: hasVariants ? (variant?.id || product.variantId) : null,
-      };
-
-      const url = `${import.meta.env.VITE_API_URL}/user/cart/${product.id}`;
-      const response = await axios.post(url, cartData);
-
-      if (response.data.success) {
-        const productToAdd = {
-          ...product,
-          price: hasVariants ? variant?.price : product.price,
-          size: cartData.size,
-          variantId: cartData.variantId,
+        const cartData = {
+          userId,
+          productId: product.id,
+          quantity: 1,
+          size: hasVariants
+            ? variant?.size || product.size
+            : product.size || "One Size",
+          variantId: hasVariants ? variant?.id || product.variantId : null,
         };
-        dispatch(addItemToCart(productToAdd));
-        toast.success(`${product.name} added to cart!`);
-      } else {
-        toast.error(response.data.message || "Error adding to cart");
+
+        const url = `${import.meta.env.VITE_API_URL}/user/cart/${product.id}`;
+        const response = await axios.post(url, cartData);
+        console.log("add to cart", response);
+
+        if (response.data.success) {
+          const productToAdd = {
+            ...product,
+            price: hasVariants ? variant?.price : product.price,
+            size: cartData.size,
+            variantId: cartData.variantId,
+          };
+          dispatch(addItemToCart(productToAdd));
+          toast.success(`${product.name} added to cart!`);
+        } else {
+          toast.error(response.data.message || "Error adding to cart");
+        }
+      } catch (error) {
+        console.error("Error adding product to cart:", error);
+        toast.error(
+          error.response?.data?.message || "Error adding product to cart"
+        );
+      } finally {
+        // Clear loading state for this product
+        setAddingToCart(prev => ({ ...prev, [product.id]: false }));
       }
-    } catch (error) {
-      // console.error("Error adding product to cart:", error);
-      toast.error(error.response?.data?.message || "Error adding product to cart");
-    }
-  }, [dispatch, navigate]);
+    },
+    [dispatch, navigate]
+  );
+
+  // Buy Now handler
+  const handleBuyNow = useCallback(
+    async (product) => {
+      const userId = getUserId();
+      if (!userId) {
+        toast.error("Please login to purchase products");
+        navigate("/login");
+        return;
+      }
+
+      // check if product is already in cart
+      if (cartItems.some((item) => item.productId === product.id && item.variantId === product.variantId) || isProductInCart(product.id, product.variantId)) {
+        // toast.error("Product is already in cart");
+        // If product is already in cart, navigate to checkout page
+        navigate("/user/checkout");
+      }else{
+        // First add to cart, then navigate to checkout
+          await handleQuickAdd(product);
+             // Navigate to checkout page after successful addition to cart
+      navigate("/user/checkout");
+      }
+    
+    },
+    [handleQuickAdd, navigate]
+  );
 
   // Check if product is in cart
-  const isProductInCart = useCallback((productId, variantId) => {
-    return cartItems.some(item => 
-      item.product === productId && item.variantId === variantId
-    );
-  }, [cartItems]);
+  const isProductInCart = useCallback(
+    (productId, variantId) => {
+      return cartItems.some((item) => {
+        const itemProductId = item.product?._id || item.product?.id || item.product || item.productId;
+        return (
+          itemProductId?.toString() === productId?.toString() &&
+          (!variantId || item.variantId === variantId)
+        );
+      });
+    },
+    [cartItems]
+  );
 
   // Loading state
   if (isLoading && page === 1) {
@@ -244,12 +311,6 @@ const ProductList = () => {
 
   return (
     <div className="products-container">
-      {/* Header */}
-      {/* <div className="products-header">
-        <h1>🛍️ Swanand Vibes</h1>
-        <p>Discover unique products for your lifestyle</p>
-      </div> */}
-
       <div className="products-content">
         {/* Mobile Filter Toggle */}
         <div className="mobile-filter-toggle">
@@ -259,15 +320,17 @@ const ProductList = () => {
           >
             {showFilters ? "▲ Hide Filters" : "▼ Show Filters"}
             <span className="filter-count">
-              {Object.values(selectedFilters).filter(arr => arr.length > 0).length +
-               (selectedCategory ? 1 : 0) + (searchQuery ? 1 : 0)}
+              {Object.values(selectedFilters).filter((arr) => arr.length > 0)
+                .length +
+                (selectedCategory ? 1 : 0) +
+                (searchQuery ? 1 : 0)}
             </span>
           </button>
         </div>
 
         <div className="products-layout">
           {/* Sidebar */}
-          <aside className={`products-sidebar ${showFilters ? 'active' : ''}`}>
+          <aside className={`products-sidebar ${showFilters ? "active" : ""}`}>
             <div className="sidebar-sections">
               {/* Search */}
               <div className="sidebar-section">
@@ -286,15 +349,19 @@ const ProductList = () => {
                 <h3>📦 Categories</h3>
                 <div className="filter-list">
                   <button
-                    className={`filter-item ${selectedCategory === "" ? "active" : ""}`}
+                    className={`filter-item ${
+                      selectedCategory === "" ? "active" : ""
+                    }`}
                     onClick={() => handleCategoryChange("")}
                   >
-                    All Products 
+                    All Products
                   </button>
                   {availableFilters.categories.map((cat) => (
                     <button
                       key={cat.id}
-                      className={`filter-item ${selectedCategory === cat.id ? "active" : ""}`}
+                      className={`filter-item ${
+                        selectedCategory === cat.id ? "active" : ""
+                      }`}
                       onClick={() => handleCategoryChange(cat.id)}
                     >
                       {cat.name} ({cat.count})
@@ -315,7 +382,6 @@ const ProductList = () => {
                           checked={selectedFilters.brands.includes(brand.name)}
                           onChange={() => handleBrandFilter(brand.name)}
                         />
-                        {/* <span className="checkmark"></span> */}
                         {brand.name} ({brand.count})
                       </label>
                     ))}
@@ -331,7 +397,11 @@ const ProductList = () => {
                     {availableFilters.sizes.map((sizeObj) => (
                       <button
                         key={sizeObj.name}
-                        className={`filter-chip ${selectedFilters.sizes.includes(sizeObj.name) ? "active" : ""}`}
+                        className={`filter-chip ${
+                          selectedFilters.sizes.includes(sizeObj.name)
+                            ? "active"
+                            : ""
+                        }`}
                         onClick={() => handleSizeFilter(sizeObj.name)}
                       >
                         {sizeObj.name}
@@ -348,7 +418,9 @@ const ProductList = () => {
                   {[4, 3, 2, 1].map((star) => (
                     <button
                       key={star}
-                      className={`rating-filter ${selectedFilters.minRating === star ? "active" : ""}`}
+                      className={`rating-filter ${
+                        selectedFilters.minRating === star ? "active" : ""
+                      }`}
                       onClick={() => handleRatingFilter(star)}
                     >
                       {"★".repeat(star)}+
@@ -369,9 +441,11 @@ const ProductList = () => {
             <div className="products-controls">
               <div className="results-info">
                 <span>{totalItems} products found</span>
-                <span>Page {page} of {totalPages}</span>
+                <span>
+                  Page {page} of {totalPages}
+                </span>
               </div>
-              
+
               <div className="controls-right">
                 <select
                   value={sortOption}
@@ -395,16 +469,19 @@ const ProductList = () => {
             {/* Products Grid */}
             <div className="products-grid">
               {products.map((product) => {
-                const inCart = isProductInCart(product.id, product.variantId);
-                
+                const variantId =
+                  product.variantId || product.variants?.[0]?.id || null;
+                const inCart = isProductInCart(product._id || product.id, variantId);
+                const isAddingToCart = addingToCart[product.id] || false;
+
                 return (
                   <div key={product.id} className="product-card">
                     <div
                       className="product-image"
                       onClick={() => navigate(`/product/${product.id}`)}
                     >
-                      <img 
-                        src={product.images} 
+                      <img
+                        src={product.images}
                         alt={product.name}
                         loading="lazy"
                       />
@@ -423,9 +500,9 @@ const ProductList = () => {
                       <h3 onClick={() => navigate(`/product/${product.id}`)}>
                         <TruncateText text={product.name} limit={25} />
                       </h3>
-                      
+
                       <p className="product-brand">{product.brand}</p>
-                      
+
                       <p className="product-description">
                         {product.description.length > 80
                           ? `${product.description.substring(0, 80)}...`
@@ -433,42 +510,53 @@ const ProductList = () => {
                       </p>
 
                       <div className="product-meta">
-
-                         <div className="rating">
+                        <div className="rating">
                           <span className="stars">
                             {"★".repeat(Math.floor(product.rating))}
                             {"☆".repeat(5 - Math.floor(product.rating))}
                           </span>
-                          <span className="rating-count">({product.rating})</span>
+                          <span className="rating-count">
+                            ({product.rating})
+                          </span>
                         </div>
-                        
-                          {product.variants?.length > 0 && (
-                        <div className="variants-info">
-                          {product.variants.length} sizes available
-                        </div>
-                      )}
-                       
+
+                        {product.variants?.length > 0 && (
+                          <div className="variants-info">
+                            {product.variants.length} sizes available
+                          </div>
+                        )}
 
                         <div className="price-section">
                           <span className="price">₹{product.price}</span>
-                          {/* {product.variantPrice && product.variantPrice !== product.price && (
-                            <span className="variant-price">
-                              From ₹{product.variantPrice}
-                            </span>
-                          )} */}
                         </div>
                       </div>
 
-                     
-
                       {getUserRole() !== "admin" && (
-                        <button
-                          className={`add-to-cart-btn ${inCart ? 'in-cart' : ''}`}
-                          onClick={() => handleQuickAdd(product)}
-                          disabled={inCart}
-                        >
-                          {inCart ? '✓ Added to Cart' : '🛒 Add to Cart'}
-                        </button>
+                        <div className="product-actions">
+                          <button
+                            className={`add-to-cart-btn ${
+                              inCart ? "in-cart" : ""
+                            }`}
+                            onClick={() => handleQuickAdd(product)}
+                            disabled={inCart || isAddingToCart}
+                          >
+                            {isAddingToCart ? (
+                              "⏳ Adding..."
+                            ) : inCart ? (
+                              "✓ Added to Cart"
+                            ) : (
+                              "🛒 Add to Cart"
+                            )}
+                          </button>
+                          
+                          <button
+                            className="buy-now-btn"
+                            onClick={() => handleBuyNow(product)}
+                            disabled={isAddingToCart}
+                          >
+                            {isAddingToCart ? "⏳..." : "⚡ Buy Now"}
+                          </button>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -498,7 +586,7 @@ const ProductList = () => {
                 >
                   ← Previous
                 </button>
-                
+
                 <div className="pagination-numbers">
                   {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                     let pageNum;
@@ -515,14 +603,16 @@ const ProductList = () => {
                     return (
                       <button
                         key={pageNum}
-                        className={`pagination-btn ${page === pageNum ? "active" : ""}`}
+                        className={`pagination-btn ${
+                          page === pageNum ? "active" : ""
+                        }`}
                         onClick={() => setPage(pageNum)}
                       >
                         {pageNum}
                       </button>
                     );
                   })}
-                  
+
                   {totalPages > 5 && (
                     <span className="pagination-ellipsis">...</span>
                   )}

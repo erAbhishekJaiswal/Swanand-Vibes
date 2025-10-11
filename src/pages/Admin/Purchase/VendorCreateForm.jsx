@@ -47,18 +47,18 @@ const VendorCreateForm = () => {
 
   return (
     <div className="vendor-form-container-unique">
-      <h2 className="vendor-form-title-unique">Create New Vendor</h2>
+      <h2 className="vendor-form-title-unique">Create New Company</h2>
 
       <form className="vendor-form-unique" onSubmit={handleSubmit}>
         <div className="vendor-form-group-unique">
-          <label htmlFor="name">Vendor Name</label>
+          <label htmlFor="name">Company Name</label>
           <input
             type="text"
             id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Enter vendor name"
+            placeholder="Enter Company name"
             required
           />
         </div>
@@ -90,14 +90,14 @@ const VendorCreateForm = () => {
         </div>
 
         <div className="vendor-form-group-unique">
-          <label htmlFor="companyName">Company Name</label>
+          <label htmlFor="companyName">Vendor Name</label>
           <input
             type="text"
             id="companyName"
             name="companyName"
             value={formData.companyName}
             onChange={handleChange}
-            placeholder="Enter company name"
+            placeholder="Enter Vendor name"
           />
         </div>
 
@@ -130,7 +130,7 @@ const VendorCreateForm = () => {
           className="vendor-form-submit-btn-unique"
           disabled={loading}
         >
-          {loading ? "Creating..." : "Create Vendor"}
+          {loading ? "Creating..." : "Create Company"}
         </button>
       </form>
     </div>

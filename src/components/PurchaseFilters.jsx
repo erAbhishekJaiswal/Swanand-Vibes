@@ -59,13 +59,13 @@ const PurchaseFilters = ({
 
       <div className="ecom-purchase-filters__controls">
         <div className="ecom-purchase-filters__select-group">
-          <label className="ecom-purchase-filters__label">Vendor</label>
+          <label className="ecom-purchase-filters__label">Company</label>
           <select
             value={filters.vendorId}
             onChange={(e) => handleFilterUpdate('vendorId', e.target.value)}
             className="ecom-purchase-filters__select"
           >
-            <option value="">All Vendors</option>
+            <option value="">All Company</option>
             {vendors.map(vendor => (
               <option key={vendor._id} value={vendor._id}>
                 {vendor.name}

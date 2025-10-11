@@ -148,7 +148,7 @@ const PurchaseTable = ({ purchases, onSort, sortConfig, isLoading }) => {
                   <SortIcon columnKey="invoiceNumber" />
                 </span>
               </th>
-              <th className="ecom-purchase-table__th">Vendor</th>
+              <th className="ecom-purchase-table__th">Company</th>
               <th className="ecom-purchase-table__th">Items</th>
               <th 
                 className="ecom-purchase-table__th ecom-purchase-table__th--sortable"

@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../../../CssFiles/Admin/Purchase/PurchaseDetailPage.css';
-
+import UpdatePaymentStatus from '../../../components/UpdatePaymentStatus';
+import { TbFileInvoice } from "react-icons/tb";
+import { FaCreditCard } from "react-icons/fa6";
+import { BsBoxes } from "react-icons/bs";
+import { FaIndianRupeeSign } from "react-icons/fa6";
 const PurchaseDetailPage = () => {
   const { id } = useParams();
   const [purchase, setPurchase] = useState(null);
@@ -231,7 +235,8 @@ const PurchaseDetailPage = () => {
         <div className="ecom-purchase-detail-page__status-cards">
           <div className="ecom-purchase-detail-page__status-card">
             <div className="ecom-purchase-detail-page__status-card-icon">
-              <i className="fas fa-file-invoice"></i>
+              {/* <i className="fas fa-file-invoice"></i> */}
+              <TbFileInvoice />
             </div>
             <div className="ecom-purchase-detail-page__status-card-content">
               <span className="ecom-purchase-detail-page__status-card-label">Order Status</span>
@@ -243,7 +248,8 @@ const PurchaseDetailPage = () => {
 
           <div className="ecom-purchase-detail-page__status-card">
             <div className="ecom-purchase-detail-page__status-card-icon">
-              <i className="fas fa-credit-card"></i>
+              {/* <i className="fas fa-credit-card"></i> */}
+              <FaCreditCard />
             </div>
             <div className="ecom-purchase-detail-page__status-card-content">
               <span className="ecom-purchase-detail-page__status-card-label">Payment Status</span>
@@ -255,7 +261,8 @@ const PurchaseDetailPage = () => {
 
           <div className="ecom-purchase-detail-page__status-card">
             <div className="ecom-purchase-detail-page__status-card-icon">
-              <i className="fas fa-boxes"></i>
+              {/* <i className="fas fa-boxes"></i> */}
+              <BsBoxes />
             </div>
             <div className="ecom-purchase-detail-page__status-card-content">
               <span className="ecom-purchase-detail-page__status-card-label">Total Items</span>
@@ -267,7 +274,8 @@ const PurchaseDetailPage = () => {
 
           <div className="ecom-purchase-detail-page__status-card">
             <div className="ecom-purchase-detail-page__status-card-icon">
-              <i className="fas fa-dollar-sign"></i>
+              {/* <i className="fas fa-dollar-sign"></i> */}
+              <FaIndianRupeeSign />
             </div>
             <div className="ecom-purchase-detail-page__status-card-content">
               <span className="ecom-purchase-detail-page__status-card-label">Total Amount</span>
@@ -651,6 +659,8 @@ const PurchaseDetailPage = () => {
             </div>
           )}
         </div>
+
+        <UpdatePaymentStatus purchaseId={id} paystatus={purchase.paymentStatus} />
       </div>
     </div>
   );
