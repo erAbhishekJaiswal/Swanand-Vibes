@@ -240,7 +240,7 @@ const OrderList = () => {
       // Create a temporary <a> element to trigger download
       const a = document.createElement('a');
       a.href = url;
-      a.download = `shipping-label-${orderId}.pdf`;
+      a.download = `shipping-label-${order._id}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
