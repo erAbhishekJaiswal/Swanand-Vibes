@@ -58,7 +58,7 @@ const OrderList = () => {
       // Replace with actual API call
       const response = await fetch(`${import.meta.env.VITE_API_URL}/order?${params}`);
       const data = await response.json();
-      // console.log(data);
+      console.log(data.data);
       
       if (data.success) {
         setOrders(data.data);
@@ -545,56 +545,6 @@ const OrderList = () => {
       </div>
 
       {/* Pagination */}
-      {/* {totalPages > 1 && (
-        <div className="pagination-controls">
-          <div className="pagination-info">
-            Page {currentPage} of {totalPages} • {totalOrders} total orders
-          </div>
-          
-          <div className="pagination-buttons">
-            <button 
-              className="pagination-btn"
-              disabled={currentPage === 1}
-              onClick={() => fetchOrders(currentPage - 1, itemsPerPage, searchTerm, statusFilter, startDate, endDate)}
-            >
-              <FiChevronLeft /> 
-            </button>
-            
-            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-              let pageNum;
-              if (totalPages <= 5) {
-                pageNum = i + 1;
-              } else if (currentPage <= 3) {
-                pageNum = i + 1;
-              } else if (currentPage >= totalPages - 2) {
-                pageNum = totalPages - 4 + i;
-              } else {
-                pageNum = currentPage - 2 + i;
-              }
-              
-              return (
-                <button
-                  key={pageNum}
-                  className={`pagination-btn ${currentPage === pageNum ? 'active' : ''}`}
-                  onClick={() => fetchOrders(pageNum, itemsPerPage, searchTerm, statusFilter, startDate, endDate)}
-                >
-                  {pageNum}
-                </button>
-              );
-            })}
-
-            
-            <button 
-              className="pagination-btn"
-              disabled={currentPage === totalPages}
-              onClick={() => fetchOrders(currentPage + 1, itemsPerPage, searchTerm, statusFilter, startDate, endDate)}
-            >
-               <FiChevronRight />
-            </button>
-          </div>
-        </div>
-      )} */}
-
       <Pagination
   currentPage={currentPage}
   totalPages={totalPages}
@@ -714,11 +664,11 @@ const OrderList = () => {
                       />
                       <div className="item-details">
                         <h4>{item.name}</h4>
-                        <p>Quantity: {item.quantity}</p>
+                        <p>Quantity: {item.qty}</p>
                         <p>Price: {formatCurrency(item.price)} each</p>
                       </div>
                       <div className="item-total">
-                        {formatCurrency(item.price * item.quantity)}
+                        {formatCurrency(item.price * item.qty)}
                       </div>
                     </div>
                   ))}
