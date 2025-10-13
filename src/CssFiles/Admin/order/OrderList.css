@@ -426,6 +426,11 @@
   font-size: 0.9rem;
 }
 
+.action-buttons-containers{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .action-buttons {
   display: flex;
   gap: 8px;

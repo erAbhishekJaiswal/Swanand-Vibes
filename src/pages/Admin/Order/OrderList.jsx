@@ -509,6 +509,7 @@ const OrderList = () => {
                       </div>
                     </td>
                     <td>
+                      <div className="action-buttons-containers">
                       <div className="action-buttons">
                         <button 
                           className="action-btn view-btn"
@@ -522,6 +523,7 @@ const OrderList = () => {
                             <button onClick={() => handleDownload(order)} >
                               <FcShipped />
                             </button>
+                      </div>
                       </div>
                     </td>
                   </tr>
