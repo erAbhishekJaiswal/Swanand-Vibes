@@ -248,6 +248,8 @@
 }
 
 .sv-hero__dot {
+  min-width: 5px;
+  min-height: 5px;
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -384,6 +386,9 @@
 }
 
 @media (max-width: 768px) {
+  .sv-hero {
+    min-height: 50vh;
+  }
   .sv-hero__container {
     padding: 1rem;
     gap: 2rem;

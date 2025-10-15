@@ -1,524 +1,483 @@
+/* About.css - Modern Spiritual Theme */
 
+:root {
+  /* Color Palette - Spiritual & Calming */
+  --primary-purple: #6D28D9;
+  --primary-indigo: #4F46E5;
+  --secondary-teal: #0D9488;
+  --accent-gold: #D97706;
+  --light-lavender: #F3F4F6;
+  --dark-navy: #1E293B;
+  --text-dark: #334155;
+  --text-light: #64748B;
+  --white: #FFFFFF;
+  --gradient-primary: linear-gradient(135deg, #6D28D9 0%, #4F46E5 100%);
+  --gradient-secondary: linear-gradient(135deg, #0D9488 0%, #059669 100%);
+  --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
 
-/* About Hero */
-.about-hero {
+/* Reset and Base Styles */
+.about-main-wrapper {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Hero Section */
+.about-hero-section {
+  /* background: var(--gradient-hero); */
+  /* color: var(--white); */
+  padding: 120px 0 80px;
   text-align: center;
-  padding: 4rem 0;
-  /* background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg)); */
-  /* border-bottom: 1px solid var(--border-color); */
-}
-
-/* Mission Section */
-.mission-section {
-  padding: 4rem 0;
-}
-
-.mission-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-}
-
-.mission-text h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #ff0099, var(--secondary-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.mission-text p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #636363;
-  margin-bottom: 2rem;
-}
-
-.mission-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-.mission-stat {
-  text-align: center;
-}
-
-.mission-stat h4 {
-  font-size: 2rem;
-  color: var(--primary-accent);
-  margin-bottom: 0.5rem;
-}
-
-.mission-stat p {
-  font-size: 0.9rem;
-  color: #636363;
-  margin: 0;
-}
-
-.mission-visual {
   position: relative;
-  height: 300px;
+  overflow: hidden;
 }
 
-.mission-image-container{
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.mission-image {
+.about-hero-section::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.floating-shapes {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.shape {
-  position: absolute;
-  border-radius: 16px;
-  background: var(--glass-bg);
-  border: 1px solid var(--border-color);
-  animation: float 6s ease-in-out infinite;
-}
-
-.shape-1 {
-  width: 120px;
-  height: 120px;
-  top: 0;
-  left: 20%;
-  animation-delay: 0s;
-}
-
-.shape-2 {
-  width: 80px;
-  height: 80px;
-  top: 40%;
-  right: 10%;
-  animation-delay: 2s;
-}
-
-.shape-3 {
-  width: 100px;
-  height: 100px;
+  right: 0;
   bottom: 0;
-  left: 10%;
-  animation-delay: 4s;
+  background: linear-gradient(0deg, #fdfdfd, #baa9ff);
+  /* background: url('https://images.unsplash.com/photo-1504674900247-0877137c5849?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') no-repeat center center/cover;
+  background-size: cover; */
 }
 
-
-
-
-/* General Reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+.about-hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  position: relative;
+  background: linear-gradient(135deg, #ff0000, #2035ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-body {
-  font-family: "Alan Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
-  /* background: #f9f9fb; */
-  color: #202020;
-}
-
-section.mlm-system {
-  padding: 40px 20px;
-  background: transparent;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  /* background: linear-gradient(to right, #f1f4f9, #e0eafc); */
-}
-
-.container {
-  max-width: 1200px;
+.about-hero-subtitle {
+  font-size: 1.3rem;
+  max-width: 600px;
   margin: 0 auto;
+  opacity: 0.9;
+  font-weight: 300;
 }
 
-/* Title */
-.section-title {
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 30px;
-  color: #202020;
-  font-weight: bold;
+/* About Us Section */
+.about-us-section {
+  padding: 100px 0;
+  background: var(--white);
 }
 
-/* Layout */
-.mlm-content {
+.about-flex {
   display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: space-between;
-}
-
-/* Left side: Level Chart */
-.mlm-visual {
-  flex: 1 1 55%;
-}
-
-.level-chart {
-  display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: 60px;
+}
+
+.about-flex-reverse {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  flex-direction: row-reverse;
+}
+
+.about-us-text,
+.mission-content-block,
+.crystals-info-text {
+  flex: 1;
+}
+
+.about-us-text h2,
+.mission-content-block h2,
+.crystals-info-text h2 {
+  font-size: 2.5rem;
+  color: var(--dark-navy);
+  margin-bottom: 1.5rem;
   position: relative;
 }
 
-.level {
-  background: #ffffff;
-  border-radius: 6px;
-  padding: 10px 16px;
-  margin: 6px 0;
+.about-us-text h2::after,
+.mission-content-block h2::after,
+.crystals-info-text h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+}
+
+.about-us-text p,
+.mission-content-block p,
+.crystals-info-text p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.about-us-image,
+.mission-image-block,
+.crystals-info-image {
+  flex: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-us-image:hover,
+.mission-image-block:hover,
+.crystals-info-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.about-us-image img,
+.mission-image-block img,
+.crystals-info-image img {
   width: 100%;
-  max-width: 360px;
-  box-shadow: 0 2px 8px rgba(85, 85, 85, 0.04);
-  position: relative;
+  height: 400px;
+  object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.level:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(134, 134, 134, 0.08);
-  background: var(--primary-accent);
+.about-us-image:hover img,
+.mission-image-block:hover img,
+.crystals-info-image:hover img {
+  transform: scale(1.05);
 }
 
-.inner-level {
-text-align: center;
-}
-.inner-level-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #202020;
-  margin-bottom: 4px;
+/* Mission Section */
+.mission-highlight-section {
+  padding: 100px 0;
+  background: var(--light-lavender);
 }
 
-.inner-level-para {
-  font-size: 0.9rem;
-  color: #252525;
+.mission-stats-row {
+  display: flex;
+  gap: 30px;
+  margin-top: 40px;
 }
 
-/* Connector */
-.connector {
-  width: 3px;
-  height: 10px;
-  background-color: #3498db;
-  margin: 2px 0;
-  border-radius: 1px;
+.stat-box {
+  flex: 1;
+  text-align: center;
+  padding: 30px 20px;
+  background: var(--white);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Right side: Info */
-.mlm-info {
-  flex: 1 1 40%;
-  /* background: #ffffff; */
-  padding: 20px;
-  border-radius: 6px;
-  box-shadow: 0 2px 10px rgba(68, 68, 68, 0.04);
+.stat-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
 }
 
-.mlm-info h3 {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-  color: #202020;
-}
-
-.mlm-info p {
-  font-size: 0.95rem;
-  margin-bottom: 18px;
-  line-height: 1.5;
-  color: #252525;
-}
-
-.mlm-features {
-  list-style: none;
-  padding-left: 0;
-}
-
-.mlm-features li {
-  font-size: 0.95rem;
+.stat-box h4 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-purple);
   margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  color: #1f1f1f;
 }
 
-.mlm-features li::before {
-  /* content: "✅"; */
-  margin-right: 8px;
-  color: #27ae60;
-  font-size: 1rem;
+.stat-box p {
+  color: var(--text-light);
+  font-weight: 500;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .mlm-content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .mlm-info, .mlm-visual {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-
-  .level {
-    max-width: 95%;
-  }
-}
-
-
-
-
-
-
-
-/* MLM System Section */
-/* .mlm-system {
-  padding: 4rem 0;
-  background: var(--secondary-bg);
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.mlm-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-}
-
-.mlm-visual {
-  display: flex;
-  justify-content: center;
-}
-
-.level-chart {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.level {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 0.8rem 1.2rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  min-width: 100px;
+/* Spiritual Tools Section */
+.spiritual-tools-section {
+  padding: 100px 0;
+  background: var(--white);
   text-align: center;
-  transition: all 0.3s ease;
-} */
-
-/* .inner-level{
-  background: var(--glass-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 0.8rem 1.5rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  min-width: 100px;
-  text-align: center;
-  transition: all 0.3s ease;
-} */
-
-/* .inner-level-title{
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
-}
- .inner-level-para{
-  font-size: 0.8rem;
-  color: var(--text-secondary);
 }
 
-.level:hover {
-  background: var(--primary-accent);
-  color: white;
-  transform: scale(1.05);
-}
-
-.connector {
-  width: 2px;
-  height: 20px;
-  background: var(--border-color);
-}
-
-.mlm-info h3 {
-  font-size: 1.8rem;
+.spiritual-tools-section h2 {
+  font-size: 2.5rem;
+  color: var(--dark-navy);
   margin-bottom: 1rem;
-  color: var(--text-primary);
 }
 
-.mlm-info p {
+.spiritual-tools-section > p {
   font-size: 1.1rem;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto 50px;
 }
 
-.mlm-features {
-  list-style: none;
-}
-
-.mlm-features li {
-  padding: 0.5rem 0;
-  color: var(--text-secondary);
-  font-size: 1rem;
-} */
-
-/* Team Section */
-.team-section {
-  padding: 4rem 0;
-}
-
-.team-grid {
+.tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
 }
 
-.team-member {
+.tool-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.tool-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.tool-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.tool-card h4 {
+  font-size: 1.3rem;
+  color: var(--dark-navy);
+  font-weight: 600;
+}
+
+/* Crystals Importance Section */
+.importance-crystals-section {
+  padding: 100px 0;
+  background: var(--light-lavender);
+}
+
+/* Vision Section */
+.vision-section {
+  padding: 100px 0;
+  background: var(--gradient-primary);
+  color: var(--white);
   text-align: center;
 }
 
-.member-image {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background: var(--glass-bg);
-  border: 1px solid var(--border-color);
-  margin: 0 auto 1rem;
-  transition: all 0.3s ease;
+.vision-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
 }
 
-.team-member:hover .member-image {
-  border-color: var(--primary-accent);
-  transform: scale(1.05);
+.vision-section p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  opacity: 0.9;
+  line-height: 1.8;
 }
 
-.team-member h3 {
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
+.vision-tagline {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  font-style: italic;
+  opacity: 0.95;
 }
 
-.team-member p {
-  color: var(--text-secondary);
+/* Core Values Section */
+.core-values-section {
+  padding: 100px 0;
+  background: var(--white);
 }
 
-/* Values Section */
-.values-section {
-  padding: 4rem 0;
-  background: var(--secondary-bg);
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
+.core-values-section h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--dark-navy);
+  margin-bottom: 3rem;
 }
 
-.values-grid {
+.core-values-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
 }
 
 .value-card {
+  background: var(--white);
+  padding: 40px 30px;
+  border-radius: 20px;
   text-align: center;
-  padding: 2rem;
-  background: transparent;
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.05);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
 }
 
 .value-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border-color: var(--primary-accent);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
 }
 
-.value-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+.value-card:nth-child(2)::before {
+  background: var(--gradient-secondary);
+}
+
+.value-card:nth-child(3)::before {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, #F59E0B 100%);
+}
+
+.value-card:nth-child(4)::before {
+  background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%);
 }
 
 .value-card h3 {
+  font-size: 1.4rem;
+  color: var(--dark-navy);
   margin-bottom: 1rem;
-  color: #333333;
+  font-weight: 600;
 }
 
 .value-card p {
-  color: #5b5a5a;
-  line-height: 1.6;
+  color: var(--text-light);
+  line-height: 1.7;
 }
 
-/* Responsive Design for About Page */
-@media (max-width: 1024px) {
-  .mission-content,
-  .mlm-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+/* Responsive Design */
+@media (max-width: 968px) {
+  .about-flex,
+  .about-flex-reverse {
+    flex-direction: column;
+    gap: 40px;
   }
   
-  .mission-stats {
-    grid-template-columns: repeat(3, 1fr);
+  .about-hero-title {
+    font-size: 2.8rem;
+  }
+  
+  .mission-stats-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .tools-grid,
+  .core-values-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
 
 @media (max-width: 768px) {
-  .mission-stats {
+  .about-container {
+    padding: 0 15px;
+  }
+  
+  .about-hero-section {
+    padding: 80px 0 60px;
+  }
+  
+  .about-hero-title {
+    font-size: 2.2rem;
+  }
+  
+  .about-hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .about-us-section,
+  .mission-highlight-section,
+  .spiritual-tools-section,
+  .importance-crystals-section,
+  .vision-section,
+  .core-values-section {
+    padding: 60px 0;
+  }
+  
+  .about-us-text h2,
+  .mission-content-block h2,
+  .crystals-info-text h2,
+  .spiritual-tools-section h2,
+  .vision-section h2,
+  .core-values-section h2 {
+    font-size: 2rem;
+  }
+  
+  .tools-grid,
+  .core-values-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .level-chart {
-    transform: scale(1);
-  }
-  
-  .mlm-info h3 {
-    font-size: 1.5rem;
+    gap: 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .mission-text h2 {
+  .about-hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .about-hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .stat-box {
+    padding: 20px 15px;
+  }
+  
+  .stat-box h4 {
     font-size: 2rem;
   }
   
-  .mission-visual {
-    height: 200px;
+  .tool-card,
+  .value-card {
+    padding: 25px 20px;
   }
-  
-  .shape-1 {
-    width: 80px;
-    height: 80px;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading Animation for Images */
+.about-us-image img,
+.mission-image-block img,
+.crystals-info-image img,
+.tool-card img {
+  background: linear-gradient(90deg, #f0f0f0 25%, transparent 37%, #f0f0f0 63%);
+  background-size: 400% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 100% 50%;
   }
-  
-  .shape-2 {
-    width: 60px;
-    height: 60px;
+  100% {
+    background-position: 0 50%;
   }
-  
-  .shape-3 {
-    width: 70px;
-    height: 70px;
-  }
-  
-  /* .level {
-    padding: 0.6rem 1rem;
-    min-width: 80px;
-    font-size: 0.9rem;
-  } */
+}
+
+/* Focus States for Accessibility */
+.about-us-image:focus,
+.mission-image-block:focus,
+.crystals-info-image:focus,
+.tool-card:focus,
+.value-card:focus,
+.stat-box:focus {
+  outline: 3px solid var(--primary-purple);
+  outline-offset: 2px;
 }
