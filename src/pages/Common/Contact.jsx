@@ -76,7 +76,7 @@ const Contact = () => {
       <section className="contact-hero">
         <div className="container">
           <h1 className="hero-title">{t("get_in_touch")}</h1>
-          <p className="hero-subtitle">{t("contact_subtitle")}</p>
+          <p className="contact-hero-subtitle">{t("contact_subtitle")}</p>
         </div>
       </section>
 
@@ -102,8 +102,7 @@ const Contact = () => {
                   <div className="method-icon">📞</div>
                   <div className="method-info">
                     <h3>{t("phone")}</h3>
-                    <p>+1 (555) 123-4567</p>
-                    <p>+1 (555) 987-6543</p>
+                    <p>+91-9821611417</p>
                   </div>
                 </div>
 
@@ -111,9 +110,9 @@ const Contact = () => {
                   <div className="method-icon">📍</div>
                   <div className="method-info">
                     <h3>{t("address")}</h3>
-                    <p>123 Business Avenue</p>
-                    <p>Suite 456, Tech District</p>
-                    <p>San Francisco, CA 94107</p>
+                    <p>Kharghar</p>
+                    <p>Navi Mumbai</p>
+                    <p>Maharashtra, India</p>
                   </div>
                 </div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./css/common.css"; // your existing stylesheet path
-import imgLogo from "../assets/logo.jpg";
+import imgLogo from "../assets/newl.jpg";
 import { Link, useLocation } from "react-router-dom";
 import {
   getUserRole,

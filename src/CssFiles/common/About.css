@@ -1,5 +1,5 @@
 /* About.css - Modern Spiritual Theme */
-
+@import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 :root {
   /* Color Palette - Spiritual & Calming */
   --primary-purple: #6D28D9;
@@ -11,14 +11,17 @@
   --text-dark: #334155;
   --text-light: #64748B;
   --white: #FFFFFF;
-  --gradient-primary: linear-gradient(135deg, #6D28D9 0%, #4F46E5 100%);
+  --gradient-primary: linear-gradient(0deg, #ff5959 0%, #7570bf 100%);
   --gradient-secondary: linear-gradient(135deg, #0D9488 0%, #059669 100%);
   --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 /* Reset and Base Styles */
 .about-main-wrapper {
-  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Alan Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
   line-height: 1.6;
   color: var(--text-dark);
   overflow-x: hidden;
@@ -38,6 +41,17 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+}
+.image-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 20px; */
+  background: #f7e2b996;
+}
+.logo-of-aboutus{
+  width: 278px;
+  height: 270px
 }
 
 .about-hero-section::before {
@@ -74,7 +88,7 @@
 /* About Us Section */
 .about-us-section {
   padding: 100px 0;
-  background: var(--white);
+  background: linear-gradient(179deg, #efe5925e, #08edff4d);;
 }
 
 .about-flex {
@@ -122,7 +136,7 @@
 .mission-content-block p,
 .crystals-info-text p {
   font-size: 1.1rem;
-  color: var(--text-light);
+  color: #000000;
   margin-bottom: 1.5rem;
   line-height: 1.8;
 }
@@ -162,7 +176,7 @@
 /* Mission Section */
 .mission-highlight-section {
   padding: 100px 0;
-  background: var(--light-lavender);
+  background: #f7e2b996;
 }
 
 .mission-stats-row {
@@ -175,7 +189,7 @@
   flex: 1;
   text-align: center;
   padding: 30px 20px;
-  background: var(--white);
+  background: #ff780040;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -201,7 +215,7 @@
 /* Spiritual Tools Section */
 .spiritual-tools-section {
   padding: 100px 0;
-  background: var(--white);
+  background: #ffb3b39c;
   text-align: center;
 }
 
@@ -226,7 +240,7 @@
 }
 
 .tool-card {
-  background: var(--white);
+  background: #ffe3e3;
   border-radius: 20px;
   padding: 30px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.08);
@@ -256,7 +270,7 @@
 /* Crystals Importance Section */
 .importance-crystals-section {
   padding: 100px 0;
-  background: var(--light-lavender);
+  background: #ffb3b39c;
 }
 
 /* Vision Section */
@@ -292,7 +306,7 @@
 /* Core Values Section */
 .core-values-section {
   padding: 100px 0;
-  background: var(--white);
+  background: #ff5858;
 }
 
 .core-values-section h2 {

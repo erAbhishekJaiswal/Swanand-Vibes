@@ -93,20 +93,24 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import '../../CssFiles/common/About.css';
 import Footer from '../../components/Footer';
+import Logo from '../../assets/aboutuslogo.png';
 
 const About = () => {
   const { t } = useTranslation();
 
   return (
     <div className="about-main-wrapper">
+      <div className='image-section'>
+        <img src={Logo} alt="logo" className='logo-of-aboutus'/>
+      </div>
 
       {/* Hero Section */}
-      <section className="about-hero-section">
+      {/* <section className="about-hero-section">
         <div className="about-container">
           <h1 className="about-hero-title">{t('hero_title')}</h1>
           <p className="about-hero-subtitle">{t('hero_subtitle')}</p>
         </div>
-      </section>
+      </section> */}
 
       {/* About Us Section */}
       <section className="about-us-section">
@@ -133,11 +137,11 @@ const About = () => {
             <p>{t('mission_desc')}</p>
             <div className="mission-stats-row">
               <div className="stat-box">
-                <h4>2023</h4>
+                <h4>2025</h4>
                 <p>{t('year_established')}</p>
               </div>
               <div className="stat-box">
-                <h4>50+</h4>
+                <h4>5+</h4>
                 <p>{t('countries_served')}</p>
               </div>
               <div className="stat-box">
@@ -218,7 +222,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
       <Footer />
     </div>
   );
