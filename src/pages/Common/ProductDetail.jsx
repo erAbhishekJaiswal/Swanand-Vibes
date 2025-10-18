@@ -224,7 +224,8 @@ const ProductDetail = () => {
             {/* ✅ Show price (general OR variant) */}
             {selectedVariant ? (
               <div className="product-price-large">
-                ₹ {(selectedVariant.price + (productData.tax || 0)).toFixed(2)}
+                ₹ {selectedVariant.price.toFixed(2)} 
+                {/* + (productData.tax || 0)) */}
               </div>
             ) : productData?.variants?.length > 0 ? (
               <div className="product-price-large">
