@@ -287,8 +287,8 @@ const KYCDetails = () => {
 
 
   useEffect(() => {
-    fetchKYCData();
-  }, []);
+    fetchKYCData(id);
+  }, [id]);
 
   
 
