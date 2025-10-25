@@ -1,0 +1,517 @@
+/* 🎨 Modernized KYCDetails.css - Prefixed for uniqueness */
+
+/* ===== CSS Variables ===== */
+:root {
+  --kyc-primary-blue: #3a5bff;
+  --kyc-primary-purple: #6a00f4;
+  --kyc-primary-green: #34d399;
+  --kyc-accent-pink: #f72585;
+  --kyc-accent-orange: #fbbf24;
+  --kyc-accent-teal: #14b8a6;
+
+  --kyc-light-bg: #f4f7fc;
+  --kyc-light-card: #ffffff;
+  --kyc-light-text: #1e293b;
+  --kyc-light-text-secondary: #64748b;
+  --kyc-light-border: #e2e8f0;
+
+  --kyc-success: #16a34a;
+  --kyc-warning: #f59e0b;
+  --kyc-danger: #ef4444;
+  --kyc-info: #3b82f6;
+
+  --kyc-shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.08);
+  --kyc-shadow-strong: 0 12px 40px rgba(0, 0, 0, 0.12);
+  --kyc-radius-lg: 16px;
+  --kyc-radius-md: 10px;
+  --kyc-radius-sm: 6px;
+  --kyc-transition-fast: all 0.25s ease-in-out;
+}
+
+/* ===== Global Base ===== */
+.kyc-details {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f9fafb, #eef2ff);
+  color: var(--kyc-light-text);
+  padding: 24px;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* ===== Loading / Error ===== */
+.kyc-loading,
+.kyc-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  text-align: center;
+}
+
+.kyc-loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--kyc-light-border);
+  border-top: 4px solid var(--kyc-primary-blue);
+  border-radius: 50%;
+  animation: kyc-spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+/* ===== KYC Header ===== */
+.kyc-header {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: var(--kyc-radius-lg);
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: var(--kyc-shadow-soft);
+  border: 1px solid var(--kyc-light-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  transition: var(--kyc-transition-fast);
+  flex-wrap: wrap;
+}
+
+.kyc-header:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--kyc-shadow-strong);
+}
+
+.kyc-header__user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.kyc-header__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--kyc-radius-lg);
+  background: linear-gradient(135deg, var(--kyc-primary-blue), var(--kyc-primary-purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
+}
+
+.kyc-header__name {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.kyc-header__contact {
+  color: var(--kyc-light-text-secondary);
+  font-size: 1rem;
+}
+
+/* ===== Status Badge ===== */
+.kyc-status-badge {
+  padding: 8px 14px;
+  border-radius: var(--kyc-radius-md);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid transparent;
+  transition: var(--kyc-transition-fast);
+}
+
+.kyc-status-badge--approved {
+  background: rgba(52, 211, 153, 0.15);
+  color: var(--kyc-success);
+  border-color: var(--kyc-success);
+}
+
+.kyc-status-badge--pending {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--kyc-warning);
+  border-color: var(--kyc-warning);
+}
+
+.kyc-status-badge--rejected {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--kyc-danger);
+  border-color: var(--kyc-danger);
+}
+
+/* ===== Main Layout ===== */
+.kyc-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.kyc-main,
+.kyc-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* ===== Document Viewer ===== */
+.kyc-document-viewer {
+  background: var(--kyc-light-card);
+  border-radius: var(--kyc-radius-lg);
+  padding: 30px;
+  box-shadow: var(--kyc-shadow-soft);
+  border: 1px solid var(--kyc-light-border);
+  transition: var(--kyc-transition-fast);
+}
+
+.kyc-document-viewer:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--kyc-shadow-strong);
+}
+
+.kyc-document-viewer__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.kyc-documents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* ===== Document Card ===== */
+.kyc-document-card {
+  background: var(--kyc-light-bg);
+  border-radius: var(--kyc-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--kyc-light-border);
+  transition: var(--kyc-transition-fast);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.kyc-document-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-radius: var(--kyc-radius-sm);
+  margin-bottom: 10px;
+  background: #f0f0f0;
+}
+
+.kyc-document-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(67, 97, 238, 0.15);
+  border-color: var(--kyc-primary-blue);
+}
+
+.kyc-document-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--kyc-radius-md);
+  transition: var(--kyc-transition-fast);
+}
+
+.kyc-document-card:hover .kyc-document-card__overlay {
+  opacity: 1;
+}
+
+.kyc-document-card__view-btn {
+  background: var(--kyc-primary-blue);
+  color: white;
+  padding: 8px 14px;
+  border-radius: var(--kyc-radius-md);
+  font-weight: 600;
+  transition: var(--kyc-transition-fast);
+  border: none;
+}
+
+.kyc-document-card__view-btn:hover {
+  background: var(--kyc-primary-purple);
+}
+
+/* ===== Document Modal ===== */
+.kyc-document-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 20, 40, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 24px;
+  animation: kyc-fadeIn 0.3s ease;
+}
+
+.kyc-document-modal__content {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: var(--kyc-radius-lg);
+  max-width: 90vw;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--kyc-shadow-strong);
+  overflow: hidden;
+}
+
+.kyc-document-modal__header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--kyc-light-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kyc-document-modal__close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--kyc-light-text-secondary);
+  cursor: pointer;
+  transition: var(--kyc-transition-fast);
+}
+
+.kyc-document-modal__close:hover {
+  color: var(--kyc-danger);
+}
+
+.kyc-document-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.kyc-document-image img {
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+
+/* Fullscreen zoom modal */
+.kyc-zoom-modal {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: zoom-out;
+  padding: 16px;
+  animation: kyc-fadeIn 0.25s ease-in-out;
+}
+
+.kyc-zoom-modal img {
+  max-width: 95%;
+  max-height: 95%;
+  object-fit: contain;
+  border-radius: var(--kyc-radius-md);
+  box-shadow: var(--kyc-shadow-strong);
+  transition: transform 0.3s ease;
+}
+
+.kyc-zoom-modal img:hover {
+  transform: scale(1.05);
+}
+.kyc-action-buttons{
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+.kyc-btn-approve{
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+/* .kyc-btn-request{
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+} */
+.kyc-btn-reject{
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+/* Optional fade-in animation (already in your CSS) */
+@keyframes kyc-fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+/* ===== Animations ===== */
+@keyframes kyc-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes kyc-fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .kyc-content {
+    grid-template-columns: 1fr;
+  }
+
+  .kyc-documents-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .kyc-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .kyc-document-card img {
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .kyc-document-card img {
+    height: 120px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Confirmation Modal ===== */
+.kyc-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: kyc-fadeIn 0.3s ease;
+}
+
+.kyc-confirmation-modal {
+  background: var(--kyc-light-card);
+  border-radius: var(--kyc-radius-lg);
+  width: 400px;
+  max-width: 90%;
+  box-shadow: var(--kyc-shadow-strong);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: kyc-scaleUp 0.25s ease;
+}
+
+.kyc-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kyc-modal-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.kyc-modal-header button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.kyc-modal-content {
+  font-size: 1rem;
+  color: var(--kyc-light-text);
+}
+
+.kyc-modal-subtext {
+  font-size: 0.85rem;
+  color: var(--kyc-light-text-secondary);
+}
+
+.kyc-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.kyc-modal-btn {
+  padding: 8px 16px;
+  font-weight: 600;
+  border-radius: var(--kyc-radius-md);
+  border: none;
+  cursor: pointer;
+  transition: var(--kyc-transition-fast);
+}
+
+.kyc-modal-btn.cancel {
+  background: #e2e8f0;
+  color: var(--kyc-light-text);
+}
+
+.kyc-modal-btn.confirm.approve {
+  background: var(--kyc-success);
+  color: white;
+}
+
+.kyc-modal-btn.confirm.reject {
+  background: var(--kyc-danger);
+  color: white;
+}
+
+.kyc-modal-btn.confirm.request {
+  background: var(--kyc-warning);
+  color: white;
+}
+
+@keyframes kyc-scaleUp {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
