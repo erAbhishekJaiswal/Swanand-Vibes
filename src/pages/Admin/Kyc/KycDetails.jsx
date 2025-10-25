@@ -270,23 +270,27 @@ const KYCDetails = () => {
   const [zoomedImage, setZoomedImage] = useState(null); // For image zoom modal
 
   // Fetch KYC Data
-  useEffect(() => {
-    const fetchKYCData = async () => {
+
+      const fetchKYCData = async () => {
       try {
         setLoading(true);
         const response = await getKycById(id);
         setKycData(response.data);
         setNotes(response.data?.verificationNotes || "");
         toast.success("KYC details fetched successfully");
+        setLoading(false);
       } catch (err) {
         console.error(err);
         toast.error("Failed to fetch KYC details");
-      } finally {
-        setLoading(false);
       }
     };
+
+
+  useEffect(() => {
     fetchKYCData();
-  }, [id]);
+  }, []);
+
+  
 
   // Helper functions
   const formatDate = (date) =>
