@@ -413,6 +413,24 @@
 }
 
 
+.kyc-doc-details {
+  margin-top: 8px;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.kyc-doc-details li {
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.kyc-doc-details strong {
+  color: var(--primary);
+}
+
 
 
 

@@ -277,6 +277,7 @@ const KYCDetails = () => {
         const response = await getKycById(id);
         setKycData(response.data);
         setNotes(response.data?.verificationNotes || "");
+        console.log(response.data);
         toast.success("KYC details fetched successfully");
         setLoading(false);
       } catch (err) {
@@ -344,12 +345,48 @@ const KYCDetails = () => {
 
   const { userId: user } = kycData;
 
+  // const documents = [
+  //   { title: "📷 Passport Photo", src: kycData.passportPhoto },
+  //   { title: "🆔 Aadhaar Card", src: kycData.adharImage },
+  //   { title: "💳 PAN Card", src: kycData.panImage },
+  //   { title: "🏦 Bank Document", src: kycData.bankDocImage },
+  // ];
+
   const documents = [
-    { title: "📷 Passport Photo", src: kycData.passportPhoto },
-    { title: "🆔 Aadhaar Card", src: kycData.adharImage },
-    { title: "💳 PAN Card", src: kycData.panImage },
-    { title: "🏦 Bank Document", src: kycData.bankDocImage },
-  ];
+  {
+    title: "📷 Passport Photo",
+    src: kycData.passportPhoto,
+    details: [
+      { label: "Full Name", value: user?.name },
+      { label: "Email", value: user?.email },
+    ],
+  },
+  {
+    title: "🆔 Aadhaar Card",
+    src: kycData.adharImage,
+    details: [
+      { label: "Aadhaar Name", value: kycData.adharName },
+      { label: "Aadhaar Number", value: kycData.adharNumber },
+    ],
+  },
+  {
+    title: "💳 PAN Card",
+    src: kycData.panImage,
+    details: [
+      { label: "PAN Number", value: kycData.panNumber },
+    ],
+  },
+  {
+    title: "🏦 Bank Document",
+    src: kycData.bankDocImage,
+    details: [
+      { label: "Bank Name", value: kycData.bankName },
+      { label: "Account Number", value: kycData.bankAccount },
+      { label: "IFSC Code", value: kycData.ifscCode },
+    ],
+  },
+];
+
 
   return (
     <div className="kyc-container">
@@ -391,15 +428,36 @@ const KYCDetails = () => {
           <h2>KYC Documents</h2>
           <div className="kyc-documents-grid">
             {documents.map((doc, idx) => (
-              <div
-                key={idx}
-                className="kyc-document-card"
-                onClick={() => setZoomedImage(doc.src)}
-              >
-                <h3>{doc.title}</h3>
-                <img src={doc.src} alt={doc.title} />
-                <div className="kyc-zoom-overlay">🔍 View</div>
-              </div>
+              // <div
+              //   key={idx}
+              //   className="kyc-document-card"
+              //   onClick={() => setZoomedImage(doc.src)}
+              // >
+              //   <h3>{doc.title}</h3>
+              //   <img src={doc.src} alt={doc.title} />
+              //   <div className="kyc-zoom-overlay">🔍 View</div>
+              // </div>
+
+              <div key={idx} className="kyc-document-card">
+  <h3>{doc.title}</h3>
+  <img
+    src={doc.src}
+    alt={doc.title}
+    onClick={() => setZoomedImage(doc.src)}
+  />
+  <div className="kyc-zoom-overlay">🔍 View</div>
+
+  {doc.details && (
+    <ul className="kyc-doc-details">
+      {doc.details.map((item, i) => (
+        <li key={i}>
+          <strong>{item.label}:</strong> {item.value || "N/A"}
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
             ))}
           </div>
         </section>
