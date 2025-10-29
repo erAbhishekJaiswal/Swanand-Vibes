@@ -282,7 +282,7 @@ const ProductDetail = () => {
             </div>
           ) : (
             <div className="general-product-details">
-              <p>{productData?.description}</p>
+              <pre className="product-detail-description">{productData?.description}</pre>
               <p>
                 <strong>Total Stock:</strong> {productData?.stock}
               </p>
