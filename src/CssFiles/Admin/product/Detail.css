@@ -11,6 +11,16 @@
   font-size: 1.2rem;
   transition: all 0.2s ease;
 }
+.product-detail-description {
+  white-space: pre-wrap;  /* preserve line breaks & wrap text nicely */
+  word-wrap: break-word;
+  background-color: #fafafa;
+  padding: 10px 12px;
+  border-radius: 6px;
+  line-height: 1.6;
+  color: #333;
+}
+
 
 .star.filled {
   color: #ffc107;
