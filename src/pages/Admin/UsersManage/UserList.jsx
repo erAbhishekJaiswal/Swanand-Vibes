@@ -199,6 +199,9 @@ const UserList = () => {
                 <div className="userlist-table-header">Email</div>
               </th>
               <th>
+                <div className="userlist-table-header">Mobile No</div>
+              </th>
+              <th>
                 <div className="userlist-table-header">Role</div>
               </th>
               <th>
@@ -215,6 +218,7 @@ const UserList = () => {
                 <td>{(page - 1) * limit + index + 1}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
+                <td>{user?.mobile || "N/A"} </td>
                 <td>
                   <span className={getRoleBadgeClass(user.role)}>
                     {getRoleDisplayName(user.role)}
