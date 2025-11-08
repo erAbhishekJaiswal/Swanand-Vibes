@@ -74,129 +74,249 @@ const Home = () => {
   ];
 
   return (
-    <div className="homepage-container">
-      {/* Hero Section */}
-      <Hero />
+    // <div className="homepage-container">
+    //   {/* Hero Section */}
+    //   <Hero />
 
-      {/* Features Section */}
-      <section className="homepage-features-section">
-        <div className="homepage-container-inner">
-          <div className="homepage-section-header">
-            <h2 className="homepage-section-title">{t("why_choose")}</h2>
-            <p className="homepage-section-subtitle">Discover what makes our platform unique</p>
+    //   {/* Features Section */}
+    //   <section className="homepage-features-section">
+    //     <div className="homepage-container-inner">
+    //       <div className="homepage-section-header">
+    //         <h2 className="homepage-section-title">{t("why_choose")}</h2>
+    //         <p className="homepage-section-subtitle">Discover what makes our platform unique</p>
+    //       </div>
+
+    //       <div className="homepage-features-grid">
+    //         {features.map((feature, index) => (
+    //           <div key={index} className="homepage-feature-card">
+    //             <div className="homepage-feature-icon-container">
+    //               {feature.icon}
+    //             </div>
+    //             <h3 className="homepage-feature-title">{feature.title}</h3>
+    //             <p className="homepage-feature-description">{feature.description}</p>
+    //           </div>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   </section>
+
+    //   {/* Products Preview */}
+    //   <section className="homepage-products-section">
+    //     <div className="homepage-container-inner">
+    //       <div className="homepage-section-header">
+    //         <h2 className="homepage-section-title">{t("featured_products")}</h2>
+    //         <p className="homepage-section-subtitle">Explore our handpicked collection</p>
+    //       </div>
+
+    //       <div className="homepage-products-grid">
+    //         {products.map((product, index) => (
+    //           <div key={index} className="homepage-product-card">
+    //             <div className="homepage-product-image-container">
+    //               <img 
+    //                 src={product.image} 
+    //                 alt={product.name}
+    //                 className="homepage-product-image"
+    //               />
+    //               <div className="homepage-product-category">{product.category}</div>
+    //             </div>
+    //             <div className="homepage-product-info">
+    //               <h3 className="homepage-product-name">{product.name}</h3>
+    //               <div className="homepage-product-price">{product.price}</div>
+    //               {/* <div className="homepage-product-rating">
+    //                 <FiStar className="homepage-rating-star" />
+    //                 <FiStar className="homepage-rating-star" />
+    //                 <FiStar className="homepage-rating-star" />
+    //                 <FiStar className="homepage-rating-star" />
+    //                 <FiStar className="homepage-rating-star" />
+    //                 <span className="homepage-rating-text">(4.8)</span>
+    //               </div> */}
+    //             </div>
+    //             <button 
+    //               onClick={() => navigate('/products')} 
+    //               className="homepage-product-button"
+    //             >
+    //               View Details <FiArrowRight />
+    //             </button>
+    //           </div>
+    //         ))}
+    //       </div>
+
+    //       <div className="homepage-products-actions">
+    //         <button 
+    //           onClick={() => navigate('/products')}
+    //           className="homepage-view-all-button"
+    //         >
+    //           View All Products <FiArrowRight />
+    //         </button>
+    //       </div>
+    //     </div>
+    //   </section>
+
+    //   {/* Stats Section */}
+    //   <section className="homepage-stats-section">
+    //     <div className="homepage-container-inner">
+    //       <div className="homepage-stats-grid">
+    //         {stats.map((stat, index) => (
+    //           <div key={index} className="homepage-stat-item">
+    //             <div className="homepage-stat-icon">{stat.icon}</div>
+    //             <div className="homepage-stat-content">
+    //               <h3 className="homepage-stat-value">{stat.value}</h3>
+    //               <p className="homepage-stat-label">{stat.label}</p>
+    //             </div>
+    //           </div>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   </section>
+
+    //   {/* CTA Section */}
+    //   {!isLoggedIn && (
+    //     <section className="homepage-cta-section">
+    //       <div className="homepage-container-inner">
+    //         <div className="homepage-cta-content">
+    //           <h2 className="homepage-cta-title">{t("cta_title")}</h2>
+    //           <p className="homepage-cta-description">{t("cta_desc")}</p>
+    //           <div className="homepage-cta-buttons">
+    //             <button 
+    //               onClick={() => navigate('/register')} 
+    //               className="homepage-cta-button-primary"
+    //             >
+    //               {t("cta_register")}
+    //             </button>
+    //             <button 
+    //               onClick={() => navigate('/about')} 
+    //               className="homepage-cta-button-secondary"
+    //             >
+    //               {t("cta_learn")}
+    //             </button>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </section>
+    //   )}
+
+    //   <Footer />
+    // </div>
+
+<div className="homepage-container">
+  {/* Hero Section */}
+  <Hero />
+
+  {/* Features Section */}
+  <section className="homepage-features-section">
+    <div className="homepage-container-inner">
+      <div className="homepage-section-header">
+        <h2 className="homepage-section-title">{t("why_choose")}</h2>
+        <p className="homepage-section-subtitle">Discover what makes our platform unique</p>
+      </div>
+
+      <div className="homepage-features-grid">
+        {features.map((feature, index) => (
+          <div key={index} className="homepage-feature-card glass-card">
+            <div className="homepage-feature-icon-container glass-icon">
+              {feature.icon}
+            </div>
+            <h3 className="homepage-feature-title">{feature.title}</h3>
+            <p className="homepage-feature-description">{feature.description}</p>
+            <div className="feature-glow"></div>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-          <div className="homepage-features-grid">
-            {features.map((feature, index) => (
-              <div key={index} className="homepage-feature-card">
-                <div className="homepage-feature-icon-container">
-                  {feature.icon}
-                </div>
-                <h3 className="homepage-feature-title">{feature.title}</h3>
-                <p className="homepage-feature-description">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+  {/* Products Preview */}
+  <section className="homepage-products-section">
+    <div className="homepage-container-inner">
+      <div className="homepage-section-header">
+        <h2 className="homepage-section-title">{t("featured_products")}</h2>
+        <p className="homepage-section-subtitle">Explore our handpicked collection</p>
+      </div>
 
-      {/* Products Preview */}
-      <section className="homepage-products-section">
-        <div className="homepage-container-inner">
-          <div className="homepage-section-header">
-            <h2 className="homepage-section-title">{t("featured_products")}</h2>
-            <p className="homepage-section-subtitle">Explore our handpicked collection</p>
-          </div>
-
-          <div className="homepage-products-grid">
-            {products.map((product, index) => (
-              <div key={index} className="homepage-product-card">
-                <div className="homepage-product-image-container">
-                  <img 
-                    src={product.image} 
-                    alt={product.name}
-                    className="homepage-product-image"
-                  />
-                  <div className="homepage-product-category">{product.category}</div>
-                </div>
-                <div className="homepage-product-info">
-                  <h3 className="homepage-product-name">{product.name}</h3>
-                  <div className="homepage-product-price">{product.price}</div>
-                  {/* <div className="homepage-product-rating">
-                    <FiStar className="homepage-rating-star" />
-                    <FiStar className="homepage-rating-star" />
-                    <FiStar className="homepage-rating-star" />
-                    <FiStar className="homepage-rating-star" />
-                    <FiStar className="homepage-rating-star" />
-                    <span className="homepage-rating-text">(4.8)</span>
-                  </div> */}
-                </div>
-                <button 
-                  onClick={() => navigate('/products')} 
-                  className="homepage-product-button"
-                >
-                  View Details <FiArrowRight />
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <div className="homepage-products-actions">
+      <div className="homepage-products-grid">
+        {products.map((product, index) => (
+          <div key={index} className="homepage-product-card glass-card">
+            <div className="homepage-product-image-container">
+              <img 
+                src={product.image} 
+                alt={product.name}
+                className="homepage-product-image"
+              />
+              <div className="homepage-product-category glass-badge">{product.category}</div>
+              <div className="product-overlay"></div>
+            </div>
+            <div className="homepage-product-info">
+              <h3 className="homepage-product-name">{product.name}</h3>
+              <div className="homepage-product-price">{product.price}</div>
+            </div>
             <button 
-              onClick={() => navigate('/products')}
-              className="homepage-view-all-button"
+              onClick={() => navigate('/products')} 
+              className="homepage-product-button glass-button"
             >
-              View All Products <FiArrowRight />
+              View Details <FiArrowRight />
             </button>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
 
-      {/* Stats Section */}
-      <section className="homepage-stats-section">
-        <div className="homepage-container-inner">
-          <div className="homepage-stats-grid">
-            {stats.map((stat, index) => (
-              <div key={index} className="homepage-stat-item">
-                <div className="homepage-stat-icon">{stat.icon}</div>
-                <div className="homepage-stat-content">
-                  <h3 className="homepage-stat-value">{stat.value}</h3>
-                  <p className="homepage-stat-label">{stat.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      {!isLoggedIn && (
-        <section className="homepage-cta-section">
-          <div className="homepage-container-inner">
-            <div className="homepage-cta-content">
-              <h2 className="homepage-cta-title">{t("cta_title")}</h2>
-              <p className="homepage-cta-description">{t("cta_desc")}</p>
-              <div className="homepage-cta-buttons">
-                <button 
-                  onClick={() => navigate('/register')} 
-                  className="homepage-cta-button-primary"
-                >
-                  {t("cta_register")}
-                </button>
-                <button 
-                  onClick={() => navigate('/about')} 
-                  className="homepage-cta-button-secondary"
-                >
-                  {t("cta_learn")}
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      <Footer />
+      <div className="homepage-products-actions">
+        <button 
+          onClick={() => navigate('/products')}
+          className="homepage-view-all-button gradient-button"
+        >
+          View All Products <FiArrowRight />
+        </button>
+      </div>
     </div>
+  </section>
+
+  {/* Stats Section */}
+  <section className="homepage-stats-section">
+    <div className="homepage-container-inner">
+      <div className="homepage-stats-grid">
+        {stats.map((stat, index) => (
+          <div key={index} className="homepage-stat-item glass-card">
+            <div className="homepage-stat-icon glass-icon">{stat.icon}</div>
+            <div className="homepage-stat-content">
+              <h3 className="homepage-stat-value">{stat.value}</h3>
+              <p className="homepage-stat-label">{stat.label}</p>
+            </div>
+            <div className="stat-glow"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* CTA Section */}
+  {!isLoggedIn && (
+    <section className="homepage-cta-section">
+      <div className="homepage-container-inner">
+        <div className="homepage-cta-content glass-card">
+          <h2 className="homepage-cta-title">{t("cta_title")}</h2>
+          <p className="homepage-cta-description">{t("cta_desc")}</p>
+          <div className="homepage-cta-buttons">
+            <button 
+              onClick={() => navigate('/register')} 
+              className="homepage-cta-button-primary gradient-button"
+            >
+              {t("cta_register")}
+            </button>
+            <button 
+              onClick={() => navigate('/about')} 
+              className="homepage-cta-button-secondary glass-button"
+            >
+              {t("cta_learn")}
+            </button>
+          </div>
+          <div className="cta-glow"></div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Footer />
+</div>
   );
 };
 
