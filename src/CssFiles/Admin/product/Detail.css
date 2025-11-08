@@ -14,10 +14,10 @@
 .product-detail-description {
   white-space: pre-wrap;  /* preserve line breaks & wrap text nicely */
   word-wrap: break-word;
-  background-color: #fafafa;
-  padding: 10px 12px;
+  /* background-color: #fafafa; */
+  /* padding: 10px 12px; */
   border-radius: 6px;
-  line-height: 1.6;
+  line-height: 1.2;
   color: #333;
 }
 
