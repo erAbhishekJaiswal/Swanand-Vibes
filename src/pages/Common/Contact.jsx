@@ -72,6 +72,7 @@ const Contact = () => {
 
   return (
     <div className="contact-container">
+      <div className="contact-contact-inner-box">
       {/* Hero Section */}
       <section className="contact-hero">
         <div className="container">
@@ -110,7 +111,7 @@ const Contact = () => {
                   <div className="method-icon">📍</div>
                   <div className="method-info">
                     <h3>{t("address")}</h3>
-                    <p>Kharghar</p>
+                    <p>Yoganand society, sector 3, kharghar 410210</p>
                     <p>Navi Mumbai</p>
                     <p>Maharashtra, India</p>
                   </div>
@@ -256,7 +257,7 @@ const Contact = () => {
           </div>
         </section>
       ) : null}
-
+      </div>
       <Footer />
     </div>
   );
