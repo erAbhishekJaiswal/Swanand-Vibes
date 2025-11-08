@@ -209,7 +209,7 @@
 
 import React, { useState } from "react";
 import "../../CssFiles/Auth/Auth.css";
-import imgLogo from "../../assets/logo.jpg";
+import imgLogo from "../../assets/newl.jpg";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { isAuthenticated, getUserRole } from "../../utills/authService";
 import { useLocation } from "react-router-dom";
