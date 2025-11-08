@@ -2,7 +2,7 @@
 .products-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0px;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
@@ -30,6 +30,7 @@
 .products-content {
   display: flex;
   gap: 30px;
+  padding:20px;
   position: relative;
 }
 
@@ -543,7 +544,7 @@
 
 @media (max-width: 768px) {
   .products-container {
-    padding: 16px;
+    padding: 0px;
   }
   .product-meta {
     flex-direction: column;
