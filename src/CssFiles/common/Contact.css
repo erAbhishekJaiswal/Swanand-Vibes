@@ -5,6 +5,9 @@
   background: linear-gradient(178deg, #d3fffd, #00fff3);
 }
 
+.contact-contact-inner-box{
+  padding: 20px;
+}
 /* Contact Hero */
 .contact-hero {
   text-align: center;
