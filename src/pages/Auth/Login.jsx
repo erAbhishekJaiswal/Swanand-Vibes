@@ -1,7 +1,7 @@
 // Login.js
 import React, { useState } from "react";
 import "../../CssFiles/Auth/Auth.css";
-import imgLogo from "../../assets/logo.jpg"; // Ensure you have a logo image in the specified path
+import imgLogo from "../../assets/newl.jpg"; // Ensure you have a logo image in the specified path
 import {Link, useNavigate,  Navigate } from "react-router-dom";
 import { isAuthenticated, getUserRole , loginUser} from "../../utills/authService";
 import { loginUser as authlogin } from '../../utills/apicall';
