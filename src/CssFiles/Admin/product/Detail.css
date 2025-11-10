@@ -20,7 +20,11 @@
   line-height: 1.2;
   color: #333;
 }
-
+.product-detail-stock-description{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #333;
+}
 
 .star.filled {
   color: #ffc107;
