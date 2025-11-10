@@ -222,15 +222,46 @@ const ProductDetail = () => {
             </div>
 
             {/* ✅ Show price (general OR variant) */}
-            {selectedVariant ? (
+  {selectedVariant ? (
               <div className="product-price-large">
-                ₹ {selectedVariant.price.toFixed(2)} 
+                {/* Add 20% amount on the price of the selected product */}
+                <div className="extra-amount-price">
+                  ₹{" "}
+                  {(
+                    Number(selectedVariant.price.toFixed(2)) +
+                    (Number(selectedVariant.price.toFixed(2)) * 20) / 100
+                  ).toFixed(2)}
+                </div>
+                <>
+                  ₹ {selectedVariant.price.toFixed(2)}
+                </>
                 {/* + (productData.tax || 0)) */}
               </div>
             ) : productData?.variants?.length > 0 ? (
               <div className="product-price-large">
-                From ₹{" "}
-                {Math.min(...productData.variants.map((v) => v.price)).toFixed(2)}
+                <div className="extra-amount-price">
+                  {/* Add 20% amount on the price of the selected product */}₹{" "}
+                  {(
+                    Number(
+                      Math.min(
+                        ...productData.variants.map((v) => v.price)
+                      ).toFixed(2)
+                    ) +
+                    (Number(
+                      Math.min(
+                        ...productData.variants.map((v) => v.price)
+                      ).toFixed(2)
+                    ) *
+                      20) /
+                      100
+                  ).toFixed(2)}
+                </div>
+                <>
+                  From ₹{" "}
+                  {Math.min(
+                    ...productData.variants.map((v) => v.price)
+                  ).toFixed(2)}
+                </>
               </div>
             ) : (
               <div className="product-price-large">Price not available</div>
