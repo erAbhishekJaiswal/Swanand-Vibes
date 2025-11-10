@@ -481,9 +481,9 @@ body {
 
 /* Footer Styles */
 .futuristic-footer {
-  background: #ededed;
   padding: 3rem 2rem 1rem;
-  /* margin-top: 4rem; */
+  margin-top: 1rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .footer-content {
