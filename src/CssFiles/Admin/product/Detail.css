@@ -25,6 +25,11 @@
   margin-bottom: 10px;
   color: #333;
 }
+.extra-amount-price{
+  font-size: 13px;
+  color: rgb(193, 2, 2);
+  text-decoration: line-through;
+}
 
 .star.filled {
   color: #ffc107;
