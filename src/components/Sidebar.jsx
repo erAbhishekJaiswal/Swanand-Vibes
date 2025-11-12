@@ -104,7 +104,7 @@ const Sidebar = ({ isCollapsed, toggle }) => {
                 title={item.text}
               >
                 <Link to={item.path} className="nav-link" title={item.text}>
-                  <span className="item-icon" title={item.text}>{item.icon}</span>
+                  <span className="item-icon" title={item.text}>{item.icon} <div className="sidebar-tooltip-text">{item.text}</div></span>
                   {isCollapsed && <span className="item-text">{item.text}</span>}
                 </Link>
               </div>
