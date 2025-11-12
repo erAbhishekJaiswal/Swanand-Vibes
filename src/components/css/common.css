@@ -438,6 +438,10 @@ body {
   text-align: center;
 }
 
+.sidebar-tooltip-text{
+  font-size: 8px;
+}
+
 .item-text {
   white-space: nowrap;
 }
