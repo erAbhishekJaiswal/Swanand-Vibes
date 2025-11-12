@@ -9,7 +9,7 @@ import Spinner from "../../components/Spinner";
 import { FiShoppingCart, FiTrash2, FiPlus, FiMinus, FiLock, FiCreditCard, FiSmartphone, FiArrowLeft } from "react-icons/fi";
 import { CiBank } from "react-icons/ci";
 import { useSelector, useDispatch } from "react-redux";
-import { removeItemFromCart, setCartFromBackend } from "../../store/cartSlice";
+import { removeItemFromCart, setCartFromBackend, updateItemQuantity } from "../../store/cartSlice";
 
 // import { useSelector, useDispatch } from "react-redux";
 // import { removeItemFromCart } from "../../store/cartSlice"; // ✅ update this path if needed
@@ -56,40 +56,40 @@ const dispatch = useDispatch();
   fetchCart();
 }, [userId, dispatch]);
 
-  const updateQuantity = async (itemId, newQty, availableStock) => {
-    if (newQty < 1 || newQty > availableStock) return;
+  // const updateQuantity = async (itemId, newQty, availableStock) => {
+  //   if (newQty < 1 || newQty > availableStock) return;
 
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item._id === itemId ? { ...item, qty: newQty } : item
-      )
-    );
-
-    try {
-      // // console.log(userId, itemId, newQty);
-      
-      await updateCartItem(userId, itemId, newQty);
-      toast.success("Quantity updated");
-
-    } catch (err) {
-      // // console.log(err);
-      toast.error("Failed to update quantity");
-    }
-  };
-
-  // const removeItem = async (itemId) => {
-  //   const updatedCart = cartItems.filter((item) => item._id !== itemId);
-  //   setCartItems(updatedCart);
+  //   setCartItems((prev) =>
+  //     prev.map((item) =>
+  //       item._id === itemId ? { ...item, qty: newQty } : item
+  //     )
+  //   );
 
   //   try {
-  //     await removeFromCart(userId, itemId);
-  //     toast.success("Item removed from cart");
+  //     // // console.log(userId, itemId, newQty);
+      
+  //     await updateCartItem(userId, itemId, newQty);
+  //     toast.success("Quantity updated");
+
   //   } catch (err) {
-  //     console.error("Error removing item:", err);
-  //     toast.error("Error removing item");
+  //     // // console.log(err);
+  //     toast.error("Failed to update quantity");
   //   }
   // };
 
+  const updateQuantity = async (itemId, newQty, availableStock) => {
+  if (newQty < 1 || newQty > availableStock) return;
+
+  // ✅ update Redux state instantly
+  dispatch(updateItemQuantity({ itemId, newQty }));
+
+  try {
+    await updateCartItem(userId, itemId, newQty);
+    toast.success("Quantity updated");
+  } catch (err) {
+    toast.error("Failed to update quantity");
+  }
+};
 
   const removeItem = async (itemId) => {
   try {
