@@ -1,129 +1,4 @@
-// // // src/store/cartSlice.js
-// // import { createSlice } from '@reduxjs/toolkit';
-
-// // // Initial cart state
-// // const initialState = {
-// //   items: [],
-// // };
-
-// // // Cart Slice with actions to add and remove items
-// // const cartSlice = createSlice({
-// //   name: 'cart',
-// //   initialState,
-// //   reducers: {
-// //     addItemToCart(state, action) {
-// //       const product = action.payload;
-// //       const existingProduct = state.items.find(item => item.id === product.id);
-// //     //   if (existingProduct) {
-// //     //     existingProduct.quantity += 1; // Increment quantity if item already exists
-// //     //   } else {
-// //     //     state.items.push({ ...product, quantity: 1 });
-// //     //   }
-
-// //      if (existingProduct) {
-// //         existingProduct.quantity += 1; // Increase quantity if product already exists in the cart
-// //       } else {
-// //         state.items.push({
-// //           product: product._id,
-// //           name: product.name,
-// //           image: product.images[0].url,
-// //           price: product.price,
-// //           quantity: 1,
-// //         });
-// //       }
-// //     },
-// //     removeItemFromCart(state, action) {
-// //       const productId = action.payload;
-// //       state.items = state.items.filter(item => item.id !== productId);
-// //     },
-// //     clearCart(state) {
-// //       state.items = [];
-// //     },
-// //   },
-// // });
-
-// // export const { addItemToCart, removeItemFromCart, clearCart } = cartSlice.actions;
-// // export default cartSlice.reducer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // src/store/cartSlice.js
-// import { createSlice } from '@reduxjs/toolkit';
-
-// const initialState = {
-//   items: [],
-//   totalQuantity: 0,
-// };
-
-// const cartSlice = createSlice({
-//   name: 'cart',
-//   initialState,
-//   reducers: {
-//     addItemToCart(state, action) {
-//       const product = action.payload;
-
-//       // Normalize ID (accepts id or _id)
-//       const productId = product._id || product.id || product.product;
-
-//       const existingProduct = state.items.find(
-//         (item) => item.productId === productId && item.variantId === product.variantId
-//       );
-
-//       if (existingProduct) {
-//         existingProduct.quantity += 1; // Increment quantity
-//       } else {
-//         state.items.push({
-//           productId, // ✅ standardized key
-//           name: product.name,
-//           image: Array.isArray(product.images)
-//             ? product.images[0]?.url || product.images[0]
-//             : product.images || product.image || "",
-//           price: product.price,
-//           size: product.size || "One Size",
-//           variantId: product.variantId || null,
-//           quantity: product.quantity || 1,
-//         });
-//       }
-//     },
-
-//     removeItemFromCart(state, action) {
-//       const productId = action.payload;
-//       state.items = state.items.filter(
-//         (item) => item.productId !== productId
-//       );
-//     },
-
-//     clearCart(state) {
-//       state.items = [];
-//     },
-//   },
-// });
-
-// export const { addItemToCart, removeItemFromCart, clearCart } = cartSlice.actions;
-// export default cartSlice.reducer;
-
-
-
-
-
-
-
-
-
-
-
-// src/store/cartSlice.js
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
@@ -131,7 +6,7 @@ const initialState = {
 };
 
 const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState,
   reducers: {
     addItemToCart(state, action) {
@@ -160,30 +35,57 @@ const cartSlice = createSlice({
         });
       }
 
-      state.totalQuantity += 1; // ✅ track quantity
+      state.totalQuantity += 1; // ✅ track total quantity
     },
 
     removeItemFromCart(state, action) {
       const productId = action.payload;
-      const itemToRemove = state.items.find(item => item.productId === productId);
+      const itemToRemove = state.items.find(
+        (item) => item.productId === productId
+      );
       if (itemToRemove) {
         state.totalQuantity -= itemToRemove.quantity;
       }
-      state.items = state.items.filter(item => item.productId !== productId);
+      state.items = state.items.filter((item) => item.productId !== productId);
     },
 
     setCartFromBackend(state, action) {
-  state.items = action.payload;
-  state.totalQuantity = action.payload.reduce((sum, item) => sum + item.qty, 0);
-},
+      state.items = action.payload;
+      state.totalQuantity = action.payload.reduce(
+        (sum, item) => sum + item.qty,
+        0
+      );
+    },
 
+    // ✅ NEW: handle updating item quantity (fixes your setCartItems issue)
+    updateItemQuantity(state, action) {
+      const { itemId, newQty } = action.payload;
+      const item = state.items.find(
+        (item) => item._id === itemId || item.productId === itemId
+      );
+      if (item) {
+        state.totalQuantity += newQty - (item.qty || item.quantity || 0);
+        if (item.qty !== undefined) {
+          item.qty = newQty;
+        } else {
+          item.quantity = newQty;
+        }
+      }
+    },
 
     clearCart(state) {
       state.items = [];
-      state.totalQuantity = 0; // ✅ reset quantity
+      state.totalQuantity = 0;
     },
   },
 });
 
-export const { addItemToCart, removeItemFromCart, setCartFromBackend, clearCart } = cartSlice.actions;
+export const {
+  addItemToCart,
+  removeItemFromCart,
+  setCartFromBackend,
+  clearCart,
+  updateItemQuantity, // ✅ don't forget to export this
+} = cartSlice.actions;
+
 export default cartSlice.reducer;
