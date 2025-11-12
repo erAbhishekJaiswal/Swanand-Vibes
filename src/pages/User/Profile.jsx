@@ -185,157 +185,140 @@ const Profile = ({ user, onUpdateProfile }) => {
       </div>
 
       <div className="profile-content">
+
         <div className="profile-card">
-          <div className="profile-avatar-section">
-            {/* <div className="avatar-upload">
-              <div className="avatar-preview">
-                <div
-                  className="avatar-image"
-                  style={{
-                    backgroundImage: `url(${
-                      formData.avatar || "https://via.placeholder.com/120"
-                    })`,
-                  }}
-                ></div>
-                {isEditing && (
-                  <label htmlFor="avatar-upload" className="avatar-edit">
-                    <span>✏️</span>
-                    <input
-                      type="file"
-                      id="avatar-upload"
-                      accept="image/*"
-                      onChange={handleAvatarChange}
-                    />
-                  </label>
-                )}
-              </div>
-            </div> */}
-            <div className="avatar-info">
-              <h2>{formData.name}</h2>
-              <p>{formData.email}</p>
-              <p>Company ID: {formData.companyid || "No company ID provided"}</p>
-            </div>
-          </div>
+  <div className="profile-avatar-section">
+    <div className="avatar-info">
+      <h2>{formData.name}</h2>
+      <p>{formData.email}</p>
+      <p>Company ID: {formData.companyid || "No company ID provided"}</p>
+    </div>
+  </div>
 
-          <form className="profile-form" onSubmit={handleSubmit}>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="name">Full Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  disabled={!isEditing}
-                  className="futuristic-input"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  disabled
-                  className="futuristic-input"
-                />
-              </div>
-            </div>
+  {/* ✅ Keep only input fields inside form */}
+  <form className="profile-form" onSubmit={handleSubmit}>
+    <div className="form-row">
+      <div className="form-group">
+        <label htmlFor="name">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          disabled={!isEditing}
+          className="futuristic-input"
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          disabled
+          className="futuristic-input"
+        />
+      </div>
+    </div>
 
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="mobile">Mobile Number</label>
-                <input
-                  type="tel"
-                  id="mobile"
-                  name="mobile"
-                  value={formData.mobile}
-                  onChange={handleChange}
-                  disabled={!isEditing}
-                  className={`futuristic-input ${formErrors.mobile ? 'error' : ''}`}
-                  placeholder="Enter 10-digit mobile number"
-                />
-                {formErrors.mobile && (
-                  <span className="error-text">{formErrors.mobile}</span>
-                )}
-              </div>
-              <div className="form-group">
-                <label htmlFor="address">Address</label>
-                <input
-                  type="text"
-                  id="address"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  disabled={!isEditing}
-                  className="futuristic-input"
-                  placeholder="Enter your address"
-                />
-              </div>
-            </div>
+    <div className="form-row">
+      <div className="form-group">
+        <label htmlFor="mobile">Mobile Number</label>
+        <input
+          type="tel"
+          id="mobile"
+          name="mobile"
+          value={formData.mobile}
+          onChange={handleChange}
+          disabled={!isEditing}
+          className={`futuristic-input ${formErrors.mobile ? 'error' : ''}`}
+          placeholder="Enter 10-digit mobile number"
+        />
+        {formErrors.mobile && (
+          <span className="error-text">{formErrors.mobile}</span>
+        )}
+      </div>
+      <div className="form-group">
+        <label htmlFor="address">Address</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          disabled={!isEditing}
+          className="futuristic-input"
+          placeholder="Enter your address"
+        />
+      </div>
+    </div>
 
-           { getUserRole() === "user" && formData?.Orders !== 0 && <div className="referral-section">
-              <h3>Your Referral Link</h3>
-              <div className="referral-input-group">
-                <input 
-                  type="text" 
-                  value={refLink} 
-                  readOnly 
-                  className="futuristic-input" 
-                />
-                <button 
-                  type="button"
-                  onClick={() => handleShare(refLink)} 
-                  className="futuristic-btn share-btn"
-                >
-                  Share Link
-                </button>
-              </div>
-            </div>}
-
-            <div className="form-actions">
-              {isEditing ? (
-                <>
-                  <button 
-                    type="submit" 
-                    className="futuristic-btn primary"
-                    disabled={loading}
-                  >
-                    {loading ? "Saving..." : "Save Changes"}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleCancel}
-                    className="futuristic-btn secondary"
-                    disabled={loading}
-                  >
-                    Cancel
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => setIsEditing(true)}
-                    className="futuristic-btn primary"
-                  >
-                    Edit Profile
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleLogout}
-                    className="futuristic-btn secondary"
-                  >
-                    Logout
-                  </button>
-                </>
-              )}
-            </div>
-          </form>
+    {getUserRole() === "user" && formData?.Orders !== 0 && (
+      <div className="referral-section">
+        <h3>Your Referral Link</h3>
+        <div className="referral-input-group">
+          <input
+            type="text"
+            value={refLink}
+            readOnly
+            className="futuristic-input"
+          />
+          <button
+            type="button"
+            onClick={() => handleShare(refLink)}
+            className="futuristic-btn share-btn"
+          >
+            Share Link
+          </button>
         </div>
+      </div>
+    )}
+
+    {isEditing && (
+      <div className="form-actions">
+        <button 
+          type="submit" 
+          className="futuristic-btn primary"
+          disabled={loading}
+        >
+          {loading ? "Saving..." : "Save Changes"}
+        </button>
+        <button
+          type="button"
+          onClick={handleCancel}
+          className="futuristic-btn secondary"
+          disabled={loading}
+        >
+          Cancel
+        </button>
+      </div>
+    )}
+  </form>
+
+  {/* ✅ These buttons moved OUTSIDE form */}
+  {!isEditing && (
+    <div className="form-actions">
+      <button
+        type="button"
+        onClick={() => setIsEditing(true)}
+        className="futuristic-btn primary"
+      >
+        Edit Profile
+      </button>
+      <button
+        type="button"
+        onClick={handleLogout}
+        className="futuristic-btn secondary"
+      >
+        Logout
+      </button>
+    </div>
+  )}
+</div>
+
 
         <div className="profile-sidebar">
           <div className="sidebar-card">
@@ -363,7 +346,7 @@ const Profile = ({ user, onUpdateProfile }) => {
                 Verify Now
               </button></> :<>
               <p className="profile-kyc-status">
-              {formData.kycstatus.toUpperCase()}</p>
+              {formData.kycstatus}</p>
               </>
               }
             </div>
