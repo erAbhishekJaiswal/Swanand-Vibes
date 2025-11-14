@@ -666,11 +666,11 @@ const calculateTotal = () => {
               <p>Our support team is here to help with your order.</p>
               <div className="support-contact">
                 <span className="support-icon">📞</span>
-                <span>1-800-123-4567</span>
+                <span>9821611417</span>
               </div>
               <div className="support-contact">
                 <span className="support-icon">✉️</span>
-                <span>support@swanandvibes.com</span>
+                <span>swanandvibes@gmail.com</span>
               </div>
             </div>
           </div>
