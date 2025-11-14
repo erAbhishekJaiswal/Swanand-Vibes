@@ -6,6 +6,7 @@ import Spinner from '../../../components/Spinner';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../../../CssFiles/Admin/user/userDetail.css';
+import NetworkTreeAdmin from '../../../components/NetworkTreeAdmin';
 
 const UserDetails = () => {
   const [user, setUser] = useState(null);
@@ -283,6 +284,9 @@ const UserDetails = () => {
             </div>
           </div>
         </div>
+
+        <h2 className="section-title">Network Tree</h2>
+        <NetworkTreeAdmin userId={id} />
 
         {/* Action Buttons */}
         {/* <div className="admin-user-profile-action-buttons">
