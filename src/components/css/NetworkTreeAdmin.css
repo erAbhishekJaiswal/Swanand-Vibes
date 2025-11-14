@@ -1,0 +1,72 @@
+.nta-tree-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0px 2px 7px rgba(0,0,0,0.1);
+}
+
+.nta-level {
+  margin-bottom: 12px;
+  border-left: 3px solid #007bff;
+  padding-left: 10px;
+}
+
+.nta-level-header {
+  background: #f1f5f9;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nta-users {
+  padding: 10px 20px;
+}
+
+.nta-node {
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.nta-avatar {
+  width: 40px;
+  height: 40px;
+  background: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.nta-avatar.main {
+  background: #ff5722;
+}
+
+.nta-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.nta-name {
+  font-weight: bold;
+}
+
+.nta-email {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.nta-current-user {
+  text-align: center;
+  margin: 25px 0;
+}
