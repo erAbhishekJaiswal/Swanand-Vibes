@@ -275,7 +275,7 @@ const Checkout = () => {
     );
 
     const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY || "rzp_test_R8Ij82dWVJ1p71",
+      key: import.meta.env.VITE_RAZORPAY_KEY || "rzp_live_RempOUaNrGy0lE",
       amount: order.amount,
       currency: order.currency,
       name: "Swanand Vibes",
