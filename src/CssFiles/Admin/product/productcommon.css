@@ -628,11 +628,12 @@
 .image-thumbnails {
   display: flex;
   gap: 0.8rem;
+  flex-wrap: wrap;
 }
 
 .thumbnail {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
