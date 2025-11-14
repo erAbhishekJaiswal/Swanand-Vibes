@@ -13,7 +13,7 @@ const PaymentPage = () => {
 
       // Step 2: Open Razorpay checkout
       const options = {
-        key: "rzp_test_R8Ij82dWVJ1p71", // Replace with your Razorpay Key ID
+        key: "rzp_live_RempOUaNrGy0lE", // Replace with your Razorpay Key ID
         amount: order.amount,
         currency: order.currency,
         name: "My Shop",
