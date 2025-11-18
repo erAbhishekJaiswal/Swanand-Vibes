@@ -30,7 +30,8 @@ const Main = () => {
       <Toaster position="top-center" reverseOrder={false} />
       <AutoLogoutManager />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/admin/*" element={
             <PrivateRoute role="admin">
               <Dashboard />
