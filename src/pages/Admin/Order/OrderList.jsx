@@ -8,7 +8,7 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import Pagination from '../../../components/Pagination';
 import { FcShipped } from "react-icons/fc";
-
+import { Link } from 'react-router-dom';
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
@@ -339,6 +339,13 @@ const OrderList = () => {
               <FiSearch />
             </button>
           </div>
+
+           {/* add the order dashboard button */}
+          <Link  to="/admin/ordersdashboard">
+            <button className="order-dashboard-link">
+             Order Dashboard
+            </button>
+          </Link>
 
           <button 
             className="filter-toggle-btn"
