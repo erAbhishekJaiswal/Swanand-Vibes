@@ -17,6 +17,17 @@
   font-size: 1.1rem;
 }
 
+.order-dashboard-link {
+  padding: 12px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  display: inline-block;
+  text-decoration: none;
+  color: #3182ce;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
 /* Header Styles */
 .admin-header {
   display: flex;
