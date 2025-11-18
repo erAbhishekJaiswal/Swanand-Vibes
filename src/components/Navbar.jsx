@@ -101,9 +101,9 @@ const Navbar = () => {
           <div className="nav-common-items">
             <div className="nav-item">
               <Link
-                to="/"
+                to="/home"
                 onClick={handleNavLinkClick}
-                className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
+                className={`nav-link ${location.pathname === "/home" ? "active" : ""}`}
               >
                 {/* <span className="link-icon">🏠</span> */}
                 <span className="link-text">Home</span>
