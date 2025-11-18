@@ -35,7 +35,7 @@ const OrdersDashboard = () => {
       params.append('page', pagination.page);
       params.append('limit', pagination.limit);
 
-      const response = await axios.get(`http://localhost:5000/order/all?${params}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/order/all?${params}`);
       const data = response.data;
 
       if (data.success) {
@@ -375,3 +375,4 @@ const OrdersDashboard = () => {
 
 
 export default OrdersDashboard;
+
