@@ -310,12 +310,12 @@
   overflow-x: auto;
 }
 
-.orders-table {
+.orderslist-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.orders-table th {
+.orderslist-table th {
   background: #f7fafc;
   padding: 16px;
   text-align: left;
@@ -326,7 +326,7 @@
   transition: background 0.3s ease;
 }
 
-.orders-table th:hover {
+.orderslist-table th:hover {
   background: #edf2f7;
 }
 
@@ -336,7 +336,7 @@
   gap: 8px;
 }
 
-.orders-table td {
+.orderslist-table td {
   padding: 16px;
   border-bottom: 1px solid #e2e8f0;
   vertical-align: middle;
@@ -794,12 +794,12 @@
     justify-content: center;
   }
   
-  .orders-table {
+  .orderslst-table {
     font-size: 0.9rem;
   }
   
-  .orders-table th,
-  .orders-table td {
+  .orderslist-table th,
+  .orderslist-table td {
     padding: 12px 8px;
   }
   
