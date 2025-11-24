@@ -1171,7 +1171,7 @@ const OrderList = () => {
         </div>
         
         <div className="orders-table-wrapper">
-          <table className="orders-table">
+          <table className="orderslist-table">
             <thead>
               <tr>
                 <th onClick={() => handleSort('user')}>
