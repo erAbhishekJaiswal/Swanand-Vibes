@@ -263,25 +263,25 @@ const UserDetails = () => {
           <h3>Additional Information</h3>
           
           <div className="admin-user-profile-info-grid">
-            <div className="admin-user-profile-info-item">
+            {/* <div className="admin-user-profile-info-item">
               <strong>User ID:</strong>
               <span>{user._id}</span>
-            </div>
+            </div> */}
             
-            <div className="admin-user-profile-info-item">
+            {/* <div className="admin-user-profile-info-item">
               <strong>Wallet ID:</strong>
               <span>{user.wallet}</span>
-            </div>
+            </div> */}
             
             <div className="admin-user-profile-info-item">
               <strong>Referred By:</strong>
-              <span>{user.referredBy || 'Not referred'}</span>
+              <span>{user?.referredBy?.name || 'Not referred'}</span>
             </div>
             
-            <div className="admin-user-profile-info-item">
+            {/* <div className="admin-user-profile-info-item">
               <strong>Account Status:</strong>
               <span className="admin-user-profile-status-active">Active</span>
-            </div>
+            </div> */}
           </div>
         </div>
 
