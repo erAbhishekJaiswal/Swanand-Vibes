@@ -1,23 +1,169 @@
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import "./css/NetworkTreeAdmin.css"; // create new CSS file
+
+// const NetworkTreeAdmin = ({ userId }) => {
+//   const [downline, setDownline] = useState([]);
+//   const [upline, setUpline] = useState([]);
+//   const [expanded, setExpanded] = useState({});
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const loadNetwork = async () => {
+//       try {
+//         const [resDown, resUp] = await Promise.all([
+//           axios.get(`${import.meta.env.VITE_API_URL}/users/downline/${userId}`),
+//           axios.get(`${import.meta.env.VITE_API_URL}/users/upline/${userId}`),
+//         ]);
+
+//         setDownline(resDown.data.downline || []);
+//         setUpline(resUp.data.upline || []);
+//       } catch (err) {
+//         console.log("Network load error:", err);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     loadNetwork();
+//   }, [userId]);
+
+//   const toggle = (key) => {
+//     setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
+//   };
+
+//   const groupByLevel = (arr) => {
+//     return arr.reduce((acc, user, index) => {
+//       const level = index + 1;
+//       if (!acc[level]) acc[level] = [];
+//       acc[level].push(user);
+//       return acc;
+//     }, {});
+//   };
+
+//   const renderLevel = (grouped, type) => {
+//     return Object.keys(grouped).map(level => {
+//       const key = `${type}-${level}`;
+
+//       return (
+//         <div key={key} className="nta-level">
+//           <div className="nta-level-header" onClick={() => toggle(key)}>
+//             <span className="nta-label">
+//               Level {level} ({type})
+//             </span>
+//             <span className="nta-count">({grouped[level].length} users)</span>
+//             <span className="nta-arrow">{expanded[key] ? "▼" : "▶"}</span>
+//           </div>
+
+//           {expanded[key] && (
+//             <div className="nta-users">
+//               {grouped[level].map(u => (
+//                 <div key={u._id} className="nta-node">
+//                   <div className="nta-avatar">{u.name?.charAt(0) || "U"}</div>
+//                   <div className="nta-info">
+//                     <div className="nta-name">{u.name}</div>
+//                     <div className="nta-email">{u.email}</div>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           )}
+//         </div>
+//       );
+//     });
+//   };
+
+//   if (loading) return <p>Loading network...</p>;
+
+//   const groupedUp = groupByLevel(upline);
+//   const groupedDown = groupByLevel(downline);
+
+//   return (
+//     <div className="nta-tree-container">
+//       {/* Upline */}
+//       <h3>Upline Tree</h3>
+//       {renderLevel(groupedUp, "upline")}
+
+//       {/* Current User */}
+//       <div className="nta-current-user">
+//         <div className="nta-node">
+//           <div className="nta-avatar main">U</div>
+//           <div className="nta-info">
+//             <div className="nta-name">Selected User</div>
+//             <div className="nta-email">Current Position</div>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Downline */}
+//       <h3>Downline Tree</h3>
+//       {renderLevel(groupedDown, "downline")}
+//     </div>
+//   );
+// };
+
+// export default NetworkTreeAdmin;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./css/NetworkTreeAdmin.css"; // create new CSS file
+import "./css/NetworkTreeAdmin.css";
 
-const NetworkTreeAdmin = ({ userId }) => {
+const NetworkTreeAdmin = ({ userId: initialUserId }) => {
+  const [userId, setUserId] = useState(initialUserId);
+  const [currentUser, setCurrentUser] = useState(null);
   const [downline, setDownline] = useState([]);
   const [upline, setUpline] = useState([]);
-  const [expanded, setExpanded] = useState({});
+  const [expandedNodes, setExpandedNodes] = useState(new Set());
   const [loading, setLoading] = useState(true);
 
+  /* ------------------------
+      LOAD TREE DATA
+  ------------------------- */
   useEffect(() => {
     const loadNetwork = async () => {
+      setLoading(true);
+
       try {
-        const [resDown, resUp] = await Promise.all([
+        const [resUser, resDown, resUp] = await Promise.all([
+          axios.get(`${import.meta.env.VITE_API_URL}/users/${userId}`),
           axios.get(`${import.meta.env.VITE_API_URL}/users/downline/${userId}`),
           axios.get(`${import.meta.env.VITE_API_URL}/users/upline/${userId}`),
         ]);
 
-        setDownline(resDown.data.downline || []);
-        setUpline(resUp.data.upline || []);
+        const userData = resUser.data.user || resUser.data;
+        const downlineData = resDown.data.downline || [];
+        const uplineData = resUp.data.upline || [];
+
+        // Calculate total downline count recursively
+        const calculateTotalDownline = (users) => {
+          let total = users.length;
+          users.forEach(user => {
+            if (user.downline && user.downline.length > 0) {
+              total += calculateTotalDownline(user.downline);
+            }
+          });
+          return total;
+        };
+
+        setCurrentUser({
+          ...userData,
+          totalDownline: calculateTotalDownline(downlineData)
+        });
+        setDownline(downlineData);
+        setUpline(uplineData);
       } catch (err) {
         console.log("Network load error:", err);
       } finally {
@@ -28,76 +174,195 @@ const NetworkTreeAdmin = ({ userId }) => {
     loadNetwork();
   }, [userId]);
 
-  const toggle = (key) => {
-    setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
+  /* ------------------------
+      EXPAND / COLLAPSE
+  ------------------------- */
+  const toggleNode = (id) => {
+    const newSet = new Set(expandedNodes);
+    newSet.has(id) ? newSet.delete(id) : newSet.add(id);
+    setExpandedNodes(newSet);
   };
 
-  const groupByLevel = (arr) => {
-    return arr.reduce((acc, user, index) => {
-      const level = index + 1;
-      if (!acc[level]) acc[level] = [];
-      acc[level].push(user);
-      return acc;
-    }, {});
-  };
+  /* ------------------------
+      NODE RENDERER
+  ------------------------- */
+  const renderNode = (node, level = 0, isLast = false) => {
+    const nodeId = node._id;
+    const hasChildren = node.downline?.length > 0;
+    const isExpanded = expandedNodes.has(nodeId);
+    const isCurrentUser = currentUser && currentUser._id === nodeId;
 
-  const renderLevel = (grouped, type) => {
-    return Object.keys(grouped).map(level => {
-      const key = `${type}-${level}`;
-
-      return (
-        <div key={key} className="nta-level">
-          <div className="nta-level-header" onClick={() => toggle(key)}>
-            <span className="nta-label">
-              Level {level} ({type})
-            </span>
-            <span className="nta-count">({grouped[level].length} users)</span>
-            <span className="nta-arrow">{expanded[key] ? "▼" : "▶"}</span>
-          </div>
-
-          {expanded[key] && (
-            <div className="nta-users">
-              {grouped[level].map(u => (
-                <div key={u._id} className="nta-node">
-                  <div className="nta-avatar">{u.name?.charAt(0) || "U"}</div>
-                  <div className="nta-info">
-                    <div className="nta-name">{u.name}</div>
-                    <div className="nta-email">{u.email}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
+    return (
+      <div className={`nta-node-wrapper level-${level}`} key={nodeId}>
+        <div className="nta-node-connector">
+          {level > 0 && <div className="nta-vertical-connector"></div>}
+          {hasChildren && isExpanded && (
+            <div className="nta-horizontal-connector"></div>
           )}
         </div>
-      );
-    });
+
+        <div
+          className={`nta-node ${isCurrentUser ? "current" : ""} ${
+            isExpanded ? "expanded" : ""
+          }`}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!isCurrentUser) {
+              setUserId(nodeId);
+            }
+          }}
+        >
+          <div className="nta-node-content">
+            <div className="nta-avatar">
+              {node.name?.charAt(0)?.toUpperCase() || "U"}
+            </div>
+
+            <div className="nta-info">
+              <div className="nta-name">{node.name || "Unknown User"}</div>
+              <div className="nta-email">{node.email}</div>
+              <div className="nta-stats">
+                <span className="nta-downline-count">
+                  {node.totalDownline || 0} total
+                </span>
+                {hasChildren && (
+                  <span className="nta-direct-count">
+                    {node.downline.length} direct
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {hasChildren && (
+              <div
+                className="nta-expand-icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleNode(nodeId);
+                }}
+              >
+                {isExpanded ? "−" : "+"}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {hasChildren && isExpanded && (
+          <div className="nta-children-container">
+            {node.downline.map((child, index) => 
+              renderNode(child, level + 1, index === node.downline.length - 1)
+            )}
+          </div>
+        )}
+      </div>
+    );
   };
 
-  if (loading) return <p>Loading network...</p>;
+  /* ------------------------
+      RENDER UPLINE PATH
+  ------------------------- */
+  const renderUplinePath = () => {
+    if (upline.length === 0) return null;
 
-  const groupedUp = groupByLevel(upline);
-  const groupedDown = groupByLevel(downline);
+    return (
+      <div className="nta-upline-path">
+        <h3>Upline Path</h3>
+        <div className="nta-upline-container">
+          {upline.map((user, index) => (
+            <div key={user._id} className="nta-upline-node">
+              {renderNode(user)}
+              {index < upline.length - 1 && (
+                <div className="nta-upline-connector">
+                  <div className="nta-connector-arrow">↓</div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  /* ------------------------
+      CALCULATE TOTAL DOWNLINE
+  ------------------------- */
+  const calculateTotalDownline = (users) => {
+    let total = users.length;
+    users.forEach(user => {
+      if (user.downline && user.downline.length > 0) {
+        total += calculateTotalDownline(user.downline);
+      }
+    });
+    return total;
+  };
+
+  const totalDownline = calculateTotalDownline(downline);
+
+  /* ------------------------
+      LOADING / ERROR
+  ------------------------- */
+  if (loading)
+    return (
+      <div className="nta-loading">
+        <div className="nta-spinner"></div>
+        <p>Loading network tree...</p>
+      </div>
+    );
+
+  if (!currentUser)
+    return (
+      <div className="nta-error">
+        <p>Failed to load user data</p>
+      </div>
+    );
 
   return (
     <div className="nta-tree-container">
-      {/* Upline */}
-      <h3>Upline Tree</h3>
-      {renderLevel(groupedUp, "upline")}
-
-      {/* Current User */}
-      <div className="nta-current-user">
-        <div className="nta-node">
-          <div className="nta-avatar main">U</div>
-          <div className="nta-info">
-            <div className="nta-name">Selected User</div>
-            <div className="nta-email">Current Position</div>
+      {/* HEADER */}
+      <div className="nta-header">
+        <h2>Network Tree</h2>
+        <div className="nta-stats-summary">
+          <div className="nta-stat-item">
+            <span className="nta-stat-label">Total Downline:</span>
+            <span className="nta-stat-value">{totalDownline}</span>
+          </div>
+          <div className="nta-stat-item">
+            <span className="nta-stat-label">Direct Downline:</span>
+            <span className="nta-stat-value">{downline.length}</span>
+          </div>
+          <div className="nta-stat-item">
+            <span className="nta-stat-label">Upline Levels:</span>
+            <span className="nta-stat-value">{upline.length}</span>
           </div>
         </div>
       </div>
 
-      {/* Downline */}
-      <h3>Downline Tree</h3>
-      {renderLevel(groupedDown, "downline")}
+      <div className="nta-tree">
+        {/* UPLINE PATH */}
+        {renderUplinePath()}
+
+        {/* CURRENT USER */}
+        <div className="nta-current-user-section">
+          <div className="nta-current-user-highlight">
+            {renderNode({ ...currentUser, downline, totalDownline })}
+          </div>
+        </div>
+
+        {/* DOWNLINE TREE */}
+        <div className="nta-downline-section">
+          <h3>Downline Network ({totalDownline} members)</h3>
+          {downline.length > 0 ? (
+            <div className="nta-downline-tree">
+              {downline.map((node, index) => 
+                renderNode(node, 0, index === downline.length - 1)
+              )}
+            </div>
+          ) : (
+            <div className="nta-no-downline">
+              <p>No downline members found</p>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
