@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import "../../../CssFiles/Admin/Gift/GiftUpload.css";
+import axiosInstance from "../../../utills/axiosInstance";
 
 const UploadImage = () => {
   const [formData, setFormData] = useState({
@@ -50,7 +51,7 @@ const UploadImage = () => {
     setLoading(true);
     try {
       // 🔹 Get Cloudinary signature from backend
-      const sigRes = await axios.get(`${import.meta.env.VITE_API_URL}/products/signature`);
+      const sigRes = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/products/signature`);
       // console.log(sigRes.data);
       
       const { timestamp, signature, cloudName, apiKey } = sigRes.data;
@@ -76,7 +77,7 @@ const UploadImage = () => {
       // });
       
       // 🔹 Save to database
-      await axios.post(`${import.meta.env.VITE_API_URL}/gallery`, {
+      await axiosInstance.post(`${import.meta.env.VITE_API_URL}/gallery`, {
         title: formData.title,
         category: formData.category,
         imageUrl: secure_url,
