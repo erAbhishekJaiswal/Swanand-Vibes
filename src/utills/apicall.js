@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import axiosInstance from "./axiosInstance";
 const API_URL = import.meta.env.VITE_API_URL
 // "https://swanand-vibes-backend.vercel.app/api";
 
@@ -36,7 +36,7 @@ export const loginUser = (loginData) => {
 };
 
 export const logoutUser = () => {
-  return axios.post(`${API_URL}/auth/logout`);
+  return axiosInstance.post(`${API_URL}/auth/logout`);
 };
 
 // export const updateUserPassword = (passwordData) => {
@@ -168,40 +168,40 @@ export const getCommonProductById = (id) => {
 export const getAllProducts = (page, limit, search, category) => {
   // console.log(page, limit, search, category);
 
-  return axios.get(
+  return axiosInstance.get(
     `${API_URL}/products?page=${page}&limit=${limit}&search=${search}&category=${category}`
   );
 };
 
 //
 export const getProductById = (id) => {
-  return axios.get(`${API_URL}/products/${id}`);
+  return axiosInstance.get(`${API_URL}/products/${id}`);
 };
 
 //
 export const createProduct = (productData) => {
-  return axios.post(`${API_URL}/products`, productData);
+  return axiosInstance.post(`${API_URL}/products`, productData);
 };
 
 //
 export const updateProduct = (id, productData) => {
-  return axios.put(`${API_URL}/products/${id}`, productData);
+  return axiosInstance.put(`${API_URL}/products/${id}`, productData);
 };
 
 //
 export const deleteProduct = (id) => {
-  return axios.delete(`${API_URL}/products/${id}`);
+  return axiosInstance.delete(`${API_URL}/products/${id}`);
 };
 
 // 
 export const generateStockReport = () => {
-  return axios.get(`${API_URL}/products/stock`, {
+  return axiosInstance.get(`${API_URL}/products/stock`, {
       responseType: 'blob', // 👈 Important for binary data like .xlsx
     });
 };
 
 export const getCategories = () => {
-  return axios.get(`${API_URL}/category/`);
+  return axiosInstance.get(`${API_URL}/category/`);
 };
 
 
@@ -216,34 +216,34 @@ export const getCategories = () => {
 export const getAllUsers = (params ) => {
   // console.log(params);
   
-  return axios.get(
+  return axiosInstance.get(
     `${API_URL}/users`,{ params }
   );
 };
 //
 export const getUserById = (id) => {
-  return axios.get(`${API_URL}/users/${id}`);
+  return axiosInstance.get(`${API_URL}/users/${id}`);
 };
 
 export const updateUserProfile = async (id, formData) => {
-  return axios.put(`${API_URL}/users/${id}/profile`, formData);
+  return axiosInstance.put(`${API_URL}/users/${id}/profile`, formData);
 };
 // export const updateUser = (id, userData) => {
 //   return axios.put(`${API_URL}/users/${id}`, userData);
 // };
 //
 export const deleteUser = (id) => {
-  return axios.delete(`${API_URL}/users/${id}`);
+  return axiosInstance.delete(`${API_URL}/users/${id}`);
 };
 
 // for users
 
 export const getUserProfile = (id) => {
-  return axios.get(`${API_URL}/users/${id}/profile`);
+  return axiosInstance.get(`${API_URL}/users/${id}/profile`);
 };
 
 export const getUserAddress = (userId) => {
-  return axios.get(`${API_URL}/users/address/${userId}`);
+  return axiosInstance.get(`${API_URL}/users/address/${userId}`);
 };
 
 // Kyc
@@ -251,7 +251,7 @@ export const getUserAddress = (userId) => {
 // ✅ Get all KYC records with query parameters
 export const getAllKycs = async (params = {}) => {
   try {
-    const response = await axios.get(`${API_URL}/user/kyc`, { params });
+    const response = await axiosInstance.get(`${API_URL}/user/kyc`, { params });
     return response.data;
   } catch (error) {
     console.error('Failed to fetch KYC list:', error);
@@ -260,19 +260,19 @@ export const getAllKycs = async (params = {}) => {
 };
 //
 export const approveKyc = (id) => {
-  return axios.put(`${API_URL}/user/kyc/${id}/approve`);
+  return axiosInstance.put(`${API_URL}/user/kyc/${id}/approve`);
 };
 //
 export const rejectKyc = (id) => {
-  return axios.put(`${API_URL}/user/kyc/${id}/reject`);
+  return axiosInstance.put(`${API_URL}/user/kyc/${id}/reject`);
 };
 //
 export const getKycById = (id) => {
-  return axios.get(`${API_URL}/user/kyc/${id}`);
+  return axiosInstance.get(`${API_URL}/user/kyc/${id}`);
 };
 
 export const getKycByUserId = (userId) => {
-  return axios.get(`${API_URL}/user/kyc/user/${userId}`);
+  return axiosInstance.get(`${API_URL}/user/kyc/user/${userId}`);
 };
 
 // for users
@@ -280,7 +280,7 @@ export const getKycByUserId = (userId) => {
 export const submitKyc = (payload) => {
   // // console.log(payload);
   
-  return axios.post(`${API_URL}/user/kyc/submit`, payload, {
+  return axiosInstance.post(`${API_URL}/user/kyc/submit`, payload, {
     headers: { "Content-Type": "application/json" },
   });
 };
@@ -309,7 +309,7 @@ export const addToCart = (payload) => {
   const { userId, quantity, id, size, variantId } = payload;
   // console.log("Adding to cart:", payload);
   
-  return axios.post(`${API_URL}/user/cart/${id}`, { 
+  return axiosInstance.post(`${API_URL}/user/cart/${id}`, { 
     userId, 
     quantity, 
     size, 
@@ -319,7 +319,7 @@ export const addToCart = (payload) => {
 
 //
 export const getCart = (id) => {
-  return axios.get(`${API_URL}/user/cart/${id}`);
+  return axiosInstance.get(`${API_URL}/user/cart/${id}`);
 };
 
 //
@@ -335,17 +335,17 @@ export const getCart = (id) => {
 export const removeFromCart = (userId, itemId) => {
   // console.log("Sending to backend:", { userId, itemId });
 
-  return axios.delete(`${API_URL}/user/cart/remove`, {
+  return axiosInstance.delete(`${API_URL}/user/cart/remove`, {
   data: { userId, itemId }
 });
 };
 
 export const clearCart = (userId) => {
-  return axios.delete(`${API_URL}/user/cart/${userId}/clear`);
+  return axiosInstance.delete(`${API_URL}/user/cart/${userId}/clear`);
 };
 
 export const updateCartItem = (userId, itemId, quantity) => {
-  return axios.put(`${API_URL}/user/cart/${userId}`, { quantity, itemId , userId});
+  return axiosInstance.put(`${API_URL}/user/cart/${userId}`, { quantity, itemId , userId});
 };
 
 // Wallet Api
@@ -356,11 +356,11 @@ export const updateCartItem = (userId, itemId, quantity) => {
 
 //
 export const getWallet = (userId) => {
-  return axios.get(`${API_URL}/user/wallet/${userId}`);
+  return axiosInstance.get(`${API_URL}/user/wallet/${userId}`);
 };
 
 export const debitWallet = (userId, amount) => {
-  return axios.delete(`${API_URL}/user/wallet/${userId}/withdraw`, {
+  return axiosInstance.delete(`${API_URL}/user/wallet/${userId}/withdraw`, {
     data: { amount },
   });
 };
@@ -369,11 +369,11 @@ export const debitWallet = (userId, amount) => {
 export const placeOrder = (userId, orderData) => {
   // console.log(`Placing order for user ${userId}:`, orderData);
 
-  return axios.post(`${API_URL}/order/${userId}`, orderData);
+  return axiosInstance.post(`${API_URL}/order/${userId}`, orderData);
 };
 
 export const getOrders = (userId) => {
-  return axios.get(`${API_URL}/order/user/${userId}`);
+  return axiosInstance.get(`${API_URL}/order/user/${userId}`);
 };
 
 
@@ -387,22 +387,22 @@ export const getOrders = (userId) => {
 
 // Update the contactslist function to accept query parameters
 export const contactslist = (params) => {
-  return axios.get(`${API_URL}/contact`, {
+  return axiosInstance.get(`${API_URL}/contact`, {
     params
   });
 };
 
 
 export const contactdelete = (id) => {
-  return axios.delete(`${API_URL}/order/contact/${id}`);
+  return axiosInstance.delete(`${API_URL}/order/contact/${id}`);
 }
 
 export const contactupdate = (id, status) => {
-  return axios.put(`${API_URL}/contact/${id}`,  status);
+  return axiosInstance.put(`${API_URL}/contact/${id}`,  status);
 }
 
 export const contactcreate = (contactData) => {
-  return axios.post(`${API_URL}/contact`, contactData);
+  return axiosInstance.post(`${API_URL}/contact`, contactData);
 }
 
 
