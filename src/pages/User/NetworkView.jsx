@@ -3,6 +3,7 @@ import axios from "axios";
 import "../../CssFiles/User/Network.css";
 import { getUserId } from "../../utills/authService";
 import Spinner from "../../components/Spinner";
+import axiosInstance from "../../utills/axiosInstance";
 
 const NetworkView = () => {
   const [downline, setDownline] = useState([]);
@@ -22,8 +23,8 @@ const NetworkView = () => {
         setError(null);
         
         const [resDownline, resUpline] = await Promise.all([
-          axios.get(`${import.meta.env.VITE_API_URL}/users/downline/${userId}`),
-          axios.get(`${import.meta.env.VITE_API_URL}/users/upline/${userId}`)
+          axiosInstance.get(`${import.meta.env.VITE_API_URL}/users/downline/${userId}`),
+          axiosInstance.get(`${import.meta.env.VITE_API_URL}/users/upline/${userId}`)
         ]);
         
         setDownline(resDownline.data.downline || []);

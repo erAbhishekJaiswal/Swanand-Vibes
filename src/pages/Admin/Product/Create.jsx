@@ -4,6 +4,7 @@ import '../../../CssFiles/Admin/product/ProductForm.css';
 import { createProduct } from '../../../utills/apicall';
 import Spinner from "../../../components/Spinner";
 import { toast } from 'react-hot-toast';
+import axiosInstance from "../../../utills/axiosInstance";
 
 const CreateProduct = () => {
   const [formData, setFormData] = useState({
@@ -38,7 +39,7 @@ const CreateProduct = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/category`);
+      const response = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/category`);
       setCategoryOptions(response.data.categories);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -300,7 +301,7 @@ const CreateProduct = () => {
 
     try {
       // 1. Get Cloudinary signature from backend
-      const sigRes = await axios.get(
+      const sigRes = await axiosInstance.get(
         `${import.meta.env.VITE_API_URL}/products/signature`
       );
       const signatureData = sigRes.data;
@@ -325,7 +326,7 @@ const CreateProduct = () => {
       const totalStock = variantsWithUploadedImages.reduce((total, variant) => total + parseInt(variant.stock || 0), 0);
 
       // 4. Send product data with images to backend
-      const newProduct =  await axios.post(
+      const newProduct =  await axiosInstance.post(
         `${import.meta.env.VITE_API_URL}/products/`,
         {
           ...formData,

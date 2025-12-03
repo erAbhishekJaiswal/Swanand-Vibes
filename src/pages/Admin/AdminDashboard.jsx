@@ -9,6 +9,7 @@ import { RiCustomerService2Fill } from "react-icons/ri";
 import { ImProfile } from "react-icons/im";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { FaRupeeSign } from "react-icons/fa";
+import axiosInstance from "../../utills/axiosInstance";
 
 const AdminDashboard = () => {
 
@@ -31,8 +32,8 @@ const AdminDashboard = () => {
     });
     const fetchStats = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/dashboard/${id}`);
-        const data = await response.json();
+        const response = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/users/dashboard/${id}`);
+        const data = response.data;
         // console.log(data);
         
         setStats({

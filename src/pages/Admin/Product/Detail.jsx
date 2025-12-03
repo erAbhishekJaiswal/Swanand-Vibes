@@ -7,6 +7,7 @@ import { getUserId } from "../../../utills/authService";
 import axios from "axios";
 import Spinner from "../../../components/Spinner";
 import Footer from "../../../components/Footer";
+import axiosInstance from "../../../utills/axiosInstance";
 
 const Detail = () => {
   const { id } = useParams();
@@ -33,7 +34,7 @@ const Detail = () => {
   const fetchProduct = async (id) => {
     try {
       setLoading(true);
-      const response = await axios.get(
+      const response = await axiosInstance.get(
         `${import.meta.env.VITE_API_URL}/products/common/${id}`
       );
       setProductData(response.data.data);
@@ -81,7 +82,7 @@ const Detail = () => {
     };
 
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `${import.meta.env.VITE_API_URL}/user/cart/${id}`,
         productToAdd
       );
@@ -122,7 +123,7 @@ const Detail = () => {
     try {
       console.log({ rating: userRating, comment: reviewComment, userid: userId });
       
-      const response = await axios.put(
+      const response = await axiosInstance.put(
         `${import.meta.env.VITE_API_URL}/products/rate/${id}`,
         {
           rating: userRating,

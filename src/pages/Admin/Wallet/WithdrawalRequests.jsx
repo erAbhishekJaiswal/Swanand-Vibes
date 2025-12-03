@@ -20,6 +20,7 @@ import axios from "axios";
 import Spinner from "../../../components/Spinner";
 import Pagination from "../../../components/Pagination";
 import toast from "react-hot-toast";
+import axiosInstance from "../../../utills/axiosInstance";
 const WithdrawalRequests = () => {
   // const [requests, setRequests] = useState([]);
   const [filteredRequests, setFilteredRequests] = useState([]);
@@ -94,7 +95,7 @@ const WithdrawalRequests = () => {
       queryParams.append("status", RequestStatus);
     }
 
-    const res = await axios.get(
+    const res = await axiosInstance.get(
       `${import.meta.env.VITE_API_URL}/user/wallet/withdrawal-report?${queryParams.toString()}`,
       { responseType: "blob" }
     );
@@ -117,7 +118,7 @@ const WithdrawalRequests = () => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(
+        const response = await axiosInstance.get(
           `${import.meta.env.VITE_API_URL}/user/wallet/requests`,
           {
             params: {
@@ -257,7 +258,7 @@ const WithdrawalRequests = () => {
         }/user/wallet/${walletId}/complete-withdrawal`;
       }
       if (endpoint) {
-        await axios.put(endpoint, { walletId, txnId, status: newStatus });
+        await axiosInstance.put(endpoint, { walletId, txnId, status: newStatus });
       }
       toast.success(
         `Withdrawal ${newStatus.replace("withdrawal-", "")} successfully`

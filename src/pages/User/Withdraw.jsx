@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import '../../CssFiles/User/Withdraw.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../utills/axiosInstance';
 
 const Withdraw = () => {
   const [amount, setAmount] = useState('');
@@ -21,7 +22,7 @@ const Withdraw = () => {
     const fetchUserData = async () => {
       try {
         // Fetch wallet data  http://localhost:5000/api/user/wallet/68b5650b7505b81ebfa4a48e/withdraw-request
-        const walletResponse = await axios.get(`${import.meta.env.VITE_API_URL}/user/wallet/${userId}`);
+        const walletResponse = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/user/wallet/${userId}`);
         console.log(walletResponse);
         if (walletResponse.status === 200) {
           // const walletData = await walletResponse.json();
@@ -40,9 +41,10 @@ const Withdraw = () => {
         }
 
         // Fetch KYC status
-        const kycResponse = await fetch(`${import.meta.env.VITE_API_URL}/user/kyc/user/${userId}`);
-        if (kycResponse.ok) {
-          const kycData = await kycResponse.json();
+        const kycResponse = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/user/kyc/user/${userId}`);
+
+        if (kycResponse.status === 200) {
+          const kycData = await kycResponse.data;
           // console.log(kycData);
           
           setKycStatus(kycData.status || 'not-submitted');
@@ -86,17 +88,13 @@ const Withdraw = () => {
     setMessage({ type: '', text: '' });
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/user/wallet/${userId}/withdraw-request`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amount: parseFloat(amount) }),
-      });
+      const response = await axiosInstance.post(`${import.meta.env.VITE_API_URL}/user/wallet/${userId}/withdraw-request`,
+        { amount: parseFloat(amount) }
+      );
 
-      const data = await response.json();
+      const data = response.data;
       console.log(data);
-      if (response.ok) {
+      if (response) {
         setMessage({ type: 'success', text: data.message || 'Withdrawal request submitted successfully' });
         setAmount('');
         

@@ -7,6 +7,7 @@ import { TbFileInvoice } from "react-icons/tb";
 import { FaCreditCard } from "react-icons/fa6";
 import { BsBoxes } from "react-icons/bs";
 import { FaIndianRupeeSign } from "react-icons/fa6";
+import axiosInstance from '../../../utills/axiosInstance';
 const PurchaseDetailPage = () => {
   const { id } = useParams();
   const [purchase, setPurchase] = useState(null);
@@ -25,11 +26,14 @@ const PurchaseDetailPage = () => {
       setError(null);
       
       // Simulate API call - replace with actual API
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/purchase/${id}`);
-      const data = await response.json();
+          // const response = await fetch(`${import.meta.env.VITE_API_URL}/purchase/${id}`);
+          // const data = await response.json();
       // console.log(data);
+      const response = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/purchase/${id}`);
+      const data = response.data;
+
       
-      if (!response.ok) {
+      if (!response) {
         throw new Error(data.message || 'Failed to fetch purchase details');
       }
       
@@ -100,7 +104,7 @@ const PurchaseDetailPage = () => {
     // Implement download functionality
     // console.log('Download invoice');
      try {
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/report/${id}/invoice`, {
+    const res = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/report/${id}/invoice`, {
       responseType: "blob",
     });
 

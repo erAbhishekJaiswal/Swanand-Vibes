@@ -2,12 +2,13 @@
 import React from "react";
 import axios from "axios";
 import {toast} from 'react-hot-toast';
+import axiosInstance from "../../utills/axiosInstance";
 
 const PaymentPage = () => {
   const handlePayment = async () => {
     try {
       // Step 1: Get order from backend
-      const { data: order } = await axios.post(`${import.meta.env.VITE_API_URL}/pay/create-order`, {
+      const { data: order } = await axiosInstance.post(`${import.meta.env.VITE_API_URL}/pay/create-order`, {
         amount: 500, // ₹500
       });
 
@@ -21,7 +22,7 @@ const PaymentPage = () => {
         order_id: "razorpay_ABC123",//order.id,
         handler: async function (response) {
           // Step 3: Verify payment on backend
-          const verify = await axios.post(`${import.meta.env.VITE_API_URL}/pay/verify`, response);
+          const verify = await axiosInstance.post(`${import.meta.env.VITE_API_URL}/pay/verify`, response);
           if (verify.data.success) {
             toast.success("Payment Successful ✅");
           } else {

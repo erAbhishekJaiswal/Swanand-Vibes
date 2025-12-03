@@ -6,6 +6,7 @@ import { getUserId } from '../../utills/authService';
 import '../../CssFiles/User/OrderDetail.css';
 import { toast } from 'react-hot-toast';
 import Spinner from '../../components/Spinner';
+import axiosInstance from '../../utills/axiosInstance';
 
 const OrderDetail = () => {
   const { id } = useParams();
@@ -21,7 +22,7 @@ const OrderDetail = () => {
     const fetchOrderDetail = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/order/${id}`
+        const response = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/order/${id}`
         //     , {
         //   params: { userId }
         // }
@@ -85,7 +86,7 @@ const OrderDetail = () => {
 
 const handleDownloadInvoice = async (orderId) => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/order/${orderId}/invoice`, {
+    const response = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/order/${orderId}/invoice`, {
       responseType: "blob", // Crucial for downloading PDFs correctly
     });
 

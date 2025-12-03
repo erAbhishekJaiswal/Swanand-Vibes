@@ -6,6 +6,7 @@ import { placeOrder } from "../../utills/apicall";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import Spinner from "../../components/Spinner";
+import axiosInstance from "../../utills/axiosInstance";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -38,8 +39,8 @@ const Checkout = () => {
       try {
         setIsLoading(true);
         const [cartResponse, addressResponse] = await Promise.all([
-          axios.get(`${import.meta.env.VITE_API_URL}/user/cart/${userId}`),
-          axios.get(`${import.meta.env.VITE_API_URL}/users/${userId}`),
+          axiosInstance.get(`${import.meta.env.VITE_API_URL}/user/cart/${userId}`),
+          axiosInstance.get(`${import.meta.env.VITE_API_URL}/users/${userId}`),
         ]);
 
         setCartItems(cartResponse.data.data?.items || []);
@@ -136,13 +137,13 @@ const Checkout = () => {
         country: formData.country,
       };
 
-      const res = await axios.put(
+      const res = await axiosInstance.put(
         `${import.meta.env.VITE_API_URL}/users/${userId}/address`,
         addressPayload
       );
 
       if (res.status === 200) {
-        const addressResponse = await axios.get(
+        const addressResponse = await axiosInstance.get(
           `${import.meta.env.VITE_API_URL}/users/${userId}`
         );
         setSavedAddresses(addressResponse.data);
@@ -172,7 +173,7 @@ const Checkout = () => {
       }
 
       // 1. Create Razorpay Order on backend
-      const { data: order } = await axios.post(
+      const { data: order } = await axiosInstance.post(
         `${import.meta.env.VITE_API_URL}/pay/create-order`,
         { amount: totalPrice }
       );
@@ -191,7 +192,7 @@ const Checkout = () => {
             setOrderProcessing(true);
 
             // 3. Verify payment with backend
-            await axios.post(`${import.meta.env.VITE_API_URL}/pay/verify`, {
+            await axiosInstance.post(`${import.meta.env.VITE_API_URL}/pay/verify`, {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,

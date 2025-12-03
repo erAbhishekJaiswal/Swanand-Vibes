@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../../CssFiles/Admin/Purchase/ProfitLossPage.css';
-
+import axiosInstance from '../../../utills/axiosInstance';
 const ProfitLossPage = () => {
   const [reportData, setReportData] = useState(null);
   const [filters, setFilters] = useState({
@@ -31,10 +31,15 @@ const ProfitLossPage = () => {
       if (filters.from) params.append('from', filters.from);
       if (filters.to) params.append('to', filters.to);
       
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/report/profitandloss?${params}`);
-      const data = await response.json();
+      // const response = await fetch(`${import.meta.env.VITE_API_URL}/report/profitandloss?${params}`);
+      // const data = await response.json();
       
-      if (!response.ok) {
+      const response = await axiosInstance.get(
+        `${import.meta.env.VITE_API_URL}/report/profitandloss?${params}`
+      );
+      const data = response.data;
+
+      if (!response) {
         throw new Error(data.message || 'Failed to fetch profit and loss report');
       }
       

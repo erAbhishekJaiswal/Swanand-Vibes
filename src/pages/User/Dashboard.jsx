@@ -9,6 +9,7 @@ import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 import { CgFileDocument } from "react-icons/cg";
 import { PiNetworkDuotone } from "react-icons/pi";
 import { toast } from "react-hot-toast";
+import axiosInstance from "../../utills/axiosInstance";
 
 const Dashboard = () => {
   const id = getUserId();
@@ -44,7 +45,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fatchdashboard = await axios.get(
+        const fatchdashboard = await axiosInstance.get(
           `${import.meta.env.VITE_API_URL}/users/dashboard/user/${id}`
         );
 

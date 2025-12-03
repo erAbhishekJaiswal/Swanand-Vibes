@@ -5,6 +5,7 @@ import '../../../CssFiles/Admin/product/ProductForm.css';
 import { updateProduct, getProductById, getCategories } from '../../../utills/apicall';
 import Spinner from "../../../components/Spinner";
 import { toast } from 'react-hot-toast';
+import axiosInstance from "../../../utills/axiosInstance";
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -305,32 +306,6 @@ const EditProduct = () => {
     return Object.keys(newErrors).length === 0 && !hasVariantErrors;
   };
 
-  // Upload images to Cloudinary
-  // const uploadImagesToCloudinary = async (imageFiles, signatureData) => {
-  //   const { timestamp, signature, cloudName, apiKey } = signatureData;
-  //   const uploadedImages = [];
-    
-  //   for (const image of imageFiles) {
-  //     const imageFormData = new FormData();
-  //     imageFormData.append("file", image);
-  //     imageFormData.append("api_key", apiKey);
-  //     imageFormData.append("timestamp", timestamp);
-  //     imageFormData.append("signature", signature);
-
-  //     const uploadRes = await axios.post(
-  //       `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-  //       imageFormData
-  //     );
-
-  //     uploadedImages.push({
-  //       public_id: uploadRes.data.public_id,
-  //       url: uploadRes.data.secure_url,
-  //     });
-  //   }
-    
-  //   return uploadedImages;
-  // };
-
   const uploadImagesToCloudinary = async (imageFiles, signatureData) => {
   const { timestamp, signature, cloudName, apiKey } = signatureData;
   const uploadedImages = [];
@@ -377,7 +352,7 @@ const EditProduct = () => {
 
     try {
       // 1. Get Cloudinary signature from backend
-      const sigRes = await axios.get(
+      const sigRes = await axiosInstance.get(
         `${import.meta.env.VITE_API_URL}/products/signature`
       );
       const signatureData = sigRes.data;

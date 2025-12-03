@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import Spinner from "../../../components/Spinner";
 import Pagination from "../../../components/Pagination";
+import axiosInstance from "../../../utills/axiosInstance";
 
 const AdminWallet = () => {
   const [walletData, setWalletData] = useState({
@@ -63,7 +64,7 @@ const fetchWalletData = async () => {
     setLoading(true);
     // console.log(`Fetching wallet data for page ${CurrentPage} with limit ${itemsPerPage} ${import.meta.env.VITE_API_URL}`);
     
-    const response = await axios.get(
+    const response = await axiosInstance.get(
       `${import.meta.env.VITE_API_URL}/user/wallet/adminwallet?page=${CurrentPage}&limit=${itemsPerPage}`
     );
 

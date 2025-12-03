@@ -5,6 +5,7 @@ import { submitKyc } from "../../utills/apicall";
 import { toast } from "react-hot-toast";
 import Spinner from "../../components/Spinner";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../utills/axiosInstance";
 
 export default function AddKyc() {
   const navigate = useNavigate();
@@ -156,7 +157,7 @@ export default function AddKyc() {
     setLoading(true);
 
     try {
-      const sigRes = await axios.get(`${import.meta.env.VITE_API_URL}/products/signature`);
+      const sigRes = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/products/signature`);
       const { timestamp, signature, cloudName, apiKey } = sigRes.data;
 
       const uploadedFiles = {

@@ -4,6 +4,8 @@ import { FiSearch, FiFilter, FiCalendar, FiChevronLeft, FiChevronRight, FiGrid, 
 import '../../CssFiles/User/userGallery.css';
 import Spinner from '../../components/Spinner';
 import { toast } from 'react-hot-toast';
+import axiosInstance from '../../utills/axiosInstance';
+
 const Gallery = () => {
   const [images, setImages] = useState([]);
   const [filteredImages, setFilteredImages] = useState([]);
@@ -36,9 +38,9 @@ const Gallery = () => {
           ...(endDate && { endDate })
         });
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/gallery/common?${params}`);
-        const data = await response.json();
-        // // console.log(data);
+        const response = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/gallery/common?${params}`);
+        const data = response.data;
+        console.log(data);
         
         if (data.data) {
           setImages(data.data);

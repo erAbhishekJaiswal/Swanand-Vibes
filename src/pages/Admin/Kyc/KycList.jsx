@@ -7,6 +7,7 @@ import Spinner from '../../../components/Spinner';
 import { getAllKycs } from '../../../utills/apicall'; // ✅ Import delete API
 import Pagination from '../../../components/Pagination';
 import axios from 'axios';
+import axiosInstance from '../../../utills/axiosInstance';
 
 const KYCList = () => {
   const [kycList, setKycList] = useState([]);
@@ -49,7 +50,7 @@ const KYCList = () => {
 
     try {
       setLoading(true);
-      const res = await axios.delete(`${import.meta.env.VITE_API_URL}/user/kyc/${id}`);
+      const res = await axiosInstance.delete(`${import.meta.env.VITE_API_URL}/user/kyc/${id}`);
       // deleteKycById(id);
       if (res.success) {
         // Remove from list without reloading

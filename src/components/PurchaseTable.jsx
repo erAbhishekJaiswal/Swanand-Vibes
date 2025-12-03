@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import Spinner from './Spinner';
+import axiosInstance from '../utills/axiosInstance';
 
 
 const PurchaseTable = ({ purchases, onSort, sortConfig, isLoading }) => {
@@ -79,7 +80,7 @@ const PurchaseTable = ({ purchases, onSort, sortConfig, isLoading }) => {
       // Handle deletion logic here
       try {
         alert("Purchase delete within 24 hours");
-        const res = await axios.delete(`${import.meta.env.VITE_API_URL}/purchase/${id}`)
+        const res = await axiosInstance.delete(`${import.meta.env.VITE_API_URL}/purchase/${id}`)
         console.log(res.data);
         window.location.reload();
       } catch (error) {
@@ -94,7 +95,7 @@ const PurchaseTable = ({ purchases, onSort, sortConfig, isLoading }) => {
     // console.log('Download invoice');
      try {
       setIsLoading2(true);
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/report/${id}/invoice`, {
+    const res = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/report/${id}/invoice`, {
       responseType: "blob",
     });
 

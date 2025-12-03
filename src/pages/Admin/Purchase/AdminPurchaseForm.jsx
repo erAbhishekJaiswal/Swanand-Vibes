@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../../CssFiles/Admin/Purchase/AdminPurchaseForm.css"; // <- You will define styles here
-
+import axiosInstance from "../../../utills/axiosInstance";
 function formatCurrency(num) {
   return Number(num).toFixed(2);
 }
@@ -29,7 +29,7 @@ export default function AdminPurchaseForm() {
   const [errors, setErrors] = useState(null);
 
   useEffect(() => {
-    axios
+    axiosInstance
       .get(`${import.meta.env.VITE_API_URL}/vendor/`)
       .then((res) => setVendors(res.data.data || res.data))
       .catch((error) => {
@@ -41,7 +41,7 @@ export default function AdminPurchaseForm() {
   useEffect(() => {
     if (!searchQuery || searchQuery.length < 2) return;
     const controller = new AbortController();
-    axios
+    axiosInstance
       .get(
         `${import.meta.env.VITE_API_URL}/products/search?search=${encodeURIComponent(searchQuery)}`,
         { signal: controller.signal }
@@ -189,7 +189,7 @@ export default function AdminPurchaseForm() {
 
         invoiceFiles.forEach((f) => fd.append("invoiceFiles", f));
         console.log(fd);
-        const res = await axios.post(
+        const res = await axiosInstance.post(
           `${import.meta.env.VITE_API_URL}/purchase/`,
           fd,
           {
@@ -216,7 +216,7 @@ export default function AdminPurchaseForm() {
         };
         console.log(body);
 
-        const res = await axios.post(
+        const res = await axiosInstance.post(
           `${import.meta.env.VITE_API_URL}/purchase/`,
           body
         );

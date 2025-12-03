@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './OrdersDashboard.css';
+import axiosInstance from '../../../utills/axiosInstance';
 
 const OrdersDashboard = () => {
   const [orders, setOrders] = useState([]);
@@ -35,7 +36,7 @@ const OrdersDashboard = () => {
       params.append('page', pagination.page);
       params.append('limit', pagination.limit);
 
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/order/all?${params}`);
+      const response = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/order/all?${params}`);
       const data = response.data;
 
       if (data.success) {

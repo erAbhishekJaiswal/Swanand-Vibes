@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaRegClock , FaRegCheckCircle,FaRupeeSign } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
+import axiosInstance from '../../../utills/axiosInstance';
 const PurchaseListPage = () => {
   const navigate = useNavigate();
   const [purchases, setPurchases] = useState([]);
@@ -28,7 +29,7 @@ const PurchaseListPage = () => {
 
 
     useEffect(() => {
-      axios
+      axiosInstance
         .get(`${import.meta.env.VITE_API_URL}/vendor/`)
         .then((res) => setVendors(res.data.data || res.data))
         .catch((error) => {
@@ -59,7 +60,7 @@ const PurchaseListPage = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // In real implementation, you would call your API:
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/purchase/`, {
+      const response = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/purchase/`, {
         params: { ...filters, page, limit: purchasesPerPage }
       });
 

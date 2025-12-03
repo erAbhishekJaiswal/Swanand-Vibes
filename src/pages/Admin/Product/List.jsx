@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { FiArrowLeft, FiArrowRight, FiEdit, FiTrash2, FiEye, FiPlus, FiDownload, FiBox, FiChevronDown, FiChevronUp, FiFilter } from 'react-icons/fi';
 import { LuDownload } from "react-icons/lu";
 import axios from 'axios';
+import axiosInstance from '../../../utills/axiosInstance';
 
 const List = () => {
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ const List = () => {
 
   const handlegenerateStockReport = async () => {
     try {
-      const res = await axios.get('https://swanand-vibes-backend.vercel.app/api/products/stock', {
+      const res = await axiosInstance.get('https://swanand-vibes-backend.vercel.app/api/products/stock', {
         responseType: 'blob',
       });
 

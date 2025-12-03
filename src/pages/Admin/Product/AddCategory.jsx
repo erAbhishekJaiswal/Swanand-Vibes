@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "../../../CssFiles/Admin/product/AddCategory.css";
-
+import axiosInstance from '../../../utills/axiosInstance';
 export default function AddCategory() {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState('');
@@ -40,16 +40,21 @@ export default function AddCategory() {
       setLoading(true);
       setError('');
       setSuccess('');
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/category`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim() }),
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.message || 'Failed to add category');
-      }
-      const newCat = await res.json();
+      const res = await axiosInstance.post(`${import.meta.env.VITE_API_URL}/category`, { name: name.trim() });
+      const newCat = res.data;
+      // console.log(newCat);
+
+      // const res = await fetch(`${import.meta.env.VITE_API_URL}/category`, {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ name: name.trim() }),
+      // });
+      // if (!res.ok) {
+      //   const err = await res.json().catch(() => ({}));
+      //   throw new Error(err.message || 'Failed to add category');
+      // }
+      // const newCat = await res.json();
+
       setCategories(prev => [newCat, ...prev]);
       setName('');
       setSuccess('Category added successfully');
@@ -67,8 +72,10 @@ export default function AddCategory() {
     try {
       setLoading(true);
       setError('');
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/category/${id}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error('Failed to delete category');
+      // const res = await fetch(`${import.meta.env.VITE_API_URL}/category/${id}`, { method: 'DELETE' });
+      // if (!res.ok) throw new Error('Failed to delete category');
+      await axiosInstance.delete(`${import.meta.env.VITE_API_URL}/category/${id}`);
+      
       setCategories(prev => prev.filter(c => c._id !== id));
       setSuccess('Category deleted');
       setTimeout(() => setSuccess(''), 2500);

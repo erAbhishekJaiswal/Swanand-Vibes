@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../../../CssFiles/Admin/user/userDetail.css';
 import NetworkTreeAdmin from '../../../components/NetworkTreeAdmin';
-
+import axiosInstance from '../../../utills/axiosInstance';
 const UserDetails = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ const UserDetails = () => {
       try {
         setLoading(true);
         // Replace with actual API call
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/${id}`);
+        const response = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/users/${id}`);
         const data = response.data;
         // console.log(data);
         

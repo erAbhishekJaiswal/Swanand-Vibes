@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import "../../../CssFiles/Admin/Purchase/VendorCreateForm.css"; // custom stylesheet
-
+import axiosInstance from '../../../utills/axiosInstance';
 const VendorCreateForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -26,7 +26,7 @@ const VendorCreateForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/vendor/`, formData); // Adjust backend route
+      const { data } = await axiosInstance.post(`${import.meta.env.VITE_API_URL}/vendor/`, formData); // Adjust backend route
       toast.success("Vendor created successfully!");
       console.log("Vendor created:", data);
       setFormData({
