@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import "../../../CssFiles/Admin/Gift/GiftList.css";
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../components/Spinner';
+import axiosInstance from '../../../utills/axiosInstance';
 
 const GiftList = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const GiftList = () => {
   const fetchGifts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/gift/`);
+      const response = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/gift/`);
       setGifts(response.data);
       
       // const uniqueLevels = [...new Set(response.data.map(gift => gift.achievementLevel))];
@@ -63,7 +64,7 @@ const GiftList = () => {
     if (!window.confirm('Are you sure you want to delete this gift?')) return;
 
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/gift/${id}`);
+      await axiosInstance.delete(`${import.meta.env.VITE_API_URL}/gift/${id}`);
       toast.success('Gift deleted successfully');
       fetchGifts();
     } catch (error) {
@@ -89,7 +90,7 @@ const GiftList = () => {
 
       // If new image selected, upload to Cloudinary
       if (editingGift.newImage) {
-        const sigRes = await axios.get(`${import.meta.env.VITE_API_URL}/products/signature`);
+        const sigRes = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/products/signature`);
         const { timestamp, signature, cloudName, apiKey } = sigRes.data;
 
         const data = new FormData();
@@ -107,7 +108,7 @@ const GiftList = () => {
       }
 
       // Update gift in database
-      await axios.put(`h${import.meta.env.VITE_API_URL}/gift/${editingGift._id}`, {
+      await axiosInstance.put(`h${import.meta.env.VITE_API_URL}/gift/${editingGift._id}`, {
         title: editingGift.title,
         description: editingGift.description,
         // achievementLevel: editingGift.achievementLevel,
