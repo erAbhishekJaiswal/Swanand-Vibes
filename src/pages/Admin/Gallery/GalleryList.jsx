@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import "../../../CssFiles/Admin/Gallery/Gallery.css";
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../components/Spinner';
+import axiosInstance from '../../../utills/axiosInstance';
 
 const GalleryList = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const GalleryList = () => {
   const fetchImages = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/gallery/`);
+      const response = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/gallery/`);
       setImages(response.data);
       
       const uniqueCategories = [...new Set(response.data.map(img => img.category))];
@@ -60,7 +61,7 @@ const GalleryList = () => {
     if (!window.confirm('Are you sure you want to delete this image?')) return;
 
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/gallery/${id}`);
+      await axiosInstance.delete(`${import.meta.env.VITE_API_URL}/gallery/${id}`);
       toast.success('Image deleted successfully');
       fetchImages();
     } catch (error) {
@@ -83,7 +84,7 @@ const GalleryList = () => {
 
       // 🔹 If new image selected, upload to Cloudinary
       if (editingImage.newImage) {
-        const sigRes = await axios.get(`${import.meta.env.VITE_API_URL}/products/signature`);
+        const sigRes = await axiosInstance.get(`${import.meta.env.VITE_API_URL}/products/signature`);
         const { timestamp, signature, cloudName, apiKey } = sigRes.data;
 
         const data = new FormData();
@@ -101,7 +102,7 @@ const GalleryList = () => {
       }
 
       // 🔹 Update DB
-      await axios.put(`${import.meta.env.VITE_API_URL}/gallery/${editingImage._id}`, {
+      await axiosInstance.put(`${import.meta.env.VITE_API_URL}/gallery/${editingImage._id}`, {
         title: editingImage.title,
         category: editingImage.category,
         imageUrl
